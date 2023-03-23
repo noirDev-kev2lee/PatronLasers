@@ -10,10 +10,6 @@ import Product from './components/screens/Product';
 
 const Stack = createNativeStackNavigator();
 
-
-
-
-
 function App() {
   return (
     <NavigationContainer>
@@ -60,7 +56,8 @@ function App() {
 
 <Stack.Screen name="Product Info" component={ProductCard}         
         options={{
-          title:'Product Card',
+          title:'',
+          headerShown:false,
           headerTitleAlign:'center',
           headerStyle: {
             backgroundColor:'#03045E'

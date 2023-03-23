@@ -1,15 +1,40 @@
 import { StyleSheet,ScrollView, Pressable, Text, View, Image } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
-import Icon from 'react-native-ionicons'
-import BottomTabBar from '@react-navigation/bottom-tabs'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 
-const TabGuide = ({navigation}) => {
+const ProductHome = ({navigation}) => {
   return (
     <View>
-      <View><Text style={styles.scrollHeader}>My Products Guides</Text></View>
+      <View><Text style={styles.scrollHeader}>My Products</Text></View>
+      <ScrollView horizontal style={styles.scroll}>
+      <View style={styles.container}>
+        <Pressable onPress={() => navigation.push('Product Info')}>
+        <View style={[styles.card]}>
+          <Image style={styles.prodImg} source={require('../assets/product1.png')}/>
+          <Text style={styles.cardText}>Product One</Text>
+          </View>
+        </Pressable>
+        <View style={[styles.card]}>                                             
+          <Image style={styles.prodImg} source={require('../assets/product2.png')}/>
+          <Text style={styles.cardText}>Product Two</Text>
+        </View>
+        <View style={[styles.card,]}>
+          <Image style={styles.prodImg} source={require('../assets/product4.png')}/>
+          <Text style={styles.cardText}>Product Three</Text>
+        </View>
+        <View style={[styles.card]}>
+          <Image style={styles.prodImg} source={require('../assets/1-7.png')}/>
+          <Text style={styles.cardText}>Product Three</Text>
+        </View>
+        <View style={[styles.card, styles.card]}>
+          <Image style={styles.prodImg} source={require('../assets/product1.png')}/>
+          <Text style={styles.cardText}>Product Three</Text>
+        </View>
+      </View>
+      <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
+          <Text style={styles.pressTxt}>Add</Text>
+          </Pressable>
+      </ScrollView>
+      <View><Text style={styles.scrollHeader}>Recommended</Text></View>
       <ScrollView horizontal style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
@@ -42,7 +67,7 @@ const TabGuide = ({navigation}) => {
         </View>
       </View>
       </ScrollView>
-      <View><Text style={styles.scrollHeader}>More Product Guides</Text></View>
+      <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
       <ScrollView>
       <View style={styles.scrollsec}>
       <View style={styles.containersec}>
@@ -69,17 +94,17 @@ const TabGuide = ({navigation}) => {
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/1-7.png')}/>
+        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
         <View style={styles.containersec}>
         <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product2.png')}/>
+        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product4.png')}/>
+        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         <View style={[styles.RecCardSmall]}>
@@ -89,15 +114,15 @@ const TabGuide = ({navigation}) => {
         </View>
         <View style={styles.containersec}>
         <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product4.png')}/>
+        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product2.png')}/>
+        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/1-7.png')}/>
+        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
@@ -107,7 +132,7 @@ const TabGuide = ({navigation}) => {
   )
 }
 
-export default TabGuide
+export default ProductHome
 
 const styles = StyleSheet.create({
     scroll:{

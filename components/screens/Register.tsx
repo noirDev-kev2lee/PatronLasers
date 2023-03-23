@@ -17,8 +17,6 @@ const RegInputText = () => {
         <TextInput style={styles.textInput2} onChangeText={onEmailChange} value={Email} />
         <TextInput style={styles.textInput2} onChangeText={onMobileChange} value={Mobile} />
         <TextInput style={styles.textInput2} onChangeText={onPasswordChange} value={Password} />
-
-
       </View>
   )
   }

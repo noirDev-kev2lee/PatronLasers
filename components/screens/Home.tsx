@@ -7,7 +7,7 @@ export default function Home({navigation}) {
   return (
     <View style={styles.container}>
       <View>
-        <Image style={styles.logo} source={require('../assets/logo.png')}/>
+        <Image style={styles.logo} source={require('../assets/001.png')}/>
       </View>
       <Pressable style={styles.pressBtnReg} onPress={() => navigation.navigate('Register')}>
       <Text style={styles.pressTxt}>Register</Text>
@@ -23,10 +23,14 @@ const styles = StyleSheet.create({
     container:{
       flex:1,
       justifyContent:'center',
-      alignItems:'center'
+      alignItems:'center',
     },
     logo:{
-    
+      width:400,
+      height:200,
+      marginRight:50,
+      resizeMode:'stretch',
+      tintColor:'#03045E'
     },
     pressBtnLog:{
       margin:10,
@@ -43,6 +47,7 @@ const styles = StyleSheet.create({
         height:50
     },
     pressTxt:{
+      fontFamily:'',
       textAlign:'center',
       textTransform:'uppercase',
       letterSpacing:2,
