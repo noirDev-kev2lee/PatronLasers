@@ -56,7 +56,7 @@ function App() {
 
 <Stack.Screen name="Product Info" component={ProductCard}         
         options={{
-          title:'',
+          title:'Product Info',
           headerShown:false,
           headerTitleAlign:'center',
           headerStyle: {

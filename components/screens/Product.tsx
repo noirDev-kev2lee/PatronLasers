@@ -34,12 +34,13 @@ export default function Product({navigation}) {
           }else if (route.name === 'Tech Support') {
             iconName = focused ? 'cog' : 'cog-outline';
           }
-
-          // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: '#03045E',
+        tabBarInactiveTintColor: 'black',
+        headerStyle:{height:40,backgroundColor:'#03045E'},
+        headerTintColor:'#C6C7FD',
+        headerTitleAlign:'center'
       })}
       >
             <Tab.Screen name='Advertisement' component={TabsAds}/>
