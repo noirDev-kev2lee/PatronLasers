@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
       flex:1, 
     },
     scrollHeader:{
+      fontFamily:'Roboto',
       fontSize:20,
-      fontWeight:'900',
       padding:10,                                                                                        
       textTransform:'uppercase',
       color:'#03045E',
@@ -220,20 +220,24 @@ const styles = StyleSheet.create({
       height:80
     },
     RecCardTitle:{
+      fontFamily:'Inter',
       color:'#03045E',
       fontSize:20,
       fontWeight:'bold',
       textAlign:'left',
     },
     RecCardPara:{
+      fontFamily:'Roboto-Bold',
       fontSize:15,
       textAlign:'left',
       color:'black',
     },
     cardText:{
+
       color:'black',
     },
     pressTxt:{
+      fontFamily:'Roboto',
       fontSize:20,
       fontWeight:'bold',
       marginTop:30,
