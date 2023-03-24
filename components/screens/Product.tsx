@@ -40,7 +40,8 @@ export default function Product({navigation}) {
         tabBarInactiveTintColor: 'black',
         headerStyle:{height:40,backgroundColor:'#03045E'},
         headerTintColor:'#C6C7FD',
-        headerTitleAlign:'center'
+        headerTitleAlign:'center',
+        tabBarShowLabel:false
       })}
       >
             <Tab.Screen name='Advertisement' component={TabsAds}/>

@@ -1,7 +1,10 @@
 import { StyleSheet,ScrollView, Pressable, Text, View, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { useTheme } from '@react-navigation/native'
 import React from 'react'
-
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+function myCards(){
+    const{colors} = useTheme();
+}
 const ProductHome = ({navigation}) => {
   return (
     <View>
@@ -70,8 +73,8 @@ const ProductHome = ({navigation}) => {
       </ScrollView>
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
       <ScrollView>
-      <View style={styles.scrollsec}>
       <View style={styles.containersec}>
+      <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product One</Text>
@@ -85,7 +88,7 @@ const ProductHome = ({navigation}) => {
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
-        <View style={styles.containersec}>
+        <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product2.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
@@ -99,7 +102,7 @@ const ProductHome = ({navigation}) => {
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
-        <View style={styles.containersec}>
+        <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
@@ -139,7 +142,9 @@ const styles = StyleSheet.create({
     scroll:{
     },
     scrollsec:{
-      flex:1, 
+      flex:1,
+      flexDirection:'row',
+      justifyContent:'space-between'
     },
     scrollHeader:{
       fontFamily:'Roboto',
@@ -154,14 +159,12 @@ const styles = StyleSheet.create({
       flexDirection:'row'
     },
     containersec:{
-      flexDirection:'row',
-      justifyContent:'space-between'
     },
     card:{
       textAlign:'base-line',
       alignItems:'center',
       width: 150,
-      height: 190,
+      height: 220,
       margin: 5,
       borderRadius: 5,
       backgroundColor: '#FFF',
@@ -170,15 +173,15 @@ const styles = StyleSheet.create({
       flex:1,
       flexDirection:'row-reverse',
       width: 380,
-      height: 150,
+      height: 180,
       marginRight: 10,
-      borderRadius: 5,
+      borderRadius: 10,
       shadowColor:'#000',
       shadowOpacity:20,
       backgroundColor: '#FFF'
     },
     RecCardInfo:{
-      top:20,
+      top:10,
       left:10,
       height:100,
       width:230,
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
       resizeMode:'stretch'
     },
     prodImgSmallRec:{
-      top:-10,
+      top:-15,
       left:-20,
       height:150,
       width:230,
@@ -233,13 +236,12 @@ const styles = StyleSheet.create({
       color:'black',
     },
     cardText:{
-
+      fontFamily:'Roboto',
       color:'black',
     },
     pressTxt:{
-      fontFamily:'Roboto',
+      fontFamily:'Roboto-thin',
       fontSize:20,
-      fontWeight:'bold',
       marginTop:30,
       textAlign:'center'
     },

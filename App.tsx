@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, Pressable, ScrollView, Button } from 'react-native'
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ProductCard from './components/screens/Product';
 import Login from './components/screens/Login';
@@ -10,9 +10,19 @@ import Product from './components/screens/Product';
 
 const Stack = createNativeStackNavigator();
 
+const appTheme = {
+  colors:{
+    primary:'#fff',
+    background:'#90e0ef',
+    card:'#0077b6',
+    text:'#fff',
+
+  }
+}
+
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={appTheme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home}
         options={{
