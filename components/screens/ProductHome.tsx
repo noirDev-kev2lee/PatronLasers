@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
       fontSize:20,                                                                                      
       textTransform:'uppercase',
       textAlign:'left',
-      marginTop:5,
+      margin:5,
       color:'#03045E',
     },
     container:{
@@ -164,8 +164,6 @@ const styles = StyleSheet.create({
       height: 150,
       marginRight: 10,
       borderRadius: 10,
-      shadowColor:'#000',
-      shadowOpacity:100,
       backgroundColor: '#f6f6f6'
     },
     RecCardInfo:{
@@ -218,7 +216,7 @@ const styles = StyleSheet.create({
       textAlign:'left',
     },
     RecCardPara:{
-      fontFamily:'Roboto-Bold',
+      fontFamily:'Inter',
       fontSize:15,
       textAlign:'left',
       color:'black',

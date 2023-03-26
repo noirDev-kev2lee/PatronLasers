@@ -13,10 +13,10 @@ const TabSupport = () => {
           </Text>
         </View>
         <View style={styles.form}>
-          <TextInput style={styles.textInput2} placeholder="Serial Number" />
-          <TextInput style={styles.textInput2} placeholder="Card type" />
-          <TextInput style={styles.textInput2} placeholder="Card title" />
-          <TextInput multiline={true} numberOfLines={10} style={styles.textInput3} placeholder="Type your message..."/>
+          <TextInput style={styles.textInput2} placeholderTextColor='#000' placeholder="Serial Number" />
+          <TextInput style={styles.textInput2} placeholderTextColor='#000' placeholder="Card type" />
+          <TextInput style={styles.textInput2} placeholderTextColor='#000' placeholder="Card title" />
+          <TextInput multiline={true} numberOfLines={10} style={styles.textInput3} placeholderTextColor='#000' placeholder="Type your message..."/>
         </View>
         <SubButton/>
       
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     padding:10,
     margin:10,
     fontSize:20,
-    color:'#000',
     backgroundColor:'#D9D9D9',
     width:380,
     height:200,
