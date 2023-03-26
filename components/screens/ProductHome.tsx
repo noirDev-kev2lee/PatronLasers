@@ -72,8 +72,8 @@ const ProductHome = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
-      <ScrollView>
-      <View style={styles.containersec}>
+      <ScrollView style={styles.containersec}>
+      <View>
       <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
@@ -116,20 +116,6 @@ const ProductHome = ({navigation}) => {
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
-        <View style={styles.containersec}>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        </View>
         </View>
         </ScrollView>
         </View>
@@ -144,41 +130,43 @@ const styles = StyleSheet.create({
     scrollsec:{
       flex:1,
       flexDirection:'row',
-      justifyContent:'space-between'
+      justifyContent:'space-evenly'
     },
     scrollHeader:{
       fontFamily:'Roboto',
-      fontSize:20,
-      padding:10,                                                                                        
+      fontSize:20,                                                                                      
       textTransform:'uppercase',
-      color:'#03045E',
       textAlign:'left',
+      marginTop:5,
+      color:'#03045E',
     },
     container:{
       flex:1,
       flexDirection:'row'
     },
     containersec:{
+      height:300,
+      marginBottom:450
     },
     card:{
       textAlign:'base-line',
       alignItems:'center',
+      marginRight:10,
       width: 150,
-      height: 220,
-      margin: 5,
+      height: 180,
       borderRadius: 5,
-      backgroundColor: '#FFF',
+      backgroundColor: '#f7f7f7',
     },
     RecCard:{
       flex:1,
       flexDirection:'row-reverse',
       width: 380,
-      height: 180,
+      height: 150,
       marginRight: 10,
       borderRadius: 10,
       shadowColor:'#000',
-      shadowOpacity:20,
-      backgroundColor: '#FFF'
+      shadowOpacity:100,
+      backgroundColor: '#f6f6f6'
     },
     RecCardInfo:{
       top:10,
@@ -194,7 +182,7 @@ const styles = StyleSheet.create({
       height: 150,
       margin: 2,
       borderRadius: 5,
-      backgroundColor: '#FFF',
+      backgroundColor: '#f4f4f4',
     },
     prodImg:{
       height:150,

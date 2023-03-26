@@ -36,10 +36,10 @@ export default function Product({navigation}) {
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#03045E',
-        tabBarInactiveTintColor: 'black',
-        headerStyle:{height:40,backgroundColor:'#03045E'},
-        headerTintColor:'#C6C7FD',
+        tabBarActiveTintColor: 'orange',
+        tabBarInactiveTintColor: '#fff',
+        headerStyle:{height:40,backgroundColor:'#fff'},
+        headerTintColor:'orange',
         headerTitleAlign:'center',
         tabBarShowLabel:false
       })}

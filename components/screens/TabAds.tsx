@@ -70,9 +70,9 @@ const ProductHome = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>Must See Products</Text></View>
-      <ScrollView>
+      <ScrollView style={styles.containersec}>
+      <View>
       <View style={styles.scrollsec}>
-      <View style={styles.containersec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product One</Text>
@@ -86,7 +86,7 @@ const ProductHome = ({navigation}) => {
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
-        <View style={styles.containersec}>
+        <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product2.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
@@ -100,21 +100,7 @@ const ProductHome = ({navigation}) => {
           <Text style={styles.cardText}>Product Three</Text>
         </View>
         </View>
-        <View style={styles.containersec}>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        </View>
-        <View style={styles.containersec}>
+        <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
         <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product Three</Text>
@@ -137,107 +123,112 @@ const ProductHome = ({navigation}) => {
 export default ProductHome
 
 const styles = StyleSheet.create({
-    scroll:{
-    },
-    scrollsec:{
-      flex:1, 
-    },
-    scrollHeader:{
-      fontSize:20,
-      fontWeight:'900',
-      padding:10,                                                                                        
-      textTransform:'uppercase',
-      color:'#03045E',
-      textAlign:'left',
-    },
-    container:{
-      flex:1,
-      flexDirection:'row'
-    },
-    containersec:{
-      flexDirection:'row',
-      justifyContent:'space-between'
-    },
-    card:{
-      textAlign:'base-line',
-      alignItems:'center',
-      width: 150,
-      height: 190,
-      margin: 5,
-      borderRadius: 5,
-      backgroundColor: '#FFF',
-    },
-    RecCard:{
-      flex:1,
-      flexDirection:'row-reverse',
-      width: 380,
-      height: 150,
-      marginRight: 10,
-      borderRadius: 5,
-      shadowColor:'#000',
-      shadowOpacity:20,
-      backgroundColor: '#FFF'
-    },
-    RecCardInfo:{
-      top:20,
-      left:10,
-      height:100,
-      width:230,
-      textAlign:'left',
-      color:'black'
-    },
-    RecCardSmall:{
-      alignItems:'center',
-      width: 120,
-      height: 150,
-      margin: 2,
-      borderRadius: 5,
-      backgroundColor: '#FFF',
-    },
-    prodImg:{
-      height:150,
-      width:250,
-      resizeMode:'stretch'
-    },
-    prodImgSmall:{
-      margin:-5,
-      height:140,
-      width:240,
-      resizeMode:'stretch'
-    },
-    prodImgSmallRec:{
-      top:-10,
-      left:-20,
-      height:150,
-      width:230,
-      resizeMode:'stretch'
-    },
-    pressBtn:{
-      marginTop:60,
-      marginLeft:8,
-      borderRadius:8,
-      backgroundColor:'#03045E',
-      width:80,
-      height:80
-    },
-    RecCardTitle:{
-      color:'#03045E',
-      fontSize:20,
-      fontWeight:'bold',
-      textAlign:'left',
-    },
-    RecCardPara:{
-      fontSize:15,
-      textAlign:'left',
-      color:'black',
-    },
-    cardText:{
-      color:'black',
-    },
-    pressTxt:{
-      fontSize:20,
-      fontWeight:'bold',
-      marginTop:30,
-      textAlign:'center'
-    },
+  scroll:{
+  },
+  scrollsec:{
+    flex:1,
+    flexDirection:'row',
+    justifyContent:'space-evenly'
+  },
+  scrollHeader:{
+    fontFamily:'Roboto',
+    fontSize:20,                                                                                      
+    textTransform:'uppercase',
+    textAlign:'left',
+    marginTop:5,
+    color:'#03045E',
+  },
+  container:{
+    flex:1,
+    flexDirection:'row'
+  },
+  containersec:{
+    height:300,
+    marginBottom:450
+  },
+  card:{
+    textAlign:'base-line',
+    alignItems:'center',
+    marginRight:10,
+    width: 150,
+    height: 180,
+    borderRadius: 5,
+    backgroundColor: '#f7f7f7',
+  },
+  RecCard:{
+    flex:1,
+    flexDirection:'row-reverse',
+    width: 380,
+    height: 150,
+    marginRight: 10,
+    borderRadius: 10,
+    shadowColor:'#000',
+    shadowOpacity:100,
+    backgroundColor: '#f6f6f6'
+  },
+  RecCardInfo:{
+    top:10,
+    left:10,
+    height:100,
+    width:230,
+    textAlign:'left',
+    color:'black'
+  },
+  RecCardSmall:{
+    alignItems:'center',
+    width: 120,
+    height: 150,
+    margin: 2,
+    borderRadius: 5,
+    backgroundColor: '#f4f4f4',
+  },
+  prodImg:{
+    height:150,
+    width:250,
+    resizeMode:'stretch'
+  },
+  prodImgSmall:{
+    margin:-5,
+    height:140,
+    width:240,
+    resizeMode:'contain'
+  },
+  prodImgSmallRec:{
+    top:-15,
+    left:-20,
+    height:150,
+    width:230,
+    resizeMode:'stretch'
+  },
+  pressBtn:{
+    marginTop:60,
+    marginLeft:8,
+    borderRadius:8,
+    backgroundColor:'#03045E',
+    width:80,
+    height:80
+  },
+  RecCardTitle:{
+    fontFamily:'Inter',
+    color:'#03045E',
+    fontSize:20,
+    fontWeight:'bold',
+    textAlign:'left',
+  },
+  RecCardPara:{
+    fontFamily:'Roboto-Bold',
+    fontSize:15,
+    textAlign:'left',
+    color:'black',
+  },
+  cardText:{
+    fontFamily:'Roboto',
+    color:'black',
+  },
+  pressTxt:{
+    fontFamily:'Roboto-thin',
+    fontSize:20,
+    marginTop:30,
+    textAlign:'center'
+  },
   })

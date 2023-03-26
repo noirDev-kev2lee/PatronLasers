@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
       alignItems:'center',
     },
     logo:{
-      width:400,
-      height:200,
+      width:250,
+      height:100,
+      marginBottom:30,
       marginRight:50,
       resizeMode:'stretch',
       tintColor:'#03045E'
