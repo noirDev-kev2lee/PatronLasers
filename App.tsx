@@ -30,25 +30,24 @@ function App() {
           headerShown:false,
           headerTitleAlign:'center',
           headerStyle: {
-            backgroundColor:'#03045E'
           },
           headerTintColor: '#fff' 
         }} />
         <Stack.Screen name="Login" component={Login}
         options={{
                   title:'',
+                  headerShown:false,
                   headerTitleAlign:'center',
                   headerStyle: {
-                    backgroundColor:'#03045E'
                   },
                   headerTintColor: '#fff' 
          }}/>
         <Stack.Screen name="Register" component={Register}         
                 options={{
                   title:'',
+                  headerShown:false,
           headerTitleAlign:'center',
           headerStyle: {
-            backgroundColor:'#03045E'
           },
           headerTintColor: '#fff' 
         }}

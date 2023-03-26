@@ -1,5 +1,6 @@
 import { Alert, Button, Pressable, SafeAreaView, StyleSheet, Text, TextComponent, TextInput, TextInputComponent, ToastAndroid, View } from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
@@ -8,15 +9,16 @@ const InputText = () => {
   const [password, passwordChange]= React.useState('Password')
   return(
       <View style={styles.form}>
-        <Text style={styles.title}>Log In</Text>
-        <TextInput style={styles.textInput} onChangeText={onChangeText} value={text}/>
+        <TextInput inlineImageLeft='mail_outline' style={styles.textInput} onChangeText={onChangeText} value={text}/>
+        <Icon style={styles.icons} name={'lock-closed-outline'} size={20} color={'#000'}/>
         <TextInput style={styles.textInput} onChangeText={passwordChange} value={password} />
       </View>
   )
 }
 const Login = ({navigation}) => {
   return (
-      <View style={styles.container}>
+  <View style={styles.container}>
+    <Text style={styles.title}>Welcome Back </Text>
         <InputText />
         <View style={styles.buttons}>
           <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
@@ -42,32 +44,33 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   buttons:{
-    marginTop:50,
     flex:1,
     alignItems:'center'
   },
   title:{
-    textAlign:'center',
+    textAlign:'left',
+    fontFamily:'Inter-Regular',
     fontSize:50,
-    textTransform:'uppercase',
-    fontWeight:'bold',
-    marginTop:100,
     color:'#03045E'
   },
+  icons:{
+  },
   textInput:{
-    margin:20,
+    fontFamily:'Inter-Regular',
+    marginBottom:20,
     padding:10,
     fontSize:20,
     color:'#000',
-    backgroundColor:'#DDDDDD',
-    width:300,
+    backgroundColor:'#f4f4f4',
+    width:350,
     height:60,
-    borderRadius:8
+    borderRadius:20
   },
   pressBtn:{
+    fontFamily:'Inter-Regular',
     borderRadius:8,
     backgroundColor:'#03045E',
-    width:150,
+    width:350,
     height:50
   },
   pressTxt:{

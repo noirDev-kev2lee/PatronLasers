@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
       height:100,
       marginBottom:30,
       marginRight:50,
-      resizeMode:'stretch',
+      resizeMode:'contain',
       tintColor:'#03045E'
     },
     pressBtnLog:{
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         height:50
     },
     pressTxt:{
-      fontFamily:'',
+      fontFamily:'Roboto',
       textAlign:'center',
       textTransform:'uppercase',
       letterSpacing:2,
