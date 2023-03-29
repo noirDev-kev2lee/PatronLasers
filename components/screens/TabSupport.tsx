@@ -8,15 +8,15 @@ const TabSupport = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#fff"/>
       
         <View style={{flexDirection:'column',justifyContent:'flex-start'}}>
-          <Text style={{color:'#131035',fontSize:25, paddingLeft:15, paddingBottom:10, paddingTop:15}}>
+          <Text style={{color:'#e6e6e9',fontSize:25, paddingLeft:15, paddingBottom:10, paddingTop:15}}>
             Create a card
           </Text>
         </View>
         <View style={styles.form}>
-          <TextInput style={styles.textInput2} placeholderTextColor='#000' placeholder="Serial Number" />
-          <TextInput style={styles.textInput2} placeholderTextColor='#000' placeholder="Card type" />
-          <TextInput style={styles.textInput2} placeholderTextColor='#000' placeholder="Card title" />
-          <TextInput multiline={true} numberOfLines={10} style={styles.textInput3} placeholderTextColor='#000' placeholder="Type your message..."/>
+          <TextInput style={styles.textInput2} placeholderTextColor='#b4b9c1' placeholder="Serial Number" />
+          <TextInput style={styles.textInput2} placeholderTextColor='#b4b9c1' placeholder="Card type" />
+          <TextInput style={styles.textInput2} placeholderTextColor='#b4b9c1' placeholder="Card title" />
+          <TextInput multiline={true} numberOfLines={10} style={styles.textInput3} placeholderTextColor='#b4b9c1' placeholder="Type your message..."/>
         </View>
         <SubButton/>
       
@@ -47,9 +47,10 @@ const styles = StyleSheet.create({
   textInput2:{
     padding:10,
     margin:10,
+    fontFamily:'Roboto',
     fontSize:20,
     color:'#000',
-    backgroundColor:'#D9D9D9',
+    backgroundColor:'#e6e6e9',
     width:380,
     height:60,
     borderRadius:8
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     padding:10,
     margin:10,
     fontSize:20,
-    backgroundColor:'#D9D9D9',
+    backgroundColor:'#e6e6e9',
     width:380,
     height:200,
     borderRadius:8
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   },
   pressBtn:{
     borderRadius:8,
-    backgroundColor:'#03045E',
+    backgroundColor:'#e6e6e9',
     width:250,
     height:50
   },
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     marginTop:10,
     fontSize:20,
     fontWeight:'bold',
-    color:'#fff'
+    color:'#66666e'
   },
   pressTxt1:{
     marginTop:20,
@@ -93,11 +94,10 @@ const styles = StyleSheet.create({
     paddingHorizontal:50,
     fontSize:15,
     fontWeight:'bold',
-    color:'#03045E'
+    color:'#eee0cb'
   },
   container:{
     flex:1,
-    backgroundColor:'#fff',
     flexDirection:'column'
   },
   container2:{

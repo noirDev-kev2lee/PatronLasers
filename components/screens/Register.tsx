@@ -14,25 +14,25 @@ const RegInputText = () => {
     <View>
     <View style={styles.inputLog}>
 
-    <TextInput style={styles.textInput} onChangeText={onFnameChange} placeholder='First Name' placeholderTextColor={'#000'}/></View>
+    <TextInput style={styles.textInput} onChangeText={onFnameChange} placeholder='First Name' placeholderTextColor={'#9999a1'}/></View>
     <View style={styles.inputLog}>
 
-    <TextInput style={styles.textInput} onChangeText={onLnameChange} placeholder='Last Name' placeholderTextColor={'#000'}/></View>
+    <TextInput style={styles.textInput} onChangeText={onLnameChange} placeholder='Last Name' placeholderTextColor={'#9999a1'}/></View>
     <View style={styles.inputLog}>
 
-    <TextInput style={styles.textInput} onChangeText={onNumberChange} placeholder='Serial Number' placeholderTextColor={'#000'}/></View>
+    <TextInput style={styles.textInput} onChangeText={onNumberChange} placeholder='Serial Number' placeholderTextColor={'#9999a1'}/></View>
     <View style={styles.inputLog}>
 
-    <TextInput style={styles.textInput} onChangeText={onEmailChange} placeholder='Email' placeholderTextColor={'#000'}/></View>
+    <TextInput style={styles.textInput} onChangeText={onEmailChange} placeholder='Email' placeholderTextColor={'#9999a1'}/></View>
     <View style={styles.inputLog}>
 
-    <TextInput style={styles.textInput} onChangeText={onMobileChange} placeholder='Phone Number' placeholderTextColor={'#000'}/></View>
+    <TextInput style={styles.textInput} onChangeText={onMobileChange} placeholder='Phone Number' placeholderTextColor={'#9999a1'}/></View>
     <View style={styles.inputLog}>
 
-    <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password' placeholderTextColor={'#000'}/>
+    <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password' placeholderTextColor={'#9999a1'}/>
     </View>
     <View style={styles.inputLog}>
-    <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password Confirm' placeholderTextColor={'#000'}/></View>
+    <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password Confirm' placeholderTextColor={'#9999a1'}/></View>
   </View>
 )
   }
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     textAlign:'left',
     fontFamily:'Inter-Regular',
     fontSize:50,
-    color:'#03045E'
+    color:'#9999a1'
   },
   title2:{
     fontFamily:'Inter-Regular',
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     borderRadius:10,
     width:350,
-    backgroundColor:'#f3f3f3'
+    backgroundColor:'#e6e6e9'
   },
   textInput:{
     fontFamily:'Inter',
     paddingLeft:30,
     fontSize:20,
     color:'#000',
-    backgroundColor:'#f4f4f4',
+    backgroundColor:'#e6e6e9',
     width:250,
   },
   pressBtn:{
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     top:20,
     fontFamily:'Inter-Regular',
     borderRadius:8,
-    backgroundColor:'#03045E',
+    backgroundColor:'#9999a1',
     width:350,
     height:50
   },

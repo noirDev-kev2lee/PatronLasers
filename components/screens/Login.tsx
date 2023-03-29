@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     textAlign:'left',
     fontFamily:'Inter-Bold',
     fontSize:50,
-    color:'#03045E'
+    color:'#e6e6e9'
   },
   title2:{
     margin:10,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     top:30,
     fontFamily:'Inter-Regular',
     borderRadius:8,
-    backgroundColor:'#03045E',
+    backgroundColor:'#e6e6e9',
     width:350,
     height:50
   },
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontFamily:'Inter-Bold',
     fontSize:20,
-    color:'#fff'
+    color:'#66666e'
   },
   pressBtn2:{
     right:-110
@@ -119,6 +119,6 @@ const styles = StyleSheet.create({
     top:-10,
     fontFamily:'Inter-Regular',
     fontSize:15,
-    color:'#03045E'
+    color:'#e6e6e9'
   }
 })

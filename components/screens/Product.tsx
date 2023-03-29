@@ -1,13 +1,13 @@
 import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
 import TabsAds from './TabAds'
 import TabCustomer from './TabCustomer'
 import TabGuide from './TabGuide'
 import TabSupport from './TabSupport'
+import ProductHome from './ProductHome'
 import React from 'react'                             
-import ProductHome from './ProductHome';
 
 const Tab = createBottomTabNavigator(); 
 
@@ -36,10 +36,11 @@ export default function Product({navigation}) {
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: 'orange',
+        tabBarActiveTintColor: '#eee0cb',
         tabBarInactiveTintColor: '#fff',
-        headerStyle:{height:40,backgroundColor:'#fff'},
-        headerTintColor:'orange',
+        headerStyle:{height:40,backgroundColor:'#1b2a41'},
+        headerTintColor:'#eee0cb',
+        headerShadowVisible:true,
         headerTitleAlign:'center',
         tabBarShowLabel:false
       })}

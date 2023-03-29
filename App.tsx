@@ -12,9 +12,9 @@ const Stack = createNativeStackNavigator();
 
 const appTheme = {
   colors:{
-    primary:'#fff',
-    background:'#fff',
-    card:'#03045E',
+    primary:'f4f4f9',
+    background:'#1b2a41',
+    card:'#0c1821',
     text:'#fff',
 
   }

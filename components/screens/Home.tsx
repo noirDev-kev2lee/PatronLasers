@@ -31,19 +31,19 @@ const styles = StyleSheet.create({
       marginBottom:30,
       marginRight:50,
       resizeMode:'contain',
-      tintColor:'#03045E'
+      tintColor:'#9999a1'
     },
     pressBtnLog:{
       margin:10,
       borderRadius:8,
-      backgroundColor:'#03045E',
+      backgroundColor:'#9999a1',
       width:300,
       height:50
     },
     pressBtnReg:{
         margin:10,
         borderRadius:8,
-        backgroundColor:'#03045E',
+        backgroundColor:'#9999a1',
         width:300,
         height:50
     },

@@ -1,17 +1,14 @@
 import { StyleSheet,ScrollView, Pressable, Text, View, Image } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import React from 'react'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-function myCards(){
-    const{colors} = useTheme();
-}
+import Icon from 'react-native-vector-icons/Ionicons';
 const ProductHome = ({navigation}) => {
   return (
     <View>
       <View><Text style={styles.scrollHeader}>My Products</Text></View>
       <ScrollView horizontal style={styles.scroll}>
       <View style={styles.container}>
-        <Pressable onPress={() => navigation.push('Product Info')}>
+        <Pressable onPress={() => navigation.navigate('Product Info')}>
         <View style={[styles.card]}>
           <Image style={styles.prodImg} source={require('../assets/product1.png')}/>
           <Text style={styles.cardText}>Product One</Text>
@@ -35,7 +32,7 @@ const ProductHome = ({navigation}) => {
         </View>
       </View>
       <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
-          <Text style={styles.pressTxt}>Add</Text>
+          <Icon name='add-circle-outline' size={80} color='#eee0cb'/>
           </Pressable>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>Recommended</Text></View>
@@ -138,7 +135,7 @@ const styles = StyleSheet.create({
       textTransform:'uppercase',
       textAlign:'left',
       margin:5,
-      color:'#03045E',
+      color:'#eee0cb',
     },
     container:{
       flex:1,
@@ -155,7 +152,7 @@ const styles = StyleSheet.create({
       width: 150,
       height: 180,
       borderRadius: 5,
-      backgroundColor: '#f7f7f7',
+      backgroundColor: '#1b2a41',
     },
     RecCard:{
       flex:1,
@@ -164,7 +161,7 @@ const styles = StyleSheet.create({
       height: 150,
       marginRight: 10,
       borderRadius: 10,
-      backgroundColor: '#f6f6f6'
+      backgroundColor: '#1b2a41'
     },
     RecCardInfo:{
       top:10,
@@ -180,7 +177,7 @@ const styles = StyleSheet.create({
       height: 150,
       margin: 2,
       borderRadius: 5,
-      backgroundColor: '#f4f4f4',
+      backgroundColor: '#1b2a41',
     },
     prodImg:{
       height:150,
@@ -201,16 +198,17 @@ const styles = StyleSheet.create({
       resizeMode:'stretch'
     },
     pressBtn:{
+      fontFamily:'Inter-Regular',
+      alignContent:'center',
       marginTop:60,
       marginLeft:8,
-      borderRadius:8,
-      backgroundColor:'#03045E',
+      borderRadius:50,
       width:80,
       height:80
     },
     RecCardTitle:{
       fontFamily:'Inter',
-      color:'#03045E',
+      color:'#eee0cb',
       fontSize:20,
       fontWeight:'bold',
       textAlign:'left',
@@ -219,11 +217,11 @@ const styles = StyleSheet.create({
       fontFamily:'Inter',
       fontSize:15,
       textAlign:'left',
-      color:'black',
+      color:'#eee0cb',
     },
     cardText:{
       fontFamily:'Roboto',
-      color:'black',
+      color:'#eee0cb',
     },
     pressTxt:{
       fontFamily:'Roboto-thin',

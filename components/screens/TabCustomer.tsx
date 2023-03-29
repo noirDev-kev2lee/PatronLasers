@@ -8,10 +8,10 @@ const TabCustomer = () => {
       <Text style={styles.text}>Create</Text>
       <View style={styles.createSec}>
         <Pressable onPress={() => Alert.alert('Appointment made')} style={styles.createPress}><Text style={styles.textPress}>Appointment</Text>
-        <Icon name={'add-circle-outline'} color={'#fff'} size={40}/>
+        <Icon name={'add-circle-outline'} color={'#eee0cb'} size={70}/>
         </Pressable>
         <Pressable onPress={() => Alert.alert('Customer Added')} style={styles.createPress}><Text style={styles.textPress}>Customer</Text>
-        <Icon name={'add-circle-outline'} color={'#fff'} size={40}/>
+        <Icon name={'add-circle-outline'} color={'#eee0cb'} size={70}/>
         </Pressable>
       </View>
       <View style={styles.list}>
@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
     paddingLeft:15,
     fontFamily:'Roboto-Regular',
     fontSize:30,
-    color:'#03045E'
+    color:'#eee0cb'
   },
   textPress:{
-    marginBottom:10,
+    marginBottom:0,
     fontFamily:'Roboto-Thin',
     fontSize:20,
-    color:'#fff'
+    color:'#eee0cb'
   },
   createSec:{
     flex:1,
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     height:150,
     width:180,
-    backgroundColor:'#03045E'
+    backgroundColor:'#0c1821'
   },
   list:{
     top:200,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     color:'#000'
   },
   listScroll:{
-    height:450,
+    height:430,
     marginBottom:800,
     flexDirection:'column',
   },
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     height: 120,
     marginRight: 10,
     borderRadius: 10,
-    backgroundColor: '#f3f3f3',
+    backgroundColor: '#0c1821',
     marginBottom:10
   },
   RecCardInfo:{
@@ -141,11 +141,11 @@ const styles = StyleSheet.create({
     height:100,
     width:230,
     textAlign:'left',
-    color:'black'
+    color:'#eee0cb'
   },
   RecCardTitle:{
     fontFamily:'Inter',
-    color:'#03045E',
+    color:'#b4b9c1',
     fontSize:20,
     fontWeight:'bold',
     textAlign:'left',
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     fontFamily:'Roboto-Bold',
     fontSize:15,
     textAlign:'left',
-    color:'black',
+    color:'#eee0cb',
   },
   customerImg:{
     left:40,
