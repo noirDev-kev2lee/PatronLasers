@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   title2:{
     fontFamily:'Inter-Regular',
     fontSize:20,
-    color:'#000'
+    color:'#9999a1'
   },
   inputLog:{
     margin:10,
