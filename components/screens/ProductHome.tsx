@@ -6,7 +6,7 @@ const ProductHome = ({navigation}) => {
   return (
     <View>
       <View><Text style={styles.scrollHeader}>My Products</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
         <Pressable onPress={() => navigation.navigate('Product Info')}>
         <View style={[styles.card]}>
@@ -32,11 +32,11 @@ const ProductHome = ({navigation}) => {
         </View>
       </View>
       <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
-          <Icon name='add-circle-outline' size={80} color='#eee0cb'/>
+          <Icon name='add-circle-outline' size={80} color='orange'/>
           </Pressable>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>Recommended</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
@@ -69,7 +69,7 @@ const ProductHome = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
-      <ScrollView style={styles.containersec}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
       <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
@@ -142,16 +142,17 @@ const styles = StyleSheet.create({
       flexDirection:'row'
     },
     containersec:{
-      height:300,
+      height:250,
       marginBottom:450
     },
     card:{
       textAlign:'base-line',
       alignItems:'center',
-      marginRight:10,
+      margin:10,
       width: 150,
       height: 180,
       borderRadius: 5,
+      elevation:30,
       backgroundColor: '#1b2a41',
     },
     RecCard:{
@@ -159,8 +160,9 @@ const styles = StyleSheet.create({
       flexDirection:'row-reverse',
       width: 380,
       height: 150,
-      marginRight: 10,
+      margin:10,
       borderRadius: 10,
+      elevation:30,
       backgroundColor: '#1b2a41'
     },
     RecCardInfo:{
@@ -176,6 +178,8 @@ const styles = StyleSheet.create({
       width: 120,
       height: 150,
       margin: 2,
+      marginTop:5,
+      elevation:30,
       borderRadius: 5,
       backgroundColor: '#1b2a41',
     },

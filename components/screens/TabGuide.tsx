@@ -10,7 +10,7 @@ const TabGuide = ({navigation}) => {
   return (
     <View>
       <View><Text style={styles.scrollHeader}>My Products Guides</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
@@ -43,7 +43,7 @@ const TabGuide = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>More Product Guides</Text></View>
-      <ScrollView style={styles.containersec}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
       <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
@@ -115,23 +115,23 @@ const styles = StyleSheet.create({
   scrollsec:{
     flex:1,
     flexDirection:'row',
-    justifyContent:'space-evenly'
+    justifyContent:'space-around'
   },
   scrollHeader:{
-    fontFamily:'Roboto',
+    fontFamily:'Inter',
     fontSize:20,                                                                                      
     textTransform:'uppercase',
     textAlign:'left',
     marginTop:5,
-    color:'#03045E',
+    marginBottom:10,
+    color:'#eee0cb',
   },
   container:{
     flex:1,
     flexDirection:'row'
   },
   containersec:{
-    height:500,
-    marginBottom:450
+    height:470,
   },
   card:{
     textAlign:'base-line',
@@ -139,39 +139,39 @@ const styles = StyleSheet.create({
     width: 190,
     height: 180,
     borderRadius: 5,
-    backgroundColor: '#FFF',
+    backgroundColor: '#1b2a41',
   },
-  RecCard:{
-    flex:1,
-    flexDirection:'row-reverse',
-    width: 380,
-    height: 150,
-    marginRight: 10,
-    borderRadius: 10,
-    shadowColor:'#000',
-    shadowOpacity:100,
-    backgroundColor: '#FFF'
-  },
+    RecCard:{
+      flex:1,
+      flexDirection:'row-reverse',
+      width: 380,
+      height: 150,
+      margin:10,
+      borderRadius: 10,
+      elevation:30,
+      backgroundColor: '#1b2a41'
+    },
   RecCardInfo:{
     top:10,
     left:10,
     height:100,
     width:230,
     textAlign:'left',
-    color:'black'
   },
-  RecCardSmall:{
-    alignItems:'center',
-    textAlign:'center',
-    width: 120,
-    height: 170,
-    marginBottom:5,
-    borderRadius: 5,
-    backgroundColor: '#f4f4f4',
-  },
+    RecCardSmall:{
+      alignItems:'center',
+      width: 120,
+      height: 170,
+      margin: 2,
+      marginTop:5,
+      elevation:30,
+      borderRadius: 5,
+      backgroundColor: '#1b2a41',
+    },
   prodImg:{
-    height:150,
-    width:250,
+    top:20,
+    height:100,
+    width:200,
     resizeMode:'contain'
   },
   prodImgSmall:{
@@ -205,11 +205,11 @@ const styles = StyleSheet.create({
     fontFamily:'Roboto-Bold',
     fontSize:15,
     textAlign:'left',
-    color:'black',
+    color:'#eee0cb',
   },
   cardText:{
     fontFamily:'Roboto',
-    color:'black',
+    color:'#eee0cb',
   },
   pressTxt:{
     fontFamily:'Roboto-thin',

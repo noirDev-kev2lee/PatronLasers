@@ -16,7 +16,6 @@ const appTheme = {
     background:'#1b2a41',
     card:'#0c1821',
     text:'#fff',
-
   }
 }
 
