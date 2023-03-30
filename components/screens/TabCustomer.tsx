@@ -19,7 +19,7 @@ const TabCustomer = () => {
         <ScrollView style={styles.listScroll}>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Thruwaida Kunambi</Text>
+            <Text style={styles.RecCardTitle}>Jane doe</Text>
             <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis voluptas blanditiis beatae expedita illum doloribus earum aspernatur, ullam exercitationem iste.</Text>
             </View>
           <View style={styles.customerImg}>
@@ -28,7 +28,7 @@ const TabCustomer = () => {
         </View>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Joline Catfish</Text>
+            <Text style={styles.RecCardTitle}>Alister mclain</Text>
             <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis voluptas blanditiis beatae expedita illum doloribus earum aspernatur, ullam exercitationem iste.</Text>
             </View>
           <View style={styles.customerImg}>
@@ -37,7 +37,7 @@ const TabCustomer = () => {
         </View>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Doris Maitaip</Text>
+            <Text style={styles.RecCardTitle}>Sarah john</Text>
             <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis voluptas blanditiis beatae expedita illum doloribus earum aspernatur, ullam exercitationem iste.</Text>
             </View>
           <View style={styles.customerImg}>
@@ -46,7 +46,7 @@ const TabCustomer = () => {
         </View>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Maisha Tabu</Text>
+            <Text style={styles.RecCardTitle}>Doris hale</Text>
             <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis voluptas blanditiis beatae expedita illum doloribus earum aspernatur, ullam exercitationem iste.</Text>
             </View>
           <View style={styles.customerImg}>
@@ -55,7 +55,7 @@ const TabCustomer = () => {
         </View>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Bila Barakoa</Text>
+            <Text style={styles.RecCardTitle}>clare monclair</Text>
             <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis voluptas blanditiis beatae expedita illum doloribus earum aspernatur, ullam exercitationem iste.</Text>
             </View>
           <View style={styles.customerImg}>
@@ -64,7 +64,7 @@ const TabCustomer = () => {
         </View>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Ndogo Tamu</Text>
+            <Text style={styles.RecCardTitle}>Marie Matip</Text>
             <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis voluptas blanditiis beatae expedita illum doloribus earum aspernatur, ullam exercitationem iste.</Text>
             </View>
           <View style={styles.customerImg}>
