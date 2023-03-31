@@ -1,5 +1,6 @@
 import { Button, Pressable, StyleSheet,TextInput, Text, View, KeyboardAvoidingView } from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
+import Icon from 'react-native-vector-icons/Ionicons'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 const RegInputText = () => {
@@ -10,22 +11,36 @@ const RegInputText = () => {
   const [Mobile, onMobileChange]= React.useState('Mobile')
   const [Password, onPasswordChange]= React.useState('Password')
   return(
-      <View style={styles.form}>
-        <TextInput style={styles.textInput} onChangeText={onFnameChange} value={FirstName}/>
-        <TextInput style={styles.textInput} onChangeText={onLnameChange} value={LastName} />
-        <TextInput style={styles.textInput2} onChangeText={onNumberChange} value={SerialNumber} />
-        <TextInput style={styles.textInput2} onChangeText={onEmailChange} value={Email} />
-        <TextInput style={styles.textInput2} onChangeText={onMobileChange} value={Mobile} />
-        <TextInput style={styles.textInput2} onChangeText={onPasswordChange} value={Password} />
+    <View>
+    <View style={styles.inputLog}>
 
+    <TextInput style={styles.textInput} onChangeText={onFnameChange} placeholder='First Name' placeholderTextColor={'#9999a1'}/></View>
+    <View style={styles.inputLog}>
 
-      </View>
-  )
+    <TextInput style={styles.textInput} onChangeText={onLnameChange} placeholder='Last Name' placeholderTextColor={'#9999a1'}/></View>
+    <View style={styles.inputLog}>
+
+    <TextInput style={styles.textInput} onChangeText={onNumberChange} placeholder='Serial Number' placeholderTextColor={'#9999a1'}/></View>
+    <View style={styles.inputLog}>
+
+    <TextInput style={styles.textInput} onChangeText={onEmailChange} placeholder='Email' placeholderTextColor={'#9999a1'}/></View>
+    <View style={styles.inputLog}>
+
+    <TextInput style={styles.textInput} onChangeText={onMobileChange} placeholder='Phone Number' placeholderTextColor={'#9999a1'}/></View>
+    <View style={styles.inputLog}>
+
+    <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password' placeholderTextColor={'#9999a1'}/>
+    </View>
+    <View style={styles.inputLog}>
+    <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password Confirm' placeholderTextColor={'#9999a1'}/></View>
+  </View>
+)
   }
 export default function Register ({navigation}) {
   return (
-    <View style={styles.container}>
+    <View style={styles.form}>
       <Text style={styles.title}>Register</Text>
+      <Text style={styles.title2}>Welcome to Patron, register as a clinic or patient</Text>
       <RegInputText/>
       <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
       <Text style={styles.pressTxt}>Register</Text>
@@ -34,62 +49,54 @@ export default function Register ({navigation}) {
   )
 }
 
-
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    justifyContent:'center',
-    flexWrap:'wrap',
-    alignItems:'center'
-  },
-  title:{
-    fontSize:50,
-    fontWeight:'600',
-    textTransform:'uppercase',
-    color:'#03045E',
-    textAlign:'left',
-    margin:50
-  },
-  textInput:{
-    padding:10,
-    marginHorizontal:10,
-    margin:10,
-    fontSize:20,
-    color:'#000',
-    backgroundColor:'#DDDDDD',
-    width:180,
-    height:40,
-    borderRadius:8
-  },
-  textInput2:{
-    padding:10,
-    margin:10,
-    fontSize:20,
-    color:'#000',
-    backgroundColor:'#DDDDDD',
-    width:380,
-    height:40,
-    borderRadius:8
-  },
   form:{
     flex:1,
+    padding:20,
+    alignContent:'center',
+  },
+  title:{
+    textAlign:'left',
+    fontFamily:'Inter-Regular',
+    fontSize:50,
+    color:'#9999a1'
+  },
+  title2:{
+    fontFamily:'Inter-Regular',
+    fontSize:20,
+    color:'#9999a1'
+  },
+  inputLog:{
+    margin:10,
+    paddingHorizontal:10,
+    alignItems:'center',
     flexDirection:'row',
-    flexWrap:'wrap',
+    borderRadius:10,
+    width:350,
+    backgroundColor:'#e6e6e9'
+  },
+  textInput:{
+    fontFamily:'Inter',
+    paddingLeft:30,
+    fontSize:20,
+    color:'#000',
+    backgroundColor:'#e6e6e9',
+    width:250,
   },
   pressBtn:{
-    borderRadius:8,
-    justifyContent:'center',
     alignItems:'center',
-    backgroundColor:'#03045E',
-    width:280,
+    left:10,
+    top:20,
+    fontFamily:'Inter-Regular',
+    borderRadius:8,
+    backgroundColor:'#9999a1',
+    width:350,
     height:50
   },
   pressTxt:{
-    textAlign:'center',
-    textTransform:'uppercase',
-    letterSpacing:2,
+    top:10,
+    fontFamily:'Inter-Bold',
     fontSize:20,
-    fontWeight:'bold',
     color:'#fff'
-  }
+  },
 })

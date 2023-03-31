@@ -1,22 +1,53 @@
 import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
 import TabsAds from './TabAds'
 import TabCustomer from './TabCustomer'
 import TabGuide from './TabGuide'
 import TabSupport from './TabSupport'
-import React from 'react'
-import Register from './Register';
+import ProductHome from './ProductHome'
+import React from 'react'                             
 
 const Tab = createBottomTabNavigator(); 
 
 export default function Product({navigation}) {
   return (
     <View style={styles.container}>
-      <Tab.Navigator>
-            <Tab.Screen name='Advertisement' component={TabsAds} />
+      <Tab.Navigator initialRouteName='Home'
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'home'
+              : 'home-outline';
+          } else if (route.name === 'Advertisement') {
+            iconName = focused ? 'globe' : 'globe-outline';
+          }
+          else if (route.name === 'Clinical Guides') {
+            iconName = focused ? 'medkit' : 'medkit-outline';
+          }
+          else if (route.name === 'My Customer') {
+            iconName = focused ? 'people' : 'people-outline';
+          }else if (route.name === 'Tech Support') {
+            iconName = focused ? 'cog' : 'cog-outline';
+          }
+          return <Icon name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#eee0cb',
+        tabBarInactiveTintColor: '#fff',
+        headerStyle:{height:40,backgroundColor:'#1b2a41'},
+        headerTintColor:'#eee0cb',
+        headerShadowVisible:true,
+        headerTitleAlign:'center',
+        tabBarShowLabel:false
+      })}
+      >
+            <Tab.Screen name='Advertisement' component={TabsAds}/>
             <Tab.Screen name='Clinical Guides' component={TabGuide} />
+            <Tab.Screen name='Home' component={ProductHome}/>
             <Tab.Screen name='My Customer' component={TabCustomer} />
             <Tab.Screen name='Tech Support' component={TabSupport} />
           </Tab.Navigator>
@@ -26,39 +57,7 @@ export default function Product({navigation}) {
 
 
 const styles = StyleSheet.create({
-  scroll:{
-    marginBottom:10,
-  },
-  scrollHeader:{
-    fontSize:20,
-    fontWeight:'900',
-    padding:10,
-    textTransform:'uppercase',
-    color:'#03045E',
-    textAlign:'left',
-  },
   container:{
     flex:1,
-    flexDirection:'row'
-  },
-  card:{
-    justifyContent:'flex-start',
-    alignItems:'center',
-    width: 150,
-    height: 190,
-    margin: 5,
-    borderRadius: 5,
-  },
-  cardText:{
-    color:'black',
-  },
-  card1:{
-    backgroundColor: '#FFF',
-  },
-  card2:{
-    backgroundColor:'#FFF',
-  },
-  card3:{
-    backgroundColor:'#FFF',
-  }
+    flexDirection:'row'}
 })
