@@ -35,7 +35,7 @@ const ProductHome = ({navigation}) => {
           <Icon name='plus-circle' size={80} color='#fff'/>
           </Pressable>
       </ScrollView>
-      <View><Text style={styles.scrollHeader}>Recommended</Text></View>
+      {/* <View><Text style={styles.scrollHeader}>Recommended</Text></View>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
@@ -67,7 +67,7 @@ const ProductHome = ({navigation}) => {
       <Image style={styles.prodImgSmallRec} source={require('../assets/1-7.png')}/>
         </View>
       </View>
-      </ScrollView>
+      </ScrollView> */}
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
       flexDirection:'row'
     },
     containersec:{
-      height:250,
+      maxHeight:320,
       marginBottom:450
     },
     card:{
