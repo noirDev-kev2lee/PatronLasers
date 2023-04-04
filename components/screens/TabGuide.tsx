@@ -151,7 +151,12 @@ const styles = StyleSheet.create({
       margin:10,
       borderRadius: 10,
       elevation:30,
-      backgroundColor: '#1b2a41'
+      backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
   RecCardInfo:{
     top:10,
@@ -169,6 +174,11 @@ const styles = StyleSheet.create({
       elevation:30,
       borderRadius: 5,
       backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
   prodImg:{
     top:20,

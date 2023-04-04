@@ -32,7 +32,7 @@ const ProductHome = ({navigation}) => {
         </View>
       </View>
       <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
-          <Icon name='add-circle-outline' size={80} color='orange'/>
+          <Icon name='plus-circle' size={80} color='#fff'/>
           </Pressable>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>Recommended</Text></View>
@@ -154,6 +154,11 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       elevation:30,
       backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
     RecCard:{
       flex:1,
@@ -163,7 +168,12 @@ const styles = StyleSheet.create({
       margin:10,
       borderRadius: 10,
       elevation:30,
-      backgroundColor: '#1b2a41'
+      backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
     RecCardInfo:{
       top:10,
@@ -182,6 +192,11 @@ const styles = StyleSheet.create({
       elevation:30,
       borderRadius: 5,
       backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
     prodImg:{
       height:150,

@@ -22,17 +22,17 @@ export default function Product({navigation}) {
           if (route.name === 'Home') {
             iconName = focused
               ? 'home'
-              : 'home-outline';
+              : 'home';
           } else if (route.name === 'Advertisement') {
-            iconName = focused ? 'globe' : 'globe-outline';
+            iconName = focused ? 'globe' : 'globe';
           }
           else if (route.name === 'Clinical Guides') {
             iconName = focused ? 'medkit' : 'medkit';
           }
           else if (route.name === 'My Customer') {
-            iconName = focused ? 'people' : 'people-outline';
+            iconName = focused ? 'users' : 'users';
           }else if (route.name === 'Tech Support') {
-            iconName = focused ? 'cog' : 'cog-outline';
+            iconName = focused ? 'cog' : 'cog';
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
