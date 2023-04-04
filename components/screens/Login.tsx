@@ -1,6 +1,6 @@
 import { Alert, Button, Pressable, SafeAreaView, StyleSheet, Text, TextComponent, TextInput, TextInputComponent, ToastAndroid, View } from 'react-native'
 import {NavigationContainer} from '@react-navigation/native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
@@ -10,11 +10,11 @@ const InputText = () => {
   return(
       <View style={styles.form}>
         <View style={styles.inputLog}>
-        <Icon style={styles.icons} name={'mail-outline'} size={20} color={'#000'}/>
+        <Icon style={styles.icons} name={'envelope'} size={20} color={'#000'}/>
         <TextInput style={styles.textInput} onChangeText={onChangeText} placeholder='User Name Or Email' placeholderTextColor={'#000'}/></View>
         <View style={styles.inputPass}>
-        <Icon name={'lock-closed-outline'} size={20} color={'#000'}/>
-        <TextInput style={styles.textInput} onChangeText={passwordChange} placeholder='Password' placeholderTextColor={'#000'}/><Icon name={'eye-off-outline'} size={20} color={'#000'}/></View>
+        <Icon name={'lock'} size={20} color={'#000'}/>
+        <TextInput style={styles.textInput} onChangeText={passwordChange} placeholder='Password' placeholderTextColor={'#000'}/><Icon name={'eye-slash'} size={20} color={'#000'}/></View>
       </View>
   )
 }

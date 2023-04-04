@@ -1,7 +1,7 @@
 import { StyleSheet,ScrollView, Pressable, Text, View, Image } from 'react-native'
 import { useTheme } from '@react-navigation/native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const ProductHome = ({navigation}) => {
   return (
     <View>

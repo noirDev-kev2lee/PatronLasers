@@ -1,7 +1,7 @@
 import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import TabsAds from './TabAds'
 import TabCustomer from './TabCustomer'
 import TabGuide from './TabGuide'
@@ -27,7 +27,7 @@ export default function Product({navigation}) {
             iconName = focused ? 'globe' : 'globe-outline';
           }
           else if (route.name === 'Clinical Guides') {
-            iconName = focused ? 'medkit' : 'medkit-outline';
+            iconName = focused ? 'medkit' : 'medkit';
           }
           else if (route.name === 'My Customer') {
             iconName = focused ? 'people' : 'people-outline';
