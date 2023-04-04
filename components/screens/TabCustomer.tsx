@@ -5,13 +5,13 @@ import Icon from 'react-native-vector-icons/Ionicons'
 const TabCustomer = () => {
   return (
     <View>
-      <Text style={styles.text}>Create</Text>
+    
       <View style={styles.createSec}>
         <Pressable onPress={() => Alert.alert('Appointment made')} style={styles.createPress}><Text style={styles.textPress}>Appointment</Text>
-        <Icon name={'add-circle-outline'} color={'#eee0cb'} size={70}/>
+        <Icon name={'add-circle-outline'} color={'#fff'} size={70}/>
         </Pressable>
         <Pressable onPress={() => Alert.alert('Customer Added')} style={styles.createPress}><Text style={styles.textPress}>Customer</Text>
-        <Icon name={'add-circle-outline'} color={'#eee0cb'} size={70}/>
+        <Icon name={'add-circle-outline'} color={'#fff'} size={70}/>
         </Pressable>
       </View>
       <View style={styles.list}>
@@ -86,13 +86,13 @@ const styles = StyleSheet.create({
     paddingLeft:15,
     fontFamily:'Roboto-Regular',
     fontSize:30,
-    color:'#eee0cb'
+    color:'#000'
   },
   textPress:{
     marginBottom:0,
     fontFamily:'Roboto-Thin',
     fontSize:20,
-    color:'#eee0cb'
+    color:'#fff'
   },
   createSec:{
     flex:1,
@@ -104,11 +104,13 @@ const styles = StyleSheet.create({
     top:20,
     paddingTop:40,
     marginHorizontal:10,
+    marginBottom: 10,
     borderRadius:40,
     alignItems:'center',
+    elevation: 50,
     height:150,
     width:180,
-    backgroundColor:'#0c1821'
+    backgroundColor:'#03045e'
   },
   list:{
     top:200,
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     color:'#000'
   },
   listScroll:{
-    height:430,
+    height:453,
     marginBottom:800,
     flexDirection:'column',
   },
@@ -130,9 +132,11 @@ const styles = StyleSheet.create({
     alignItems:'center',
     width: 380,
     height: 120,
+    marginTop: 5,
     marginRight: 10,
     borderRadius: 10,
-    backgroundColor: '#0c1821',
+    elevation: 10,
+    backgroundColor: '#fff',
     marginBottom:10
   },
   RecCardInfo:{
@@ -145,7 +149,7 @@ const styles = StyleSheet.create({
   },
   RecCardTitle:{
     fontFamily:'Inter',
-    color:'#b4b9c1',
+    color:'#000',
     fontSize:20,
     fontWeight:'bold',
     textAlign:'left',
@@ -154,7 +158,7 @@ const styles = StyleSheet.create({
     fontFamily:'Roboto-Bold',
     fontSize:15,
     textAlign:'left',
-    color:'#eee0cb',
+    color:'#000',
   },
   customerImg:{
     left:40,

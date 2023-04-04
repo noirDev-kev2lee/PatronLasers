@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, Pressable, ScrollView, Button } from 'react-native'
+import { View, Text, SafeAreaView, Pressable, ScrollView, Button, StatusBar } from 'react-native'
 import React from 'react'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -13,16 +13,19 @@ const Stack = createNativeStackNavigator();
 const appTheme = {
   colors:{
     primary:'f4f4f9',
-    background:'#1b2a41',
-    card:'#0c1821',
-    text:'#fff',
+    background:'#fff',
+    card:'#fff',
+    text:'#000',
 
   }
 }
 
+
 function App() {
   return (
     <NavigationContainer theme={appTheme}>
+      <StatusBar backgroundColor="#14213d"/>
+      
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home}
         options={{

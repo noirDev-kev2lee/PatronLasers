@@ -6,7 +6,7 @@ const ProductHome = ({navigation}) => {
   return (
     <View>
       <View><Text style={styles.scrollHeader}>My Products</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scroll}>
       <View style={styles.container}>
         <Pressable onPress={() => navigation.navigate('Product Info')}>
         <View style={[styles.card]}>
@@ -36,7 +36,7 @@ const ProductHome = ({navigation}) => {
           </Pressable>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>Recommended</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
@@ -69,7 +69,7 @@ const ProductHome = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
-      <ScrollView style={styles.containersec}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
       <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
@@ -135,33 +135,36 @@ const styles = StyleSheet.create({
       textTransform:'uppercase',
       textAlign:'left',
       margin:5,
-      color:'#eee0cb',
+      color:'#000',
     },
     container:{
       flex:1,
       flexDirection:'row'
     },
     containersec:{
-      height:300,
+      height:250,
       marginBottom:450
     },
     card:{
       textAlign:'base-line',
       alignItems:'center',
-      marginRight:10,
+      margin:10,
       width: 150,
       height: 180,
+      elevation: 10,
       borderRadius: 5,
-      backgroundColor: '#1b2a41',
+      backgroundColor: '#fff',
     },
     RecCard:{
       flex:1,
       flexDirection:'row-reverse',
       width: 380,
       height: 150,
-      marginRight: 10,
+      marginBottom: 10,
+      marginRight: 8,
       borderRadius: 10,
-      backgroundColor: '#1b2a41'
+      elevation: 10,
+      backgroundColor: '#fff'
     },
     RecCardInfo:{
       top:10,
@@ -175,9 +178,10 @@ const styles = StyleSheet.create({
       alignItems:'center',
       width: 120,
       height: 150,
-      margin: 2,
+      margin: 10,
+      elevation: 10,
       borderRadius: 5,
-      backgroundColor: '#1b2a41',
+      backgroundColor: '#fff',
     },
     prodImg:{
       height:150,
@@ -208,7 +212,7 @@ const styles = StyleSheet.create({
     },
     RecCardTitle:{
       fontFamily:'Inter',
-      color:'#eee0cb',
+      color:'#000',
       fontSize:20,
       fontWeight:'bold',
       textAlign:'left',
@@ -217,11 +221,11 @@ const styles = StyleSheet.create({
       fontFamily:'Inter',
       fontSize:15,
       textAlign:'left',
-      color:'#eee0cb',
+      color:'#000',
     },
     cardText:{
       fontFamily:'Roboto',
-      color:'#eee0cb',
+      color:'#000',
     },
     pressTxt:{
       fontFamily:'Roboto-thin',

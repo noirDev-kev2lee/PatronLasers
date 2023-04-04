@@ -36,13 +36,14 @@ export default function Product({navigation}) {
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#eee0cb',
-        tabBarInactiveTintColor: '#fff',
-        headerStyle:{height:40,backgroundColor:'#1b2a41'},
-        headerTintColor:'#eee0cb',
+        tabBarActiveTintColor: '#fca311',
+        tabBarInactiveTintColor: '#202B31',
+        headerStyle:{height:60,backgroundColor:'#03045e'},
+        headerTintColor:'#FFF',
         headerShadowVisible:true,
         headerTitleAlign:'center',
-        tabBarShowLabel:false
+        tabBarShowLabel:false,
+        tabBarStyle:{borderColor:'#fff'}
       })}
       >
             <Tab.Screen name='Advertisement' component={TabsAds}/>
