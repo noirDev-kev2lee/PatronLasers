@@ -1,7 +1,7 @@
 import { StyleSheet,ScrollView, Pressable, Text, View, Image } from 'react-native'
 import { NavigationContainer, useTheme } from '@react-navigation/native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const ProductHome = ({navigation}) => {
   return (
     <View>
@@ -186,20 +186,20 @@ const styles = StyleSheet.create({
     prodImg:{
       height:150,
       width:250,
-      resizeMode:'stretch'
+      resizeMode:'contain'
     },
     prodImgSmall:{
       margin:-5,
       height:140,
       width:240,
-      resizeMode:'stretch'
+      resizeMode:'contain'
     },
     prodImgSmallRec:{
       top:-15,
-      left:-20,
+      right:30,
       height:150,
       width:230,
-      resizeMode:'stretch'
+      resizeMode:'contain'
     },
     pressBtn:{
       fontFamily:'Inter-Regular',
