@@ -45,14 +45,13 @@ const styles = StyleSheet.create({
     alignContent:'center',
   },
   form:{
-    marginTop:20,
     flex:1,
+    justifyContent:'center',
     alignItems:'center',
   },
   buttons:{
     flex:1,
     alignItems:'center',
-    marginTop:-200,
   },
   title:{
     marginTop:100,
@@ -98,7 +97,6 @@ const styles = StyleSheet.create({
     width:250,
   },
   pressBtn:{
-    top:30,
     fontFamily:'Inter-Regular',
     borderRadius:8,
     backgroundColor:'#e6e6e9',
@@ -116,7 +114,6 @@ const styles = StyleSheet.create({
     right:-110
   },
   pressTxt2:{
-    top:-10,
     fontFamily:'Inter-Regular',
     fontSize:15,
     color:'#e6e6e9'

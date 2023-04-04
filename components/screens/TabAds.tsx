@@ -10,7 +10,7 @@ const ProductHome = ({navigation}) => {
   return (
     <View>
       <View><Text style={styles.scrollHeader}>Related To You</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
         <Pressable onPress={() => navigation.push('Product Info')}>
         <View style={[styles.card]}>
@@ -37,7 +37,7 @@ const ProductHome = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>New Arrivals</Text></View>
-      <ScrollView horizontal style={styles.scroll}>
+      <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
@@ -70,7 +70,7 @@ const ProductHome = ({navigation}) => {
       </View>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>Must See Products</Text></View>
-      <ScrollView style={styles.containersec}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
       <View style={styles.scrollsec}>
         <View style={[styles.RecCardSmall]}>
@@ -131,40 +131,40 @@ const styles = StyleSheet.create({
     justifyContent:'space-evenly'
   },
   scrollHeader:{
-    fontFamily:'Roboto',
+    fontFamily:'Inter',
     fontSize:20,                                                                                      
     textTransform:'uppercase',
     textAlign:'left',
-    marginTop:5,
-    color:'#03045E',
+    margin:5,
+    color:'#eee0cb',
   },
   container:{
     flex:1,
     flexDirection:'row'
   },
   containersec:{
-    height:300,
+    height:250,
     marginBottom:450
   },
   card:{
     textAlign:'base-line',
     alignItems:'center',
-    marginRight:10,
+    margin:10,
     width: 150,
     height: 180,
     borderRadius: 5,
-    backgroundColor: '#f7f7f7',
+    elevation:30,
+    backgroundColor: '#1b2a41',
   },
   RecCard:{
     flex:1,
     flexDirection:'row-reverse',
     width: 380,
     height: 150,
-    marginRight: 10,
+    margin:10,
     borderRadius: 10,
-    shadowColor:'#000',
-    shadowOpacity:100,
-    backgroundColor: '#f6f6f6'
+    elevation:30,
+    backgroundColor: '#1b2a41'
   },
   RecCardInfo:{
     top:10,
@@ -179,13 +179,15 @@ const styles = StyleSheet.create({
     width: 120,
     height: 150,
     margin: 2,
+    marginTop:5,
+    elevation:30,
     borderRadius: 5,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: '#1b2a41',
   },
   prodImg:{
     height:150,
     width:250,
-    resizeMode:'stretch'
+    resizeMode:'contain'
   },
   prodImgSmall:{
     margin:-5,
@@ -198,32 +200,33 @@ const styles = StyleSheet.create({
     left:-20,
     height:150,
     width:230,
-    resizeMode:'stretch'
+    resizeMode:'contain'
   },
   pressBtn:{
+    fontFamily:'Inter-Regular',
+    alignContent:'center',
     marginTop:60,
     marginLeft:8,
-    borderRadius:8,
-    backgroundColor:'#03045E',
+    borderRadius:50,
     width:80,
     height:80
   },
   RecCardTitle:{
     fontFamily:'Inter',
-    color:'#03045E',
+    color:'#66666e',
     fontSize:20,
     fontWeight:'bold',
     textAlign:'left',
   },
   RecCardPara:{
-    fontFamily:'Roboto-Bold',
+    fontFamily:'Inter',
     fontSize:15,
     textAlign:'left',
-    color:'black',
+    color:'#e6e6e9',
   },
   cardText:{
     fontFamily:'Roboto',
-    color:'black',
+    color:'#e6e6e9',
   },
   pressTxt:{
     fontFamily:'Roboto-thin',

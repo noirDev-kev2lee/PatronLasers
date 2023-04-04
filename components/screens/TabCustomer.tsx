@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 const TabCustomer = () => {
   return (
     <View>
-      <Text style={styles.text}>Create</Text>
       <View style={styles.createSec}>
         <Pressable onPress={() => Alert.alert('Appointment made')} style={styles.createPress}><Text style={styles.textPress}>Appointment</Text>
         <Icon name={'add-circle-outline'} color={'#eee0cb'} size={70}/>
@@ -15,7 +14,11 @@ const TabCustomer = () => {
         </Pressable>
       </View>
       <View style={styles.list}>
+        <View style={styles.customerHeader}>
+        <Icon name={'chevron-back-outline'} size={30} color={'#eee0cb'}/>
         <Text style={styles.listTitle}>My Customers</Text>
+        <Icon name={'chevron-forward-outline'} size={30} color={'#eee0cb'}/>
+        </View>
         <ScrollView style={styles.listScroll}>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
@@ -103,6 +106,7 @@ const styles = StyleSheet.create({
   createPress:{
     top:20,
     paddingTop:40,
+    elevation:100,
     marginHorizontal:10,
     borderRadius:40,
     alignItems:'center',
@@ -117,11 +121,13 @@ const styles = StyleSheet.create({
     fontFamily:'Inter',
     fontSize:40,
     textAlign:'center',
-    color:'#000'
+    marginBottom:10,
+    color:'#eee0cb'
   },
   listScroll:{
-    height:430,
+    height:470,
     marginBottom:800,
+    elevation:30,
     flexDirection:'column',
   },
   RecCard:{
@@ -131,6 +137,7 @@ const styles = StyleSheet.create({
     width: 380,
     height: 120,
     marginRight: 10,
+    elevation:50,
     borderRadius: 10,
     backgroundColor: '#0c1821',
     marginBottom:10
@@ -159,6 +166,11 @@ const styles = StyleSheet.create({
   customerImg:{
     left:40,
     alignItems:'center',
+  },
+  customerHeader:{
+    flexDirection:'row',
+    justifyContent:'space-evenly',
+    alignItems:'center'
   },
   prodImgSmallRec:{    
     height:100,
