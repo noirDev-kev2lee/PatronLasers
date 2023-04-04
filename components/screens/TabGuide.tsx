@@ -12,6 +12,7 @@ const TabGuide = ({navigation}) => {
       <View><Text style={styles.scrollHeader}>My Products Guides</Text></View>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
+        <Pressable onPress={() =>navigation.navigate('Guide Info')}>
       <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
             <Text style={styles.RecCardTitle}>Product One</Text>
@@ -19,6 +20,7 @@ const TabGuide = ({navigation}) => {
             </View>
       <Image style={styles.prodImgSmallRec} source={require('../assets/product1.png')}/>
         </View>
+        </Pressable>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
             <Text style={styles.RecCardTitle}>Product Two</Text>

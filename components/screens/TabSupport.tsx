@@ -67,13 +67,11 @@ const styles = StyleSheet.create({
   },
   form:{
     flex:1,
-    flexDirection:'row',
-    flexWrap:'wrap',
   },
   buttons:{
-    marginTop:50,
     flex:1,
-    alignItems:'center'
+    justifyContent:'center',
+    alignItems:'center',
   },
   pressBtn:{
     borderRadius:8,
@@ -101,8 +99,7 @@ const styles = StyleSheet.create({
     flexDirection:'column'
   },
   container2:{
-    marginTop:250,
     flex:1,
-    flexDirection:'column'
+    marginTop:150,
   },
 })

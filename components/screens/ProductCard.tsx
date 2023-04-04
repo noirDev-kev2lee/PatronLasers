@@ -1,20 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import NativeStackView from '@react-navigation/native-stack'
+import { View, Text } from 'react-native'
 import React from 'react'
 
-const function ProductCard({navigation}) {
+const ProductCard = () => {
   return (
     <View>
-      <Text style={styles.text}>ProductCard</Text>
+      <Text>ProductCard</Text>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  text:{
-    top:50,
-    fontSize:220,
-    color:'#000'
-  }
-})
+export default ProductCard

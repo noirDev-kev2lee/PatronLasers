@@ -2,8 +2,9 @@ import { View, Text, SafeAreaView, Pressable, ScrollView, Button } from 'react-n
 import React from 'react'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import ProductCard from './components/screens/Product';
+import ProductCard from './components/screens/ProductCard';
 import Login from './components/screens/Login';
+import GuideCard from './components/screens/GuideCard';
 import Register from "./components/screens/Register";
 import Home from "./components/screens/Home"
 import Product from './components/screens/Product';
@@ -21,7 +22,7 @@ const appTheme = {
 
 function App() {
   return (
-    <NavigationContainer theme={appTheme}>
+    <NavigationContainer  theme={appTheme}>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home}
         options={{
@@ -72,7 +73,18 @@ function App() {
           },
           headerTintColor: '#fff' 
         }}/>
+        <Stack.Screen name="Guide Info" component={GuideCard}         
+        options={{
+          title:'Product Info',
+          headerShown:false,
+          headerTitleAlign:'center',
+          headerStyle: {
+            backgroundColor:'#03045E'
+          },
+          headerTintColor: '#fff' 
+        }}/>
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }

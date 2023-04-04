@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     right:-110
   },
   pressTxt2:{
-    top:-10,
     fontFamily:'Inter-Regular',
     fontSize:15,
     color:'#e6e6e9'
