@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
       flexDirection:'row'
     },
     containersec:{
-      maxHeight:320,
-      marginBottom:450
+      height:420,
+      minHeight:320,
     },
     card:{
       textAlign:'base-line',
