@@ -1,7 +1,7 @@
 import { StyleSheet,ScrollView, Pressable, Text, View, Image } from 'react-native'
-import { useTheme } from '@react-navigation/native'
+import { NavigationContainer, useTheme } from '@react-navigation/native'
 import React from 'react'
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 const ProductHome = ({navigation}) => {
   return (
     <View>
@@ -32,10 +32,10 @@ const ProductHome = ({navigation}) => {
         </View>
       </View>
       <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
-          <Icon name='add-circle-outline' size={80} color='orange'/>
+          <Icon name='plus-circle' size={80} color='#fff'/>
           </Pressable>
       </ScrollView>
-      <View><Text style={styles.scrollHeader}>Recommended</Text></View>
+      {/* <View><Text style={styles.scrollHeader}>Recommended</Text></View>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
       <View style={[styles.RecCard]}>
@@ -67,7 +67,7 @@ const ProductHome = ({navigation}) => {
       <Image style={styles.prodImgSmallRec} source={require('../assets/1-7.png')}/>
         </View>
       </View>
-      </ScrollView>
+      </ScrollView> */}
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
       flexDirection:'row'
     },
     containersec:{
-      height:250,
-      marginBottom:450
+      height:420,
+      minHeight:320,
     },
     card:{
       textAlign:'base-line',
@@ -154,6 +154,11 @@ const styles = StyleSheet.create({
       borderRadius: 5,
       elevation:30,
       backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
     RecCard:{
       flex:1,
@@ -163,7 +168,12 @@ const styles = StyleSheet.create({
       margin:10,
       borderRadius: 10,
       elevation:30,
-      backgroundColor: '#1b2a41'
+      backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
     RecCardInfo:{
       top:10,
@@ -182,24 +192,29 @@ const styles = StyleSheet.create({
       elevation:30,
       borderRadius: 5,
       backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
     prodImg:{
       height:150,
       width:250,
-      resizeMode:'stretch'
+      resizeMode:'contain'
     },
     prodImgSmall:{
       margin:-5,
       height:140,
       width:240,
-      resizeMode:'stretch'
+      resizeMode:'contain'
     },
     prodImgSmallRec:{
       top:-15,
-      left:-20,
+      right:30,
       height:150,
       width:230,
-      resizeMode:'stretch'
+      resizeMode:'contain'
     },
     pressBtn:{
       fontFamily:'Inter-Regular',

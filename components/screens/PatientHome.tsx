@@ -1,19 +1,16 @@
-import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { StyleSheet, Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TabCustomer from './TabCustomer';
 import TabsAds from './TabAds'
-import TabCustomer from './TabCustomer'
-import TabGuide from './TabGuide'
-import TabSupport from './TabSupport'
-import ProductHome from './ProductHome'
-import React from 'react'                             
+import ProductHome from './ProductHome';
+import React from 'react'
 
 const Tab = createBottomTabNavigator(); 
 
-export default function Product({navigation}) {
+const PatientHome = ({navigation}) => {
   return (
-    <View style={styles.container}>
+<View style={styles.container}>
       <Tab.Navigator initialRouteName='Home'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -46,18 +43,17 @@ export default function Product({navigation}) {
       })}
       >
             <Tab.Screen name='Advertisement' component={TabsAds}/>
-            <Tab.Screen name='Clinical Guides' component={TabGuide} />
             <Tab.Screen name='Home' component={ProductHome}/>
-            <Tab.Screen name='My Customer' component={TabCustomer} />
-            <Tab.Screen name='Tech Support' component={TabSupport} />
+            <Tab.Screen name='Clinical Guides' component={TabCustomer} />
           </Tab.Navigator>
       </View>
   )
 }
 
+export default PatientHome
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    flexDirection:'row'}
+    container:{
+        flex:1,
+        flexDirection:'row'}
 })

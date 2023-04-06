@@ -12,6 +12,7 @@ const TabGuide = ({navigation}) => {
       <View><Text style={styles.scrollHeader}>My Products Guides</Text></View>
       <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
       <View style={styles.container}>
+        <Pressable onPress={() =>navigation.navigate('Guide Info')}>
       <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
             <Text style={styles.RecCardTitle}>Product One</Text>
@@ -19,6 +20,7 @@ const TabGuide = ({navigation}) => {
             </View>
       <Image style={styles.prodImgSmallRec} source={require('../assets/product1.png')}/>
         </View>
+        </Pressable>
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
             <Text style={styles.RecCardTitle}>Product Two</Text>
@@ -149,7 +151,12 @@ const styles = StyleSheet.create({
       margin:10,
       borderRadius: 10,
       elevation:30,
-      backgroundColor: '#1b2a41'
+      backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
   RecCardInfo:{
     top:10,
@@ -167,6 +174,11 @@ const styles = StyleSheet.create({
       elevation:30,
       borderRadius: 5,
       backgroundColor: '#1b2a41',
+      //IOS SHADOWS
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.5,
+      shadowRadius: 2,
     },
   prodImg:{
     top:20,

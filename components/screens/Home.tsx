@@ -9,7 +9,7 @@ export default function Home({navigation}) {
       <View>
         <Image style={styles.logo} source={require('../assets/001.png')}/>
       </View>
-      <Pressable style={styles.pressBtnReg} onPress={() => navigation.navigate('Register')}>
+      <Pressable style={styles.pressBtnReg} onPress={() => navigation.navigate('Register Choice')}>
       <Text style={styles.pressTxt}>Register</Text>
       </Pressable>
       <Pressable style={styles.pressBtnLog} onPress={() => navigation.navigate('Login')}>
