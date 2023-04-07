@@ -1,121 +1,161 @@
-import { Alert, Button, Pressable, SafeAreaView, StyleSheet, Text, TextComponent, TextInput, TextInputComponent, ToastAndroid, View } from 'react-native'
-import {NavigationContainer} from '@react-navigation/native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon3 from 'react-native-vector-icons/AntDesign';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
 
 const InputText = () => {
-  const [text, onChangeText]= React.useState('User Name');
-  const [password, passwordChange]= React.useState('Password')
-  return(
-      <View style={styles.form}>
-        <View style={styles.inputLog}>
-        <Icon style={styles.icons} name={'envelope'} size={20} color={'#000'}/>
-        <TextInput style={styles.textInput} onChangeText={onChangeText} placeholder='User Name Or Email' placeholderTextColor={'#000'}/></View>
-        <View style={styles.inputPass}>
-        <Icon name={'lock'} size={20} color={'#000'}/>
-        <TextInput style={styles.textInput} onChangeText={passwordChange} placeholder='Password' placeholderTextColor={'#000'}/><Icon name={'eye-slash'} size={20} color={'#000'}/></View>
+  const [text, onChangeText] = React.useState('User Name');
+  const [password, passwordChange] = React.useState('Password');
+  console.log(text, password);
+  return (
+    <View style={styles.form}>
+      <View style={styles.inputStyle}>
+        <Icon name="email" size={30} color="#000000" />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={onChangeText}
+          placeholder="User Name Or Email"
+          placeholderTextColor={'#000'}
+        />
       </View>
-  )
-}
+      <View style={styles.inputStyle}>
+        <Icon name="lock" size={30} color="#000000" />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={passwordChange}
+          placeholder="Password"
+          placeholderTextColor={'#000'}
+        />
+        <Icon2 name="eye-off" size={30} color="#000000" />
+      </View>
+    </View>
+  );
+};
 const Login = ({navigation}) => {
   return (
-  <View style={styles.container}>
-    <Text style={styles.title}>Welcome Back </Text>
-    <Text style={styles.title2}>Happy to have you back using Patron Services.
-    Proceed to use all we offer.</Text>
-        <InputText />
-        <View style={styles.buttons}>
-        <Pressable style={styles.pressBtn2} onPress={() => Alert.alert('Not Working yet')}>
-          <Text style={styles.pressTxt2}>Forgot Password?</Text>
+    <View style={styles.container}>
+      <View>
+        <Pressable
+          style={styles.backArrow}
+          onPress={() => navigation.navigate('Home')}>
+          <Icon3
+            style={styles.Arrow}
+            name="arrowleft"
+            size={30}
+            color="#000000"
+          />
         </Pressable>
-          <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Products')}>
-          <Text style={styles.pressTxt}>Log In</Text>
-          </Pressable>
-        </View>
-        </View>
-  )
-}
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.title}>Let’s sign you in </Text>
+        <Text style={styles.title2}>Welcome back.</Text>
+        <Text style={styles.title2}>You have been missed.</Text>
+      </View>
 
-export default Login
+      <InputText />
+      <View style={styles.buttons}>
+        <Pressable
+          style={styles.pressBtn2}
+          onPress={() => Alert.alert('Not Working yet')}>
+          <Text style={styles.forgotPass}>Forgot Password?</Text>
+        </Pressable>
+        <Pressable
+          style={styles.pressBtn}
+          onPress={() => navigation.navigate('Products')}>
+          <Text style={styles.pressTxt}>Log In</Text>
+        </Pressable>
+      </View>
+    </View>
+  );
+};
+
+export default Login;
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    alignContent:'center',
+  container: {
+    flex: 1,
+    alignContent: 'center',
+    backgroundColor: 'white',
   },
-  form:{
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
+  form: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  buttons:{
-    flex:1,
-    alignItems:'center',
+  buttons: {
+    flex: 1,
+    alignItems: 'center',
   },
-  title:{
-    marginTop:100,
-    margin:10,
-    textAlign:'left',
-    fontFamily:'Inter-Bold',
-    fontSize:50,
-    color:'#e6e6e9'
+  title: {
+    marginTop: 50,
+    fontFamily: 'Inter-Bold',
+    fontSize: 40,
+    color: '#131035',
   },
-  title2:{
-    margin:10,
-    width:300,
-    lineHeight:40,
-    fontFamily:'Inter',
-    fontSize:30,
-    color:'grey'
+  title2: {
+    width: 300,
+    fontFamily: 'Inter',
+    fontSize: 25,
+    color: '#131035',
   },
-  inputLog:{
-    margin:10,
-    paddingHorizontal:10,
-    alignItems:'center',
-    flexDirection:'row',
-    borderRadius:20,
-    width:350,
-    backgroundColor:'#f3f3f3'
+  inputStyle: {
+    margin: 10,
+    paddingLeft: 24,
+    paddingRight: 24,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 12,
+    width: 350,
+    height: 60,
+    backgroundColor: '#D9D9D9',
   },
-  inputPass:{
-    margin:10,
-    paddingHorizontal:10,
-    alignItems:'center',
-    flexDirection:'row',
-    borderRadius:20,
-    height:50,
-    width:350,
-    backgroundColor:'#f3f3f3'
+  textInput: {
+    fontFamily: 'Inter-Regular',
+    padding: 10,
+    fontSize: 18,
+    color: '#000',
+    width: 250,
   },
-  textInput:{
-    fontFamily:'Inter-Regular',
-    padding:10,
-    fontSize:20,
-    color:'#000',
-    backgroundColor:'#f4f4f4',
-    width:250,
+  pressBtn: {
+    borderRadius: 12,
+    width: 350,
+    height: 60,
+    padding: 10,
+    backgroundColor: '#131035',
   },
-  pressBtn:{
-    fontFamily:'Inter-Regular',
-    borderRadius:8,
-    backgroundColor:'#e6e6e9',
-    width:350,
-    height:50
+  pressTxt: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 18,
+    color: 'white',
+    textAlign: 'center',
   },
-  pressTxt:{
-    marginTop:10,
-    textAlign:'center',
-    fontFamily:'Inter-Bold',
-    fontSize:20,
-    color:'#66666e'
+  pressBtn2: {
+    right: -110,
   },
-  pressBtn2:{
-    right:-110
+  forgotPass: {
+    top: -10,
+    fontFamily: 'Inter-Regular',
+    fontSize: 15,
+    color: '#737373',
   },
-  pressTxt2:{
-    fontFamily:'Inter-Regular',
-    fontSize:15,
-    color:'#e6e6e9'
-  }
-})
+  textContainer: {
+    paddingLeft: 25,
+  },
+  backArrow: {
+    paddingTop: 35,
+    paddingLeft: 25,
+  },
+  Arrow: {
+    fontSize: 30,
+  },
+});
