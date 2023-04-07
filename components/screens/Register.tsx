@@ -1,5 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {Pressable, StyleSheet, TextInput, Text, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  TextInput,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 const RegInputText = () => {
   const [FirstName, onFnameChange] = React.useState('First Name');
@@ -72,16 +81,25 @@ const RegInputText = () => {
 };
 export default function Register({navigation}) {
   return (
-    <View style={styles.form}>
-      <Text style={styles.title}>Register</Text>
-      <Text style={styles.title2}>Welcome to Patron, register as a Clinic</Text>
-      <RegInputText />
-      <Pressable
-        style={styles.pressBtn}
-        onPress={() => navigation.navigate('Products')}>
-        <Text style={styles.pressTxt}>Sign Up</Text>
-      </Pressable>
-    </View>
+    <ScrollView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
+        style={styles.keyboard}>
+        <View style={styles.form}>
+          <Text style={styles.title}>Register</Text>
+          <Text style={styles.title2}>
+            Welcome to Patron, register as a Clinic
+          </Text>
+          <RegInputText />
+          <Pressable
+            style={styles.pressBtn}
+            onPress={() => navigation.navigate('Products')}>
+            <Text style={styles.pressTxt}>Sign Up</Text>
+          </Pressable>
+        </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
 
@@ -89,6 +107,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     padding: 20,
+
     alignContent: 'center',
     backgroundColor: 'white',
   },
@@ -136,4 +155,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
+  keyboard: { paddingBottom: 30},
 });

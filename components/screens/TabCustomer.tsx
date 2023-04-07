@@ -8,128 +8,79 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const TabCustomer = () => {
+  const customerList = [
+    {
+      id: 0,
+      name: 'Thruwaida Kunambi',
+      img: require('../assets/customer1.jpg'),
+      desc: 'This is customer one',
+    },
+    {
+      id: 1,
+      name: 'Joline CatFish',
+      img: require('../assets/customer2.jpg'),
+      desc: 'This is customer two',
+    },
+    {
+      id: 2,
+      name: 'Doris Maitaip',
+      img: require('../assets/customer3.jpg'),
+      desc: 'This is customer three',
+    },
+    {
+      id: 3,
+      name: 'Maisha Tabu',
+      img: require('../assets/customer2.jpg'),
+      desc: 'This is customer four',
+    },
+    {
+      id: 4,
+      name: 'Bila Barakoa',
+      img: require('../assets/customer1.jpg'),
+      desc: 'This is customer four',
+    },
+  ];
   return (
     <View>
       <View style={styles.createSec}>
         <Pressable
           onPress={() => Alert.alert('Appointment made')}
           style={styles.createPress}>
-          <Text style={styles.textPress}>Appointment</Text>
-          <Icon name={'plus-circle'} color={'#eee0cb'} size={70} />
+          <View style={styles.cardContent}>
+            <Text style={styles.textPress}>Appointment</Text>
+            <Icon name="pluscircle" size={50} color="#fff" />
+          </View>
         </Pressable>
         <Pressable
           onPress={() => Alert.alert('Customer Added')}
           style={styles.createPress}>
-          <Text style={styles.textPress}>Customer</Text>
-          <Icon name={'plus-circle'} color={'#eee0cb'} size={70} />
+          <View style={styles.cardContent}>
+            <Text style={styles.textPress}>Customer</Text>
+            <Icon name="pluscircle" size={50} color="#fff" />
+          </View>
         </Pressable>
       </View>
       <View style={styles.list}>
         <View style={styles.customerHeader}>
-          <Icon name={'chevron-left'} size={30} color={'#eee0cb'} />
+          <Icon name={'left'} size={30} color={'#eee0cb'} />
           <Text style={styles.listTitle}>My Customers</Text>
-          <Icon name={'chevron-right'} size={30} color={'#eee0cb'} />
+          <Icon name={'right'} size={30} color={'#eee0cb'} />
         </View>
         <ScrollView style={styles.listScroll}>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Thruwaida Kunambi</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facilis voluptas blanditiis beatae expedita illum doloribus
-                earum aspernatur, ullam exercitationem iste.
-              </Text>
+          {customerList.map(customer => (
+            <View key={customer.id} style={[styles.RecCard]}>
+              <View style={styles.RecCardInfo}>
+                <Text style={styles.RecCardTitle}>{customer.name}</Text>
+                <Text style={styles.RecCardPara}>{customer.desc}</Text>
+              </View>
+              <View style={styles.customerImg}>
+                <Image style={styles.prodImgSmallRec} source={customer.img} />
+              </View>
             </View>
-            <View style={styles.customerImg}>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={require('../assets/customer1.jpg')}
-              />
-            </View>
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Joline Catfish</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facilis voluptas blanditiis beatae expedita illum doloribus
-                earum aspernatur, ullam exercitationem iste.
-              </Text>
-            </View>
-            <View style={styles.customerImg}>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={require('../assets/customer2.jpg')}
-              />
-            </View>
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Doris Maitaip</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facilis voluptas blanditiis beatae expedita illum doloribus
-                earum aspernatur, ullam exercitationem iste.
-              </Text>
-            </View>
-            <View style={styles.customerImg}>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={require('../assets/customer3.jpg')}
-              />
-            </View>
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Maisha Tabu</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facilis voluptas blanditiis beatae expedita illum doloribus
-                earum aspernatur, ullam exercitationem iste.
-              </Text>
-            </View>
-            <View style={styles.customerImg}>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={require('../assets/customer3.jpg')}
-              />
-            </View>
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Bila Barakoa</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facilis voluptas blanditiis beatae expedita illum doloribus
-                earum aspernatur, ullam exercitationem iste.
-              </Text>
-            </View>
-            <View style={styles.customerImg}>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={require('../assets/customer2.jpg')}
-              />
-            </View>
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Ndogo Tamu</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Facilis voluptas blanditiis beatae expedita illum doloribus
-                earum aspernatur, ullam exercitationem iste.
-              </Text>
-            </View>
-            <View style={styles.customerImg}>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={require('../assets/customer2.jpg')}
-              />
-            </View>
-          </View>
+          ))}
         </ScrollView>
       </View>
     </View>
@@ -180,16 +131,18 @@ const styles = StyleSheet.create({
   },
   listTitle: {
     fontFamily: 'Inter',
-    fontSize: 40,
+    fontSize: 25,
     textAlign: 'center',
     marginBottom: 10,
     color: '#eee0cb',
   },
   listScroll: {
     height: 470,
-    marginBottom: 800,
+    paddingBottom: 30,
     elevation: 30,
     flexDirection: 'column',
+    paddingVertical: 30,
+    paddingHorizontal: 15,
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -200,11 +153,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row-reverse',
     alignItems: 'center',
-    width: 380,
     height: 120,
-    marginRight: 10,
     elevation: 50,
-    borderRadius: 10,
+    borderRadius: 12,
     backgroundColor: '#0c1821',
     marginBottom: 10,
     //IOS SHADOWS
@@ -244,9 +195,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   prodImgSmallRec: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     borderRadius: 100,
     resizeMode: 'contain',
+  },
+  cardContent: {
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 });

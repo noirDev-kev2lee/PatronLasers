@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 // import {NavigationContainer, useTheme} from '@react-navigation/native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/AntDesign';
 const ProductHome = ({navigation}) => {
   const productList = [
     {
@@ -61,8 +61,8 @@ const ProductHome = ({navigation}) => {
         </View>
         <Pressable
           style={styles.pressBtn}
-          onPress={() => navigation.navigate('Products')}>
-          <Icon name="plus-circle" size={80} color="#fff" />
+          onPress={() => navigation.navigate('add_product')}>
+          <Icon name="pluscircle" size={60} color="#fff" />
         </Pressable>
       </ScrollView>
       {/* <View><Text style={styles.scrollHeader}>Recommended</Text></View>
@@ -98,8 +98,8 @@ const ProductHome = ({navigation}) => {
         </View>
       </View>
       </ScrollView> */}
-      <View>
-        <Text style={styles.scrollHeader}>More From Patron</Text>
+      <View style={styles.moreContainer}>
+        <Text style={styles.scrollHeader}>More products</Text>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -191,10 +191,11 @@ const styles = StyleSheet.create({
   },
   scrollHeader: {
     fontFamily: 'Roboto',
-    fontSize: 20,
+    fontSize: 18,
     textTransform: 'uppercase',
     textAlign: 'left',
-    margin: 5,
+    marginLeft: 20,
+    paddingTop: 20,
     color: '#eee0cb',
   },
   container: {
@@ -307,5 +308,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 30,
     textAlign: 'center',
+  },
+  moreContainer: {
+    marginTop: 20,
   },
 });

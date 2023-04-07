@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductCard from './components/screens/ProductCard';
+import AddProduct from './components/screens/AddProduct';
 import Login from './components/screens/Login';
 import GuideCard from './components/screens/GuideCard';
 import Register from './components/screens/Register';
@@ -111,6 +112,19 @@ function App() {
           component={ProductCard}
           options={{
             title: 'Product Info',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#03045E',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="add_product"
+          component={AddProduct}
+          options={{
+            title: 'Add Product',
             headerShown: false,
             headerTitleAlign: 'center',
             headerStyle: {
