@@ -72,7 +72,7 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="Patient Home"
+          name="patient_home"
           component={PatientHome}
           options={{
             title: '',
