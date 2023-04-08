@@ -8,80 +8,54 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Alert,
 } from 'react-native';
 import React from 'react';
-const RegInputText = () => {
-  const [FirstName, onFnameChange] = React.useState('First Name');
-  const [LastName, onLnameChange] = React.useState('Last Name');
-  const [Email, onEmailChange] = React.useState('Email');
-  const [SerialNumber, onNumberChange] = React.useState('Serial Number');
-  const [Mobile, onMobileChange] = React.useState('Mobile');
-  const [Password, onPasswordChange] = React.useState('Password');
+import axios from 'axios';
 
-  return (
-    <View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onFnameChange}
-          placeholder="Clinic Name"
-          placeholderTextColor={'black'}
-        />
-      </View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onNumberChange}
-          placeholder="Serial Number"
-          placeholderTextColor={'black'}
-        />
-      </View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onNumberChange}
-          placeholder="Location"
-          placeholderTextColor={'black'}
-        />
-      </View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onEmailChange}
-          placeholder="Email"
-          placeholderTextColor={'black'}
-        />
-      </View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onMobileChange}
-          placeholder="Phone Number"
-          placeholderTextColor={'black'}
-        />
-      </View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onPasswordChange}
-          placeholder="Password"
-          placeholderTextColor={'black'}
-        />
-      </View>
-      <View style={styles.inputLog}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onPasswordChange}
-          placeholder="Password Confirm"
-          placeholderTextColor={'black'}
-        />
-      </View>
-    </View>
-  );
-};
 export default function Register({navigation}) {
+  const [clinicName, onClinicNameChange] = React.useState('');
+   const [serialNumber, onNumberChange] = React.useState('');
+  const [email, onEmailChange] = React.useState('');
+  const [location, onLocationChange] = React.useState('');
+  const [mobile, onMobileChange] = React.useState('');
+  const [password, onPasswordChange] = React.useState('');
+
+  const handleClinicRegister = async () => {
+    try {
+      if (
+        email === '' ||
+        password === '' ||
+        clinicName === '' ||
+        serialNumber === '' ||
+        location === '' ||
+        mobile === ''
+      ) {
+        Alert.alert('All field must be provided');
+      } else {
+        const response = await axios.post(
+          'http://15.236.168.186:7000/api/v1/signup/',
+          {
+            first_name: clinicName,
+            last_name: serialNumber,
+            email: email,
+            password: password,
+            role: 'clinic',
+          },
+        );
+
+        const json = response.data;
+        console.log(json);
+        Alert.alert('Registration Successfully!');
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      Alert.alert('Wrong email or password');
+      console.error('Wrong email or password', error);
+    }
+  };
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
@@ -91,10 +65,65 @@ export default function Register({navigation}) {
           <Text style={styles.title2}>
             Welcome to Patron, register as a Clinic
           </Text>
-          <RegInputText />
-          <Pressable
-            style={styles.pressBtn}
-            onPress={() => navigation.navigate('Products')}>
+          <View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onClinicNameChange}
+                placeholder="Clinic Name"
+                placeholderTextColor={'black'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onNumberChange}
+                placeholder="Serial Number"
+                placeholderTextColor={'black'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onLocationChange}
+                placeholder="Location"
+                placeholderTextColor={'black'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onEmailChange}
+                placeholder="Email"
+                placeholderTextColor={'black'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onMobileChange}
+                placeholder="Phone Number"
+                placeholderTextColor={'black'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onPasswordChange}
+                placeholder="Password"
+                placeholderTextColor={'black'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
+                onChangeText={onPasswordChange}
+                placeholder="Password Confirm"
+                placeholderTextColor={'black'}
+              />
+            </View>
+          </View>
+          <Pressable style={styles.pressBtn} onPress={handleClinicRegister}>
             <Text style={styles.pressTxt}>Sign Up</Text>
           </Pressable>
         </View>
@@ -155,5 +184,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-  keyboard: { paddingBottom: 30},
+  keyboard: {paddingBottom: 30},
 });
