@@ -10,21 +10,25 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import Icon3 from 'react-native-vector-icons/AntDesign';
 import React from 'react';
 // import {NavigationContainer} from '@react-navigation/native';
 
-const TabSupport = () => {
+const AddProduct = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+        <View style={styles.arrow}>
+          <Icon3 name="arrowleft" size={30} color="#000000" />
+        </View>
         <ScrollView>
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
             style={styles.keyboard}>
             <View>
-              <Text style={styles.title}>Create a card</Text>
+              <Text style={styles.title}>Add New Product</Text>
             </View>
             <View style={styles.form}>
               <TextInput
@@ -35,24 +39,12 @@ const TabSupport = () => {
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
-                placeholder="Card type"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                placeholder="Card title"
-              />
-              <TextInput
-                multiline={true}
-                numberOfLines={10}
-                style={styles.textInput3}
-                placeholderTextColor="#b4b9c1"
-                placeholder="Type your message..."
+                placeholder="Product Name"
               />
               <Pressable
                 style={styles.pressBtn}
                 onPress={() => Alert.alert('Submitted')}>
-                <Text style={styles.pressTxt}>Request</Text>
+                <Text style={styles.pressTxt}>Submit</Text>
               </Pressable>
             </View>
           </KeyboardAvoidingView>
@@ -62,7 +54,7 @@ const TabSupport = () => {
   );
 };
 
-export default TabSupport;
+export default AddProduct;
 
 const styles = StyleSheet.create({
   text: {
@@ -136,4 +128,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   keyboard: {flex: 1, padding: 30},
+  arrow: {
+    color: 'white',
+  },
 });
