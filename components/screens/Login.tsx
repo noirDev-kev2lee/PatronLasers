@@ -5,7 +5,11 @@ import {
   Text,
   TextInput,
   View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
+import axios from 'axios';
 // import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
@@ -13,35 +17,39 @@ import Icon3 from 'react-native-vector-icons/AntDesign';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
-const InputText = () => {
-  const [text, onChangeText] = React.useState('User Name');
-  const [password, passwordChange] = React.useState('Password');
-  console.log(text, password);
-  return (
-    <View style={styles.form}>
-      <View style={styles.inputStyle}>
-        <Icon name="email" size={30} color="#000000" />
-        <TextInput
-          style={styles.textInput}
-          onChangeText={onChangeText}
-          placeholder="User Name Or Email"
-          placeholderTextColor={'#000'}
-        />
-      </View>
-      <View style={styles.inputStyle}>
-        <Icon name="lock" size={30} color="#000000" />
-        <TextInput
-          style={styles.textInput}
-          onChangeText={passwordChange}
-          placeholder="Password"
-          placeholderTextColor={'#000'}
-        />
-        <Icon2 name="eye-off" size={30} color="#000000" />
-      </View>
-    </View>
-  );
-};
 const Login = ({navigation}) => {
+  const [email, onChangeEmail] = React.useState('');
+  const [password, passwordChange] = React.useState('');
+  const [hide, setHide] = React.useState(true);
+
+  const handleLogin = async () => {
+    try {
+      if (email === '' || password === '') {
+        Alert.alert('Email or password must be provided');
+      } else {
+        const response = await axios.post(
+          'http://15.236.168.186:7000/api/v1/signin/',
+          {
+            email,
+            password,
+          },
+        );
+
+        const json = response.data;
+        onChangeEmail('');
+        passwordChange('');
+        Alert.alert('Login Successfully!');
+        if (json.data.role === 'clinic') {
+          navigation.navigate('Products');
+        } else if (json.data.role === 'patient') {
+          navigation.navigate('patient_home');
+        }
+      }
+    } catch (error) {
+      Alert.alert('Wrong email or password');
+      console.error('Wrong email or password', error);
+    }
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -56,25 +64,60 @@ const Login = ({navigation}) => {
           />
         </Pressable>
       </View>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>Let’s sign you in </Text>
-        <Text style={styles.title2}>Welcome back.</Text>
-        <Text style={styles.title2}>You have been missed.</Text>
-      </View>
+      <ScrollView>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
+          style={styles.keyboard}>
+          <View style={styles.formContainer}>
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>Let’s sign you in </Text>
+              <Text style={styles.title2}>Welcome back.</Text>
+              <Text style={styles.title2}>You have been missed.</Text>
+            </View>
 
-      <InputText />
-      <View style={styles.buttons}>
-        <Pressable
-          style={styles.pressBtn2}
-          onPress={() => Alert.alert('Not Working yet')}>
-          <Text style={styles.forgotPass}>Forgot Password?</Text>
-        </Pressable>
-        <Pressable
-          style={styles.pressBtn}
-          onPress={() => navigation.navigate('Products')}>
-          <Text style={styles.pressTxt}>Log In</Text>
-        </Pressable>
-      </View>
+            <View style={styles.form}>
+              <View style={styles.inputStyle}>
+                <Icon name="email" size={30} color="#000000" />
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onChangeEmail}
+                  placeholder="Username Or Email"
+                  placeholderTextColor={'gray'}
+                />
+              </View>
+              <View style={styles.inputStyle}>
+                <Icon name="lock" size={30} color="#000000" />
+
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={passwordChange}
+                  secureTextEntry={hide}
+                  placeholder="Enter password"
+                  placeholderTextColor={'gray'}
+                />
+                <Pressable onPress={() => setHide(!hide)}>
+                  {hide ? (
+                    <Icon2 name="eye-off" size={30} color="#000000" />
+                  ) : (
+                    <Icon2 name="eye-sharp" size={30} color="#000000" />
+                  )}
+                </Pressable>
+              </View>
+            </View>
+            <View style={styles.buttons}>
+              <Pressable
+                style={styles.pressBtn2}
+                onPress={() => Alert.alert('Not Working yet')}>
+                <Text style={styles.forgotPass}>Forgot Password?</Text>
+              </Pressable>
+              <Pressable style={styles.pressBtn} onPress={handleLogin}>
+                <Text style={styles.pressTxt}>Log In</Text>
+              </Pressable>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </View>
   );
 };
@@ -88,13 +131,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   form: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 30,
   },
   buttons: {
-    flex: 1,
     alignItems: 'center',
+    marginTop: 20,
   },
   title: {
     marginTop: 50,
@@ -157,5 +200,9 @@ const styles = StyleSheet.create({
   },
   Arrow: {
     fontSize: 30,
+  },
+  keyboard: {paddingBottom: 30},
+  formContainer: {
+    flexDirection: 'column',
   },
 });
