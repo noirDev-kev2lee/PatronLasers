@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import theme  from '@react-navigation/native';
 import ProductCard from './components/screens/ProductCard';
 import AddProduct from './components/screens/AddProduct';
 import Login from './components/screens/Login';
@@ -18,9 +19,9 @@ const Stack = createNativeStackNavigator();
 
 const appTheme = {
   colors: {
-    primary: 'f4f4f9',
-    background: '#1b2a41',
-    card: '#0c1821',
+    primary: '111113',
+    background: '#fff',
+    card: '#f3f3f3',
     text: '#fff',
   },
 };
@@ -63,6 +64,17 @@ function App() {
           }}
         />
         <Stack.Screen
+          name="Register_choice"
+          component={RegisterChoice}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
           name="Patient"
           component={PatientRegister}
           options={{
@@ -95,46 +107,57 @@ function App() {
         }}
         />
         <Stack.Screen
-          name="Products"
+          name="Product"
           component={Product}
           options={{
             title: '',
             headerShown: false,
             headerTitleAlign: 'center',
             headerStyle: {
-              backgroundColor: '#03045E',
+              backgroundColor: '#343436',
             },
             headerTintColor: '#fff',
           }}
         />
-        <Stack.Screen name="Products" component={Product}         
+        <Stack.Screen name="Products" component={ProductHome}         
         options={{
           title:'',
-          headerShown: false,
+          headerShown: true,
           headerTitleAlign:'center',
           headerStyle: {
-            backgroundColor:'#03045E'
+            backgroundColor:'#111113'
           },
           headerTintColor: '#fff' 
         }}/>
 
 <Stack.Screen name="Product Info" component={ProductCard}         
         options={{
-          title:'Product Info',
-          headerShown:false,
+          title:'',
+          headerShown:true,
+          headerShadowVisible:false,
           headerTitleAlign:'center',
           headerStyle: {
-            backgroundColor:'#03045E'
+            backgroundColor:'#fff'
           },
-          headerTintColor: '#fff' 
+          headerTintColor: '#222' 
         }}/>
         <Stack.Screen name="Guide Info" component={GuideCard}         
+        options={{
+          title:'',
+          headerShown:true,
+          headerTitleAlign:'center',
+          headerStyle: {
+            backgroundColor:'#fff'
+          },
+          headerTintColor: '#222' 
+        }}/>
+        <Stack.Screen name="Add Product" component={AddProduct}         
         options={{
           title:'Product Info',
           headerShown:false,
           headerTitleAlign:'center',
           headerStyle: {
-            backgroundColor:'#03045E'
+            backgroundColor:'#111113'
           },
           headerTintColor: '#fff' 
         }}/>

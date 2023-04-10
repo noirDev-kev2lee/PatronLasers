@@ -1,13 +1,12 @@
 import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TabsAds from './TabAds'
 import TabCustomer from './TabCustomer'
 import TabGuide from './TabGuide'
 import TabSupport from './TabSupport'
-import ProductHome from './ProductHome'
 import React from 'react'                             
+import ProductHome from './ProductHome';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,10 +32,10 @@ export default function Product({navigation}) {
             }
             return <Icon name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#eee0cb',
-          tabBarInactiveTintColor: '#fff',
-          headerStyle: {height: 40, backgroundColor: '#1b2a41'},
-          headerTintColor: '#eee0cb',
+          tabBarActiveTintColor: '#222',
+          tabBarInactiveTintColor: '#999',
+          headerStyle: {height: 40, backgroundColor: '#fff'},
+          headerTintColor: '#222',
           headerShadowVisible: true,
           headerTitleAlign: 'center',
           tabBarShowLabel: false,

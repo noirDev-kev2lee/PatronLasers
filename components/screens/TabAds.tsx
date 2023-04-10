@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'left',
     margin: 5,
-    color: '#eee0cb',
+    color: '#222',
   },
   container: {
     flex: 1,
@@ -247,8 +247,8 @@ const styles = StyleSheet.create({
     width: 150,
     height: 180,
     borderRadius: 5,
-    elevation: 30,
-    backgroundColor: '#1b2a41',
+    elevation: 10,
+    backgroundColor: '#fff',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
     height: 150,
     margin: 10,
     borderRadius: 10,
-    elevation: 30,
-    backgroundColor: '#1b2a41',
+    elevation: 10,
+    backgroundColor: '#fff',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 230,
     textAlign: 'left',
-    color: 'black',
+    color: '#222',
   },
   RecCardSmall: {
     alignItems: 'center',
@@ -284,9 +284,9 @@ const styles = StyleSheet.create({
     height: 150,
     margin: 2,
     marginTop: 5,
-    elevation: 30,
+    elevation: 10,
     borderRadius: 5,
-    backgroundColor: '#1b2a41',
+    backgroundColor: '#fff',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   },
   RecCardTitle: {
     fontFamily: 'Inter',
-    color: '#66666e',
+    color: '#222',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'left',
@@ -331,11 +331,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     fontSize: 15,
     textAlign: 'left',
-    color: '#e6e6e9',
+    color: '#222',
   },
   cardText: {
     fontFamily: 'Roboto',
-    color: '#e6e6e9',
+    color: '#222',
   },
   pressTxt: {
     fontFamily: 'Roboto-thin',

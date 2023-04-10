@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     width: 350,
     backgroundColor: '#fff',
     borderRadius: 50,
-    elevation: 80,
+    elevation: 10,
   },
   prodImg: {
     height: 350,
@@ -49,9 +49,11 @@ const styles = StyleSheet.create({
   prodTitle:{
     fontFamily:'Inter-Bold',
     marginBottom:10,
+    color:'#888',
     fontSize:30
   },
   prodInfo:{
+    color:'#222',
     fontSize:20,
     textAlign:'justify',
   }

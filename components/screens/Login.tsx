@@ -40,7 +40,7 @@ const Login = ({navigation}) => {
         passwordChange('');
         Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
-          navigation.navigate('Products');
+          navigation.navigate('Product');
         } else if (json.data.role === 'patient') {
           navigation.navigate('patient_home');
         }
@@ -55,7 +55,7 @@ const Login = ({navigation}) => {
       <View>
         <Pressable
           style={styles.backArrow}
-          onPress={() => navigation.navigate('Home')}>
+          onPress={() => navigation.navigate('Product')}>
           <Icon3
             style={styles.Arrow}
             name="arrowleft"

@@ -51,7 +51,7 @@ const TabCustomer = () => {
           style={styles.createPress}>
           <View style={styles.cardContent}>
             <Text style={styles.textPress}>Appointment</Text>
-            <Icon name="pluscircle" size={50} color="#fff" />
+            <Icon name="pluscircle" size={50} color="#222" />
           </View>
         </Pressable>
         <Pressable
@@ -59,15 +59,15 @@ const TabCustomer = () => {
           style={styles.createPress}>
           <View style={styles.cardContent}>
             <Text style={styles.textPress}>Customer</Text>
-            <Icon name="pluscircle" size={50} color="#fff" />
+            <Icon name="pluscircle" size={50} color="#222" />
           </View>
         </Pressable>
       </View>
       <View style={styles.list}>
         <View style={styles.customerHeader}>
-          <Icon name={'left'} size={30} color={'#eee0cb'} />
+          <Icon name={'left'} size={30} color={'#222'} />
           <Text style={styles.listTitle}>My Customers</Text>
-          <Icon name={'right'} size={30} color={'#eee0cb'} />
+          <Icon name={'right'} size={30} color={'#222'} />
         </View>
         <ScrollView style={styles.listScroll}>
           {customerList.map(customer => (
@@ -96,13 +96,13 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     fontFamily: 'Roboto-Regular',
     fontSize: 30,
-    color: '#eee0cb',
+    color: '#fff',
   },
   textPress: {
     marginBottom: 0,
     fontFamily: 'Roboto-Thin',
     fontSize: 20,
-    color: '#eee0cb',
+    color: '#333',
   },
   createSec: {
     flex: 1,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 150,
     width: 180,
-    backgroundColor: '#0c1821',
+    backgroundColor: '#fff',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -134,12 +134,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginBottom: 10,
-    color: '#eee0cb',
+    color: '#222',
   },
   listScroll: {
     height: 470,
     paddingBottom: 30,
-    elevation: 30,
+    elevation: 10,
     flexDirection: 'column',
     paddingVertical: 30,
     paddingHorizontal: 15,
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     height: 120,
     elevation: 50,
     borderRadius: 12,
-    backgroundColor: '#0c1821',
+    backgroundColor: '#fff',
     marginBottom: 10,
     //IOS SHADOWS
     shadowColor: '#000',
@@ -170,11 +170,11 @@ const styles = StyleSheet.create({
     height: 100,
     width: 230,
     textAlign: 'left',
-    color: '#eee0cb',
+    color: '#777',
   },
   RecCardTitle: {
     fontFamily: 'Inter',
-    color: '#b4b9c1',
+    color: '#777',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'left',
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     fontSize: 15,
     textAlign: 'left',
-    color: '#eee0cb',
+    color: '#222',
   },
   customerImg: {
     left: 40,

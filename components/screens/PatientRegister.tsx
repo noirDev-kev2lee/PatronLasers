@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     padding: 20,
+    paddingBottom:180,
     alignContent: 'center',
     backgroundColor: 'white',
   },
@@ -174,5 +175,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-  keyboard: {paddingBottom: 30},
 });
