@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     elevation: 30,
-    backgroundColor: '#1b2a41',
+    backgroundColor: '#fff',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   scrollContainer:{
-    backgroundColor:'#1b2a41',
+    backgroundColor:'#fff',
     marginTop:20,
     flexDirection:'row'
   },
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 20,
     textAlign: 'left',
-    color: '#eee0cb',
+    color: '#222',
   },
   RecCardInfo: {
     top: 10,
@@ -129,14 +129,14 @@ const styles = StyleSheet.create({
   },
   RecCardTitle: {
     fontFamily: 'Inter',
-    color: '#fff',
+    color: '#333',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'left',
   },
   RecCardTitleSmall: {
     fontFamily: 'Inter',
-    color: '#999',
+    color: '#444',
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'left',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter',
     fontSize: 15,
     textAlign: 'left',
-    color: '#e6e6e9',
+    color: '#222',
   },
   prodImgSmallRec: {
     top: -15,
@@ -174,28 +174,28 @@ const styles = StyleSheet.create({
     margin:20,
     borderRadius: 10,
     elevation:20,
-    backgroundColor: '#1b2a41',
+    backgroundColor: '#fff',
   },
   appointTitle1:{
     padding:10,
     width:300,
     fontFamily:'Roboto-bold',
     fontSize:50,
-    color:'#fff'
+    color:'#888'
   },
   appointTitle2:{
     padding:10,
     width:300,
     fontFamily:'Roboto-Regular',
     fontSize:30,
-    color:'#fff'
+    color:'#666'
   },
   appointInfo:{
     width:300,
     padding:10,
     textAlign:'left',
     fontFamily:'Inter',
-    fontSize:14,
-    color:'#fff'
+    fontSize:20,
+    color:'#111'
   },
 })

@@ -21,7 +21,7 @@ const appTheme = {
   colors: {
     primary: '111113',
     background: '#fff',
-    card: '#f3f3f3',
+    card: '#fff',
     text: '#fff',
   },
 };

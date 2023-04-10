@@ -29,7 +29,7 @@ export default function PatientHome() {
       </View>
     </ScrollView>
         <Pressable style={styles.hoverBtn}>
-          <Icon name="pluscircle" size={60} color="#fff" />
+          <Icon name="pluscircle" size={60} color="#777" />
         </Pressable>
       </View>
   )
@@ -37,15 +37,19 @@ export default function PatientHome() {
 
 const styles = StyleSheet.create({
   scrollContainer:{
-    backgroundColor:'#1b2a41',
+    backgroundColor:'#fff',
     marginTop:20,
     flexDirection:'row'
   },
   heading:{
+    marginLeft:10,
+    color:'#222',
     fontFamily:'Inter',
     fontSize:40,
   },
   heading2:{
+    marginLeft:10,
+    color:'#888',
     fontFamily:'Inter',
     fontSize:20,
   },
@@ -60,22 +64,22 @@ const styles = StyleSheet.create({
     height: 450,
     margin:20,
     borderRadius: 10,
-    elevation:20,
-    backgroundColor: '#1b2a41',
+    elevation:10,
+    backgroundColor: '#fff',
   },
   appointTitle1:{
     padding:10,
     width:300,
     fontFamily:'Roboto-bold',
     fontSize:50,
-    color:'#fff'
+    color:'#222'
   },
   appointTitle2:{
     padding:10,
     width:300,
     fontFamily:'Roboto-Regular',
     fontSize:30,
-    color:'#fff'
+    color:'#555'
   },
   appointInfo:{
     width:300,
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign:'left',
     fontFamily:'Inter',
     fontSize:14,
-    color:'#fff'
+    color:'#777'
   },
   hoverBtn:{
     bottom:-10,

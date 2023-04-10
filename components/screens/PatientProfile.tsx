@@ -5,8 +5,8 @@ export default function PatientProfile() {
   return (
     <View>
       <View style={styles.profileHead}>
-        <Image style={styles.profileHeadImg} source={require('../assets/customer1.jpg')}/>
-        <Text style={styles.profileHeadName}>Thrwaida Kunambi</Text>
+        <View style={styles.profileHeadImgContainer}><Image style={styles.profileHeadImg} source={require('../assets/customer1.jpg')}/></View>
+        <Text style={styles.profileHeadName}>Thuhiya Kunambi</Text>
         <Text style={styles.profileHeadEmail}>stepbro@example.com</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.profileBio}>
@@ -38,47 +38,52 @@ const styles = StyleSheet.create({
     height:150,
     width:150,
     borderRadius:100,
-    marginVertical:20,
     resizeMode:'contain',
+  },
+  profileHeadImgContainer:{
+    margin:20,
+    borderRadius:200,
+    backgroundColor:'#fff',
+    elevation:30
   },
   profileHeadName:{
     fontFamily:'Roboto-Regular',
     fontSize:25,
-    color:'#fff'
+    color:'#222'
   },
   profileHeadEmail:{
     fontFamily:'Roboto-Regular',
     fontSize:15,
-    color:'gold'
+    color:'#888'
   },
   profileBio:{
     height:450,
     width:400,
-    
     marginHorizontal:5,
     paddingHorizontal:20,
     borderRadius:10,
-    backgroundColor:'#142131',
+    backgroundColor:'#fff',
+    elevation:10
   },
   bioHead:{
     marginLeft:5,
     marginBottom:10,
     fontFamily:'Roboto-Bold',
     fontSize:25,
-    color:'#fff'
+    color:'#666'
   },
   bioHead2:{
     marginLeft:5,
     marginBottom:10,
     fontFamily:'Roboto-Regular',
     fontSize:20,
-    color:'#fff'
+    color:'#222'
   },
   bioInfo:{
     marginLeft:5,
     marginVertical:3,
     fontFamily:'Roboto-Thin',
     fontSize:18,
-    color:'#fff'
+    color:'#000'
   }
 })

@@ -36,10 +36,11 @@ const Patient = ({navigation}) => {
           }
           return <Icon name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#eee0cb',
-        tabBarInactiveTintColor: '#fff',
-        headerStyle:{height:40,backgroundColor:'#1b2a41'},
-        headerTintColor:'#eee0cb',
+        
+        tabBarActiveTintColor: '#222',
+        tabBarInactiveTintColor: '#777',
+        headerStyle:{height:40,backgroundColor:'#fff'},
+        headerTintColor:'#222',
         headerShadowVisible:true,
         headerTitleAlign:'center',
         tabBarShowLabel:false
