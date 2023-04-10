@@ -1,82 +1,59 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import TabCustomer from './TabCustomer';
+import TabsAds from './TabAds'
+import ProductHome from './ProductHome';
 import React from 'react'
 
-export default function PatientHome() {
+const Tab = createBottomTabNavigator(); 
+
+const PatientHome = ({navigation}) => {
   return (
-    <View>
-      <Text style={styles.heading}>Welcome To Patron.</Text>
-      <Text style={styles.heading2}>Appointments and Services</Text>
-      <Text style={styles.heading2}>Appointments and Services</Text>
-      <Text style={styles.heading2}>Appointments and Services</Text>
+<View style={styles.container}>
+      <Tab.Navigator initialRouteName='Home'
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-    <ScrollView pagingEnabled={true} horizontal style={styles.scroll}>
-      <View style={styles.scrollContainer}>
-      <View style={[styles.RecCard]}> 
-          <View style={styles.RecCardInfo}>
-            <Text style={styles.appointTitle}>Tatoo Removal</Text>
-            <Text style={styles.appointTitle2}>Israel Clinic</Text>
-            <Text style={styles.appointInfo}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum, mollitia. Cumque reiciendis repellendus exercitationem nam harum velit id nemo quos, non qui, officia itaque asperiores eos. Consequuntur asperiores, numquam deserunt doloribus similique consectetur at dignissimos laudantium ipsa facilis unde odit, iure nemo.</Text>
-          </View>
-        </View>
-        <View style={[styles.RecCard]}> 
-          <View style={styles.RecCardInfo}>
-
-          </View>
-        </View>
-      </View>
-    </ScrollView>
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'home'
+              : 'home';
+          } else if (route.name === 'Advertisement') {
+            iconName = focused ? 'globe' : 'globe';
+          }
+          else if (route.name === 'Clinical Guides') {
+            iconName = focused ? 'medkit' : 'medkit';
+          }
+          else if (route.name === 'My Customer') {
+            iconName = focused ? 'users' : 'users';
+          }else if (route.name === 'Tech Support') {
+            iconName = focused ? 'cog' : 'cog';
+          }
+          return <Icon name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#eee0cb',
+        tabBarInactiveTintColor: '#fff',
+        headerStyle:{height:40,backgroundColor:'#1b2a41'},
+        headerTintColor:'#eee0cb',
+        headerShadowVisible:true,
+        headerTitleAlign:'center',
+        tabBarShowLabel:false
+      })}
+      >
+            <Tab.Screen name='Advertisement' component={TabsAds}/>
+            <Tab.Screen name='Home' component={ProductHome}/>
+            <Tab.Screen name='Clinical Guides' component={TabCustomer} />
+          </Tab.Navigator>
       </View>
   )
 }
 
+export default PatientHome
+
 const styles = StyleSheet.create({
-  scrollContainer:{
-    backgroundColor:'#1b2a41',
-    marginTop:20,
-    flexDirection:'row'
-  },
-  heading:{
-    fontFamily:'Inter',
-    fontSize:40,
-  },
-  heading2:{
-    fontFamily:'Inter',
-    fontSize:20,
-  },
-  RecCardInfo:{
-    height:300,
-    width:200,
-    textAlign:'justify',
-  },
-  RecCard:{
-    flex:1,
-    width: 300,
-    height: 500,
-    margin:20,
-    borderRadius: 10,
-    elevation:20,
-    backgroundColor: '#1b2a41',
-  },
-  appointTitle:{
-    padding:10,
-    width:300,
-    fontFamily:'Roboto-bold',
-    fontSize:50,
-    color:'#fff'
-  },
-  appointTitle2:{
-    padding:10,
-    width:300,
-    fontFamily:'Roboto-Regular',
-    fontSize:30,
-    color:'#fff'
-  },
-  appointInfo:{
-    width:280,
-    padding:10,
-    textAlign:'left',
-    fontFamily:'Inter',
-    fontSize:14,
-    color:'#fff'
-  }
+    container:{
+        flex:1,
+        flexDirection:'row'}
 })
