@@ -38,7 +38,7 @@ const TabGuide = ({navigation}) => {
         <View style={[styles.RecCard]}>
           <View style={styles.RecCardInfo}>
             <Text style={styles.RecCardTitle}>Product Four</Text>
-            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cumque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
+            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cwidth:400umque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
             </View>
       <Image style={styles.prodImgSmallRec} source={require('../assets/1-7.png')}/>
         </View>
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   },
   RecCardTitle:{
     fontFamily:'Inter',
-    color:'#03045E',
+    color:'#eee0cb',
     fontSize:20,
     fontWeight:'bold',
     textAlign:'left',

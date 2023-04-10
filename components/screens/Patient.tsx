@@ -1,18 +1,19 @@
-import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TabCustomer from './TabCustomer';
 import TabsAds from './TabAds'
-import TabCustomer from './TabCustomer'
-import TabGuide from './TabGuide'
-import TabSupport from './TabSupport'
-import React from 'react'                             
 import ProductHome from './ProductHome';
+import React from 'react'
+import PatientHome from './PatientHome';
+import PatientAds from './PatientAds';
+import PatientProfile from './PatientProfile';
 
 const Tab = createBottomTabNavigator(); 
 
-export default function Product({navigation}) {
+const Patient = ({navigation}) => {
   return (
-    <View style={styles.container}>
+<View style={styles.container}>
       <Tab.Navigator initialRouteName='Home'
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
@@ -25,8 +26,8 @@ export default function Product({navigation}) {
           } else if (route.name === 'Advertisement') {
             iconName = focused ? 'globe' : 'globe';
           }
-          else if (route.name === 'Clinical Guides') {
-            iconName = focused ? 'medkit' : 'medkit';
+          else if (route.name === 'Profile') {
+            iconName = focused ? 'user' : 'user';
           }
           else if (route.name === 'My Customer') {
             iconName = focused ? 'users' : 'users';
@@ -44,19 +45,18 @@ export default function Product({navigation}) {
         tabBarShowLabel:false
       })}
       >
-            <Tab.Screen name='Advertisement' component={TabsAds}/>
-            <Tab.Screen name='Clinical Guides' component={TabGuide} />
-            <Tab.Screen name='Home' component={ProductHome}/>
-            <Tab.Screen name='My Customer' component={TabCustomer} />
-            <Tab.Screen name='Tech Support' component={TabSupport} />
+            <Tab.Screen name='Advertisement' component={PatientAds}/>
+            <Tab.Screen name='Home' component={PatientHome}/>
+            <Tab.Screen name='Profile' component={PatientProfile} />
           </Tab.Navigator>
       </View>
   )
 }
 
+export default Patient
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
-    flexDirection:'row'}
+    container:{
+        flex:1,
+        flexDirection:'row'}
 })

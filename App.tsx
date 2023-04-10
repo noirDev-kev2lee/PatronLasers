@@ -10,7 +10,9 @@ import Home from "./components/screens/Home"
 import Product from './components/screens/Product';
 import RegisterChoice from './components/screens/RegisterChoice';
 import PatientRegister from './components/screens/PatientRegister';
-import PatientHome from './components/screens/PatientHome';
+import PatientHome from './components/screens/Patient';
+import ProductHome from './components/screens/ProductHome';
+import Patient from './components/screens/Patient';
 
 const Stack = createNativeStackNavigator();
 
@@ -65,7 +67,7 @@ function App() {
           headerTintColor: '#fff' 
         }}
         />
-        <Stack.Screen name="Patient Home" component={PatientHome}         
+        <Stack.Screen name="Patient Screen" component={Patient}         
                 options={{
                   title:'',
                   headerShown:false,
@@ -95,26 +97,35 @@ function App() {
           },
           headerTintColor: '#fff' 
         }}/>
-
-<Stack.Screen name="Product Info" component={ProductCard}         
+        <Stack.Screen name="Products Home" component={ProductHome}         
         options={{
-          title:'Product Info',
-          headerShown:false,
+          title:'',
+          headerShown: false,
           headerTitleAlign:'center',
           headerStyle: {
             backgroundColor:'#03045E'
           },
           headerTintColor: '#fff' 
         }}/>
-        <Stack.Screen name="Guide Info" component={GuideCard}         
+<Stack.Screen name="Product Info" component={ProductCard}         
         options={{
           title:'Product Info',
-          headerShown:false,
+          headerShown:true,
           headerTitleAlign:'center',
           headerStyle: {
-            backgroundColor:'#03045E'
+            backgroundColor:'#1b2a41'
           },
           headerTintColor: '#fff' 
+        }}/>
+        <Stack.Screen name="Guide Info" component={GuideCard}         
+        options={{
+          title:'',
+          headerTitleAlign:'center',
+          headerStyle: {
+            backgroundColor:'#fff'
+          },
+          headerTintColor: '#222',
+          headerShadowVisible:false 
         }}/>
       </Stack.Navigator>
       

@@ -10,7 +10,7 @@ export default function RegisterChoice({navigation}) {
           <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Register')}>
           <Text style={styles.pressTxt}>Clinic</Text>
           </Pressable>
-          <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Patient')}>
+          <Pressable style={styles.pressBtnPatient} onPress={() => navigation.navigate('Patient')}>
           <Text style={styles.pressTxt}>Patient</Text>
           </Pressable>
         </View>
@@ -81,6 +81,13 @@ const styles = StyleSheet.create({
         margin:20,
         borderRadius:8,
         backgroundColor:'#e6e6e9',
+        width:350,
+        height:50
+      },
+      pressBtnPatient:{
+        fontFamily:'Inter-Regular',
+        borderRadius:8,
+        backgroundColor:'#94c5cc',
         width:350,
         height:50
       },

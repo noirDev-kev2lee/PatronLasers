@@ -35,39 +35,6 @@ const ProductHome = ({navigation}) => {
           <Icon name='plus-circle' size={80} color='#fff'/>
           </Pressable>
       </ScrollView>
-      {/* <View><Text style={styles.scrollHeader}>Recommended</Text></View>
-      <ScrollView showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
-      <View style={styles.container}>
-      <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Product One</Text>
-            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cumque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
-            </View>
-      <Image style={styles.prodImgSmallRec} source={require('../assets/product1.png')}/>
-        </View>
-        <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Product Two</Text>
-            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cumque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
-            </View>
-      <Image style={styles.prodImgSmallRec} source={require('../assets/product2.png')}/>
-        </View>
-        <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Product Three</Text>
-            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cumque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
-            </View>
-      <Image style={styles.prodImgSmallRec} source={require('../assets/product4.png')}/>
-        </View>
-        <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Product Four</Text>
-            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cumque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
-            </View>
-      <Image style={styles.prodImgSmallRec} source={require('../assets/1-7.png')}/>
-        </View>
-      </View>
-      </ScrollView> */}
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
       <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>

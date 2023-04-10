@@ -5,7 +5,8 @@ const RegInputText = () => {
     const [FirstName, onFnameChange]= React.useState('First Name');
     const [LastName, onLnameChange]= React.useState('Last Name')
     const [Email, onEmailChange]= React.useState('Email')
-    const [SerialNumber, onNumberChange]= React.useState('Serial Number')                          
+    const [SerialNumber, onNumberChange]= React.useState('Serial Number')
+    const [ClinicName, onClinicName]= React.useState('Clinic')                             
     const [Mobile, onMobileChange]= React.useState('Mobile')
     const [Password, onPasswordChange]= React.useState('Password')
     return(
@@ -18,19 +19,21 @@ const RegInputText = () => {
       <TextInput style={styles.textInput} onChangeText={onLnameChange} placeholder='Last Name' placeholderTextColor={'#9999a1'}/></View>
       <View style={styles.inputLog}>
   
-      <TextInput style={styles.textInput} onChangeText={onNumberChange} placeholder='Serial Number' placeholderTextColor={'#9999a1'}/></View>
-      <View style={styles.inputLog}>
-  
       <TextInput style={styles.textInput} onChangeText={onEmailChange} placeholder='Email' placeholderTextColor={'#9999a1'}/></View>
+      
       <View style={styles.inputLog}>
-  
       <TextInput style={styles.textInput} onChangeText={onMobileChange} placeholder='Phone Number' placeholderTextColor={'#9999a1'}/></View>
+      
       <View style={styles.inputLog}>
-  
+      <TextInput style={styles.textInput} onChangeText={onClinicName} placeholder='Clinic Name' placeholderTextColor={'#9999a1'}/></View>
+
+      <View style={styles.inputLog}> 
       <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password' placeholderTextColor={'#9999a1'}/>
       </View>
+      
       <View style={styles.inputLog}>
       <TextInput style={styles.textInput} onChangeText={onPasswordChange} placeholder='Password Confirm' placeholderTextColor={'#9999a1'}/></View>
+
     </View>
   )
     }
@@ -40,7 +43,7 @@ const PatientRegister = ({navigation}) => {
       <Text style={styles.title}>Patient</Text>
       <Text style={styles.title2}>Welcome to Patron, register as a Patient</Text>
       <RegInputText/>
-      <Pressable style={styles.pressBtn} onPress={() => navigation.navigate('Patient Home')}>
+      <Pressable style={styles.pressBtnPatient} onPress={() => navigation.navigate('Patient Screen')}>
       <Text style={styles.pressTxt}>Register</Text>
       </Pressable>
     </View>
@@ -83,13 +86,13 @@ const styles = StyleSheet.create({
         backgroundColor:'#e6e6e9',
         width:250,
       },
-      pressBtn:{
+      pressBtnPatient:{
         alignItems:'center',
         left:10,
         top:20,
         fontFamily:'Inter-Regular',
         borderRadius:8,
-        backgroundColor:'#9999a1',
+        backgroundColor:'#94c5cc',
         width:350,
         height:50
       },
