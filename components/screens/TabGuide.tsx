@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     height: 150,
     margin: 10,
     borderRadius: 10,
-    elevation: 30,
+    elevation: 10,
     backgroundColor: '#fff',
     //IOS SHADOWS
     shadowColor: '#000',
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     height: 170,
     margin: 2,
     marginTop: 5,
-    elevation: 30,
+    elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
     //IOS SHADOWS

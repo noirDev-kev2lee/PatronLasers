@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   createPress: {
     top: 20,
     paddingTop: 40,
-    elevation: 100,
+    elevation: 10,
     marginHorizontal: 10,
     borderRadius: 40,
     alignItems: 'center',
