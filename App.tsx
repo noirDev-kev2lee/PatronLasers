@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import theme  from '@react-navigation/native';
+import theme from '@react-navigation/native';
 import ProductCard from './components/screens/ProductCard';
 import AddProduct from './components/screens/AddProduct';
 import Login from './components/screens/Login';
@@ -13,7 +13,7 @@ import RegisterChoice from './components/screens/RegisterChoice';
 import PatientRegister from './components/screens/PatientRegister';
 import PatientHome from './components/screens/Patient';
 import ProductHome from './components/screens/ProductHome';
-import Patient from './components/screens/Patient';
+// import Patient from './components/screens/Patient';
 
 const Stack = createNativeStackNavigator();
 
@@ -96,15 +96,16 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-        <Stack.Screen name="Patient Home" component={PatientHome}         
-                options={{
-                  title:'',
-                  headerShown:false,
-          headerTitleAlign:'center',
-          headerStyle: {
-          },
-          headerTintColor: '#fff' 
-        }}
+        <Stack.Screen
+          name="Patient Home"
+          component={PatientHome}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
         />
         <Stack.Screen
           name="Product"
@@ -119,48 +120,60 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-        <Stack.Screen name="Products" component={ProductHome}         
-        options={{
-          title:'',
-          headerShown: true,
-          headerTitleAlign:'center',
-          headerStyle: {
-            backgroundColor:'#111113'
-          },
-          headerTintColor: '#fff' 
-        }}/>
+        <Stack.Screen
+          name="Products"
+          component={ProductHome}
+          options={{
+            title: '',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#111113',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
 
-<Stack.Screen name="Product Info" component={ProductCard}         
-        options={{
-          title:'',
-          headerShown:true,
-          headerShadowVisible:false,
-          headerTitleAlign:'center',
-          headerStyle: {
-            backgroundColor:'#fff'
-          },
-          headerTintColor: '#222' 
-        }}/>
-        <Stack.Screen name="Guide Info" component={GuideCard}         
-        options={{
-          title:'',
-          headerShown:true,
-          headerTitleAlign:'center',
-          headerStyle: {
-            backgroundColor:'#fff'
-          },
-          headerTintColor: '#222' 
-        }}/>
-        <Stack.Screen name="Add Product" component={AddProduct}         
-        options={{
-          title:'Product Info',
-          headerShown:false,
-          headerTitleAlign:'center',
-          headerStyle: {
-            backgroundColor:'#111113'
-          },
-          headerTintColor: '#fff' 
-        }}/>
+        <Stack.Screen
+          name="Product Info"
+          component={ProductCard}
+          options={{
+            title: '',
+            headerShown: true,
+            headerShadowVisible: false,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#222',
+          }}
+        />
+        <Stack.Screen
+          name="Guide Info"
+          component={GuideCard}
+          options={{
+            title: '',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#222',
+          }}
+        />
+        <Stack.Screen
+          name="Add Product"
+          component={AddProduct}
+          options={{
+            title: 'Product Info',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#111113',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
