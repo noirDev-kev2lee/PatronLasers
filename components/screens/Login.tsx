@@ -55,7 +55,7 @@ const Login = ({navigation}) => {
       <View>
         <Pressable
           style={styles.backArrow}
-          onPress={() => navigation.navigate('Product')}>
+          onPress={() => navigation.navigate('Home')}>
           <Icon3
             style={styles.Arrow}
             name="arrowleft"
