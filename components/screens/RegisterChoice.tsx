@@ -1,9 +1,22 @@
 import {StyleSheet, Text, Pressable, View} from 'react-native';
 import React from 'react';
+import Icon3 from 'react-native-vector-icons/AntDesign';
 
 export default function RegisterChoice({navigation}) {
   return (
     <View style={styles.container}>
+      <View>
+        <Pressable
+          style={styles.backArrow}
+          onPress={() => navigation.navigate('Home')}>
+          <Icon3
+            style={styles.Arrow}
+            name="arrowleft"
+            size={30}
+            color="#000000"
+          />
+        </Pressable>
+      </View>
       <View style={{paddingLeft: 25}}>
         <Text style={styles.title}>Welcome To Patron Registration </Text>
         <Text style={styles.title2}>
@@ -43,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginTop: 100,
+    marginTop: 50,
     margin: 10,
     textAlign: 'left',
     fontFamily: 'Inter-Bold',
@@ -55,7 +68,7 @@ const styles = StyleSheet.create({
     width: 350,
     lineHeight: 40,
     fontFamily: 'Inter',
-    fontSize: 25,
+    fontSize: 23,
     color: 'grey',
     textAlign: 'left',
   },
@@ -109,5 +122,13 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     fontSize: 15,
     color: '#e6e6e9',
+  },
+  backArrow: {
+    paddingTop: 35,
+    paddingLeft: 25,
+  },
+  Arrow: {
+    fontSize: 30,
+    color: 'white',
   },
 });
