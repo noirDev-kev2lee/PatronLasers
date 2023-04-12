@@ -8,16 +8,55 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const PatientRegister = ({navigation}) => {
-  const [firstName, onFnameChange] = React.useState('First Name');
-  const [lastName, onLnameChange] = React.useState('Last Name');
-  const [email, onEmailChange] = React.useState('Email');
-  const [mobile, onMobileChange] = React.useState('Mobile');
-  const [password, onPasswordChange] = React.useState('Password');
+  const [disableButton, setDisableButton] = React.useState(true);
+  const [isLoading, setLoading] = React.useState(false);
+  const [emailError, setEmailError] = React.useState(false);
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [borderColor, setBorderColor] = React.useState('#D9D9D9');
+  const [firstName, onFnameChange] = React.useState('');
+  const [lastName, onLnameChange] = React.useState('');
+  const [email, onEmailChange] = React.useState('');
+  const [mobile, onMobileChange] = React.useState('');
+  const [password, onPasswordChange] = React.useState('');
+  const [passwordConform, onPasswordConfirmChange] = React.useState('');
+
+  // function to validate password
+  useEffect(() => {
+    if (!EMAIL_PATTERN.test(email) && email !== '') {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+    if (!PASSWORD_REGEX.test(password) && password !== '') {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+    if (
+      passwordConform === password &&
+      password !== '' &&
+      passwordConform !== ''
+    ) {
+      setDisableButton(false);
+      setBorderColor('#D9D9D9');
+    } else {
+      setDisableButton(true);
+      if (password === '' && passwordConform === '') {
+        setBorderColor('#D9D9D9');
+      } else {
+        setBorderColor('red');
+      }
+    }
+  }, [password, passwordConform, email]);
 
   const handlePatientRegister = async () => {
     try {
@@ -30,25 +69,20 @@ const PatientRegister = ({navigation}) => {
       ) {
         Alert.alert('All field must be provided');
       } else {
-        const response = await axios.post(
-          'http://15.236.168.186:7000/api/v1/signup/',
-          {
-            first_name: firstName,
-            last_name: lastName,
-            email: email,
-            password: password,
-            role: 'patient',
-          },
-        );
-
-        const json = response.data;
-        console.log(json);
+        setLoading(true);
+        await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          role: 'patient',
+        });
+        setLoading(false);
         Alert.alert('Registration Successfully!');
         navigation.navigate('Login');
       }
     } catch (error) {
       Alert.alert('Wrong email or password');
-      console.error('Wrong email or password', error);
     }
   };
   return (
@@ -68,7 +102,7 @@ const PatientRegister = ({navigation}) => {
                 style={styles.textInput}
                 onChangeText={onFnameChange}
                 placeholder="First Name"
-                placeholderTextColor={'#9999a1'}
+                placeholderTextColor={'grey'}
               />
             </View>
             <View style={styles.inputLog}>
@@ -76,44 +110,79 @@ const PatientRegister = ({navigation}) => {
                 style={styles.textInput}
                 onChangeText={onLnameChange}
                 placeholder="Last Name"
-                placeholderTextColor={'#9999a1'}
+                placeholderTextColor={'grey'}
               />
             </View>
-            <View style={styles.inputLog}>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={onEmailChange}
-                placeholder="Email"
-                placeholderTextColor={'#9999a1'}
-              />
+            <View>
+              <View style={styles.inputLog}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onEmailChange}
+                  placeholder="Email"
+                  placeholderTextColor={'grey'}
+                />
+              </View>
+              {emailError && (
+                <Text style={{color: 'red', marginLeft: 15}}>
+                  Please enter a valid email
+                </Text>
+              )}
             </View>
+
             <View style={styles.inputLog}>
               <TextInput
                 style={styles.textInput}
                 onChangeText={onMobileChange}
                 placeholder="Phone Number"
-                placeholderTextColor={'#9999a1'}
+                placeholderTextColor={'grey'}
               />
             </View>
-            <View style={styles.inputLog}>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={onPasswordChange}
-                placeholder="Password"
-                placeholderTextColor={'#9999a1'}
-              />
+            <View style={{flexDirection: 'column'}}>
+              <View
+                style={[
+                  styles.inputLog,
+                  {borderColor: borderColor, borderWidth: 1},
+                ]}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onPasswordChange}
+                  placeholder="Password"
+                  secureTextEntry={true}
+                  placeholderTextColor={'grey'}
+                />
+              </View>
+              {passwordError && (
+                <Text style={{color: 'red', marginLeft: 15}}>
+                  Please enter a strong password
+                </Text>
+              )}
             </View>
-            <View style={styles.inputLog}>
+            <View
+              style={[
+                styles.inputLog,
+                {borderColor: borderColor, borderWidth: 1},
+              ]}>
               <TextInput
                 style={styles.textInput}
-                onChangeText={onPasswordChange}
+                onChangeText={onPasswordConfirmChange}
+                secureTextEntry={true}
                 placeholder="Password Confirm"
-                placeholderTextColor={'#9999a1'}
+                placeholderTextColor={'grey'}
               />
             </View>
           </View>
-          <Pressable style={styles.pressBtn} onPress={handlePatientRegister}>
-            <Text style={styles.pressTxt}>Register</Text>
+          <Pressable
+            disabled={disableButton}
+            style={styles.pressBtn}
+            onPress={handlePatientRegister}>
+            {isLoading ? (
+              <ActivityIndicator
+                color="white"
+                style={styles.activityIndicator}
+              />
+            ) : (
+              <Text style={styles.pressTxt}>Sign Up</Text>
+            )}
           </Pressable>
         </View>
       </KeyboardAvoidingView>
@@ -127,7 +196,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     padding: 20,
-    paddingBottom:180,
+    paddingBottom: 180,
     alignContent: 'center',
     backgroundColor: 'white',
   },

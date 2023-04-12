@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   Pressable,
   ScrollView,
@@ -10,7 +9,7 @@ import {
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const TabCustomer = () => {
+const TabCustomer = ({navigation}) => {
   const customerList = [
     {
       id: 0,
@@ -44,22 +43,22 @@ const TabCustomer = () => {
     },
   ];
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.createSec}>
         <Pressable
-          onPress={() => Alert.alert('Appointment made')}
+          onPress={() => navigation.navigate('add_appointment')}
           style={styles.createPress}>
           <View style={styles.cardContent}>
             <Text style={styles.textPress}>Appointment</Text>
-            <Icon name="pluscircle" size={50} color="#222" />
+            <Icon name="pluscircle" size={50} color="white" />
           </View>
         </Pressable>
         <Pressable
-          onPress={() => Alert.alert('Customer Added')}
+          onPress={() => navigation.navigate('Patient')}
           style={styles.createPress}>
           <View style={styles.cardContent}>
             <Text style={styles.textPress}>Customer</Text>
-            <Icon name="pluscircle" size={50} color="#222" />
+            <Icon name="pluscircle" size={50} color="white" />
           </View>
         </Pressable>
       </View>
@@ -90,6 +89,12 @@ const TabCustomer = () => {
 export default TabCustomer;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 40,
+    backgroundColor: '#E4E5EC',
+    fontFamily: 'Inter',
+    flex: 1,
+  },
   text: {
     top: 10,
     paddingBottom: 10,
@@ -99,27 +104,26 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   textPress: {
-    marginBottom: 0,
+    marginBottom: 10,
     fontFamily: 'Roboto-Thin',
     fontSize: 20,
-    color: '#333',
+    color: 'white',
   },
   createSec: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     backgroundColor: 'f6f6f6',
+    marginBottom: 50,
   },
   createPress: {
-    top: 20,
-    paddingTop: 40,
+    flexDirection: 'column',
+    justifyContent: 'center',
     elevation: 10,
     marginHorizontal: 10,
-    borderRadius: 40,
-    alignItems: 'center',
+    borderRadius: 26,
     height: 150,
     width: 180,
-    backgroundColor: '#fff',
+    backgroundColor: '#131035',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -127,14 +131,14 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   list: {
-    top: 200,
+    top: 0,
   },
   listTitle: {
     fontFamily: 'Inter',
-    fontSize: 25,
+    fontSize: 23,
     textAlign: 'center',
     marginBottom: 10,
-    color: '#222',
+    color: '#131035',
   },
   listScroll: {
     height: 470,
@@ -154,8 +158,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 100,
     elevation: 10,
-    borderRadius: 12,
-    backgroundColor: '#fff',
+    borderRadius: 10,
+    backgroundColor: '#BCBFD0',
     margin: 10,
     //IOS SHADOWS
     shadowColor: '#000',
@@ -169,20 +173,20 @@ const styles = StyleSheet.create({
     height: 100,
     width: 230,
     textAlign: 'left',
-    color: '#777',
+    color: '#131035',
   },
   RecCardTitle: {
     fontFamily: 'Inter',
-    color: '#777',
+    color: '#131035',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '700',
     textAlign: 'left',
   },
   RecCardPara: {
-    fontFamily: 'Roboto-Bold',
-    fontSize: 15,
+    fontFamily: 'Inter',
+    fontSize: 16,
     textAlign: 'left',
-    color: '#222',
+    color: '#4E517D',
   },
   customerImg: {
     left: 40,
@@ -192,10 +196,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    marginBottom: 20,
   },
   prodImgSmallRec: {
-    height: 80,
-    width: 80,
+    height: 70,
+    width: 70,
     borderRadius: 100,
     resizeMode: 'contain',
   },

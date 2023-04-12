@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'left',
     fontFamily: 'Inter-Regular',
-    fontSize: 30,
+    fontSize: 27,
     color: '#131035',
   },
   mainContainer: {
@@ -136,6 +136,6 @@ const styles = StyleSheet.create({
   },
   Arrow: {
     fontSize: 30,
-    color: 'white',
+    color: '#131035',
   },
 });
