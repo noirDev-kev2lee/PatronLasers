@@ -1,11 +1,11 @@
-import { Button, ScrollView, StyleSheet, Pressable, Text, View } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import TabsAds from './TabAds'
-import TabCustomer from './TabCustomer'
-import TabGuide from './TabGuide'
-import TabSupport from './TabSupport'
-import React from 'react'                             
+import {StyleSheet, View} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
+import TabsAds from './TabAds';
+import TabCustomer from './TabCustomer';
+import TabGuide from './TabGuide';
+import TabSupport from './TabSupport';
+import React from 'react';
 import ProductHome from './ProductHome';
 
 const Tab = createBottomTabNavigator();
@@ -22,13 +22,13 @@ export default function Product({navigation}) {
             if (route.name === 'Home') {
               iconName = focused ? 'home' : 'home';
             } else if (route.name === 'Advertisement') {
-              iconName = focused ? 'globe' : 'globe';
+              iconName = focused ? 'globe-outline' : 'globe-outline';
             } else if (route.name === 'Clinical Guides') {
               iconName = focused ? 'medkit' : 'medkit';
             } else if (route.name === 'My Customer') {
-              iconName = focused ? 'users' : 'users';
+              iconName = focused ? 'people' : 'people';
             } else if (route.name === 'Tech Support') {
-              iconName = focused ? 'cog' : 'cog';
+              iconName = focused ? 'ios-settings' : 'ios-settings';
             }
             return <Icon name={iconName} size={size} color={color} />;
           },
