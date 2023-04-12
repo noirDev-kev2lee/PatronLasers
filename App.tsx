@@ -13,7 +13,7 @@ import RegisterChoice from './components/screens/RegisterChoice';
 import PatientRegister from './components/screens/PatientRegister';
 import PatientHome from './components/screens/Patient';
 import ProductHome from './components/screens/ProductHome';
-// import Patient from './components/screens/Patient';
+import AddAppontment from './components/screens/AddAppontment';
 
 const Stack = createNativeStackNavigator();
 
@@ -151,6 +151,19 @@ function App() {
         <Stack.Screen
           name="Guide Info"
           component={GuideCard}
+          options={{
+            title: '',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#222',
+          }}
+        />
+        <Stack.Screen
+          name="add_appointment"
+          component={AddAppontment}
           options={{
             title: '',
             headerShown: true,
