@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
 // import {NavigationContainer} from '@react-navigation/native';
@@ -18,6 +19,7 @@ import Icon3 from 'react-native-vector-icons/AntDesign';
 import React from 'react';
 
 const Login = ({navigation}) => {
+  const [isLoading, setLoading] = React.useState(false);
   const [email, onChangeEmail] = React.useState('');
   const [password, passwordChange] = React.useState('');
   const [hide, setHide] = React.useState(true);
@@ -27,6 +29,7 @@ const Login = ({navigation}) => {
       if (email === '' || password === '') {
         Alert.alert('Email or password must be provided');
       } else {
+        setLoading(true);
         const response = await axios.post(
           'http://15.236.168.186:7000/api/v1/signin/',
           {
@@ -38,6 +41,7 @@ const Login = ({navigation}) => {
         const json = response.data;
         onChangeEmail('');
         passwordChange('');
+        setLoading(false);
         Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
           navigation.navigate('Product');
@@ -55,7 +59,7 @@ const Login = ({navigation}) => {
       <View>
         <Pressable
           style={styles.backArrow}
-          onPress={() => navigation.navigate('Product')}>
+          onPress={() => navigation.navigate('Home')}>
           <Icon3
             style={styles.Arrow}
             name="arrowleft"
@@ -112,7 +116,14 @@ const Login = ({navigation}) => {
                 <Text style={styles.forgotPass}>Forgot Password?</Text>
               </Pressable>
               <Pressable style={styles.pressBtn} onPress={handleLogin}>
-                <Text style={styles.pressTxt}>Log In</Text>
+                {isLoading ? (
+                  <ActivityIndicator
+                    color="white"
+                    style={styles.activityIndicator}
+                  />
+                ) : (
+                  <Text style={styles.pressTxt}>Sign Up</Text>
+                )}
               </Pressable>
             </View>
           </View>
@@ -204,5 +215,9 @@ const styles = StyleSheet.create({
   keyboard: {paddingBottom: 30},
   formContainer: {
     flexDirection: 'column',
+  },
+  activityIndicator: {
+    alignSelf: 'center',
+    padding: 20,
   },
 });

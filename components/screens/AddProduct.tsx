@@ -12,15 +12,23 @@ import {
 } from 'react-native';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
 
-const AddProduct = () => {
+const AddProduct = ({navigation}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
         <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-        <View style={styles.arrow}>
-          <Icon3 name="arrowleft" size={30} color="#000000" />
+        <View>
+          <Pressable
+            style={styles.backArrow}
+            onPress={() => navigation.navigate('Product')}>
+            <Icon3
+              style={styles.Arrow}
+              name="arrowleft"
+              size={30}
+              color="#000000"
+            />
+          </Pressable>
         </View>
         <ScrollView>
           <KeyboardAvoidingView
@@ -33,12 +41,12 @@ const AddProduct = () => {
             <View style={styles.form}>
               <TextInput
                 style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
+                placeholderTextColor="grey"
                 placeholder="Serial Number"
               />
               <TextInput
                 style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
+                placeholderTextColor="grey"
                 placeholder="Product Name"
               />
               <Pressable
@@ -61,25 +69,15 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   textInput: {
-    paddingLeft: 20,
     margin: 10,
-    fontFamily: 'Roboto',
-    fontSize: 20,
-    color: '#000',
-    backgroundColor: '#e6e6e9',
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 12,
     width: 350,
     height: 60,
-    borderRadius: 12,
-  },
-  textInput3: {
-    textAlignVertical: 'top',
-    padding: 10,
-    margin: 10,
-    fontSize: 20,
-    backgroundColor: '#e6e6e9',
-    width: 350,
-    height: 200,
-    borderRadius: 8,
+    backgroundColor: '#D9D9D9',
+    paddingLeft: 25,
   },
   form: {
     flex: 1,
@@ -88,20 +86,23 @@ const styles = StyleSheet.create({
   },
 
   pressBtn: {
+    alignItems: 'center',
+    left: 10,
+    top: 20,
+    fontFamily: 'Inter-Regular',
     borderRadius: 12,
-    backgroundColor: '#e6e6e9',
-    width: 250,
+    backgroundColor: '#131035',
+    width: 350,
     height: 60,
   },
   pressTxt: {
     textAlign: 'center',
-    marginTop: 10,
+    fontFamily: 'Inter-Regular',
+    padding: 10,
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#66666e',
+    color: 'white',
   },
   pressTxt1: {
-    marginTop: 20,
     paddingVertical: 12,
     paddingHorizontal: 50,
     fontSize: 15,
@@ -115,20 +116,26 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#e6e6e9',
-    fontSize: 25,
-    paddingLeft: 15,
-    paddingBottom: 10,
-    paddingTop: 15,
+    textAlign: 'left',
+    fontFamily: 'Inter-Regular',
+    fontSize: 30,
+    color: '#131035',
   },
   mainContainer: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   keyboard: {flex: 1, padding: 30},
   arrow: {
+    color: 'white',
+  },
+  backArrow: {
+    paddingTop: 35,
+    paddingLeft: 25,
+  },
+  Arrow: {
+    fontSize: 30,
     color: 'white',
   },
 });
