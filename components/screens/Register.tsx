@@ -251,18 +251,12 @@ const styles = StyleSheet.create({
   pressTxt: {
     top: 10,
     fontFamily: 'Inter-Regular',
-    fontSize: 20,
+    fontSize: 25,
     color: '#fff',
   },
   keyboard: {paddingBottom: 0},
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
-  },
-  alert: {
-    backgroundColor: 'red',
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
   },
 });
