@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: '#D9D9D9',
     paddingLeft: 25,
+    fontSize: 18,
   },
   form: {
     flex: 1,
