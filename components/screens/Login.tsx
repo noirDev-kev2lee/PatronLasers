@@ -182,14 +182,14 @@ const styles = StyleSheet.create({
     width: 350,
     height: 60,
     padding: 10,
-    alignItems: 'center',
     backgroundColor: '#131035',
   },
   pressTxt: {
     fontFamily: 'Inter',
-    padding: 3,
+    padding: 8,
     fontSize: 20,
     color: 'white',
+    textAlign: 'center',
   },
   pressBtn2: {
     right: -110,

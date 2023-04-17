@@ -11,7 +11,7 @@ import {
 import React, {useState} from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/FontAwesome5';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import AddProduct from './AddProduct';
 import Login from './Login';
 import Register from './Register';
@@ -79,7 +79,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         </View>
       </Modal>
       <View style={styles.welcome}>
-        <Icon2 name="person-circle" size={60} color="#131035" />
+        <Icon2 name="person-circle" size={52} color="#131035" />
         <Text style={styles.welcomeNote}>Hello, {username}</Text>
       </View>
       <View>
