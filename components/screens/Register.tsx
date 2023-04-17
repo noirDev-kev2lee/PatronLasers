@@ -249,9 +249,9 @@ const styles = StyleSheet.create({
     height: 60,
   },
   pressTxt: {
-    top: 10,
+    padding: 10,
     fontFamily: 'Inter-Regular',
-    fontSize: 25,
+    fontSize: 20,
     color: '#fff',
   },
   keyboard: {paddingBottom: 0},
