@@ -244,4 +244,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
+   keyboard: {paddingBottom: 0},
+  activityIndicator: {
+    alignSelf: 'center',
+    padding: 20,
+  },
 });

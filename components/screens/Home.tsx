@@ -1,6 +1,4 @@
 import {View, StyleSheet, Pressable, Text, Image} from 'react-native';
-// import {NavigationContainer} from '@react-navigation/native';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
 export default function Home({navigation}) {
@@ -12,12 +10,12 @@ export default function Home({navigation}) {
       <Pressable
         style={styles.pressBtnReg}
         onPress={() => navigation.navigate('Register_choice')}>
-        <Text style={[styles.pressTxt,{color: 'white'}]}>Register</Text>
+        <Text style={[styles.pressTxt, {color: 'white'}]}>Register</Text>
       </Pressable>
       <Pressable
         style={styles.pressBtnLog}
         onPress={() => navigation.navigate('Login')}>
-        <Text style={[styles.pressTxt,{color: '#131035'}]}>Login</Text>
+        <Text style={[styles.pressTxt, {color: '#131035'}]}>Login</Text>
       </Pressable>
     </View>
   );
@@ -28,7 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#131035'
+    backgroundColor: '#131035',
   },
   logo: {
     width: 250,

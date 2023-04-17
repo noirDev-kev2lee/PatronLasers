@@ -6,11 +6,7 @@ import {
   View,
   Image,
 } from 'react-native';
-// import {NavigationContainer} from '@react-navigation/native';
-// import Icon from 'react-native-vector-icons';
-// import BottomTabBar from '@react-navigation/bottom-tabs';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import React from 'react';
 
 const ProductHome = ({navigation}) => {

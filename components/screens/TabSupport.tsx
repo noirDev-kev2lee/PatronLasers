@@ -11,7 +11,6 @@ import {
   ScrollView,
 } from 'react-native';
 import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
 
 const TabSupport = () => {
   return (
@@ -97,16 +96,16 @@ const styles = StyleSheet.create({
 
   pressBtn: {
     borderRadius: 12,
-    backgroundColor: '#e6e6e9',
-    width: 250,
+    backgroundColor: '#131035',
+    width: 350,
     height: 60,
+    top: 20,
   },
   pressTxt: {
     textAlign: 'center',
-    marginTop: 10,
+    padding: 10,
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#66666e',
+    color: 'white',
   },
   pressTxt1: {
     marginTop: 20,
