@@ -11,11 +11,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
-// import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 
 const Login = ({navigation}) => {
@@ -39,19 +37,18 @@ const Login = ({navigation}) => {
         );
 
         const json = response.data;
-        onChangeEmail('');
-        passwordChange('');
+        const userName = json.data.firstname;
+
         setLoading(false);
         Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
-          navigation.navigate('Product');
+          navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
           navigation.navigate('patient_home');
         }
       }
     } catch (error) {
       Alert.alert('Wrong email or password');
-      console.error('Wrong email or password', error);
     }
   };
   return (
@@ -122,7 +119,7 @@ const Login = ({navigation}) => {
                     style={styles.activityIndicator}
                   />
                 ) : (
-                  <Text style={styles.pressTxt}>Sign Up</Text>
+                  <Text style={styles.pressTxt}>Login</Text>
                 )}
               </Pressable>
             </View>
@@ -188,8 +185,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
   },
   pressTxt: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 18,
+    fontFamily: 'Inter',
+    padding: 3,
+    fontSize: 20,
     color: 'white',
     textAlign: 'center',
   },
