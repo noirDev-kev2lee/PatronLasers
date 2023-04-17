@@ -55,7 +55,7 @@ const Login = ({navigation}) => {
       <View>
         <Pressable
           style={styles.backArrow}
-          onPress={() => navigation.navigate('Product')}>
+          onPress={() => navigation.navigate('Home')}>
           <Icon3
             style={styles.Arrow}
             name="arrowleft"
@@ -174,13 +174,14 @@ const styles = StyleSheet.create({
     width: 350,
     height: 60,
     padding: 10,
+    alignItems:'center',
     backgroundColor: '#131035',
   },
   pressTxt: {
     fontFamily: 'Inter-Regular',
-    fontSize: 18,
+    fontSize: 20,
+    marginTop:3,
     color: 'white',
-    textAlign: 'center',
   },
   pressBtn2: {
     right: -110,

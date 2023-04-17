@@ -1,15 +1,33 @@
 import {
   StyleSheet,
   ScrollView,
+  Modal,
   Pressable,
   Text,
   View,
   Image,
 } from 'react-native';
 // import {NavigationContainer, useTheme} from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/AntDesign';
+import AddProduct from './AddProduct';
+import Login from './Login';
+import Register from './Register';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer({navigation}) {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Login" component={Login} />
+      <Drawer.Screen name="Register" component={Register} />
+    </Drawer.Navigator>
+  );
+}
+
 const ProductHome = ({navigation}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const productList = [
     {
       id: 0,
@@ -38,6 +56,24 @@ const ProductHome = ({navigation}) => {
   ];
   return (
     <View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+          <Pressable
+              style={styles.button}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Icon name='close'size={30}color={'#222'}/>
+            </Pressable>
+          <AddProduct/>
+          </View>
+        </View>
+      </Modal>
       <View>
         <Text style={styles.scrollHeader}>My Products</Text>
       </View>
@@ -61,8 +97,11 @@ const ProductHome = ({navigation}) => {
         </View>
         <Pressable
           style={styles.pressBtn}
-          onPress={() => navigation.navigate('Add Product')}>
+          onPress={() => setModalVisible(true)}>
           <Icon name="pluscircle" size={60} color="#888" />
+        </Pressable>
+        <Pressable onPress={() => navigation.openDrawer()}>
+          <Icon name='circle' size={30} color={'#222'}/>
         </Pressable>
       </ScrollView>
       <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
@@ -245,7 +284,29 @@ const styles = StyleSheet.create({
     marginTop: 30,
     textAlign: 'center',
   },
-  moreContainer: {
-    marginTop: 20,
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    height:300,
+    width:350,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    top:10,
+    left:150,
+    elevation: 2,
   },
 });

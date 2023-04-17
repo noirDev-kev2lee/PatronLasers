@@ -7,6 +7,8 @@ import TabGuide from './TabGuide'
 import TabSupport from './TabSupport'
 import React from 'react'                             
 import ProductHome from './ProductHome';
+import Login from './Login';
+import Register from './Register';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +36,7 @@ export default function Product({navigation}) {
           },
           tabBarActiveTintColor: '#222',
           tabBarInactiveTintColor: '#999',
-          headerStyle: {height: 40, backgroundColor: '#fff'},
+          headerStyle: {height: 50, backgroundColor: '#fff'},
           headerTintColor: '#222',
           headerShadowVisible: true,
           headerTitleAlign: 'center',

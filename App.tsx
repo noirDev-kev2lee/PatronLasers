@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import theme  from '@react-navigation/native';
+import 'react-native-gesture-handler';
 import ProductCard from './components/screens/ProductCard';
 import AddProduct from './components/screens/AddProduct';
 import Login from './components/screens/Login';
@@ -153,7 +154,7 @@ function App() {
         }}/>
         <Stack.Screen name="Add Product" component={AddProduct}         
         options={{
-          title:'Product Info',
+          title:'',
           headerShown:false,
           headerTitleAlign:'center',
           headerStyle: {

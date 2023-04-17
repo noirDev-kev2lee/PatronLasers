@@ -8,9 +8,13 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-
+import { Modal } from 'react-native';
+import {AddAppointment, AddCustomer} from './AddProduct';
 const TabCustomer = () => {
+  const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
+  const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const customerList = [
     {
       id: 0,
@@ -45,24 +49,55 @@ const TabCustomer = () => {
   ];
   return (
     <View>
+    <Modal
+        animationType="slide"
+        transparent={true}
+        visible={CustomerModalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setCustomerModalVisible(!CustomerModalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable
+              style={styles.button}
+              onPress={() => setCustomerModalVisible(!CustomerModalVisible)}>
+              <Icon name='close'size={30}color={'#222'}/>
+            </Pressable>
+            <AddCustomer/>
+          </View>
+        </View>
+      </Modal>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={AppointModalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setAppointModalVisible(!AppointModalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable
+              style={styles.button}
+              onPress={() => setAppointModalVisible(!AppointModalVisible)}>
+              <Icon name='close'size={30}color={'#222'}/>
+            </Pressable>
+            <AddAppointment/>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.createSec}>
-        <Pressable
-          onPress={() => Alert.alert('Appointment made')}
-          style={styles.createPress}>
-          <View style={styles.cardContent}>
-            <Text style={styles.textPress}>Appointment</Text>
-            <Icon name="pluscircle" size={50} color="#222" />
-          </View>
+        <Pressable onPress={() => setCustomerModalVisible(true)} style={styles.createPress}>
+          <Text style={styles.textPress}>Add Customer</Text>
+          <Icon name='user'size={50}color={'#222'}/>
         </Pressable>
-        <Pressable
-          onPress={() => Alert.alert('Customer Added')}
-          style={styles.createPress}>
-          <View style={styles.cardContent}>
-            <Text style={styles.textPress}>Customer</Text>
-            <Icon name="pluscircle" size={50} color="#222" />
-          </View>
+        <Pressable onPress={() => setAppointModalVisible(true)} style={styles.createPress}>
+          <Text style={styles.textPress}>Add Appointment</Text>
+          <Icon name='bars'size={50}color={'#222'}/>
         </Pressable>
       </View>
+      <ScrollView horizontal pagingEnabled={true}>
       <View style={styles.list}>
         <View style={styles.customerHeader}>
           <Icon name={'left'} size={30} color={'#222'} />
@@ -83,6 +118,27 @@ const TabCustomer = () => {
           ))}
         </ScrollView>
       </View>
+      <View style={styles.list}>
+        <View style={styles.customerHeader}>
+          <Icon name={'left'} size={30} color={'#222'} />
+          <Text style={styles.listTitle}>Appointments</Text>
+          <Icon name={'right'} size={30} color={'#222'} />
+        </View>
+        <ScrollView style={styles.listScroll}>
+          {customerList.map(customer => (
+            <View key={customer.id} style={[styles.RecCard]}>
+              <View style={styles.RecCardInfo}>
+                <Text style={styles.RecCardTitle}>{customer.name}</Text>
+                <Text style={styles.RecCardPara}>{customer.desc}</Text>
+              </View>
+              <View style={styles.customerImg}>
+                <Image style={styles.prodImgSmallRec} source={customer.img} />
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -90,28 +146,17 @@ const TabCustomer = () => {
 export default TabCustomer;
 
 const styles = StyleSheet.create({
-  text: {
-    top: 10,
-    paddingBottom: 10,
-    paddingLeft: 15,
-    fontFamily: 'Roboto-Regular',
-    fontSize: 30,
-    color: '#fff',
-  },
   textPress: {
     marginBottom: 0,
-    fontFamily: 'Roboto-Thin',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#333',
   },
   createSec: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
     backgroundColor: 'f6f6f6',
   },
   createPress: {
-    top: 20,
     paddingTop: 40,
     elevation: 10,
     marginHorizontal: 10,
@@ -127,71 +172,65 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   list: {
-    top: 200,
+    marginTop:50
   },
   listTitle: {
     fontFamily: 'Inter',
     fontSize: 25,
-    textAlign: 'center',
+    width:300,
     marginBottom: 10,
-    color: '#222',
+    textAlign: 'center',
+    color: '#222'
   },
   listScroll: {
-    height: 470,
+    height: 450,
     paddingBottom: 30,
-    elevation: 10,
+    marginHorizontal:10,
     flexDirection: 'column',
-    paddingHorizontal: 15,
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.5,
-    shadowRadius: 2,
+    shadowRadius: 2
   },
   RecCard: {
-    flex: 1,
     flexDirection: 'row-reverse',
-    alignItems: 'center',
-    height: 100,
+    height: 120,
+    alignItems:'center',
+    marginBottom:30,
     elevation: 10,
     borderRadius: 12,
-    backgroundColor: '#fff',
-    margin: 10,
+    backgroundColor: '#f3f3f3',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.5,
-    shadowRadius: 2,
+    shadowRadius: 2
   },
   RecCardInfo: {
-    top: 10,
-    left: 10,
-    height: 100,
-    width: 230,
-    textAlign: 'left',
-    color: '#777',
+    height: 90,
+    width:200,
+    marginLeft:60,
+    textAlign:'justify',
+    backgroundColor: '#f3f3f3'
   },
   RecCardTitle: {
-    fontFamily: 'Inter',
-    color: '#777',
+    fontFamily: 'Inter-Bold',
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    color: '#777'
   },
   RecCardPara: {
     fontFamily: 'Roboto-Bold',
     fontSize: 15,
-    textAlign: 'left',
-    color: '#222',
+    color: '#222'
   },
   customerImg: {
-    left: 40,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   customerHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    marginHorizontal:20
+
   },
   prodImgSmallRec: {
     height: 80,
@@ -199,8 +238,34 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     resizeMode: 'contain',
   },
-  cardContent: {
-    flexDirection: 'column',
+  centeredView: {
+    flex: 1,
+    alignItems:'center',
+    justifyContent:'center',
+
+  },
+  modalView: {
+    height:400,
+    width:350,
+    backgroundColor: '#f7f7f7',
+    borderRadius: 20,
     alignItems: 'center',
+    shadowColor: '#111',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    top:10,
+    left:140
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
