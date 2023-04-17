@@ -88,14 +88,12 @@ export default function PatientAds() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
   },  
   RecCard: {
-    flex: 1,
     width: 380,
     height: 150,
-    margin: 10,
+    margin: 15,
     borderRadius: 10,
     elevation: 30,
     backgroundColor: '#fff',
@@ -108,6 +106,7 @@ const styles = StyleSheet.create({
   scrollContainer:{
     backgroundColor:'#fff',
     marginTop:20,
+    justifyContent:'center',
     flexDirection:'row'
   },
   scrollHeader: {
