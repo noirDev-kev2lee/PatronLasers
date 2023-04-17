@@ -10,7 +10,10 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 
-const ProductHome = ({navigation}) => {
+const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
+  const data = route.params as {username: string};
+  const {username} = data;
+
   const productList = [
     {
       id: 0,
@@ -41,7 +44,7 @@ const ProductHome = ({navigation}) => {
     <View style={styles.mainContainer}>
       <View style={styles.welcome}>
         <Icon2 name="person-circle" size={60} color="#131035" />
-        <Text style={styles.welcomeNote}>Hello, username</Text>
+        <Text style={styles.welcomeNote}>Hello, {username}</Text>
       </View>
       <View>
         <Text style={styles.scrollHeader}>My Products</Text>
@@ -176,7 +179,7 @@ const styles = StyleSheet.create({
   },
   scrollHeader: {
     fontFamily: 'Inter',
-    fontWeight: 'bold',
+    fontWeight: '700',
     fontSize: 15,
     textTransform: 'uppercase',
     textAlign: 'left',
