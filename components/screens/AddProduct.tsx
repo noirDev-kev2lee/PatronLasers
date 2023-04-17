@@ -15,7 +15,7 @@ import React from 'react';
 // import {NavigationContainer} from '@react-navigation/native';
 export function AddCustomer(){
   return(
-    <View style={styles.mainContainer}>
+    <View>
       <View style={styles.container}>
         <ScrollView>
           <KeyboardAvoidingView
@@ -60,7 +60,7 @@ export function AddCustomer(){
 }
 export function AddAppointment(){
   return(
-    <View style={styles.mainContainer}>
+    <View>
       <View style={styles.container}>
         <ScrollView>
           <KeyboardAvoidingView
@@ -105,7 +105,7 @@ export function AddAppointment(){
 }
 const AddProduct = () => {
   return (
-    <View style={styles.mainContainer}>
+    <View>
       <View style={styles.container}>
         <ScrollView>
           <KeyboardAvoidingView
@@ -118,12 +118,12 @@ const AddProduct = () => {
             <View style={styles.form}>
               <TextInput
                 style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
+                placeholderTextColor="grey"
                 placeholder="Serial Number"
               />
               <TextInput
                 style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
+                placeholderTextColor="grey"
                 placeholder="Product Name"
               />
               <Pressable
@@ -161,6 +161,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pressBtn: {
+    alignItems: 'center',
+    left: 10,
+    top: 20,
+    fontFamily: 'Inter-Regular',
     borderRadius: 12,
     backgroundColor: '#e6e6e9',
     width: 200,
@@ -168,13 +172,12 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     textAlign: 'center',
-    marginTop: 10,
+    fontFamily: 'Inter-Regular',
+    padding: 10,
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#66666e',
+    color: 'white',
   },
   pressTxt1: {
-    marginTop: 20,
     paddingVertical: 12,
     paddingHorizontal: 50,
     fontSize: 15,
@@ -193,5 +196,13 @@ const styles = StyleSheet.create({
   keyboard: {flex: 1, padding: 30},
   arrow: {
     color: 'white',
+  },
+  backArrow: {
+    paddingTop: 35,
+    paddingLeft: 25,
+  },
+  Arrow: {
+    fontSize: 30,
+    color: '#131035',
   },
 });

@@ -1,5 +1,4 @@
 import {
-  Alert,
   Image,
   Pressable,
   ScrollView,
@@ -150,21 +149,21 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     fontFamily: 'Roboto',
     fontSize: 20,
-    color: '#333',
+    color: 'white',
   },
   createSec: {
     flexDirection: 'row',
     backgroundColor: 'f6f6f6',
+    marginBottom: 50,
   },
   createPress: {
     paddingTop: 40,
     elevation: 10,
     marginHorizontal: 10,
-    borderRadius: 40,
-    alignItems: 'center',
+    borderRadius: 26,
     height: 150,
     width: 180,
-    backgroundColor: '#fff',
+    backgroundColor: '#131035',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -233,8 +232,8 @@ const styles = StyleSheet.create({
 
   },
   prodImgSmallRec: {
-    height: 80,
-    width: 80,
+    height: 70,
+    width: 70,
     borderRadius: 100,
     resizeMode: 'contain',
   },

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Pressable,
   StyleSheet,
@@ -9,17 +8,55 @@ import {
   Platform,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export default function Register({navigation}) {
+  const [disableButton, setDisableButton] = React.useState(true);
+  const [passwordError, setPasswordError] = React.useState(false);
+  const [emailError, setEmailError] = React.useState(false);
+  const [isLoading, setLoading] = React.useState(false);
+  const [borderColor, setBorderColor] = React.useState('#D9D9D9');
   const [clinicName, onClinicNameChange] = React.useState('');
-   const [serialNumber, onNumberChange] = React.useState('');
+  const [serialNumber, onNumberChange] = React.useState('');
   const [email, onEmailChange] = React.useState('');
   const [location, onLocationChange] = React.useState('');
   const [mobile, onMobileChange] = React.useState('');
   const [password, onPasswordChange] = React.useState('');
+  const [passwordConform, onPasswordConfirmChange] = React.useState('');
+  // function to validate password
+  useEffect(() => {
+    if (!EMAIL_PATTERN.test(email) && email !== '') {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
+    if (!PASSWORD_REGEX.test(password) && password !== '') {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+    if (
+      passwordConform === password &&
+      password !== '' &&
+      passwordConform !== ''
+    ) {
+      setDisableButton(false);
+      setBorderColor('#D9D9D9');
+    } else {
+      setDisableButton(true);
+      if (password === '' && passwordConform === '') {
+        setBorderColor('#D9D9D9');
+      } else {
+        setBorderColor('red');
+      }
+    }
+  }, [password, passwordConform, email]);
 
   const handleClinicRegister = async () => {
     try {
@@ -33,31 +70,27 @@ export default function Register({navigation}) {
       ) {
         Alert.alert('All field must be provided');
       } else {
-        const response = await axios.post(
-          'http://15.236.168.186:7000/api/v1/signup/',
-          {
-            first_name: clinicName,
-            last_name: serialNumber,
-            email: email,
-            password: password,
-            role: 'clinic',
-          },
-        );
-
-        const json = response.data;
-        console.log(json);
+        setLoading(true);
+        await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
+          first_name: clinicName,
+          last_name: serialNumber,
+          email: email,
+          password: password,
+          role: 'clinic',
+        });
+        setLoading(false);
         Alert.alert('Registration Successfully!');
         navigation.navigate('Login');
       }
     } catch (error) {
       Alert.alert('Wrong email or password');
-      console.error('Wrong email or password', error);
     }
   };
+
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.select({android: undefined, ios: 'padding'})}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
         style={styles.keyboard}>
         <View style={styles.form}>
@@ -71,7 +104,7 @@ export default function Register({navigation}) {
                 style={styles.textInput}
                 onChangeText={onClinicNameChange}
                 placeholder="Clinic Name"
-                placeholderTextColor={'black'}
+                placeholderTextColor={'grey'}
               />
             </View>
             <View style={styles.inputLog}>
@@ -79,7 +112,7 @@ export default function Register({navigation}) {
                 style={styles.textInput}
                 onChangeText={onNumberChange}
                 placeholder="Serial Number"
-                placeholderTextColor={'black'}
+                placeholderTextColor={'grey'}
               />
             </View>
             <View style={styles.inputLog}>
@@ -87,44 +120,81 @@ export default function Register({navigation}) {
                 style={styles.textInput}
                 onChangeText={onLocationChange}
                 placeholder="Location"
-                placeholderTextColor={'black'}
+                placeholderTextColor={'grey'}
               />
             </View>
-            <View style={styles.inputLog}>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={onEmailChange}
-                placeholder="Email"
-                placeholderTextColor={'black'}
-              />
+            <View>
+              <View style={styles.inputLog}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onEmailChange}
+                  placeholder="Email"
+                  placeholderTextColor={'grey'}
+                />
+              </View>
+              {emailError && (
+                <Text style={{color: 'red', marginLeft: 15}}>
+                  Please enter a valid email
+                </Text>
+              )}
             </View>
+
             <View style={styles.inputLog}>
               <TextInput
                 style={styles.textInput}
                 onChangeText={onMobileChange}
                 placeholder="Phone Number"
-                placeholderTextColor={'black'}
+                placeholderTextColor={'grey'}
+                keyboardType={'numeric'}
+                maxLength={10} // optional: limit the number of characters to 10 for a typical
               />
             </View>
-            <View style={styles.inputLog}>
-              <TextInput
-                style={styles.textInput}
-                onChangeText={onPasswordChange}
-                placeholder="Password"
-                placeholderTextColor={'black'}
-              />
+            <View style={{flexDirection: 'column'}}>
+              <View
+                style={[
+                  styles.inputLog,
+                  {borderColor: borderColor, borderWidth: 1},
+                ]}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onPasswordChange}
+                  placeholder="Password"
+                  secureTextEntry={true}
+                  placeholderTextColor={'grey'}
+                />
+              </View>
+              {passwordError && (
+                <Text style={{color: 'red', marginLeft: 15}}>
+                  Please enter a strong password
+                </Text>
+              )}
             </View>
-            <View style={styles.inputLog}>
+            <View
+              style={[
+                styles.inputLog,
+                {borderColor: borderColor, borderWidth: 1},
+              ]}>
               <TextInput
                 style={styles.textInput}
-                onChangeText={onPasswordChange}
-                placeholder="Password Confirm"
-                placeholderTextColor={'black'}
+                onChangeText={onPasswordConfirmChange}
+                secureTextEntry={true}
+                placeholder="Confirm Password"
+                placeholderTextColor={'grey'}
               />
             </View>
           </View>
-          <Pressable style={styles.pressBtn} onPress={handleClinicRegister}>
-            <Text style={styles.pressTxt}>Sign Up</Text>
+          <Pressable
+            disabled={disableButton}
+            style={styles.pressBtn}
+            onPress={handleClinicRegister}>
+            {isLoading ? (
+              <ActivityIndicator
+                color="white"
+                style={styles.activityIndicator}
+              />
+            ) : (
+              <Text style={styles.pressTxt}>Sign Up</Text>
+            )}
           </Pressable>
         </View>
       </KeyboardAvoidingView>
@@ -136,7 +206,7 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     padding: 20,
-    paddingBottom:100,
+    paddingBottom: 100,
     alignContent: 'center',
     backgroundColor: 'white',
   },
@@ -181,8 +251,12 @@ const styles = StyleSheet.create({
   pressTxt: {
     top: 10,
     fontFamily: 'Inter-Regular',
-    fontSize: 20,
+    fontSize: 25,
     color: '#fff',
   },
   keyboard: {paddingBottom: 0},
+  activityIndicator: {
+    alignSelf: 'center',
+    padding: 20,
+  },
 });

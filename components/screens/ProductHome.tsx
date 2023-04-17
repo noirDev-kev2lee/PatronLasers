@@ -104,69 +104,114 @@ const ProductHome = ({navigation}) => {
           <Icon name='circle' size={30} color={'#222'}/>
         </Pressable>
       </ScrollView>
-      <View><Text style={styles.scrollHeader}>More From Patron</Text></View>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.containersec}>
       <View>
-      <View style={styles.scrollsec}>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product One</Text>
+        <Text style={styles.scrollHeader}>More From Patron</Text>
+      </View>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.containersec}>
+        <View>
+          <View style={styles.scrollsec}>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product1.png')}
+              />
+              <Text style={styles.cardText}>Product One</Text>
+            </View>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product2.png')}
+              />
+              <Text style={styles.cardText}>Product Two</Text>
+            </View>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product4.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+          </View>
+          <View style={styles.scrollsec}>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product2.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product4.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product1.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+          </View>
+          <View style={styles.scrollsec}>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product1.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product1.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+            <View style={[styles.RecCardSmall]}>
+              <Image
+                style={styles.prodImgSmall}
+                source={require('../assets/product1.png')}
+              />
+              <Text style={styles.cardText}>Product Three</Text>
+            </View>
+          </View>
         </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product2.png')}/>
-          <Text style={styles.cardText}>Product Two</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product4.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        </View>
-        <View style={styles.scrollsec}>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product2.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product4.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        </View>
-        <View style={styles.scrollsec}>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        <View style={[styles.RecCardSmall]}>
-        <Image style={styles.prodImgSmall} source={require('../assets/product1.png')}/>
-          <Text style={styles.cardText}>Product Three</Text>
-        </View>
-        </View>
-        </View>
-        </ScrollView>
-        </View>
-    );
+      </ScrollView>
+    </View>
+  );
 };
 
 export default ProductHome;
 
 const styles = StyleSheet.create({
   scroll: {},
+  mainContainer: {
+    paddingHorizontal: 0,
+  },
+  welcome: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  welcomeNote: {
+    fontSize: 15,
+    color: 'black',
+  },
   scrollsec: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
   scrollHeader: {
-    fontFamily: 'Roboto',
-    fontSize: 18,
+    fontFamily: 'Inter',
+    fontWeight: 'bold',
+    fontSize: 15,
     textTransform: 'uppercase',
     textAlign: 'left',
     marginLeft: 20,
@@ -275,11 +320,11 @@ const styles = StyleSheet.create({
     color: '#222',
   },
   cardText: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Inter',
     color: '#222',
   },
   pressTxt: {
-    fontFamily: 'Roboto-thin',
+    fontFamily: 'Inter',
     fontSize: 20,
     marginTop: 30,
     textAlign: 'center',
