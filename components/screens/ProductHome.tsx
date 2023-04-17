@@ -2,15 +2,33 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
+  Modal,
   Text,
   View,
   Image,
 } from 'react-native';
-import React from 'react';
+// import {NavigationContainer, useTheme} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/FontAwesome5';
+import AddProduct from './AddProduct';
+import Login from './Login';
+import Register from './Register';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer({navigation}) {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Login" component={Login} />
+      <Drawer.Screen name="Register" component={Register} />
+    </Drawer.Navigator>
+  );
+}
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
 
@@ -42,6 +60,24 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   ];
   return (
     <View style={styles.mainContainer}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable
+              style={styles.button}
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Icon name="close" size={30} color={'#222'} />
+            </Pressable>
+            <AddProduct />
+          </View>
+        </View>
+      </Modal>
       <View style={styles.welcome}>
         <Icon2 name="person-circle" size={60} color="#131035" />
         <Text style={styles.welcomeNote}>Hello, {username}</Text>
@@ -67,10 +103,11 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             </Pressable>
           ))}
         </View>
-        <Pressable
-          style={styles.pressBtn}
-          onPress={() => navigation.navigate('Add Product')}>
-          <Icon name="pluscircle" size={60} color="#131035" />
+        <Pressable style={styles.pressBtn}>
+          <Icon name="pluscircle" size={60} color="#888" />
+        </Pressable>
+        <Pressable onPress={() => navigation.openDrawer()}>
+          <Icon name="circle" size={30} color={'#222'} />
         </Pressable>
       </ScrollView>
       <View>
@@ -298,7 +335,29 @@ const styles = StyleSheet.create({
     marginTop: 30,
     textAlign: 'center',
   },
-  moreContainer: {
-    marginTop: 20,
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    height: 300,
+    width: 350,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    top: 10,
+    left: 150,
+    elevation: 2,
   },
 });

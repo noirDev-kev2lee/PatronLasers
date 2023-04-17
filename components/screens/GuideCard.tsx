@@ -97,10 +97,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   scrollContainer: {
-    flex: 1,
-    backgroundColor: '#888',
-    paddingTop: 60,
     flexDirection: 'row',
+    paddingTop: 60,
+    borderTopLeftRadius: 80,
+    borderTopRightRadius: 80,
+    backgroundColor: '#888',
   },
   scrollsec: {
     flex: 1,
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
     width: 200,
     resizeMode: 'contain',
   },
+
   guideTitle: {
     textAlign: 'center',
     color: '#fff',
