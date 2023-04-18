@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, ScrollView, Pressable} from 'react-native'
-import React from 'react'
-import Icon  from 'react-native-vector-icons/AntDesign'
+import {StyleSheet, Text, View, ScrollView, Pressable} from 'react-native';
+import React from 'react';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 export default function PatientHome() {
   return (
@@ -10,87 +10,108 @@ export default function PatientHome() {
       <Text style={styles.heading2}>Manage and Add New Appointment</Text>
       <Text style={styles.heading2}>Medical History</Text>
 
-    <ScrollView pagingEnabled={true} showsHorizontalScrollIndicator={false} horizontal style={styles.scroll}>
-      <View style={styles.scrollContainer}>
-      <View style={[styles.RecCard1]}> 
-          <View style={styles.RecCardInfo1}>
-            <Text style={styles.appointTitle1}>Tatoo Removal</Text>
-            <Text style={styles.appointTitle2}>Israel Clinic</Text>
-            <Text style={styles.appointInfo}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum, mollitia. Cumque reiciendis repellendus exercitationem nam harum velit id nemo quos, non qui, officia itaque asperiores eos. Consequuntur asperiores, numquam deserunt doloribus similique consectetur at dignissimos laudantium ipsa facilis unde odit, iure nemo.</Text>
+      <ScrollView
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        style={styles.scroll}>
+        <View style={styles.scrollContainer}>
+          <View style={[styles.RecCard1]}>
+            <View style={styles.RecCardInfo1}>
+              <Text style={styles.appointTitle1}>Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Israel Clinic</Text>
+              <Text style={styles.appointInfo}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
+                mollitia. Cumque reiciendis repellendus exercitationem nam harum
+                velit id nemo quos, non qui, officia itaque asperiores eos.
+                Consequuntur asperiores, numquam deserunt doloribus similique
+                consectetur at dignissimos laudantium ipsa facilis unde odit,
+                iure nemo.
+              </Text>
+            </View>
+          </View>
+          <View style={[styles.RecCard1]}>
+            <View style={styles.RecCardInfo1}>
+              <Text style={styles.appointTitle1}>Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Israel Clinic</Text>
+              <Text style={styles.appointInfo}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
+                mollitia. Cumque reiciendis repellendus exercitationem nam harum
+                velit id nemo quos, non qui, officia itaque asperiores eos.
+                Consequuntur asperiores, numquam deserunt doloribus similique
+                consectetur at dignissimos laudantium ipsa facilis unde odit,
+                iure nemo.
+              </Text>
+            </View>
           </View>
         </View>
-        <View style={[styles.RecCard1]}> 
-          <View style={styles.RecCardInfo1}>
-            <Text style={styles.appointTitle1}>Tatoo Removal</Text>
-            <Text style={styles.appointTitle2}>Israel Clinic</Text>
-            <Text style={styles.appointInfo}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum, mollitia. Cumque reiciendis repellendus exercitationem nam harum velit id nemo quos, non qui, officia itaque asperiores eos. Consequuntur asperiores, numquam deserunt doloribus similique consectetur at dignissimos laudantium ipsa facilis unde odit, iure nemo.</Text>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
-        <Pressable style={styles.hoverBtn}>
-          <Icon name="pluscircle" size={60} color="#777" />
-        </Pressable>
-      </View>
-  )
+      </ScrollView>
+      <Pressable style={styles.hoverBtn}>
+        <Icon name="pluscircle" size={60} color="#777" />
+      </Pressable>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-  scrollContainer:{
-    backgroundColor:'#fff',
-    marginTop:20,
-    flexDirection:'row'
+  scroll: {},
+  scrollContainer: {
+    backgroundColor: '#fff',
+    marginTop: 20,
+    flexDirection: 'row',
   },
-  heading:{
-    marginLeft:10,
-    color:'#222',
-    fontFamily:'Inter',
-    fontSize:40,
+  heading: {
+    marginLeft: 10,
+    color: '#222',
+    fontFamily: 'Inter',
+    fontSize: 40,
   },
-  heading2:{
-    marginLeft:10,
-    color:'#888',
-    fontFamily:'Inter',
-    fontSize:20,
+  heading2: {
+    marginLeft: 10,
+    color: '#888',
+    fontFamily: 'Inter',
+    fontSize: 20,
   },
-  RecCardInfo1:{
-    height:300,
-    width:250,
-    textAlign:'justify',
+  RecCardInfo1: {
+    height: 300,
+    width: 250,
+    textAlign: 'justify',
   },
-  RecCard1:{
-    flex:1,
+  RecCard1: {
+    flex: 1,
     width: 330,
     height: 450,
-    margin:20,
+    margin: 20,
     borderRadius: 10,
-    elevation:10,
+    elevation: 10,
     backgroundColor: '#fff',
   },
-  appointTitle1:{
-    padding:10,
-    width:300,
-    fontFamily:'Roboto-bold',
-    fontSize:50,
-    color:'#222'
+  appointTitle1: {
+    padding: 10,
+    width: 300,
+    fontFamily: 'Roboto-bold',
+    fontSize: 50,
+    color: '#222',
   },
-  appointTitle2:{
-    padding:10,
-    width:300,
-    fontFamily:'Roboto-Regular',
-    fontSize:30,
-    color:'#555'
+  appointTitle2: {
+    padding: 10,
+    width: 300,
+    fontFamily: 'Roboto-Regular',
+    fontSize: 30,
+    color: '#555',
   },
-  appointInfo:{
-    width:300,
-    padding:10,
-    textAlign:'left',
-    fontFamily:'Inter',
-    fontSize:14,
-    color:'#777'
+  appointInfo: {
+    width: 300,
+    padding: 10,
+    textAlign: 'left',
+    fontFamily: 'Inter',
+    fontSize: 14,
+    color: '#777',
   },
-  hoverBtn:{
-    bottom:-10,
-    left:330,
-  }
-})
+  hoverBtn: {
+    bottom: -10,
+    left: 330,
+  },
+});

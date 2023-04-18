@@ -40,21 +40,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     resizeMode: 'contain',
   },
-  Info:{
-    top:60,
-    width:400,
-    height:300,
-    paddingHorizontal:10
+  Info: {
+    top: 60,
+    width: 400,
+    height: 300,
+    paddingHorizontal: 10,
   },
-  prodTitle:{
-    fontFamily:'Inter-Bold',
-    marginBottom:10,
-    color:'#888',
-    fontSize:30
+  prodTitle: {
+    fontFamily: 'Inter-Bold',
+    marginBottom: 10,
+    color: '#888',
+    fontSize: 30,
   },
-  prodInfo:{
-    color:'#222',
-    fontSize:20,
-    textAlign:'justify',
-  }
+  prodInfo: {
+    color: '#222',
+    fontSize: 20,
+    textAlign: 'justify',
+  },
 });

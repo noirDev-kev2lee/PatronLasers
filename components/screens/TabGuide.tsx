@@ -6,11 +6,7 @@ import {
   View,
   Image,
 } from 'react-native';
-// import {NavigationContainer} from '@react-navigation/native';
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import BottomTabBar from '@react-navigation/bottom-tabs';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import React from 'react';
 
 const TabGuide = ({navigation}) => {
@@ -66,12 +62,20 @@ const TabGuide = ({navigation}) => {
                 recusandae aliquid vel reiciendis sed!
               </Text>
             </View>
-      <Image style={styles.prodImgSmallRec} source={require('../assets/product4.png')}/>
-        </View>
-        <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
-            <Text style={styles.RecCardTitle}>Product Four</Text>
-            <Text style={styles.RecCardPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic quod vel cumque dolore recusandae quam maiores, doloremque enim inventore error ducimus laborum consequuntur. Pariatur recusandae aliquid vel reiciendis sed!</Text>
+            <Image
+              style={styles.prodImgSmallRec}
+              source={require('../assets/product4.png')}
+            />
+          </View>
+          <View style={[styles.RecCard]}>
+            <View style={styles.RecCardInfo}>
+              <Text style={styles.RecCardTitle}>Product Four</Text>
+              <Text style={styles.RecCardPara}>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
+                hic quod vel cumque dolore recusandae quam maiores, doloremque
+                enim inventore error ducimus laborum consequuntur. Pariatur
+                recusandae aliquid vel reiciendis sed!
+              </Text>
             </View>
             <Image
               style={styles.prodImgSmallRec}
@@ -281,12 +285,12 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
   },
-  RecCardTitle:{
-    fontFamily:'Inter',
-    color:'#777',
-    fontSize:20,
-    fontWeight:'bold',
-    textAlign:'left',
+  RecCardTitle: {
+    fontFamily: 'Inter',
+    color: '#777',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'left',
   },
   RecCardPara: {
     fontFamily: 'Roboto-Bold',

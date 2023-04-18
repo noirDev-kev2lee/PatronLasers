@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, Image,ScrollView } from 'react-native'
-import React from 'react'
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import React from 'react';
 
 export default function PatientAds() {
   return (
     <View>
-      <ScrollView pagingEnabled={true}
+      <ScrollView
+        pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
         horizontal
         style={styles.scroll}>
@@ -23,7 +24,7 @@ export default function PatientAds() {
             </View>
           </View>
           <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
+            <View style={styles.RecCardInfo}>
               <Text style={styles.RecCardTitle}>Oyseterbay Clinic</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
@@ -36,7 +37,7 @@ export default function PatientAds() {
             </View>
           </View>
           <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
+            <View style={styles.RecCardInfo}>
               <Text style={styles.RecCardTitle}>Masaki Clinic</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
@@ -49,7 +50,7 @@ export default function PatientAds() {
             </View>
           </View>
           <View style={[styles.RecCard]}>
-          <View style={styles.RecCardInfo}>
+            <View style={styles.RecCardInfo}>
               <Text style={styles.RecCardTitle}>Sinza</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
@@ -65,31 +66,47 @@ export default function PatientAds() {
       </ScrollView>
       <Text style={styles.scrollHeader}>Patron Approved Services</Text>
       <ScrollView pagingEnabled={true} horizontal style={styles.scroll}>
-      <View style={styles.scrollContainer}>
-      <View style={[styles.RecCard1]}> 
-          <View style={styles.RecCardInfo1}>
-            <Text style={styles.appointTitle1}>Tatoo Removal</Text>
-            <Text style={styles.appointTitle2}>Masaki Clinic</Text>
-            <Text style={styles.appointInfo}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum, mollitia. Cumque reiciendis repellendus exercitationem nam harum velit id nemo quos, non qui, officia itaque asperiores eos. Consequuntur asperiores, numquam deserunt doloribus similique consectetur at dignissimos laudantium ipsa facilis unde odit, iure nemo.</Text>
+        <View style={styles.scrollContainer}>
+          <View style={[styles.RecCard1]}>
+            <View style={styles.RecCardInfo1}>
+              <Text style={styles.appointTitle1}>Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Masaki Clinic</Text>
+              <Text style={styles.appointInfo}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
+                mollitia. Cumque reiciendis repellendus exercitationem nam harum
+                velit id nemo quos, non qui, officia itaque asperiores eos.
+                Consequuntur asperiores, numquam deserunt doloribus similique
+                consectetur at dignissimos laudantium ipsa facilis unde odit,
+                iure nemo.
+              </Text>
+            </View>
+          </View>
+          <View style={[styles.RecCard1]}>
+            <View style={styles.RecCardInfo1}>
+              <Text style={styles.appointTitle1}>Hair Removal</Text>
+              <Text style={styles.appointTitle2}>Oysterbay Clinic</Text>
+              <Text style={styles.appointInfo}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
+                mollitia. Cumque reiciendis repellendus exercitationem nam harum
+                velit id nemo quos, non qui, officia itaque asperiores eos.
+                Consequuntur asperiores, numquam deserunt doloribus similique
+                consectetur at dignissimos laudantium ipsa facilis unde odit,
+                iure nemo.
+              </Text>
+            </View>
           </View>
         </View>
-        <View style={[styles.RecCard1]}> 
-          <View style={styles.RecCardInfo1}>
-            <Text style={styles.appointTitle1}>Hair Removal</Text>
-            <Text style={styles.appointTitle2}>Oysterbay Clinic</Text>
-            <Text style={styles.appointInfo}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum, mollitia. Cumque reiciendis repellendus exercitationem nam harum velit id nemo quos, non qui, officia itaque asperiores eos. Consequuntur asperiores, numquam deserunt doloribus similique consectetur at dignissimos laudantium ipsa facilis unde odit, iure nemo.</Text>
-          </View>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-  },  
+  },
   RecCard: {
     width: 380,
     height: 150,
@@ -103,15 +120,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
   },
-  scrollContainer:{
-    backgroundColor:'#fff',
-    marginTop:20,
-    justifyContent:'center',
-    flexDirection:'row'
+  scrollContainer: {
+    backgroundColor: '#fff',
+    marginTop: 20,
+    flexDirection: 'row',
   },
   scrollHeader: {
-    top:10,
-    marginLeft:10,
+    top: 10,
+    marginLeft: 10,
     fontFamily: 'Roboto',
     textTransform: 'uppercase',
     fontSize: 20,
@@ -145,7 +161,7 @@ const styles = StyleSheet.create({
     color: 'green',
     fontSize: 15,
     fontWeight: 'bold',
-    right:-40,
+    right: -40,
     textAlign: 'right',
   },
   RecCardPara: {
@@ -161,40 +177,41 @@ const styles = StyleSheet.create({
     width: 230,
     resizeMode: 'contain',
   },
-  RecCardInfo1:{
-    height:300,
-    width:250,
-    textAlign:'justify',
+  RecCardInfo1: {
+    height: 300,
+    width: 250,
+    textAlign: 'justify',
   },
-  RecCard1:{
-    flex:1,
+  RecCard1: {
+    flex: 1,
     width: 330,
     height: 460,
-    margin:20,
+    margin: 20,
     borderRadius: 10,
-    elevation:20,
+    elevation: 20,
     backgroundColor: '#fff',
   },
-  appointTitle1:{
-    padding:10,
-    width:300,
-    fontFamily:'Roboto-bold',
-    fontSize:50,
-    color:'#888'
+  appointTitle1: {
+    padding: 10,
+    width: 300,
+    fontFamily: 'Roboto-bold',
+    fontSize: 50,
+    color: '#888',
   },
-  appointTitle2:{
-    padding:10,
-    width:300,
-    fontFamily:'Roboto-Regular',
-    fontSize:30,
-    color:'#666'
+  appointTitle2: {
+    padding: 10,
+    width: 300,
+    fontFamily: 'Roboto-Regular',
+    fontSize: 30,
+    color: '#666',
   },
-  appointInfo:{
-    width:300,
-    padding:10,
-    textAlign:'left',
-    fontFamily:'Inter',
-    fontSize:20,
-    color:'#111'
+  appointInfo: {
+    width: 300,
+    padding: 10,
+    textAlign: 'left',
+    fontFamily: 'Inter',
+    fontSize: 20,
+    color: '#111',
   },
-})
+  scroll: {},
+});

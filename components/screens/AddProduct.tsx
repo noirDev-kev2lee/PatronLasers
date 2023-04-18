@@ -1,6 +1,5 @@
 import {
   Alert,
-  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -10,11 +9,10 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import Icon3 from 'react-native-vector-icons/AntDesign';
+// import Icon3 from 'react-native-vector-icons/AntDesign';
 import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
-export function AddCustomer(){
-  return(
+export function AddCustomer() {
+  return (
     <View>
       <View style={styles.container}>
         <ScrollView>
@@ -56,10 +54,10 @@ export function AddCustomer(){
         </ScrollView>
       </View>
     </View>
-  )
+  );
 }
-export function AddAppointment(){
-  return(
+export function AddAppointment() {
+  return (
     <View>
       <View style={styles.container}>
         <ScrollView>
@@ -101,7 +99,7 @@ export function AddAppointment(){
         </ScrollView>
       </View>
     </View>
-  )
+  );
 }
 const AddProduct = () => {
   return (
@@ -184,14 +182,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#eee0cb',
   },
-  container: {
-
-  },
+  container: {},
 
   title: {
-    textAlign:'center',
+    textAlign: 'center',
     color: '#222',
-    fontSize: 25
+    fontSize: 25,
   },
   keyboard: {flex: 1, padding: 30},
   arrow: {
