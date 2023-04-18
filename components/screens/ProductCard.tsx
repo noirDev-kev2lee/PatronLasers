@@ -1,22 +1,54 @@
-import {Text, StyleSheet, View, Image} from 'react-native';
-import React from 'react';
+import {Text, StyleSheet, View, ScrollView, Pressable} from 'react-native';
+import React, {useRef} from 'react';
 import {useRoute} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function ProductCard() {
   const route = useRoute();
-  const desc = route.params?.desc;
+  const data = route.params as {desc: string; name: string; category: string};
+  const {desc, name, category} = data;
+  const [scrollDirection, setScrollDirection] = React.useState<'up' | 'down'>(
+    'down',
+  );
+
+  const scrollViewRef = useRef<ScrollView>(null);
+  const handleScrollTo = (y: number) => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo({y, animated: true});
+    }
+  };
+
+  const handleScroll = () => {
+    if (scrollDirection === 'down') {
+      handleScrollTo(500);
+      setScrollDirection('up');
+    } else {
+      handleScrollTo(0);
+      setScrollDirection('down');
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <View style={styles.prodImgContainer}>
-        <Image
-          style={styles.prodImg}
-          source={require('../assets/product1.png')}
-        />
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>{name}</Text>
+        <Text style={styles.subText}>{category}</Text>
       </View>
-      <View style={styles.Info}>
-        <Text style={styles.prodTitle}>This is the title</Text>
+      <ScrollView ref={scrollViewRef} style={styles.Info}>
+        <Text style={styles.prodTitle}>Introduction</Text>
         <Text style={styles.prodInfo}>{desc}</Text>
-      </View>
+      </ScrollView>
+      <Pressable style={styles.scrollBtn} onPress={handleScroll}>
+        <Icon
+          name={
+            scrollDirection === 'down'
+              ? 'keyboard-arrow-down'
+              : 'keyboard-arrow-up'
+          }
+          size={52}
+          color="white"
+        />
+      </Pressable>
     </View>
   );
 }
@@ -24,27 +56,30 @@ export default function ProductCard() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: '#F3EDED',
   },
-  prodImgContainer: {
-    top: 40,
-    height: 380,
-    width: 350,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    elevation: 10,
+  headerContainer: {
+    paddingVertical: 30,
+    paddingHorizontal: 20,
   },
-  prodImg: {
-    height: 350,
-    width: 350,
-    alignItems: 'center',
-    resizeMode: 'contain',
+  headerText: {
+    color: '#000000',
+    fontSize: 25,
+    fontFamily: 'Inter',
+    fontWeight: 'bold',
+  },
+  subText: {
+    color: '#888',
+    fontFamily: 'Inter',
+    fontWeight: '500',
+    fontSize: 20,
   },
   Info: {
-    top: 60,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
     width: 400,
-    height: 300,
-    paddingHorizontal: 10,
+    height: 100,
+    backgroundColor: 'white',
   },
   prodTitle: {
     fontFamily: 'Inter-Bold',
@@ -56,5 +91,17 @@ const styles = StyleSheet.create({
     color: '#222',
     fontSize: 20,
     textAlign: 'justify',
+  },
+  scrollBtn: {
+    position: 'absolute',
+    bottom: 30,
+    right: 180,
+    zIndex: 1,
+    height: 64,
+    width: 64,
+    borderRadius: 54,
+    backgroundColor: '#131035',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
