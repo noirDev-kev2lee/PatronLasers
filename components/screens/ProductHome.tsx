@@ -6,19 +6,28 @@ import {
   Text,
   View,
   Image,
+  Button,
+  TouchableOpacity
 } from 'react-native';
-// import {NavigationContainer, useTheme} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React, {useState} from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,} from '@react-navigation/drawer';
+import { Gesture } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
+import { DrawerActions } from '@react-navigation/native';
 import AddProduct from './AddProduct';
+import { Alert } from 'react-native';
+
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
 
+  const nav = useNavigation();
   const productList = [
     {
       id: 0,
@@ -65,10 +74,12 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
           </View>
         </View>
       </Modal>
+      <Pressable>
       <View style={styles.welcome}>
         <Icon2 name="person-circle" size={52} color="#131035" />
         <Text style={styles.welcomeNote}>Hello, {username}</Text>
       </View>
+      </Pressable>
       <View>
         <Text style={styles.scrollHeader}>My Products</Text>
       </View>
@@ -90,7 +101,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             </Pressable>
           ))}
         </View>
-        <Pressable style={styles.pressBtn}>
+        <Pressable onPress={() => setModalVisible(true)} style={styles.pressBtn}>
           <Icon name="pluscircle" size={60} color="#888" />
         </Pressable>
       </ScrollView>
@@ -214,7 +225,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containersec: {
-    height: 420,
+    height: 350,
     minHeight: 320,
   },
   card: {

@@ -1,38 +1,61 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Button,Text} from 'react-native';
+import {createDrawerNavigator, DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useRoute} from '@react-navigation/native';
-import Button from 'react-native';
-
 import ProductHome from './ProductHome';
 import TabsAds from './TabAds';
 import TabCustomer from './TabCustomer';
 import TabGuide from './TabGuide';
 import TabSupport from './TabSupport';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-
-function HomeScreen({ navigation }) {
+function Feed({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Feed Screen</Text>
+      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
     </View>
   );
 }
 
-function NotificationsScreen({ navigation }) {
+function Notifications() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Notifications Screen</Text>
     </View>
   );
 }
-
 const Drawer = createDrawerNavigator();
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+      <DrawerItem
+        label="Close drawer"
+        onPress={() => props.navigation.closeDrawer()}
+      />
+      <DrawerItem
+        label="Toggle drawer"
+        onPress={() => props.navigation.toggleDrawer()}
+      />
+    </DrawerContentScrollView>
+  );
+}
 
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+    >
+      <Drawer.Screen name="Feed" component={Feed} />
+      <Drawer.Screen name="Notifications" component={Notifications} />
+    </Drawer.Navigator>
+  );
+}                                                                 
 const Tab = createBottomTabNavigator();
 
 const screenOptions = ({route}: {route: {name: string}}) => ({
@@ -88,10 +111,6 @@ const Product = () => {
         <Tab.Screen name="My Customer" component={TabCustomer} />
         <Tab.Screen name="Tech Support" component={TabSupport} />
       </Tab.Navigator>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-      </Drawer.Navigator>
     </View>
   );
 };
