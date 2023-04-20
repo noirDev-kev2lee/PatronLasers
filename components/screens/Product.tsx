@@ -1,8 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, Button,Text} from 'react-native';
-import {createDrawerNavigator, DrawerContentScrollView,
+import {StyleSheet, View, Button, Text} from 'react-native';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,} from '@react-navigation/drawer';
+  DrawerItem,
+} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useRoute} from '@react-navigation/native';
@@ -11,9 +14,9 @@ import TabsAds from './TabAds';
 import TabCustomer from './TabCustomer';
 import TabGuide from './TabGuide';
 import TabSupport from './TabSupport';
-function Feed({ navigation }) {
+function Feed({navigation}) {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Feed Screen</Text>
       <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
@@ -23,7 +26,7 @@ function Feed({ navigation }) {
 
 function Notifications() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Notifications Screen</Text>
     </View>
   );
@@ -45,17 +48,15 @@ function CustomDrawerContent(props) {
   );
 }
 
-
 function MyDrawer() {
   return (
     <Drawer.Navigator
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
-    >
+      drawerContent={props => <CustomDrawerContent {...props} />}>
       <Drawer.Screen name="Feed" component={Feed} />
       <Drawer.Screen name="Notifications" component={Notifications} />
     </Drawer.Navigator>
   );
-}                                                                 
+}
 const Tab = createBottomTabNavigator();
 
 const screenOptions = ({route}: {route: {name: string}}) => ({
