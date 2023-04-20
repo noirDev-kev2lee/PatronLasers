@@ -57,13 +57,6 @@ function App() {
   return (
     <NavigationContainer theme={appTheme}>
       <Stack.Navigator initialRouteName="Home">
-
-     
-        <Stack.Screen name="Drawer" component={DrawerNavigator} />
-        {/* Other screen components go here */}
-    
-
-
         <Stack.Screen
           name="Home"
           component={Home}

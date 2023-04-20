@@ -24,6 +24,7 @@ import { Alert } from 'react-native';
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
 
@@ -74,7 +75,27 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
           </View>
         </View>
       </Modal>
-      <Pressable>
+      <Modal
+        animationType='fade'
+        transparent={true}
+        visible={drawerModalVisible}
+        onRequestClose={() => {
+          setdrawerModalVisible(!drawerModalVisible);
+        }}>
+        <View style={styles.drawerModal}>
+          <View>
+            <Pressable
+              style={styles.drawerButton}
+              onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
+              <Icon name="close" size={30} color={'#222'} />
+            </Pressable>
+              <Pressable><Text style={styles.drawerTxt}>Finacial Area</Text></Pressable>
+              <Pressable><Text style={styles.drawerTxt}>About</Text></Pressable>
+              <Pressable onPress={() => navigation.navigate('Login')}><Text style={styles.drawerTxt2}>Log Out</Text></Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable onPress={() => setdrawerModalVisible(true)}>
       <View style={styles.welcome}>
         <Icon2 name="person-circle" size={52} color="#131035" />
         <Text style={styles.welcomeNote}>Hello, {username}</Text>
@@ -356,4 +377,32 @@ const styles = StyleSheet.create({
     left: 150,
     elevation: 2,
   },
+  drawerModal:{
+    top:100,
+    left:60,
+    height:170,
+    width:230,
+    elevation:100,
+    borderTopLeftRadius:20,
+    borderBottomRightRadius:20,
+    backgroundColor:'#f1f1f1'
+  },
+  drawerButton:{
+    top:5,
+    left:180
+  },
+  drawerTxt:{
+    right:-10,
+    fontSize:25,
+    paddingBottom:30,
+    color:'#222'
+  },
+  drawerTxt2:{
+    fontSize:18,
+    textAlign:'center',
+    left:160,
+    width:60,
+    backgroundColor:'#f1f1f1',
+    color:'#222'
+  }
 });
