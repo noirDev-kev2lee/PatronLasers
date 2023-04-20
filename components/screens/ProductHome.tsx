@@ -2,42 +2,39 @@ import {
   StyleSheet,
   ScrollView,
   Pressable,
+  Modal,
   Text,
   View,
   Image,
+  Button,
+  TouchableOpacity
 } from 'react-native';
-// import {NavigationContainer, useTheme} from '@react-navigation/native';
-import React from 'react';
-// import {createDrawerNavigator} from '@react-navigation/drawer';
+import { useNavigation } from '@react-navigation/native';
+import React, {useState} from 'react';
+import {createDrawerNavigator, DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,} from '@react-navigation/drawer';
+import { Gesture } from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-// import AddProduct from './AddProduct';
-// import Login from './Login';
-// import Register from './Register';
+import { DrawerActions } from '@react-navigation/native';
+import AddProduct from './AddProduct';
+import { Alert } from 'react-native';
 
-// const Drawer = createDrawerNavigator();
-
-// function MyDrawer({navigation}) {
-//   return (
-//     <Drawer.Navigator>
-//       <Drawer.Screen name="Login" component={Login} />
-//       <Drawer.Screen name="Register" component={Register} />
-//     </Drawer.Navigator>
-//   );
-// }
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
-  // const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
 
+  const nav = useNavigation();
   const productList = [
     {
       id: 0,
-      name: 'Boxa',
-      category: 'Hair removal devices',
+      name: 'product one',
       img: require('../assets/product1.png'),
-      desc: 'and affordable way, which fits and integrates perfectly with the new pace of life. Where other devices have failed, macro treatment technology, uniquely developed by Patron Germany, succeeds - in all our devices you will get a pleasant treatment experience, thanks to the ice handle that reduces the feeling of pain and has two wavelengths. We will match your business with the most appropriate equipment, depending on the space of the business, the number of customers, the desire and ambition of the business to upgrade the maximum adjustment according to the hair type, hair shade and skin color.755nm wavelength - an optimal wavelength intended for most types of hair, and allows absorption of the laser beam in the melanin pigment at a high intensity. 755nm wavelength is particularly effective on light skin tone, light hair, thin hair and sensitive areas. No other wavelength is able to absorb laser in melanin above 6,000 W and up to 2 MS.',
+      desc: 'This is product one',
     },
     {
       id: 1,
@@ -60,7 +57,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   ];
   return (
     <View style={styles.mainContainer}>
-      {/* <Modal
+      <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -77,11 +74,33 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             <AddProduct />
           </View>
         </View>
-      </Modal> */}
+      </Modal>
+      <Modal
+        animationType='fade'
+        transparent={true}
+        visible={drawerModalVisible}
+        onRequestClose={() => {
+          setdrawerModalVisible(!drawerModalVisible);
+        }}>
+        <View style={styles.drawerModal}>
+          <View>
+            <Pressable
+              style={styles.drawerButton}
+              onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
+              <Icon name="close" size={30} color={'#222'} />
+            </Pressable>
+              <Pressable><Text style={styles.drawerTxt}>Finacial Area</Text></Pressable>
+              <Pressable><Text style={styles.drawerTxt}>About</Text></Pressable>
+              <Pressable onPress={() => navigation.navigate('Login')}><Text style={styles.drawerTxt2}>Log Out</Text></Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable onPress={() => setdrawerModalVisible(true)}>
       <View style={styles.welcome}>
         <Icon2 name="person-circle" size={52} color="#131035" />
         <Text style={styles.welcomeNote}>Hello, {username}</Text>
       </View>
+      </Pressable>
       <View>
         <Text style={styles.scrollHeader}>My Products</Text>
       </View>
@@ -94,11 +113,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             <Pressable
               key={product.id}
               onPress={() =>
-                navigation.navigate('Product Info', {
-                  desc: product.desc,
-                  name: product.name,
-                  category: product.category,
-                })
+                navigation.navigate('Product Info', {desc: product.desc})
               }>
               <View style={[styles.card]}>
                 <Image style={styles.prodImg} source={product.img} />
@@ -107,12 +122,9 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             </Pressable>
           ))}
         </View>
-        <Pressable style={styles.pressBtn}>
+        <Pressable onPress={() => setModalVisible(true)} style={styles.pressBtn}>
           <Icon name="pluscircle" size={60} color="#888" />
         </Pressable>
-        {/* <Pressable onPress={() => navigation.openDrawer()}>
-          <Icon name="circle" size={30} color={'#222'} />
-        </Pressable> */}
       </ScrollView>
       <View>
         <Text style={styles.scrollHeader}>More From Patron</Text>
@@ -234,7 +246,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containersec: {
-    height: 420,
+    height: 350,
     minHeight: 320,
   },
   card: {
@@ -365,4 +377,32 @@ const styles = StyleSheet.create({
     left: 150,
     elevation: 2,
   },
+  drawerModal:{
+    top:100,
+    left:60,
+    height:170,
+    width:230,
+    elevation:100,
+    borderTopLeftRadius:20,
+    borderBottomRightRadius:20,
+    backgroundColor:'#f1f1f1'
+  },
+  drawerButton:{
+    top:5,
+    left:180
+  },
+  drawerTxt:{
+    right:-10,
+    fontSize:25,
+    paddingBottom:30,
+    color:'#222'
+  },
+  drawerTxt2:{
+    fontSize:18,
+    textAlign:'center',
+    left:160,
+    width:60,
+    backgroundColor:'#f1f1f1',
+    color:'#222'
+  }
 });

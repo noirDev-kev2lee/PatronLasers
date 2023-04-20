@@ -121,7 +121,7 @@ const TabCustomer = () => {
         <View style={styles.customerHeader}>
           <Icon name={'left'} size={30} color={'#222'} />
           <Text style={styles.listTitle}>Appointments</Text>
-          <Icon name={'right'} size={30} color={'#222'} />
+          <Icon name={'right'} size={30} color={'#fff'} />
         </View>
         <ScrollView style={styles.listScroll}>
           {customerList.map(customer => (
@@ -146,24 +146,26 @@ export default TabCustomer;
 
 const styles = StyleSheet.create({
   textPress: {
-    marginBottom: 0,
+    marginBottom: 10,
     fontFamily: 'Roboto',
+    textAlign:'center',
     fontSize: 20,
-    color: 'white',
+    color: '#222',
   },
   createSec: {
+    marginTop:20,
     flexDirection: 'row',
     backgroundColor: 'f6f6f6',
-    marginBottom: 50,
   },
   createPress: {
     paddingTop: 40,
+    alignItems:'center',
     elevation: 10,
     marginHorizontal: 10,
     borderRadius: 26,
     height: 150,
     width: 180,
-    backgroundColor: '#131035',
+    backgroundColor: '#f3f3f3',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},

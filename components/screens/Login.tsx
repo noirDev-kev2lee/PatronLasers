@@ -21,7 +21,7 @@ const Login = ({navigation}) => {
   const [email, onChangeEmail] = React.useState('');
   const [password, passwordChange] = React.useState('');
   const [hide, setHide] = React.useState(true);
-
+  
   const handleLogin = async () => {
     try {
       if (email === '' || password === '') {
@@ -39,12 +39,13 @@ const Login = ({navigation}) => {
         const json = response.data;
         const userName = json.data.firstname;
 
+        const first_name = json.data.firstName;
         setLoading(false);
         Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
           navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
-          navigation.navigate('patient_home');
+          navigation.navigate('patient_home',);
         }
       }
     } catch (error) {

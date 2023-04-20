@@ -13,53 +13,6 @@ const ProductHome = ({navigation}) => {
   return (
     <View>
       <View>
-        <Text style={styles.scrollHeader}>Related To You</Text>
-      </View>
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        style={styles.scroll}>
-        <View style={styles.container}>
-          <Pressable onPress={() => navigation.push('Product Info')}>
-            <View style={[styles.card]}>
-              <Image
-                style={styles.prodImg}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product One</Text>
-            </View>
-          </Pressable>
-          <View style={[styles.card]}>
-            <Image
-              style={styles.prodImg}
-              source={require('../assets/product2.png')}
-            />
-            <Text style={styles.cardText}>Product Two</Text>
-          </View>
-          <View style={[styles.card]}>
-            <Image
-              style={styles.prodImg}
-              source={require('../assets/product4.png')}
-            />
-            <Text style={styles.cardText}>Product Three</Text>
-          </View>
-          <View style={[styles.card]}>
-            <Image
-              style={styles.prodImg}
-              source={require('../assets/1-7.png')}
-            />
-            <Text style={styles.cardText}>Product Three</Text>
-          </View>
-          <View style={[styles.card, styles.card]}>
-            <Image
-              style={styles.prodImg}
-              source={require('../assets/product1.png')}
-            />
-            <Text style={styles.cardText}>Product Three</Text>
-          </View>
-        </View>
-      </ScrollView>
-      <View>
         <Text style={styles.scrollHeader}>New Arrivals</Text>
       </View>
       <ScrollView
@@ -225,7 +178,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textTransform: 'uppercase',
     textAlign: 'left',
-    margin: 5,
+    marginTop: 20,
     color: '#222',
   },
   container: {
@@ -233,7 +186,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containersec: {
-    height: 250,
+    marginTop:10,
+    height: 400,
     marginBottom: 450,
   },
   card: {
