@@ -39,7 +39,6 @@ const Login = ({navigation}) => {
         const json = response.data;
         const userName = json.data.firstname;
 
-        const first_name = json.data.firstName;
         setLoading(false);
         Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
@@ -49,7 +48,7 @@ const Login = ({navigation}) => {
         }
       }
     } catch (error) {
-      Alert.alert('Server Error');
+      Alert.alert('Server Error or user not found');
       setLoading(false);
     }
   };
