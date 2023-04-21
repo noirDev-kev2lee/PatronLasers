@@ -49,7 +49,8 @@ const Login = ({navigation}) => {
         }
       }
     } catch (error) {
-      Alert.alert('Wrong email or password');
+      Alert.alert('Server Error');
+      setLoading(false);
     }
   };
   return (
