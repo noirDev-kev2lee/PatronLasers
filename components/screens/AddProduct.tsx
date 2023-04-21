@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Alert,
   StyleSheet,
@@ -9,8 +10,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-// import Icon3 from 'react-native-vector-icons/AntDesign';
-import React from 'react';
+
 export function AddCustomer() {
   return (
     <View>
@@ -89,6 +89,11 @@ export function AddAppointment() {
                 placeholderTextColor="#b4b9c1"
                 placeholder="Time"
               />
+              <TextInput
+                style={styles.textInput}
+                placeholderTextColor="#b4b9c1"
+                placeholder="Time"
+              />
               <Pressable
                 style={styles.pressBtn}
                 onPress={() => Alert.alert('Submitted')}>
@@ -148,8 +153,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
     backgroundColor: '#e6e6e9',
+    paddingLeft: 20,
     width: 300,
-    height: 40,
+    height: 60,
     color: '#000',
     borderRadius: 12,
   },
@@ -160,13 +166,12 @@ const styles = StyleSheet.create({
   },
   pressBtn: {
     alignItems: 'center',
-    left: 10,
     top: 20,
     fontFamily: 'Inter-Regular',
     borderRadius: 12,
-    backgroundColor: '#e6e6e9',
-    width: 200,
-    height: 50,
+    backgroundColor: '#131035',
+    width: 300,
+    height: 60,
   },
   pressTxt: {
     textAlign: 'center',
@@ -188,6 +193,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#222',
     fontSize: 25,
+    marginBottom: 10,
   },
   keyboard: {flex: 1, padding: 30},
   arrow: {

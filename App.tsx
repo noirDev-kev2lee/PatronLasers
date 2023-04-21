@@ -14,35 +14,12 @@ import RegisterChoice from './components/screens/RegisterChoice';
 import PatientRegister from './components/screens/PatientRegister';
 import PatientHome from './components/screens/Patient';
 import ProductHome from './components/screens/ProductHome';
-import AddAppontment from './components/screens/AddAppontment';
-import { Button, View, TouchableOpacity,Text } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import TabCustomer from './components/screens/TabCustomer';
+// import AddAppontment from './components/screens/AddAppontment';
+// import {createDrawerNavigator} from '@react-navigation/drawer';
+// import TabCustomer from './components/screens/TabCustomer';
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-
-function HomeScreen() {
-  // Your screen content here
-}
-
-function SettingsScreen() {
-  // Your screen content here
-}
-
-function DrawerContent({ navigation }) {
-  return (
-    <View>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Text>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-        <Text>Settings</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
+// const Drawer = createDrawerNavigator();
 
 const appTheme = {
   colors: {
@@ -203,15 +180,6 @@ function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-}
-
-function DrawerNavigator() {
-  return (
-    <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={TabCustomer} />
-      <Drawer.Screen name="Settings" component={TabCustomer} />
-    </Drawer.Navigator>
   );
 }
 
