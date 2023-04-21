@@ -71,16 +71,38 @@ export default function Register({navigation}) {
         Alert.alert('All field must be provided');
       } else {
         setLoading(true);
-        await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
-          first_name: clinicName,
-          last_name: serialNumber,
-          email: email,
-          password: password,
-          role: 'clinic',
-        });
-        setLoading(false);
-        Alert.alert('Registration Successfully!');
-        navigation.navigate('Login');
+        // add to clinic table
+        try {
+          const response = await axios.post(
+            'http://15.236.168.186:7000/api/v1/clinics/',
+            {
+              serial_number: serialNumber,
+              clinic_name: clinicName,
+              clinic_location: location,
+              email: email,
+              phone: mobile,
+            },
+          );
+          const json = response.data;
+          if (json.data.code === '23503') {
+            Alert.alert('Error occurs!, serial number not found');
+            setLoading(false);
+          } else {
+            // add to user table
+            await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
+              first_name: clinicName,
+              last_name: serialNumber,
+              email: email,
+              password: password,
+              role: 'clinic',
+            });
+            setLoading(false);
+            Alert.alert('Registration Successfully!');
+            navigation.navigate('Login');
+          }
+        } catch (err) {
+          Alert.alert('Error occurs!');
+        }
       }
     } catch (error) {
       Alert.alert('Wrong email or password');
