@@ -393,15 +393,15 @@ const styles = StyleSheet.create({
   },
   drawerTxt:{
     right:-10,
-    fontSize:25,
+    fontSize:23,
     paddingBottom:30,
     color:'#222'
   },
   drawerTxt2:{
-    fontSize:18,
-    textAlign:'center',
     left:160,
     width:60,
+    fontSize:20,
+    textAlign:'center',
     backgroundColor:'#f1f1f1',
     color:'#222'
   }

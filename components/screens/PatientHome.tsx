@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View, ScrollView, Pressable, Modal} from 'react-native';
 import { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { AddAppointment } from './AddProduct';
 import { useNavigation } from '@react-navigation/native';
+import { AddAppointment } from './AddProduct';
 
 export default function PatientHome({navigation,route}: {navigation: any; route: any}) {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
