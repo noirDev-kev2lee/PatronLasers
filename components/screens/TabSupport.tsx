@@ -1,22 +1,58 @@
+import React from 'react';
 import {
   Alert,
-  StatusBar,
   StyleSheet,
   Text,
-  View,
   TextInput,
   Pressable,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  View,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import axios from 'axios';
 
 const TabSupport = () => {
+  const [isLoading, setLoading] = React.useState(false);
+  const [cardType, onCardTpyeChange] = React.useState('');
+  const [serialNumber, onSerialNumberChange] = React.useState('');
+  const [cardTitle, onCardTitleChange] = React.useState('');
+  const [desc, onDescChange] = React.useState('');
+
+  const handleSupportRegister = async () => {
+    try {
+      if (
+        cardType === '' ||
+        cardTitle === '' ||
+        serialNumber === '' ||
+        desc === ''
+      ) {
+        Alert.alert('All field must be provided');
+      } else {
+        setLoading(true);
+        // add to support table
+        try {
+          await axios.post('http://15.236.168.186:7000/api/v1/supports/', {
+            clinic_id: 1235,
+            serial_number: serialNumber,
+            card_type: cardType,
+            card_title: cardTitle,
+            descriptions: 'hello',
+          });
+        } catch (err) {
+           setLoading(false);
+          Alert.alert('Error occurs!');
+        }
+      }
+    } catch (error) {
+      Alert.alert('Wrong email or password');
+       setLoading(false);
+    }
+  };
   return (
     <View style={styles.mainContainer}>
       <View style={styles.container}>
-        <StatusBar barStyle="dark-content" backgroundColor="#fff" />
         <ScrollView>
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -29,16 +65,20 @@ const TabSupport = () => {
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={onSerialNumberChange}
                 placeholder="Serial Number"
               />
+
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={onCardTpyeChange}
                 placeholder="Card type"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={onCardTitleChange}
                 placeholder="Card title"
               />
               <TextInput
@@ -46,12 +86,20 @@ const TabSupport = () => {
                 numberOfLines={10}
                 style={styles.textInput3}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={onDescChange}
                 placeholder="Type your message..."
               />
               <Pressable
                 style={styles.pressBtn}
-                onPress={() => Alert.alert('Submitted')}>
-                <Text style={styles.pressTxt}>Request</Text>
+                onPress={handleSupportRegister}>
+                {isLoading ? (
+                  <ActivityIndicator
+                    color="white"
+                    style={styles.activityIndicator}
+                  />
+                ) : (
+                  <Text style={styles.pressTxt}>Submit</Text>
+                )}
               </Pressable>
             </View>
           </KeyboardAvoidingView>
@@ -87,6 +135,7 @@ const styles = StyleSheet.create({
     width: 350,
     height: 200,
     borderRadius: 8,
+    color: '#000',
   },
   form: {
     flex: 1,
@@ -135,4 +184,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   keyboard: {flex: 1, padding: 30},
+  activityIndicator: {
+    alignSelf: 'center',
+    padding: 20,
+  },
 });

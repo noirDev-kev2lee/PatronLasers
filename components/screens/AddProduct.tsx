@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Alert,
   StyleSheet,
@@ -8,9 +9,10 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from 'react-native';
-// import Icon3 from 'react-native-vector-icons/AntDesign';
-import React from 'react';
+import  Icon  from 'react-native-vector-icons/Ionicons';
+
 export function AddCustomer() {
   return (
     <View>
@@ -89,6 +91,11 @@ export function AddAppointment() {
                 placeholderTextColor="#b4b9c1"
                 placeholder="Time"
               />
+              <TextInput
+                style={styles.textInput}
+                placeholderTextColor="#b4b9c1"
+                placeholder="Time"
+              />
               <Pressable
                 style={styles.pressBtn}
                 onPress={() => Alert.alert('Submitted')}>
@@ -113,7 +120,7 @@ const AddProduct = () => {
             <View>
               <Text style={styles.title}>Add New Product</Text>
             </View>
-            <View style={styles.form}>
+            <View style={[styles.form,{height:300,}]}>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
@@ -137,6 +144,24 @@ const AddProduct = () => {
   );
 };
 
+export const AboutUs =() => {
+  return(
+    <View style={styles.aboutUs}>
+      <Image style={styles.logo} source={require('../assets/001.png')} />
+      <Text style={styles.aboutUsTxt}>Patron Lasers Ltd</Text>
+      <Text style={styles.aboutUsPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, distinctio eaque nostrum sapiente voluptas cumque facere impedit, esse saepe amet tempora repudiandae minus! Dolorem unde reprehenderit aliquid nesciunt eum illo!</Text>
+      <Text style={styles.aboutUsFooter1}>Patron Devs</Text>
+      <Text style={styles.aboutUsFooter}>&copy;2023</Text>
+    </View>
+  )
+}
+export const FinancialArea =() => {
+  return(
+    <View>
+      
+    </View>
+  )
+}
 export default AddProduct;
 
 const styles = StyleSheet.create({
@@ -148,25 +173,26 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 10,
     backgroundColor: '#e6e6e9',
+    paddingLeft: 20,
     width: 300,
-    height: 40,
+    height: 60,
     color: '#000',
     borderRadius: 12,
   },
   form: {
     flex: 1,
+    height:600,
     flexDirection: 'column',
     alignItems: 'center',
   },
   pressBtn: {
     alignItems: 'center',
-    left: 10,
     top: 20,
     fontFamily: 'Inter-Regular',
     borderRadius: 12,
-    backgroundColor: '#e6e6e9',
-    width: 200,
-    height: 50,
+    backgroundColor: '#131035',
+    width: 300,
+    height: 60,
   },
   pressTxt: {
     textAlign: 'center',
@@ -188,6 +214,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#222',
     fontSize: 25,
+    marginBottom: 10,
   },
   keyboard: {flex: 1, padding: 30},
   arrow: {
@@ -201,4 +228,34 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#131035',
   },
+  logo: {
+    width: 400,
+    height: 300,
+    resizeMode: 'contain',
+    tintColor: '#fff',
+  },
+  aboutUs:{
+    height:800,
+    backgroundColor:'#131035'
+  },
+  aboutUsTxt:{
+    fontFamily:'Inter-Regular',
+    fontSize:30,
+    textDecorationColor:'#fff',
+    textAlign:'center',
+  },
+  aboutUsPara:{
+    fontSize:14,
+    marginTop:20,
+    left:40,
+    width:350,
+    textAlign:'center',
+  },
+  aboutUsFooter:{
+    textAlign:'center'
+  },
+  aboutUsFooter1:{
+    marginTop:300,
+    textAlign:'center'
+  }
 });
