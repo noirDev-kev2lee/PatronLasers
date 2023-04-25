@@ -9,7 +9,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from 'react-native';
+import  Icon  from 'react-native-vector-icons/Ionicons';
 
 export function AddCustomer() {
   return (
@@ -118,7 +120,7 @@ const AddProduct = () => {
             <View>
               <Text style={styles.title}>Add New Product</Text>
             </View>
-            <View style={styles.form}>
+            <View style={[styles.form,{height:300,}]}>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
@@ -142,6 +144,24 @@ const AddProduct = () => {
   );
 };
 
+export const AboutUs =() => {
+  return(
+    <View style={styles.aboutUs}>
+      <Image style={styles.logo} source={require('../assets/001.png')} />
+      <Text style={styles.aboutUsTxt}>Patron Lasers Ltd</Text>
+      <Text style={styles.aboutUsPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, distinctio eaque nostrum sapiente voluptas cumque facere impedit, esse saepe amet tempora repudiandae minus! Dolorem unde reprehenderit aliquid nesciunt eum illo!</Text>
+      <Text style={styles.aboutUsFooter1}>Patron Devs</Text>
+      <Text style={styles.aboutUsFooter}>&copy;2023</Text>
+    </View>
+  )
+}
+export const FinancialArea =() => {
+  return(
+    <View>
+      
+    </View>
+  )
+}
 export default AddProduct;
 
 const styles = StyleSheet.create({
@@ -161,6 +181,7 @@ const styles = StyleSheet.create({
   },
   form: {
     flex: 1,
+    height:600,
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -207,4 +228,34 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#131035',
   },
+  logo: {
+    width: 400,
+    height: 300,
+    resizeMode: 'contain',
+    tintColor: '#fff',
+  },
+  aboutUs:{
+    height:800,
+    backgroundColor:'#131035'
+  },
+  aboutUsTxt:{
+    fontFamily:'Inter-Regular',
+    fontSize:30,
+    textDecorationColor:'#fff',
+    textAlign:'center',
+  },
+  aboutUsPara:{
+    fontSize:14,
+    marginTop:20,
+    left:40,
+    width:350,
+    textAlign:'center',
+  },
+  aboutUsFooter:{
+    textAlign:'center'
+  },
+  aboutUsFooter1:{
+    marginTop:300,
+    textAlign:'center'
+  }
 });
