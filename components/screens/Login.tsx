@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     fontFamily: 'Inter',
-    padding: 8,
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
