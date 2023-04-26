@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
         if (json.data.role === 'clinic') {
           navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
-          navigation.navigate('patient_home');
+          navigation.navigate('patient_home', {username: userName});
         }
       }
     } catch (error) {
