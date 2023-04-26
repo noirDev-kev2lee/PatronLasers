@@ -6,30 +6,33 @@ import {
   ScrollView,
   Pressable,
   Modal,
+  Alert,
 } from 'react-native';
 import {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {AddAppointment} from './AddProduct';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 // import {useNavigation} from '@react-navigation/native';
 
 export default function PatientHome({
   navigation,
+  route,
 }: {
   navigation: any;
   route: any;
 }) {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
+  const data = route.params as {username: string};
+  const {username} = data;
   return (
-    <View>
+    <View style={styles.mainContainer}>
       <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
-          <Icon name="user" size={52} color="#131035" />
+          <Icon2 name="person-circle" size={52} color="#131035" />
+          <Text style={styles.welcomeNote}>Hello, {username}</Text>
         </View>
       </Pressable>
-      <Text style={styles.heading2}>Appointments and Services</Text>
-      <Text style={styles.heading2}>Manage and Add New Appointment</Text>
-      <Text style={styles.heading2}>Medical History</Text>
       <Modal
         animationType="slide"
         transparent={true}
@@ -61,20 +64,26 @@ export default function PatientHome({
             <Pressable
               style={styles.drawerButton}
               onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
-              <Icon name="close" size={30} color={'#222'} />
+              <View style={styles.closeBntCont}>
+                <Icon name="close" size={30} color={'#222'} />
+              </View>
             </Pressable>
-            <Pressable>
+            {/* <Pressable>
               <Text style={styles.drawerTxt}>Finacial Area</Text>
-            </Pressable>
+            </Pressable> */}
             <Pressable>
               <Text style={styles.drawerTxt}>About</Text>
             </Pressable>
             <Pressable onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.drawerTxt2}>Log Out</Text>
+              <Text style={styles.drawerTxt2}>Sign Out</Text>
             </Pressable>
           </View>
         </View>
       </Modal>
+      {/* pending appointment */}
+      <View>
+        <Text style={styles.pendingText}>Pending Appointment</Text>
+      </View>
       <ScrollView
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
@@ -83,38 +92,52 @@ export default function PatientHome({
         <View style={styles.scrollContainer}>
           <View style={[styles.RecCard1]}>
             <View style={styles.RecCardInfo1}>
-              <Text style={styles.appointTitle1}>Tatoo Removal</Text>
-              <Text style={styles.appointTitle2}>Israel Clinic</Text>
-              <Text style={styles.appointInfo}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
-                mollitia. Cumque reiciendis repellendus exercitationem nam harum
-                velit id nemo quos, non qui, officia itaque asperiores eos.
-                Consequuntur asperiores, numquam deserunt doloribus similique
-                consectetur at dignissimos laudantium ipsa facilis unde odit,
-                iure nemo.
-              </Text>
+              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Status: Pending</Text>
             </View>
           </View>
           <View style={[styles.RecCard1]}>
             <View style={styles.RecCardInfo1}>
-              <Text style={styles.appointTitle1}>Tatoo Removal</Text>
-              <Text style={styles.appointTitle2}>Israel Clinic</Text>
-              <Text style={styles.appointInfo}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
-                mollitia. Cumque reiciendis repellendus exercitationem nam harum
-                velit id nemo quos, non qui, officia itaque asperiores eos.
-                Consequuntur asperiores, numquam deserunt doloribus similique
-                consectetur at dignissimos laudantium ipsa facilis unde odit,
-                iure nemo.
-              </Text>
+              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Status: Pending</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+      {/* done appointment */}
+      <View>
+        <Text style={styles.doneText}>Done Appointment</Text>
+      </View>
+      <ScrollView
+        pagingEnabled={true}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        style={styles.scroll}>
+        <View style={styles.scrollContainer}>
+          <View style={[styles.RecCard1]}>
+            <View style={styles.RecCardInfo1}>
+              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Status: Done</Text>
+            </View>
+          </View>
+          <View style={[styles.RecCard1]}>
+            <View style={styles.RecCardInfo1}>
+              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
+              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
+              <Text style={styles.appointTitle2}>Status: Done</Text>
             </View>
           </View>
         </View>
       </ScrollView>
       <Pressable
-        style={styles.hoverBtn}
+        style={styles.floatingBtn}
         onPress={() => setAppointModalVisible(true)}>
         <Icon name="pluscircle" size={60} color="#777" />
       </Pressable>
@@ -124,9 +147,12 @@ export default function PatientHome({
 
 const styles = StyleSheet.create({
   scroll: {},
+  mainContainer: {
+    flex: 1,
+    paddingHorizontal: 18,
+    backgroundColor: '#F3EDED',
+  },
   scrollContainer: {
-    backgroundColor: '#fff',
-    marginTop: 20,
     flexDirection: 'row',
   },
   heading: {
@@ -149,25 +175,26 @@ const styles = StyleSheet.create({
   RecCard1: {
     flex: 1,
     width: 330,
-    height: 450,
-    margin: 20,
+    height: 200,
+    marginTop: 10,
+    marginLeft: 20,
     borderRadius: 10,
     elevation: 10,
     backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 25,
   },
   appointTitle1: {
-    padding: 10,
-    width: 300,
-    fontFamily: 'Roboto-bold',
-    fontSize: 50,
+    fontFamily: 'Roboto',
+    fontWeight: '600',
+    fontSize: 19,
     color: '#222',
   },
   appointTitle2: {
-    padding: 10,
-    width: 300,
     fontFamily: 'Roboto-Regular',
-    fontSize: 30,
+    fontSize: 19,
     color: '#555',
+    textAlign: 'justify',
   },
   appointInfo: {
     width: 300,
@@ -177,9 +204,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#777',
   },
-  hoverBtn: {
-    bottom: -10,
-    left: 330,
+  pendingText: {
+    fontFamily: 'Roboto',
+    fontSize: 19,
+    color: 'red',
+  },
+  doneText: {
+    fontFamily: 'Roboto',
+    fontSize: 19,
+    color: 'green',
+  },
+  floatingBtn: {
+    bottom: 20,
+    left: 290,
   },
   centeredView: {
     flex: 1,
@@ -214,11 +251,14 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderBottomRightRadius: 20,
     backgroundColor: '#f1f1f1',
+    paddingHorizontal: 25,
+    paddingVertical: 12,
   },
-  drawerButton: {
-    top: 5,
-    left: 180,
+  closeBntCont: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
+  drawerButton: {},
   drawerTxt: {
     right: -10,
     fontSize: 25,
@@ -227,10 +267,16 @@ const styles = StyleSheet.create({
   },
   drawerTxt2: {
     fontSize: 18,
-    textAlign: 'center',
-    left: 160,
-    width: 60,
     backgroundColor: '#f1f1f1',
     color: '#222',
+  },
+  welcome: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  welcomeNote: {
+    fontSize: 15,
+    color: 'black',
   },
 });
