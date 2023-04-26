@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
         if (json.data.role === 'clinic') {
           navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
-          navigation.navigate('patient_home');
+          navigation.navigate('patient_home', {username: userName});
         }
       }
     } catch (error) {
@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     fontFamily: 'Inter',
-    padding: 8,
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
