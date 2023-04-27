@@ -69,14 +69,41 @@ const PatientRegister = ({navigation}) => {
       ) {
         Alert.alert('All field must be provided');
       } else {
+        // add to clinic table
+        try {
+          const response = await axios.post(
+            'http://15.236.168.186:7000/api/v1/patients/',
+            {
+              clinic_id: '86886',
+              first_name: firstName,
+              last_name: lastName,
+              age: '45',
+              gender: 'male',
+              phone: '0099988',
+              email: email,
+              password: password,
+              role: 'patient',
+            },
+          );
+          const json = response.data;
+          if (json.data.code === '23503') {
+            Alert.alert('Error occurs!, serial number not found');
+            setLoading(false);
+          } else {
+            //  add to user table
+            await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
+              first_name: firstName,
+              last_name: lastName,
+              email: email,
+              password: password,
+              role: 'patient',
+            });
+          }
+        } catch (error) {
+          Alert.alert('Error occurs!');
+        }
         setLoading(true);
-        await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-          role: 'patient',
-        });
+
         setLoading(false);
         Alert.alert('Registration Successfully!');
         navigation.navigate('Login');
@@ -244,7 +271,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-   keyboard: {paddingBottom: 0},
+  keyboard: {paddingBottom: 0},
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
