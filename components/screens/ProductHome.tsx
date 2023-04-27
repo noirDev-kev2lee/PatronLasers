@@ -16,6 +16,7 @@ import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/Feather';
 import AddProduct, { AboutUs } from './AddProduct';
+import { Platform } from 'react-native';
 // import {DrawerActions} from '@react-navigation/native';
 // import {Alert} from 'react-native';
 
@@ -55,7 +56,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
     },
   ];
   return (
-    <View style={styles.mainContainer}>
+    <View style={Platform.OS === 'ios'? styles.mainContainer : ios}>
       {/* Modal for adding new product */}
       <Modal
         animationType="slide"
