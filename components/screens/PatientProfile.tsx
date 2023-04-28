@@ -1,73 +1,120 @@
-import {Image, StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PatientProfile() {
+  const [patientData, setPatientData] = React.useState([]);
+  console.log(patientData);
+
+  const fetchData = () => {
+    axios
+      .get('http://15.236.168.186:7000/api/v1/patients/')
+      .then(res => setPatientData(res.data.rows))
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  React.useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.profileHead}>
         <View style={styles.profileHeadImgContainer}>
-          <Image
-            style={styles.profileHeadImg}
-            source={require('../assets/customer1.jpg')}
-          />
+          <Text style={styles.profileLetter}>J</Text>
         </View>
         <Text style={styles.profileHeadName}>Thuhiya Kunambi</Text>
-        <Text style={styles.profileHeadEmail}>stepbro@example.com</Text>
+        <Text style={styles.profileHeadEmail}>Zahoro clinic</Text>
       </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.profileBio}>
-        <Text style={styles.bioHead}>Patient Bio</Text>
-        <Text style={styles.bioInfo}>Gender : Female</Text>
-        <Text style={styles.bioInfo}>Age : 36</Text>
-        <Text style={styles.bioInfo}>Address : Temeke</Text>
-        <Text style={styles.bioHead}>Medical History</Text>
-        <Text style={styles.bioHead2}>Service 1</Text>
-        <Text style={styles.bioInfo}>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore
-          dolorem veniam, dolorum perspiciatis repellat repudiandae ex quasi
-          blanditiis nisi magnam?
-        </Text>
-        <Text style={styles.bioHead2}>Service 2</Text>
-        <Text style={styles.bioInfo}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-          natus labore sunt placeat quas similique.
-        </Text>
-        <Text style={styles.bioHead2}>Service 3</Text>
-        <Text style={styles.bioInfo}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-          natus labore sunt placeat quas similique.
-        </Text>
-        <Text style={styles.bioHead2}>Service 4</Text>
-        <Text style={styles.bioInfo}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-          natus labore sunt placeat quas similique.
-        </Text>
-      </ScrollView>
+      <View style={styles.profileBio}>
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Email</Text>
+          <Text style={styles.bioInfo2}>info@patron.com</Text>
+        </View>
+        <View style={styles.lineContainer}>
+          <View style={styles.line} />
+        </View>
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Age</Text>
+          <Text style={styles.bioInfo2}>48</Text>
+        </View>
+        <View style={styles.lineContainer}>
+          <View style={styles.line} />
+        </View>
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Gender</Text>
+          <Text style={styles.bioInfo2}>Male</Text>
+        </View>
+        <View style={styles.lineContainer}>
+          <View style={styles.line} />
+        </View>
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Phone</Text>
+          <Text style={styles.bioInfo2}>999999999</Text>
+        </View>
+      </View>
+      <View style={styles.profileBio}>
+        <View style={styles.iconText}>
+          <Icon name="ios-medkit-outline" size={25} color="#F54D42" />
+          <View style={styles.infoCon}>
+            <View style={{paddingLeft: 10}}>
+              <Text style={styles.bioInfo1}>Appointmemt(s)</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={styles.profileBio}>
+        <View style={[styles.iconText, {marginBottom: 18}]}>
+          <Icon name="lock-closed" size={25} color="#2D4059" />
+          <View style={styles.infoCon}>
+            <View style={{paddingLeft: 10}}>
+              <Text style={styles.bioInfo1}>Change password</Text>
+            </View>
+          </View>
+        </View>
+         <View style={styles.iconText}>
+          <Icon name="ios-help-sharp" size={25} color="#FFB400" />
+          <View style={styles.infoCon}>
+            <View style={{paddingLeft: 10}}>
+              <Text style={styles.bioInfo1}>Help</Text>
+            </View>
+          </View>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {backgroundColor: '#F8FAFB', paddingHorizontal: 25},
+  profileLetter: {
+    color: '#fff',
+    fontFamily: 'Roboto',
+    fontWeight: '600',
+    fontSize: 49,
+  },
   profileHead: {
     marginBottom: 10,
     alignItems: 'center',
   },
-  profileHeadImg: {
-    height: 150,
-    width: 150,
-    borderRadius: 100,
-    resizeMode: 'contain',
-  },
+
   profileHeadImgContainer: {
     margin: 20,
+    height: 100,
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 200,
-    backgroundColor: '#fff',
+    backgroundColor: '#131035',
     elevation: 30,
   },
   profileHeadName: {
-    fontFamily: 'Roboto-Regular',
-    fontSize: 25,
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    fontWeight: 'bold',
     color: '#222',
   },
   profileHeadEmail: {
@@ -75,34 +122,51 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#888',
   },
-  profileBio: {
-    height: 450,
-    width: 400,
-    marginHorizontal: 5,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    elevation: 10,
-  },
   bioHead: {
-    marginLeft: 5,
     marginBottom: 10,
     fontFamily: 'Roboto-Bold',
     fontSize: 25,
     color: '#666',
   },
   bioHead2: {
-    marginLeft: 5,
     marginBottom: 10,
     fontFamily: 'Roboto-Regular',
     fontSize: 20,
     color: '#222',
   },
-  bioInfo: {
-    marginLeft: 5,
-    marginVertical: 3,
-    fontFamily: 'Roboto-Thin',
-    fontSize: 18,
+  profileBio: {
+    height: 'auto',
+    paddingHorizontal: 25,
+    paddingVertical: 25,
+    borderRadius: 12,
+    backgroundColor: '#fff',
+    elevation: 3,
+    marginBottom: 12,
+  },
+  bioInfo1: {
+    fontFamily: 'Roboto',
+    fontSize: 17,
     color: '#000',
+  },
+  bioInfo2: {
+    fontFamily: 'Roboto',
+    fontSize: 17,
+    color: '#B4B9C8',
+  },
+  infoCon: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  lineContainer: {
+    paddingVertical: 8,
+  },
+  line: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#DADADA',
+  },
+  iconText: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
