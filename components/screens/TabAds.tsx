@@ -70,79 +70,42 @@ const ProductHome = ({navigation}) => {
         <Text style={styles.scrollHeader}>Must See Products</Text>
       </View>
       <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.containersec}>
+        showsVerticalScrollIndicator={false} style={styles.containersec}>
         <View>
-          <View style={styles.scrollsec}>
+        {productList.map (product => (
+          <Pressable key={product.id} onPress={() => navigation.navigate('Product Info',{
+            desc:product.desc,
+            name:product.name,
+            image:product.img,
+            category:product.category
+            })
+          }>  
+              <View style={styles.scrollsec}>
             <View style={[styles.RecCardSmall]}>
               <Image
                 style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product One</Text>
+                source={product.img}
+                />
+              <Text style={styles.cardText}>{product.name}</Text>
             </View>
             <View style={[styles.RecCardSmall]}>
               <Image
                 style={styles.prodImgSmall}
-                source={require('../assets/product2.png')}
-              />
-              <Text style={styles.cardText}>Product Two</Text>
+                source={product.img}
+                />
+              <Text style={styles.cardText}>{product.name}</Text>
             </View>
             <View style={[styles.RecCardSmall]}>
               <Image
                 style={styles.prodImgSmall}
-                source={require('../assets/product4.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
+                source={product.img}
+                />
+              <Text style={styles.cardText}>{product.name}</Text>
             </View>
+            </View>
+            </Pressable>
+            ))}
           </View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product2.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product4.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
-        </View>
       </ScrollView>
     </View>
   );
@@ -154,27 +117,26 @@ const styles = StyleSheet.create({
   scroll: {
     height:180
   },
-  scrollsec: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-  },
   scrollHeader: {
     fontFamily: 'Inter',
     fontSize: 20,
     textTransform: 'uppercase',
     textAlign: 'left',
-    marginTop: 20,
+    marginTop: 10,
     color: '#222',
   },
   container: {
     flex: 1,
     flexDirection: 'row',
+    marginHorizontal:10,
+  },
+  scrollsec: {
+    flexDirection:'row',
+    marginVertical:5
   },
   containersec: {
-    marginTop:10,
-    height: 430,
-    marginBottom: 450,
+    height:470,
+    flexDirection:'column',
   },
   card: {
     textAlign: 'base-line',
@@ -218,8 +180,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 120,
     height: 150,
-    margin: 2,
-    marginTop: 5,
+    marginTop:3,
+    marginHorizontal:8,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
