@@ -10,6 +10,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 import React, {useEffect} from 'react';
 import axios from 'axios';
 
@@ -31,6 +32,7 @@ const PatientRegister = ({navigation}) => {
   const [mobile, onMobileChange] = React.useState('');
   const [password, onPasswordChange] = React.useState('');
   const [passwordConform, onPasswordConfirmChange] = React.useState('');
+  const sex = ['Male', 'Female'];
 
   // function to validate password
   useEffect(() => {

@@ -40,7 +40,6 @@ const Login = ({navigation}) => {
         const userName = json.data.firstname;
 
         setLoading(false);
-        Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
           navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
