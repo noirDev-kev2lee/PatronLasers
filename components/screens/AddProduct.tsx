@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   StyleSheet,
@@ -10,8 +10,10 @@ import {
   Platform,
   ScrollView,
   Image,
+  ActivityIndicator,
 } from 'react-native';
-import  Icon  from 'react-native-vector-icons/Ionicons';
+import axios from 'axios';
+
 
 export function AddCustomer() {
   return (
@@ -59,6 +61,53 @@ export function AddCustomer() {
   );
 }
 export function AddAppointment() {
+  const [isLoading, setLoading] = React.useState(false);
+  const [fname, setFname] = useState('');
+  const [lname, setLname] = useState('');
+  const [service, setService] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  // const [startTime, setStartTime] = useState('');
+  // const [endTime, setEndTime] = useState('');
+
+  const handleSaveAppointment = async () => {
+    try {
+      if (
+        fname === '' ||
+        lname === '' ||
+        service === '' ||
+        startDate === '' ||
+        endDate === ''
+      ) {
+        Alert.alert('Email or password must be provided');
+      } else {
+        setLoading(true);
+        await axios
+          .post('http://15.236.168.186:7000/api/v1/appointments/', {
+            patient_id: '75757',
+            clinic_name: 'hghgg',
+            fname: fname,
+            lname: lname,
+            service_type: service,
+            start_date: startDate,
+            start_time: '55t6',
+            end_date: endDate,
+            end_time: '44884',
+            job_status: 'pending',
+          })
+          .then(() => {
+            setLoading(false);
+            Alert.alert('Data sent Successfully!');
+          })
+          .catch(() => {
+            Alert.alert('Data sent Successfully!');
+          });
+      }
+    } catch (error) {
+      Alert.alert('Server Error or user not found');
+      setLoading(false);
+    }
+  };
   return (
     <View>
       <View style={styles.container}>
@@ -74,32 +123,44 @@ export function AddAppointment() {
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={setFname}
                 placeholder="First Name"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={setLname}
                 placeholder="Last Name"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
+                onChangeText={setService}
                 placeholder="Service Type"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
-                placeholder="Time"
+                onChangeText={setStartDate}
+                placeholder="Start Date"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
-                placeholder="Time"
+                onChangeText={setEndDate}
+                placeholder="End Date"
               />
               <Pressable
                 style={styles.pressBtn}
-                onPress={() => Alert.alert('Submitted')}>
-                <Text style={styles.pressTxt}>Submit</Text>
+                onPress={handleSaveAppointment}>
+                {isLoading ? (
+                  <ActivityIndicator
+                    color="white"
+                    style={styles.activityIndicator}
+                  />
+                ) : (
+                  <Text style={styles.pressTxt}>Add Appointment</Text>
+                )}
               </Pressable>
             </View>
           </KeyboardAvoidingView>
@@ -120,7 +181,7 @@ const AddProduct = () => {
             <View>
               <Text style={styles.title}>Add New Product</Text>
             </View>
-            <View style={[styles.form,{height:300,}]}>
+            <View style={[styles.form, {height: 300}]}>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
@@ -144,24 +205,25 @@ const AddProduct = () => {
   );
 };
 
-export const AboutUs =() => {
-  return(
+export const AboutUs = () => {
+  return (
     <View style={styles.aboutUs}>
       <Image style={styles.logo} source={require('../assets/001.png')} />
       <Text style={styles.aboutUsTxt}>Patron Lasers Ltd</Text>
-      <Text style={styles.aboutUsPara}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur, distinctio eaque nostrum sapiente voluptas cumque facere impedit, esse saepe amet tempora repudiandae minus! Dolorem unde reprehenderit aliquid nesciunt eum illo!</Text>
+      <Text style={styles.aboutUsPara}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur,
+        distinctio eaque nostrum sapiente voluptas cumque facere impedit, esse
+        saepe amet tempora repudiandae minus! Dolorem unde reprehenderit aliquid
+        nesciunt eum illo!
+      </Text>
       <Text style={styles.aboutUsFooter1}>Patron Devs</Text>
       <Text style={styles.aboutUsFooter}>&copy;2023</Text>
     </View>
-  )
-}
-export const FinancialArea =() => {
-  return(
-    <View>
-      
-    </View>
-  )
-}
+  );
+};
+export const FinancialArea = () => {
+  return <View />;
+};
 export default AddProduct;
 
 const styles = StyleSheet.create({
@@ -181,7 +243,7 @@ const styles = StyleSheet.create({
   },
   form: {
     flex: 1,
-    height:600,
+    height: 600,
     flexDirection: 'column',
     alignItems: 'center',
   },
@@ -234,28 +296,32 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     tintColor: '#fff',
   },
-  aboutUs:{
-    height:800,
-    backgroundColor:'#131035'
+  aboutUs: {
+    height: 800,
+    backgroundColor: '#131035',
   },
-  aboutUsTxt:{
-    fontFamily:'Inter-Regular',
-    fontSize:30,
-    textDecorationColor:'#fff',
-    textAlign:'center',
+  aboutUsTxt: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 30,
+    textDecorationColor: '#fff',
+    textAlign: 'center',
   },
-  aboutUsPara:{
-    fontSize:14,
-    marginTop:20,
-    left:40,
-    width:350,
-    textAlign:'center',
+  aboutUsPara: {
+    fontSize: 14,
+    marginTop: 20,
+    left: 40,
+    width: 350,
+    textAlign: 'center',
   },
-  aboutUsFooter:{
-    textAlign:'center'
+  aboutUsFooter: {
+    textAlign: 'center',
   },
-  aboutUsFooter1:{
-    marginTop:300,
-    textAlign:'center'
-  }
+  aboutUsFooter1: {
+    marginTop: 300,
+    textAlign: 'center',
+  },
+  activityIndicator: {
+    alignSelf: 'center',
+    padding: 20,
+  },
 });
