@@ -15,8 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/Feather';
-import AddProduct, { AboutUs } from './AddProduct';
-import { Platform } from 'react-native';
+import AddProduct, {AboutUs} from './AddProduct';
 // import {DrawerActions} from '@react-navigation/native';
 // import {Alert} from 'react-native';
 
@@ -56,7 +55,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
     },
   ];
   return (
-    <View style={Platform.OS === 'ios'? styles.mainContainer : ios}>
+    <View style={styles.mainContainer}>
       {/* Modal for adding new product */}
       <Modal
         animationType="slide"
@@ -101,7 +100,11 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               <View style={styles.line} />
             </View>
             <View>
-              <Pressable onPress={() => [setdrawerModalVisible(!drawerModalVisible),navigation.navigate('Finacial Area')]}>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('Finacial Area'),
+                ]}>
                 <View style={styles.drawerList}>
                   <Icon3 name="money" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
@@ -109,7 +112,11 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                   </View>
                 </View>
               </Pressable>
-              <Pressable onPress={() => [setdrawerModalVisible(!drawerModalVisible),navigation.navigate('About Us')]}>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('About Us'),
+                ]}>
                 <View style={styles.drawerList}>
                   <Icon2 name="book" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
@@ -129,7 +136,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
           </View>
         </View>
       </Modal>
-      <Pressable onPress={() =>setdrawerModalVisible(true)}>
+      <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
           <Icon2 name="person-circle" size={52} color="#131035" />
           <Text style={styles.welcomeNote}>Hello, {username}</Text>

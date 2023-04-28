@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import React from 'react';
+import Product from './Product';
 const productList = [
   {
     id: 0,
@@ -47,69 +48,23 @@ const ProductHome = ({navigation}) => {
         showsHorizontalScrollIndicator={false}
         horizontal
         style={styles.scroll}>
-        <View style={styles.container}>
-                
+          {productList.map (product => (
+            <Pressable key={product.id} onPress={() => navigation.navigate('Product Info',{
+              desc:product.desc,
+              name:product.name,
+              image:product.img,
+              category:product.category
+            })
+          }>
           <View style={[styles.RecCard]}>
             <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product One</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
+              <Text style={styles.RecCardTitle}>{product.name}</Text>
+              <Text style={styles.RecCardPara}>{product.desc}</Text>
             </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/product1.png')}
-            />
+            <Image style={styles.prodImgSmallRec}source={product.img}/>
           </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product Two</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
-            </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/product2.png')}
-            />
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product Three</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
-            </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/product4.png')}
-            />
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product Four</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
-            </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/1-7.png')}
-            />
-          </View>
-        </View>
+          </Pressable>
+          ))}
       </ScrollView>
       <View>
         <Text style={styles.scrollHeader}>Must See Products</Text>
@@ -196,7 +151,9 @@ const ProductHome = ({navigation}) => {
 export default ProductHome;
 
 const styles = StyleSheet.create({
-  scroll: {},
+  scroll: {
+    height:180
+  },
   scrollsec: {
     flex: 1,
     flexDirection: 'row',
@@ -216,7 +173,7 @@ const styles = StyleSheet.create({
   },
   containersec: {
     marginTop:10,
-    height: 400,
+    height: 430,
     marginBottom: 450,
   },
   card: {
