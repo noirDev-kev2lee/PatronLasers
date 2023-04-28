@@ -68,48 +68,48 @@ const PatientRegister = ({navigation}) => {
         password === '' ||
         firstName === '' ||
         lastName === '' ||
-        mobile === ''
+        mobile === '' ||
+        age === '' ||
+        gender === '' ||
+        clinicName === ''
       ) {
         Alert.alert('All field must be provided');
       } else {
-        // add to clinic table
+        // add to user table
         try {
           const response = await axios.post(
-            'http://15.236.168.186:7000/api/v1/patients/',
+            'http://15.236.168.186:7000/api/v1/signup/',
             {
-              clinic_name: clinicName,
               first_name: firstName,
               last_name: lastName,
-              age: age,
-              gender: gender,
-              phone: mobile,
               email: email,
               password: password,
               role: 'patient',
             },
           );
           const json = response.data;
-          if (json.data.code === '23503') {
-            Alert.alert('Error occurs!, serial number not found');
+          if (json.data.data.code === '23505') {
+            Alert.alert('Error occurs!, user exists already');
             setLoading(false);
           } else {
-            //  add to user table
-            await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
+            //  add to patient table
+            await axios.post('http://15.236.168.186:7000/api/v1/patients/', {
+              clinic_name: clinicName,
               first_name: firstName,
               last_name: lastName,
+              age: age,
+              gender: gender.toLowerCase(),
+              phone: mobile,
               email: email,
-              password: password,
-              role: 'patient',
             });
+            setLoading(false);
+            Alert.alert('Registration Successfully!');
+            navigation.navigate('Login');
           }
         } catch (error) {
+          setLoading(true);
           Alert.alert('Error occurs!');
         }
-        setLoading(true);
-
-        setLoading(false);
-        Alert.alert('Registration Successfully!');
-        navigation.navigate('Login');
       }
     } catch (error) {
       Alert.alert('Wrong email or password');
@@ -164,7 +164,7 @@ const PatientRegister = ({navigation}) => {
               <View style={styles.inputcustom}>
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={onGenderChange}
+                  onChangeText={onAgeChange}
                   placeholder="Age"
                   keyboardType={'numeric'}
                   maxLength={3} // optional: limit the number of characters to 10 for a typical
