@@ -161,6 +161,8 @@ const PatientRegister = ({navigation}) => {
                 style={styles.textInput}
                 onChangeText={onMobileChange}
                 placeholder="Phone Number"
+                keyboardType={'numeric'}
+                maxLength={10} // optional: limit the number of characters to 10 for a typical
                 placeholderTextColor={'grey'}
               />
             </View>
