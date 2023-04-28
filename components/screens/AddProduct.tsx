@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
-// import Icon from 'react-native-vector-icons/Ionicons';
+
 
 export function AddCustomer() {
   return (
@@ -93,6 +93,7 @@ export function AddAppointment() {
             start_time: '55t6',
             end_date: endDate,
             end_time: '44884',
+            job_status: 'pending',
           })
           .then(() => {
             setLoading(false);
@@ -158,7 +159,7 @@ export function AddAppointment() {
                     style={styles.activityIndicator}
                   />
                 ) : (
-                  <Text style={styles.pressTxt}>Login</Text>
+                  <Text style={styles.pressTxt}>Add Appointment</Text>
                 )}
               </Pressable>
             </View>
