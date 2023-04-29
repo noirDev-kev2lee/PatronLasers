@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Pressable} from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function PatientProfile({route}) {
+export default function PatientProfile({navigation, route}) {
   const [patientData, setPatientData] = React.useState<any[]>([]);
 
   const data = route.params as {username: string; email: string};
@@ -68,7 +68,10 @@ export default function PatientProfile({route}) {
                 </View>
                 <View style={styles.infoCon}>
                   <Text style={styles.bioInfo1}>Gender</Text>
-                  <Text style={styles.bioInfo2}>{x.gender}</Text>
+                  <Text
+                    style={[styles.bioInfo2, {textTransform: 'capitalize'}]}>
+                    {x.gender}
+                  </Text>
                 </View>
                 <View style={styles.lineContainer}>
                   <View style={styles.line} />
@@ -88,20 +91,22 @@ export default function PatientProfile({route}) {
           <Icon name="ios-medkit-outline" size={25} color="#F54D42" />
           <View style={styles.infoCon}>
             <View style={{paddingLeft: 10}}>
-              <Text style={styles.bioInfo1}>Appointmemt(s)</Text>
+              <Text style={styles.bioInfo1}>Appointment(s)</Text>
             </View>
           </View>
         </View>
       </View>
       <View style={styles.profileBio}>
-        <View style={[styles.iconText, {marginBottom: 18}]}>
-          <Icon name="lock-closed" size={25} color="#2D4059" />
-          <View style={styles.infoCon}>
-            <View style={{paddingLeft: 10}}>
-              <Text style={styles.bioInfo1}>Change password</Text>
+        <Pressable onPress={() => navigation.navigate('change_password')}>
+          <View style={[styles.iconText, {marginBottom: 18}]}>
+            <Icon name="lock-closed" size={25} color="#2D4059" />
+            <View style={styles.infoCon}>
+              <View style={{paddingLeft: 10}}>
+                <Text style={styles.bioInfo1}>Change password</Text>
+              </View>
             </View>
           </View>
-        </View>
+        </Pressable>
         <View style={styles.iconText}>
           <Icon name="ios-help-sharp" size={25} color="#FFB400" />
           <View style={styles.infoCon}>
