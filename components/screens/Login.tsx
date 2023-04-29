@@ -39,17 +39,15 @@ const Login = ({navigation}) => {
         const json = response.data;
         const userName = json.data.firstname;
 
-        const first_name = json.data.firstName;
         setLoading(false);
-        Alert.alert('Login Successfully!');
         if (json.data.role === 'clinic') {
           navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
-          navigation.navigate('patient_home');
+          navigation.navigate('patient_home', {username: userName});
         }
       }
     } catch (error) {
-      Alert.alert('Server Error');
+      Alert.alert('Server Error or user not found');
       setLoading(false);
     }
   };
@@ -188,7 +186,6 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     fontFamily: 'Inter',
-    padding: 8,
     fontSize: 20,
     color: 'white',
     textAlign: 'center',

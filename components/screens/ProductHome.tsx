@@ -15,7 +15,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/Feather';
-import AddProduct, { AboutUs } from './AddProduct';
+import AddProduct, {AboutUs} from './AddProduct';
 // import {DrawerActions} from '@react-navigation/native';
 // import {Alert} from 'react-native';
 
@@ -100,7 +100,11 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               <View style={styles.line} />
             </View>
             <View>
-              <Pressable onPress={() => [setdrawerModalVisible(!drawerModalVisible),navigation.navigate('Finacial Area')]}>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('Finacial Area'),
+                ]}>
                 <View style={styles.drawerList}>
                   <Icon3 name="money" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
@@ -108,7 +112,11 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                   </View>
                 </View>
               </Pressable>
-              <Pressable onPress={() => [setdrawerModalVisible(!drawerModalVisible),navigation.navigate('About Us')]}>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('About Us'),
+                ]}>
                 <View style={styles.drawerList}>
                   <Icon2 name="book" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
@@ -128,7 +136,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
           </View>
         </View>
       </Modal>
-      <Pressable onPress={() =>setdrawerModalVisible(true)}>
+      <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
           <Icon2 name="person-circle" size={52} color="#131035" />
           <Text style={styles.welcomeNote}>Hello, {username}</Text>
@@ -172,75 +180,41 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         showsVerticalScrollIndicator={false}
         style={styles.containersec}>
         <View>
+        {productList.map(product => (
+            <Pressable
+              key={product.id}
+              onPress={() =>
+                navigation.navigate('Product Info', {
+                  desc: product.desc,
+                  name: product.name,
+                  category: product.category,
+                })
+              }>
           <View style={styles.scrollsec}>
             <View style={[styles.RecCardSmall]}>
               <Image
                 style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
+                source={product.img}
               />
-              <Text style={styles.cardText}>Product One</Text>
+              <Text style={styles.cardText}>{product.name}</Text>
             </View>
             <View style={[styles.RecCardSmall]}>
               <Image
                 style={styles.prodImgSmall}
-                source={require('../assets/product2.png')}
+                source={product.img}
               />
-              <Text style={styles.cardText}>Product Two</Text>
+              <Text style={styles.cardText}>{product.name}</Text>
             </View>
             <View style={[styles.RecCardSmall]}>
               <Image
                 style={styles.prodImgSmall}
-                source={require('../assets/product4.png')}
+                source={product.img}
               />
-              <Text style={styles.cardText}>Product Three</Text>
+              <Text style={styles.cardText}>{product.name}</Text>
             </View>
           </View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product2.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product4.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
+          </Pressable>
+          ))}
         </View>
       </ScrollView>
     </View>
@@ -266,9 +240,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   scrollsec: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    flexDirection:'row',
+    marginVertical:5
   },
   scrollHeader: {
     fontFamily: 'Inter',
@@ -285,8 +258,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containersec: {
-    height: 350,
-    minHeight: 320,
+    height:370,
+    flexDirection:'column',
   },
   card: {
     textAlign: 'base-line',
@@ -330,8 +303,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 120,
     height: 150,
-    margin: 2,
-    marginTop: 5,
+    marginHorizontal:8,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
