@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   scroll: {},
   mainContainer: {
     paddingHorizontal: 0,
-    backgroundColor: '#F3EDED',
+    backgroundColor: '#F8FAFB',
   },
   welcome: {
     flexDirection: 'row',
