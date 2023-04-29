@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 const Patient = ({navigation}) => {
   const route = useRoute();
   const data = route.params as {username: string};
-  const {username} = data;
+  const {username, email} = data;
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -47,9 +47,13 @@ const Patient = ({navigation}) => {
         <Tab.Screen
           name="Home"
           component={PatientHome}
-          initialParams={{username: username}}
+          initialParams={{username: username, email: email}}
         />
-        <Tab.Screen name="Profile" component={PatientProfile} />
+        <Tab.Screen
+          name="Profile"
+          component={PatientProfile}
+          initialParams={{username: username, email: email}}
+        />
       </Tab.Navigator>
     </View>
   );

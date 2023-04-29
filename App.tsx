@@ -4,7 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import theme from '@react-navigation/native';
 import ProductCard from './components/screens/ProductCard';
-import AddProduct, { AboutUs, FinancialArea } from './components/screens/AddProduct';
+import AddProduct, {
+  AboutUs,
+  FinancialArea,
+} from './components/screens/AddProduct';
 import Login from './components/screens/Login';
 import GuideCard from './components/screens/GuideCard';
 import Register from './components/screens/Register';
@@ -14,6 +17,7 @@ import RegisterChoice from './components/screens/RegisterChoice';
 import PatientRegister from './components/screens/PatientRegister';
 import PatientHome from './components/screens/Patient';
 import ProductHome from './components/screens/ProductHome';
+import ChangePassword from './components/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
 
@@ -108,6 +112,17 @@ function App() {
           }}
         />
         <Stack.Screen
+          name="change_password"
+          component={ChangePassword}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
           name="Product"
           component={Product}
           options={{
@@ -130,7 +145,7 @@ function App() {
             headerStyle: {
               backgroundColor: '#111113',
             },
-            
+
             headerTintColor: '#fff',
           }}
         />
