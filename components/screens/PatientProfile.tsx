@@ -4,23 +4,16 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PatientProfile({route}) {
-  const [patientData, setPatientData] = React.useState([]);
+  const [patientData, setPatientData] = React.useState<any[]>([]);
 
   const data = route.params as {username: string; email: string};
   const {username, email} = data;
   const firstLetter = username.charAt(0);
 
-  const fetchData = () => {
+  React.useEffect(() => {
     axios
       .get('http://15.236.168.186:7000/api/v1/patients/')
-      .then(res => setPatientData(res.data.rows))
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  React.useEffect(() => {
-    fetchData();
+      .then(res => setPatientData(res.data.rows));
   }, []);
 
   const singlePatient = patientData.filter(y => y.email === email);
@@ -31,46 +24,64 @@ export default function PatientProfile({route}) {
         <View style={styles.profileHeadImgContainer}>
           <Text style={styles.profileLetter}>{firstLetter.toUpperCase()}</Text>
         </View>
-        {singlePatient.map(profile => (
+        {singlePatient.length === 0 ? (
           <View>
-            <Text style={styles.profileHeadName}>
-              {profile.first_name} {profile.last_name}
-            </Text>
-            <Text style={styles.profileHeadEmail}>{profile.clinic_name}</Text>
+            <Text style={{color: '#000'}}>Data is loading ....</Text>
           </View>
-        ))}
+        ) : (
+          <View>
+            {singlePatient.map(profile => (
+              <View key={profile.id}>
+                <Text style={styles.profileHeadName}>
+                  {profile.first_name} {profile.last_name}
+                </Text>
+                <Text style={styles.profileHeadEmail}>
+                  {profile.clinic_name}
+                </Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
-      {singlePatient.map(x => (
+      {singlePatient.length === 0 ? (
         <View>
-          <View style={styles.profileBio}>
-            <View style={styles.infoCon}>
-              <Text style={styles.bioInfo1}>Email</Text>
-              <Text style={styles.bioInfo2}>{x.email}</Text>
-            </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.infoCon}>
-              <Text style={styles.bioInfo1}>Age</Text>
-              <Text style={styles.bioInfo2}>{x.age}</Text>
-            </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.infoCon}>
-              <Text style={styles.bioInfo1}>Gender</Text>
-              <Text style={styles.bioInfo2}>{x.gender}</Text>
-            </View>
-            <View style={styles.lineContainer}>
-              <View style={styles.line} />
-            </View>
-            <View style={styles.infoCon}>
-              <Text style={styles.bioInfo1}>Phone</Text>
-              <Text style={styles.bioInfo2}>{x.phone}</Text>
-            </View>
-          </View>
+          <Text style={{color: '#000'}}>Data loading......</Text>
         </View>
-      ))}
+      ) : (
+        <View>
+          {singlePatient.map(x => (
+            <View key={x.id}>
+              <View style={styles.profileBio}>
+                <View style={styles.infoCon}>
+                  <Text style={styles.bioInfo1}>Email</Text>
+                  <Text style={styles.bioInfo2}>{x.email}</Text>
+                </View>
+                <View style={styles.lineContainer}>
+                  <View style={styles.line} />
+                </View>
+                <View style={styles.infoCon}>
+                  <Text style={styles.bioInfo1}>Age</Text>
+                  <Text style={styles.bioInfo2}>{x.age}</Text>
+                </View>
+                <View style={styles.lineContainer}>
+                  <View style={styles.line} />
+                </View>
+                <View style={styles.infoCon}>
+                  <Text style={styles.bioInfo1}>Gender</Text>
+                  <Text style={styles.bioInfo2}>{x.gender}</Text>
+                </View>
+                <View style={styles.lineContainer}>
+                  <View style={styles.line} />
+                </View>
+                <View style={styles.infoCon}>
+                  <Text style={styles.bioInfo1}>Phone</Text>
+                  <Text style={styles.bioInfo2}>{x.phone}</Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </View>
+      )}
 
       <View style={styles.profileBio}>
         <View style={styles.iconText}>
