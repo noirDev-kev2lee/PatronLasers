@@ -3,9 +3,12 @@ import {StyleSheet, Text, View} from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function PatientProfile() {
+export default function PatientProfile({route}) {
   const [patientData, setPatientData] = React.useState([]);
-  console.log(patientData);
+
+  const data = route.params as {username: string; email: string};
+  const {username, email} = data;
+  const firstLetter = username.charAt(0);
 
   const fetchData = () => {
     axios
@@ -20,42 +23,55 @@ export default function PatientProfile() {
     fetchData();
   }, []);
 
+  const singlePatient = patientData.filter(y => y.email === email);
+
   return (
     <View style={styles.container}>
       <View style={styles.profileHead}>
         <View style={styles.profileHeadImgContainer}>
-          <Text style={styles.profileLetter}>J</Text>
+          <Text style={styles.profileLetter}>{firstLetter.toUpperCase()}</Text>
         </View>
-        <Text style={styles.profileHeadName}>Thuhiya Kunambi</Text>
-        <Text style={styles.profileHeadEmail}>Zahoro clinic</Text>
+        {singlePatient.map(profile => (
+          <View>
+            <Text style={styles.profileHeadName}>
+              {profile.first_name} {profile.last_name}
+            </Text>
+            <Text style={styles.profileHeadEmail}>{profile.clinic_name}</Text>
+          </View>
+        ))}
       </View>
-      <View style={styles.profileBio}>
-        <View style={styles.infoCon}>
-          <Text style={styles.bioInfo1}>Email</Text>
-          <Text style={styles.bioInfo2}>info@patron.com</Text>
+      {singlePatient.map(x => (
+        <View>
+          <View style={styles.profileBio}>
+            <View style={styles.infoCon}>
+              <Text style={styles.bioInfo1}>Email</Text>
+              <Text style={styles.bioInfo2}>{x.email}</Text>
+            </View>
+            <View style={styles.lineContainer}>
+              <View style={styles.line} />
+            </View>
+            <View style={styles.infoCon}>
+              <Text style={styles.bioInfo1}>Age</Text>
+              <Text style={styles.bioInfo2}>{x.age}</Text>
+            </View>
+            <View style={styles.lineContainer}>
+              <View style={styles.line} />
+            </View>
+            <View style={styles.infoCon}>
+              <Text style={styles.bioInfo1}>Gender</Text>
+              <Text style={styles.bioInfo2}>{x.gender}</Text>
+            </View>
+            <View style={styles.lineContainer}>
+              <View style={styles.line} />
+            </View>
+            <View style={styles.infoCon}>
+              <Text style={styles.bioInfo1}>Phone</Text>
+              <Text style={styles.bioInfo2}>{x.phone}</Text>
+            </View>
+          </View>
         </View>
-        <View style={styles.lineContainer}>
-          <View style={styles.line} />
-        </View>
-        <View style={styles.infoCon}>
-          <Text style={styles.bioInfo1}>Age</Text>
-          <Text style={styles.bioInfo2}>48</Text>
-        </View>
-        <View style={styles.lineContainer}>
-          <View style={styles.line} />
-        </View>
-        <View style={styles.infoCon}>
-          <Text style={styles.bioInfo1}>Gender</Text>
-          <Text style={styles.bioInfo2}>Male</Text>
-        </View>
-        <View style={styles.lineContainer}>
-          <View style={styles.line} />
-        </View>
-        <View style={styles.infoCon}>
-          <Text style={styles.bioInfo1}>Phone</Text>
-          <Text style={styles.bioInfo2}>999999999</Text>
-        </View>
-      </View>
+      ))}
+
       <View style={styles.profileBio}>
         <View style={styles.iconText}>
           <Icon name="ios-medkit-outline" size={25} color="#F54D42" />
@@ -75,7 +91,7 @@ export default function PatientProfile() {
             </View>
           </View>
         </View>
-         <View style={styles.iconText}>
+        <View style={styles.iconText}>
           <Icon name="ios-help-sharp" size={25} color="#FFB400" />
           <View style={styles.infoCon}>
             <View style={{paddingLeft: 10}}>
@@ -151,7 +167,7 @@ const styles = StyleSheet.create({
   bioInfo2: {
     fontFamily: 'Roboto',
     fontSize: 17,
-    color: '#B4B9C8',
+    color: '#AAAAAA',
   },
   infoCon: {
     flexDirection: 'row',
