@@ -38,12 +38,16 @@ const Login = ({navigation}) => {
 
         const json = response.data;
         const userName = json.data.firstname;
+        const userEmail = json.data.email;
 
         setLoading(false);
         if (json.data.role === 'clinic') {
           navigation.navigate('Product', {username: userName});
         } else if (json.data.role === 'patient') {
-          navigation.navigate('patient_home', {username: userName});
+          navigation.navigate('patient_home', {
+            username: userName,
+            email: userEmail,
+          });
         }
       }
     } catch (error) {
