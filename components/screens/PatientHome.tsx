@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     paddingHorizontal: 18,
-    backgroundColor: '#F3EDED',
+    backgroundColor: '#F8FAFB',
   },
   scrollContainer: {
     flexDirection: 'row',

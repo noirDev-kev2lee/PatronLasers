@@ -180,7 +180,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         showsVerticalScrollIndicator={false}
         style={styles.containersec}>
         <View>
-        {productList.map(product => (
+          {productList.map(product => (
             <Pressable
               key={product.id}
               onPress={() =>
@@ -190,30 +190,21 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                   category: product.category,
                 })
               }>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={product.img}
-              />
-              <Text style={styles.cardText}>{product.name}</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={product.img}
-              />
-              <Text style={styles.cardText}>{product.name}</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={product.img}
-              />
-              <Text style={styles.cardText}>{product.name}</Text>
-            </View>
-          </View>
-          </Pressable>
+              <View style={styles.scrollsec}>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+              </View>
+            </Pressable>
           ))}
         </View>
       </ScrollView>
@@ -227,7 +218,7 @@ const styles = StyleSheet.create({
   scroll: {},
   mainContainer: {
     paddingHorizontal: 0,
-    backgroundColor: '#F3EDED',
+    backgroundColor: '#F8FAFB',
   },
   welcome: {
     flexDirection: 'row',
@@ -240,8 +231,8 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   scrollsec: {
-    flexDirection:'row',
-    marginVertical:5
+    flexDirection: 'row',
+    marginVertical: 5,
   },
   scrollHeader: {
     fontFamily: 'Inter',
@@ -258,8 +249,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containersec: {
-    height:370,
-    flexDirection:'column',
+    height: 370,
+    flexDirection: 'column',
   },
   card: {
     textAlign: 'base-line',
@@ -303,7 +294,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 120,
     height: 150,
-    marginHorizontal:8,
+    marginHorizontal: 8,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
