@@ -94,9 +94,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.patronproject"
+    namespace "com.patrondev.patronlasers"
     defaultConfig {
-        applicationId "com.patronproject"
+        applicationId "com.patrondev.patronlasers"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
