@@ -6018,10 +6018,10 @@ react-native-codegen@^0.71.5:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-date-picker@^4.2.12:
-  version "4.2.12"
-  resolved "https://registry.npmjs.org/react-native-date-picker/-/react-native-date-picker-4.2.12.tgz"
-  integrity sha512-/PHhx06dbJ1K5Ynx71vq5VzfrQnmjTuxS5uqiDTiklJzJrZc3aCBYwvpmpLB3eJuepy2Yfhl5IENceOIAWt+PA==
+react-native-date-picker@^4.2.13:
+  version "4.2.13"
+  resolved "https://registry.npmjs.org/react-native-date-picker/-/react-native-date-picker-4.2.13.tgz"
+  integrity sha512-cQ3k+ExXggAnytomeNGNrtV/l2a7WzVUeWKo7Gs2pv/z3TCjjlmKn0ZBMPgcThrFAgFMxgYI0XzKVKT7TPsOmw==
   dependencies:
     prop-types "^15.8.1"
 

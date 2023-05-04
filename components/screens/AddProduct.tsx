@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
-
+import DatePicker from 'react-native-date-picker';
 
 export function AddCustomer() {
   return (
@@ -65,8 +65,9 @@ export function AddAppointment() {
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
   const [service, setService] = useState('');
-  const [startDate, setStartDate] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState('');
+  const [open, setOpen] = useState(false);
   // const [startTime, setStartTime] = useState('');
   // const [endTime, setEndTime] = useState('');
 
@@ -138,11 +139,18 @@ export function AddAppointment() {
                 onChangeText={setService}
                 placeholder="Service Type"
               />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                onChangeText={setStartDate}
-                placeholder="Start Date"
+              <Pressable title="Open" onPress={() => setOpen(true)} />
+              <DatePicker
+                modal
+                open={open}
+                date={startDate}
+                onConfirm={(date) => {
+                  setOpen(false)
+                  setDate(date)
+                }}
+                onCancel={() => {
+                  setOpen(false)
+                }}
               />
               <TextInput
                 style={styles.textInput}
