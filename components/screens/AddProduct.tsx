@@ -13,6 +13,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/Ionicons';
 import DatePicker from 'react-native-date-picker';
 
 export function AddCustomer() {
@@ -66,8 +68,9 @@ export function AddAppointment() {
   const [lname, setLname] = useState('');
   const [service, setService] = useState('');
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState('');
+  const [endDate, setEndDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
   // const [startTime, setStartTime] = useState('');
   // const [endTime, setEndTime] = useState('');
 
@@ -139,25 +142,46 @@ export function AddAppointment() {
                 onChangeText={setService}
                 placeholder="Service Type"
               />
-              <Pressable title="Open" onPress={() => setOpen(true)} />
+              <View style={styles.inputStyle}>
+                <TextInput style={styles.dateText}
+                  value={startDate.toDateString()}
+                />
+              <Pressable  style={styles.datePicker} onPress={() => setOpen(true)}>
+                <Icon name="calendar" size={25} color="#000000"/>
               <DatePicker
                 modal
                 open={open}
                 date={startDate}
-                onConfirm={(date) => {
+                onConfirm={(startDate) => {
                   setOpen(false)
-                  setDate(date)
+                  setStartDate(startDate)
                 }}
                 onCancel={() => {
                   setOpen(false)
                 }}
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                onChangeText={setEndDate}
-                placeholder="End Date"
-              />
+                />
+              </Pressable>
+              </View>
+              <View style={styles.inputStyle}>
+                <TextInput style={styles.dateText}
+                  value={endDate.toDateString()}
+                />
+              <Pressable  style={styles.datePicker} onPress={() => setOpen2(true)}>
+                <Icon name="calendar" size={25} color="#000000"/>
+              <DatePicker
+                modal
+                open={open2}
+                date={endDate}
+                onConfirm={(endDate) => {
+                  setOpen2(false)
+                  setEndDate(endDate)
+                }}
+                onCancel={() => {
+                  setOpen2(false)
+                }}
+                />
+              </Pressable>
+              </View>
               <Pressable
                 style={styles.pressBtn}
                 onPress={handleSaveAppointment}>
@@ -215,18 +239,39 @@ const AddProduct = () => {
 
 export const AboutUs = () => {
   return (
-    <View style={styles.aboutUs}>
-      <Image style={styles.logo} source={require('../assets/001.png')} />
-      <Text style={styles.aboutUsTxt}>Patron Lasers Ltd</Text>
-      <Text style={styles.aboutUsPara}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur,
-        distinctio eaque nostrum sapiente voluptas cumque facere impedit, esse
-        saepe amet tempora repudiandae minus! Dolorem unde reprehenderit aliquid
-        nesciunt eum illo!
-      </Text>
-      <Text style={styles.aboutUsFooter1}>Patron Devs</Text>
-      <Text style={styles.aboutUsFooter}>&copy;2023</Text>
-    </View>
+    <ScrollView style={styles.aboutUsContainer}>
+      <View style={styles.aboutUs}>
+        <Image style={styles.logo} source={require('../assets/001.png')} />
+        <Text style={styles.aboutUsPara}>
+          חברת פטרון לייזר היא חברה מובילה בתחום הייצור, ייבוא ושיווק מכשור
+          טכנולוגי חדשני ומתקדם בעולם האסתטיקה בישראל. החברה הוקמה בשנת 2009, על
+          ידי ארז מלכה ואבי גבסו, והפכה במרוצת השנים למותג מוביל בתחום המכשור
+          הטכנולוגי בענף הרפואה, האסתטיקה והיופי. מאז ועד היום החברה התחילה את
+          דרכה בתחום המכשור הטכנולוגי, והוקמה על בסיס החזון: "לייצר ולפתח מכשור
+          טכנולוגי המבוסס על הטכנולוגיה החדשנית והמתקדמת ביותר בעולם". המכשור
+          הטכנולוגי של פטרון לייזר בעל תו תקן מחמיר הכולל בקרת איכות כחול לבן,
+          שמסייעת בהבנת הצורך של לקוח הקצה ומתן פתרונות טכנולוגיים בהתאמה אישית.
+          פטרון לייזר צברה ניסיון עשיר, מקצוענות ומוניטין גבוה בתחום המכשור
+          הטכנולוגי. עד שנת 2018, החברה שיווקה מכשור טכנולוגי לשוק המוסדי
+          ולחברות משווקות. בשנת 2018, החליטה החברה לשווק את המכשור הטכנולוגי
+          שברשותה, גם בפלטפורמת שיווק ישיר למכוני יופי, קוסמטיקה, רשתות טיפוח
+          ויופי, מכוני כושר וקליניקות פרטיות. כיום, ניתן למצוא את המכשור
+          הטכנולוגי של חברת פטרון לייזר ברוב מכוני היופי והאסתטיקה ברחבי הארץ.
+          המכשור החדשני והמתקדם משמש לצורך מגוון רחב של טיפולים אסתטיים ורפואיים
+          כגון: טיפולי פנים, טיפולי שיניים, הסרת שיער, הסרת קעקועים, חיטוב הגוף,
+          שיזוף ביתי, טיפולי אנטי אייג'ינג ועוד. פטרון לייזר: חדשנות, מקצוענות,
+          מצוינות ואיכות חסרת פשרות! חברת פטרון לייזר, חרטה על דגלה ערכים של
+          חדשנות, מקצוענות, אמינות, מצוינות, איכות גבוהה וחסרת פשרות, שירות
+          אדיב, יחס אישי, אוזן קשבת, שביעות רצון הלקוח, ליווי 360 ואהבה גדולה
+          לעולם היופי והאסתטיקה. ליווי 360 חוויות הלקוח חשובה לנו, לאין שיעור,
+          ואנו מעניקים ליווי 360 ללקוחותינו לאורך כל הדרך – החל משלב הייעוץ
+          הראשוני, דרך ההדרכה הטכנית ועד לתגובות של לקוחות הקצה, כל זאת במטרה
+          להעניק מעטפת שלמה ללקוחותינו
+        </Text>
+        <Text style={styles.aboutUsFooter1}>Patron Devs</Text>
+        <Text style={styles.aboutUsFooter}>&copy;2023</Text>
+      </View>
+    </ScrollView>
   );
 };
 export const FinancialArea = () => {
@@ -248,6 +293,25 @@ const styles = StyleSheet.create({
     height: 60,
     color: '#000',
     borderRadius: 12,
+  },
+  dateText:{
+    marginLeft:10,
+    color:'#222',
+    fontFamily:'Inter-Bold',
+    fontSize:20
+  },
+  inputStyle: {
+    margin:10,
+    flexDirection: 'row',
+    borderRadius: 12,
+    width: 300,
+    height: 60,
+    color:'#222',
+    backgroundColor: '#D9D9D9',
+  },
+  datePicker:{
+    left:100,
+    marginTop:15,
   },
   form: {
     flex: 1,
@@ -299,27 +363,24 @@ const styles = StyleSheet.create({
     color: '#131035',
   },
   logo: {
-    width: 400,
-    height: 300,
+    width: 200,
+    height: 100,
     resizeMode: 'contain',
     tintColor: '#fff',
   },
-  aboutUs: {
-    height: 800,
+  aboutUsContainer: {
+    flex: 1,
     backgroundColor: '#131035',
+    paddingVertical: 20,
   },
-  aboutUsTxt: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 30,
-    textDecorationColor: '#fff',
-    textAlign: 'center',
+  aboutUs: {
+    height: 'auto',
   },
   aboutUsPara: {
     fontSize: 14,
     marginTop: 20,
     left: 40,
     width: 350,
-    textAlign: 'center',
   },
   aboutUsFooter: {
     textAlign: 'center',

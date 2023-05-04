@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Alert,
   Pressable,
@@ -14,61 +15,21 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon3 from 'react-native-vector-icons/AntDesign';
-import React from 'react';
 
-const Login = ({navigation}) => {
+const ChangePassword = ({navigation}) => {
   const [isLoading, setLoading] = React.useState(false);
-  const [email, onChangeEmail] = React.useState('');
   const [password, passwordChange] = React.useState('');
+  const [newPassword, onNewPasswordChange] = React.useState('');
+  const [passwordConform, onPasswordConfirmChange] = React.useState('');
   const [hide, setHide] = React.useState(true);
 
-  const handleLogin = async () => {
-    try {
-      if (email === '' || password === '') {
-        Alert.alert('Email or password must be provided');
-      } else {
-        setLoading(true);
-        const response = await axios.post(
-          'http://15.236.168.186:7000/api/v1/signin/',
-          {
-            email,
-            password,
-          },
-        );
-
-        const json = response.data;
-        const userName = json.data.firstname;
-        const userEmail = json.data.email;
-
-        setLoading(false);
-        if (json.data.role === 'clinic') {
-          navigation.navigate('Product', {username: userName});
-        } else if (json.data.role === 'patient') {
-          navigation.navigate('patient_home', {
-            username: userName,
-            email: userEmail,
-          });
-        }
-      }
-    } catch (error) {
-      Alert.alert('Server Error or user not found');
-      setLoading(false);
+  const handleChangePassword = async () => {
+    if (password === '' || newPassword === '' || passwordConform === '') {
+      Alert.alert('All field must be provided');
     }
   };
   return (
     <View style={styles.container}>
-      <View>
-        <Pressable
-          style={styles.backArrow}
-          onPress={() => navigation.navigate('Home')}>
-          <Icon3
-            style={styles.Arrow}
-            name="arrowleft"
-            size={30}
-            color="#000000"
-          />
-        </Pressable>
-      </View>
       <ScrollView>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -76,21 +37,10 @@ const Login = ({navigation}) => {
           style={styles.keyboard}>
           <View style={styles.formContainer}>
             <View style={styles.textContainer}>
-              <Text style={styles.title}>Let’s sign you in </Text>
-              <Text style={styles.title2}>Welcome back.</Text>
-              <Text style={styles.title2}>You have been missed.</Text>
+              <Text style={styles.title}>Change Password </Text>
             </View>
 
             <View style={styles.form}>
-              <View style={styles.inputStyle}>
-                <Icon name="email" size={30} color="#000000" />
-                <TextInput
-                  style={styles.textInput}
-                  onChangeText={onChangeEmail}
-                  placeholder="Username Or Email"
-                  placeholderTextColor={'gray'}
-                />
-              </View>
               <View style={styles.inputStyle}>
                 <Icon name="lock" size={30} color="#000000" />
 
@@ -98,7 +48,43 @@ const Login = ({navigation}) => {
                   style={styles.textInput}
                   onChangeText={passwordChange}
                   secureTextEntry={hide}
-                  placeholder="Enter password"
+                  placeholder="Enter old password"
+                  placeholderTextColor={'gray'}
+                />
+                <Pressable onPress={() => setHide(!hide)}>
+                  {hide ? (
+                    <Icon2 name="eye-off" size={30} color="#000000" />
+                  ) : (
+                    <Icon2 name="eye-sharp" size={30} color="#000000" />
+                  )}
+                </Pressable>
+              </View>
+              <View style={styles.inputStyle}>
+                <Icon name="lock" size={30} color="#000000" />
+
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onNewPasswordChange}
+                  secureTextEntry={hide}
+                  placeholder="Enter New password"
+                  placeholderTextColor={'gray'}
+                />
+                <Pressable onPress={() => setHide(!hide)}>
+                  {hide ? (
+                    <Icon2 name="eye-off" size={30} color="#000000" />
+                  ) : (
+                    <Icon2 name="eye-sharp" size={30} color="#000000" />
+                  )}
+                </Pressable>
+              </View>
+              <View style={styles.inputStyle}>
+                <Icon name="lock" size={30} color="#000000" />
+
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onPasswordConfirmChange}
+                  secureTextEntry={hide}
+                  placeholder="Confirm New password"
                   placeholderTextColor={'gray'}
                 />
                 <Pressable onPress={() => setHide(!hide)}>
@@ -111,19 +97,14 @@ const Login = ({navigation}) => {
               </View>
             </View>
             <View style={styles.buttons}>
-              <Pressable
-                style={styles.pressBtn2}
-                onPress={() => Alert.alert('Not Working yet')}>
-                <Text style={styles.forgotPass}>Forgot Password?</Text>
-              </Pressable>
-              <Pressable style={styles.pressBtn} onPress={handleLogin}>
+              <Pressable style={styles.pressBtn} onPress={handleChangePassword}>
                 {isLoading ? (
                   <ActivityIndicator
                     color="white"
                     style={styles.activityIndicator}
                   />
                 ) : (
-                  <Text style={styles.pressTxt}>Login</Text>
+                  <Text style={styles.pressTxt}>Change Password</Text>
                 )}
               </Pressable>
             </View>
@@ -134,7 +115,7 @@ const Login = ({navigation}) => {
   );
 };
 
-export default Login;
+export default ChangePassword;
 
 const styles = StyleSheet.create({
   container: {
@@ -154,13 +135,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 50,
     fontFamily: 'Inter-Bold',
-    fontSize: 40,
-    color: '#131035',
-  },
-  title2: {
-    width: 300,
-    fontFamily: 'Inter',
-    fontSize: 25,
+    fontSize: 30,
     color: '#131035',
   },
   inputStyle: {

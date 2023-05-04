@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface PatronProjectTests : XCTestCase
+@interface PatronLasersTests : XCTestCase
 
 @end
 
-@implementation PatronProjectTests
+@implementation PatronLasersTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {
