@@ -6,16 +6,19 @@ import {
   Text,
   View,
   Image,
+  Platform,
+  Dimensions
 } from 'react-native';
 // import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 
 // import {Gesture} from 'react-native-gesture-handler/lib/typescript/handlers/gestures/gesture';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Icon4 from 'react-native-vector-icons/Feather';
 import AddProduct, {AboutUs} from './AddProduct';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 // import {DrawerActions} from '@react-navigation/native';
 // import {Alert} from 'react-native';
 
@@ -24,6 +27,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
+  const iconName = Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
   // const nav = useNavigation();
   const productList = [
@@ -69,7 +73,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             <Pressable
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Icon2 name="md-close-outline" size={30} color={'#222'} />
+              <Icon2 name="ios-close-outline" size={30} color={'#222'} />
             </Pressable>
             <AddProduct />
           </View>
@@ -93,7 +97,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               </Pressable>
             </View>
             <View style={styles.drawerInfo}>
-              <Icon2 name="person-circle" size={72} color="#DADADA" />
+              <Icon2 name="user" size={72} color="#DADADA" />
               <Text style={styles.drawerName}>{username}</Text>
             </View>
             <View style={styles.lineContainer}>
@@ -138,7 +142,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
       </Modal>
       <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
-          <Icon2 name="person-circle" size={52} color="#131035" />
+          <Icon2 name="user" size={52} color="#131035" />
           <Text style={styles.welcomeNote}>Hello, {username}</Text>
         </View>
       </Pressable>
@@ -249,7 +253,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   containersec: {
-    height: 370,
+    margin: 5,
+    height: hp('35%'),
     flexDirection: 'column',
   },
   card: {
@@ -292,8 +297,8 @@ const styles = StyleSheet.create({
   },
   RecCardSmall: {
     alignItems: 'center',
-    width: 120,
-    height: 150,
+    width: wp('28%'),
+    height: hp('20%'),
     marginHorizontal: 8,
     elevation: 10,
     borderRadius: 5,
@@ -311,14 +316,14 @@ const styles = StyleSheet.create({
   },
   prodImgSmall: {
     margin: -5,
-    height: 140,
+    height: hp('18%'),
     width: 240,
     resizeMode: 'contain',
   },
   prodImgSmallRec: {
     top: -15,
     right: 30,
-    height: 150,
+    height: 10,
     width: 230,
     resizeMode: 'contain',
   },

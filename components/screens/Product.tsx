@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Button, Text} from 'react-native';
+import {StyleSheet, View, Button, Text, Platform} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -7,7 +7,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import {useRoute} from '@react-navigation/native';
 import ProductHome from './ProductHome';
 import TabsAds from './TabAds';
@@ -62,22 +62,23 @@ const Tab = createBottomTabNavigator();
 const screenOptions = ({route}: {route: {name: string}}) => ({
   tabBarIcon: ({color, size}: {color: string; size: number}) => {
     let iconName;
+    let iosName;
 
     switch (route.name) {
       case 'Home':
         iconName = 'home';
         break;
       case 'Advertisement':
-        iconName = 'globe-outline';
+        iconName = 'globe';
         break;
       case 'Clinical Guides':
         iconName = 'medkit';
         break;
       case 'My Customer':
-        iconName = 'people';
+        iconName = 'users';
         break;
       case 'Tech Support':
-        iconName = 'ios-settings';
+        iconName = 'cogs';
         break;
       default:
         iconName = 'home';
