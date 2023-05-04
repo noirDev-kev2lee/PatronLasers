@@ -10,6 +10,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 import React, {useEffect} from 'react';
 import axios from 'axios';
 
@@ -22,12 +23,16 @@ const PatientRegister = ({navigation}) => {
   const [emailError, setEmailError] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState(false);
   const [borderColor, setBorderColor] = React.useState('#D9D9D9');
+  const [clinicName, onClinicChange] = React.useState('');
   const [firstName, onFnameChange] = React.useState('');
   const [lastName, onLnameChange] = React.useState('');
+  const [gender, onGenderChange] = React.useState('');
+  const [age, onAgeChange] = React.useState('');
   const [email, onEmailChange] = React.useState('');
   const [mobile, onMobileChange] = React.useState('');
   const [password, onPasswordChange] = React.useState('');
   const [passwordConform, onPasswordConfirmChange] = React.useState('');
+  const sex = ['Male', 'Female'];
 
   // function to validate password
   useEffect(() => {
@@ -65,21 +70,48 @@ const PatientRegister = ({navigation}) => {
         password === '' ||
         firstName === '' ||
         lastName === '' ||
-        mobile === ''
+        mobile === '' ||
+        age === '' ||
+        gender === '' ||
+        clinicName === ''
       ) {
         Alert.alert('All field must be provided');
       } else {
-        setLoading(true);
-        await axios.post('http://15.236.168.186:7000/api/v1/signup/', {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-          role: 'patient',
-        });
-        setLoading(false);
-        Alert.alert('Registration Successfully!');
-        navigation.navigate('Login');
+        // add to user table
+        try {
+          const response = await axios.post(
+            'http://15.236.168.186:7000/api/v1/signup/',
+            {
+              first_name: firstName,
+              last_name: lastName,
+              email: email,
+              password: password,
+              role: 'patient',
+            },
+          );
+          const json = response.data;
+          if (json.data.data.code === '23505') {
+            Alert.alert('Error occurs!, user exists already');
+            setLoading(false);
+          } else {
+            //  add to patient table
+            await axios.post('http://15.236.168.186:7000/api/v1/patients/', {
+              clinic_name: clinicName,
+              first_name: firstName,
+              last_name: lastName,
+              age: age,
+              gender: gender.toLowerCase(),
+              phone: mobile,
+              email: email,
+            });
+            setLoading(false);
+            Alert.alert('Registration Successfully!');
+            navigation.navigate('Login');
+          }
+        } catch (error) {
+          setLoading(true);
+          Alert.alert('Error occurs!');
+        }
       }
     } catch (error) {
       Alert.alert('Wrong email or password');
@@ -100,6 +132,14 @@ const PatientRegister = ({navigation}) => {
             <View style={styles.inputLog}>
               <TextInput
                 style={styles.textInput}
+                onChangeText={onClinicChange}
+                placeholder="Clinic Name"
+                placeholderTextColor={'grey'}
+              />
+            </View>
+            <View style={styles.inputLog}>
+              <TextInput
+                style={styles.textInput}
                 onChangeText={onFnameChange}
                 placeholder="First Name"
                 placeholderTextColor={'grey'}
@@ -113,6 +153,28 @@ const PatientRegister = ({navigation}) => {
                 placeholderTextColor={'grey'}
               />
             </View>
+
+            <View style={{flexDirection: 'row'}}>
+              <View style={styles.inputcustom}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onGenderChange}
+                  placeholder="Gender"
+                  placeholderTextColor={'grey'}
+                />
+              </View>
+              <View style={styles.inputcustom}>
+                <TextInput
+                  style={styles.textInput}
+                  onChangeText={onAgeChange}
+                  placeholder="Age"
+                  keyboardType={'numeric'}
+                  maxLength={3} // optional: limit the number of characters to 10 for a typical
+                  placeholderTextColor={'grey'}
+                />
+              </View>
+            </View>
+
             <View>
               <View style={styles.inputLog}>
                 <TextInput
@@ -134,6 +196,8 @@ const PatientRegister = ({navigation}) => {
                 style={styles.textInput}
                 onChangeText={onMobileChange}
                 placeholder="Phone Number"
+                keyboardType={'numeric'}
+                maxLength={10} // optional: limit the number of characters to 10 for a typical
                 placeholderTextColor={'grey'}
               />
             </View>
@@ -221,6 +285,16 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: '#D9D9D9',
   },
+  inputcustom: {
+    margin: 10,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderRadius: 12,
+    width: 165,
+    height: 60,
+    backgroundColor: '#D9D9D9',
+  },
   textInput: {
     fontFamily: 'Inter',
     paddingLeft: 30,
@@ -244,7 +318,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-   keyboard: {paddingBottom: 0},
+  keyboard: {paddingBottom: 0},
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,

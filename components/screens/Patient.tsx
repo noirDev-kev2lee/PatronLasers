@@ -5,10 +5,14 @@ import React from 'react';
 import PatientHome from './PatientHome';
 import PatientAds from './PatientAds';
 import PatientProfile from './PatientProfile';
+import {useRoute} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const Patient = ({navigation}) => {
+  const route = useRoute();
+  const data = route.params as {username: string};
+  const {username, email} = data;
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -40,8 +44,16 @@ const Patient = ({navigation}) => {
           tabBarShowLabel: false,
         })}>
         <Tab.Screen name="Advertisement" component={PatientAds} />
-        <Tab.Screen name="Home" component={PatientHome} />
-        <Tab.Screen name="Profile" component={PatientProfile} />
+        <Tab.Screen
+          name="Home"
+          component={PatientHome}
+          initialParams={{username: username, email: email}}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={PatientProfile}
+          initialParams={{username: username, email: email}}
+        />
       </Tab.Navigator>
     </View>
   );

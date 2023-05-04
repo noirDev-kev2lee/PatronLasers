@@ -4,7 +4,10 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import theme from '@react-navigation/native';
 import ProductCard from './components/screens/ProductCard';
-import AddProduct from './components/screens/AddProduct';
+import AddProduct, {
+  AboutUs,
+  FinancialArea,
+} from './components/screens/AddProduct';
 import Login from './components/screens/Login';
 import GuideCard from './components/screens/GuideCard';
 import Register from './components/screens/Register';
@@ -14,35 +17,9 @@ import RegisterChoice from './components/screens/RegisterChoice';
 import PatientRegister from './components/screens/PatientRegister';
 import PatientHome from './components/screens/Patient';
 import ProductHome from './components/screens/ProductHome';
-import AddAppontment from './components/screens/AddAppontment';
-import { Button, View, TouchableOpacity,Text } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import TabCustomer from './components/screens/TabCustomer';
+import ChangePassword from './components/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
-
-function HomeScreen() {
-  // Your screen content here
-}
-
-function SettingsScreen() {
-  // Your screen content here
-}
-
-function DrawerContent({ navigation }) {
-  return (
-    <View>
-      <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-        <Text>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-        <Text>Settings</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
-
 
 const appTheme = {
   colors: {
@@ -135,6 +112,17 @@ function App() {
           }}
         />
         <Stack.Screen
+          name="change_password"
+          component={ChangePassword}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
           name="Product"
           component={Product}
           options={{
@@ -157,6 +145,7 @@ function App() {
             headerStyle: {
               backgroundColor: '#111113',
             },
+
             headerTintColor: '#fff',
           }}
         />
@@ -189,6 +178,19 @@ function App() {
           }}
         />
         <Stack.Screen
+          name="About Us"
+          component={AboutUs}
+          options={{
+            title: 'About Us',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#131035',
+            },
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
           name="Add Product"
           component={AddProduct}
           options={{
@@ -201,17 +203,21 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
+        <Stack.Screen
+          name="Finacial Area"
+          component={FinancialArea}
+          options={{
+            title: 'Finacial Area',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#222',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-  );
-}
-
-function DrawerNavigator() {
-  return (
-    <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Home" component={TabCustomer} />
-      <Drawer.Screen name="Settings" component={TabCustomer} />
-    </Drawer.Navigator>
   );
 }
 

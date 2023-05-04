@@ -8,10 +8,39 @@ import {
 } from 'react-native';
 
 import React from 'react';
+// import Product from './Product';
+const productList = [
+  {
+    id: 0,
+    name: 'Box',
+    category: 'Hair removal devices',
+    img: require('../assets/product1.png'),
+    desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
+  },
+  {
+    id: 1,
+    name: 'Lisa',
+    category: 'Hair removal devices',
+    img: require('../assets/product2.png'),
+    desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
+  },
+  {
+    id: 2,
+    name: 'product three',
+    img: require('../assets/product3.png'),
+    desc: 'This is product three',
+  },
+  {
+    id: 3,
+    name: 'product four',
+    img: require('../assets/product4.png'),
+    desc: 'This is product four',
+  },
+];
 
 const ProductHome = ({navigation}) => {
   return (
-    <View>
+    <View style={styles.container}>
       <View>
         <Text style={styles.scrollHeader}>New Arrivals</Text>
       </View>
@@ -19,68 +48,26 @@ const ProductHome = ({navigation}) => {
         showsHorizontalScrollIndicator={false}
         horizontal
         style={styles.scroll}>
-        <View style={styles.container}>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product One</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
+        {productList.map(product => (
+          <Pressable
+            key={product.id}
+            onPress={() =>
+              navigation.navigate('Product Info', {
+                desc: product.desc,
+                name: product.name,
+                image: product.img,
+                category: product.category,
+              })
+            }>
+            <View style={[styles.RecCard]}>
+              <View style={styles.RecCardInfo}>
+                <Text style={styles.RecCardTitle}>{product.name}</Text>
+                <Text style={styles.RecCardPara}>{product.desc}</Text>
+              </View>
+              <Image style={styles.prodImgSmallRec} source={product.img} />
             </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/product1.png')}
-            />
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product Two</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
-            </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/product2.png')}
-            />
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product Three</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
-            </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/product4.png')}
-            />
-          </View>
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Product Four</Text>
-              <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
-              </Text>
-            </View>
-            <Image
-              style={styles.prodImgSmallRec}
-              source={require('../assets/1-7.png')}
-            />
-          </View>
-        </View>
+          </Pressable>
+        ))}
       </ScrollView>
       <View>
         <Text style={styles.scrollHeader}>Must See Products</Text>
@@ -89,75 +76,33 @@ const ProductHome = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         style={styles.containersec}>
         <View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product One</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product2.png')}
-              />
-              <Text style={styles.cardText}>Product Two</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product4.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product2.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product4.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
-          <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={require('../assets/product1.png')}
-              />
-              <Text style={styles.cardText}>Product Three</Text>
-            </View>
-          </View>
+          {productList.map(product => (
+            <Pressable
+              key={product.id}
+              onPress={() =>
+                navigation.navigate('Product Info', {
+                  desc: product.desc,
+                  name: product.name,
+                  image: product.img,
+                  category: product.category,
+                })
+              }>
+              <View style={styles.scrollsec}>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+              </View>
+            </Pressable>
+          ))}
         </View>
       </ScrollView>
     </View>
@@ -167,28 +112,30 @@ const ProductHome = ({navigation}) => {
 export default ProductHome;
 
 const styles = StyleSheet.create({
-  scroll: {},
-  scrollsec: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+  scroll: {
+    height: 180,
   },
   scrollHeader: {
-    fontFamily: 'Inter',
-    fontSize: 20,
+    fontFamily: 'Roboto',
+    fontSize: 18,
     textTransform: 'uppercase',
     textAlign: 'left',
-    marginTop: 20,
+    marginTop: 10,
+     marginBottom: 20,
     color: '#222',
   },
   container: {
     flex: 1,
+    marginHorizontal: 20,
+    paddingVertical: 20,
+  },
+  scrollsec: {
     flexDirection: 'row',
+    marginVertical: 5,
   },
   containersec: {
-    marginTop:10,
-    height: 400,
-    marginBottom: 450,
+    height: 470,
+    flexDirection: 'column',
   },
   card: {
     textAlign: 'base-line',
@@ -209,7 +156,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row-reverse',
     width: 380,
-    height: 150,
+    height: 'auto',
     margin: 10,
     borderRadius: 10,
     elevation: 10,
@@ -232,8 +179,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 120,
     height: 150,
-    margin: 2,
-    marginTop: 5,
+    marginTop: 3,
+    marginHorizontal: 8,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',

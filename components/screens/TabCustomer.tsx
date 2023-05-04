@@ -1,4 +1,6 @@
+import React from 'react';
 import {
+  Alert,
   Image,
   Pressable,
   ScrollView,
@@ -6,10 +8,9 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
-import { useState } from 'react';
+import {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { Modal } from 'react-native';
+import {Modal} from 'react-native';
 import {AddAppointment, AddCustomer} from './AddProduct';
 const TabCustomer = () => {
   const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
@@ -20,35 +21,93 @@ const TabCustomer = () => {
       name: 'Jane Kunambi',
       img: require('../assets/customer1.jpg'),
       desc: 'This is customer one',
+      time: '1:00 pm',
+      status: 'Not-Done'
     },
     {
       id: 1,
       name: 'Anna Kituli',
       img: require('../assets/customer2.jpg'),
       desc: 'This is customer two',
+      time: '2:00 pm',
+      status: 'Done'
     },
     {
       id: 2,
       name: 'Doris Hatibu',
       img: require('../assets/customer3.jpg'),
       desc: 'This is customer three',
+      time: '3:30 pm',
+      status: 'Done'
     },
     {
       id: 3,
       name: 'Paula Kajala',
       img: require('../assets/customer2.jpg'),
       desc: 'This is customer four',
+      time: '3:00 pm',
+      status: 'Done'
     },
     {
       id: 4,
       name: 'Airah Rose',
       img: require('../assets/customer1.jpg'),
       desc: 'This is customer four',
+      time: '5:00 pm',
+      status: 'Done'
+    },
+  ];
+  const AppointmentList = [
+    {
+      id: 0,
+      service: 'Hair Removal',
+      customer: 'Jane Kunambi',
+      img: require('../assets/customer1.jpg'),
+      desc: 'This is customer one',
+      time: '1:00 pm',
+      status: 'Not-Done'
+    },
+    {
+      id: 1,
+      service: 'Tatoo Removal',
+      customer:'Anna Kituli',
+      img: require('../assets/customer2.jpg'),
+      desc: 'This is customer two',
+      time: '2:00 pm',
+      status: 'Done'
+    },
+    {
+      id: 2,
+      service: 'Laser Waxing',
+      customer:'Doris Hatibu',
+      img: require('../assets/customer3.jpg'),
+      desc: 'This is customer three',
+      time: '3:30 pm',
+      status: 'Done'
+    },
+    {
+      id: 3,
+      service: 'Skin Bleaching',
+      customer:'Paula Kajala',
+      img: require('../assets/customer2.jpg'),
+      desc: 'This is customer four',
+      time: '3:00 pm',
+      status: 'Done'
+    },
+    {
+      id: 4,
+      service: 'Tatoo Removal',
+      customer:'Airah Rose',
+      img: require('../assets/customer1.jpg'),
+      desc: 'This is customer four',
+      time: '5:00 pm',
+      status: 'Done'
     },
   ];
   return (
     <View>
-    <Modal
+      {/* Modal to add new customer or patient */}
+      <Modal
         animationType="slide"
         transparent={true}
         visible={CustomerModalVisible}
@@ -61,12 +120,13 @@ const TabCustomer = () => {
             <Pressable
               style={styles.button}
               onPress={() => setCustomerModalVisible(!CustomerModalVisible)}>
-              <Icon name='close'size={30}color={'#222'}/>
+              <Icon name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddCustomer/>
+            <AddCustomer />
           </View>
         </View>
       </Modal>
+      {/* Modal to add new appointment */}
       <Modal
         animationType="slide"
         transparent={true}
@@ -80,63 +140,69 @@ const TabCustomer = () => {
             <Pressable
               style={styles.button}
               onPress={() => setAppointModalVisible(!AppointModalVisible)}>
-              <Icon name='close'size={30}color={'#222'}/>
+              <Icon name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddAppointment/>
+            <AddAppointment />
           </View>
         </View>
       </Modal>
       <View style={styles.createSec}>
-        <Pressable onPress={() => setCustomerModalVisible(true)} style={styles.createPress}>
+        <Pressable
+          onPress={() => setCustomerModalVisible(true)}
+          style={styles.createPress}>
           <Text style={styles.textPress}>Add Customer</Text>
-          <Icon name='user'size={50}color={'#222'}/>
+          <Icon name="user" size={50} color={'#222'} />
         </Pressable>
-        <Pressable onPress={() => setAppointModalVisible(true)} style={styles.createPress}>
+        <Pressable
+          onPress={() => setAppointModalVisible(true)}
+          style={styles.createPress}>
           <Text style={styles.textPress}>Add Appointment</Text>
-          <Icon name='bars'size={50}color={'#222'}/>
+          <Icon name="bars" size={50} color={'#222'} />
         </Pressable>
       </View>
       <ScrollView horizontal pagingEnabled={true}>
-      <View style={styles.list}>
-        <View style={styles.customerHeader}>
-          <Icon name={'left'} size={30} color={'#222'} />
-          <Text style={styles.listTitle}>My Customers</Text>
-          <Icon name={'right'} size={30} color={'#222'} />
+        <View style={styles.list}>
+          <View style={styles.customerHeader}>
+            <Icon name={'left'} size={30} color={'#222'} />
+            <Text style={styles.listTitle}>My Customers</Text>
+            <Icon name={'right'} size={30} color={'#222'} />
+          </View>
+          <ScrollView style={styles.listScroll}>
+            {customerList.map(customer => (
+              <View key={customer.id} style={[styles.RecCard]}>
+                <View style={styles.RecCardInfo}>
+                  <Text style={styles.RecCardTitle}>{customer.name}</Text>
+                  <Text style={styles.RecCardPara}>{customer.desc}</Text>
+                </View>
+                <View style={styles.customerImg}>
+                  <Image style={styles.prodImgSmallRec} source={customer.img} />
+                </View>
+              </View>
+            ))}
+          </ScrollView>
         </View>
-        <ScrollView style={styles.listScroll}>
-          {customerList.map(customer => (
-            <View key={customer.id} style={[styles.RecCard]}>
-              <View style={styles.RecCardInfo}>
-                <Text style={styles.RecCardTitle}>{customer.name}</Text>
-                <Text style={styles.RecCardPara}>{customer.desc}</Text>
+        <View style={styles.list}>
+          <View style={styles.customerHeader}>
+            <Icon name={'left'} size={30} color={'#222'} />
+            <Text style={styles.listTitle}>Appointments</Text>
+            <Icon name={'right'} size={30} color={'#fff'} />
+          </View>
+          <ScrollView style={styles.listScroll}>
+            {AppointmentList.map(AppointmentList => (
+              <View key={AppointmentList.id} style={[styles.RecCard]}>
+                <View style={styles.RecCardInfo}>
+                <Text style={styles.RecCardTitle}>{AppointmentList.service}</Text>
+                  <Text style={styles.RecCardTitle2}>{AppointmentList.customer}</Text>
+                  <Text style={styles.RecCardPara}>{AppointmentList.desc}</Text>
+                <Text style={styles.RecCardInfoTime}>{AppointmentList.time}</Text>
+                </View>
+                <View style={styles.customerImg}>
+                  <Image style={styles.prodImgSmallRec} source={AppointmentList.img} />
+                </View>
               </View>
-              <View style={styles.customerImg}>
-                <Image style={styles.prodImgSmallRec} source={customer.img} />
-              </View>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
-      <View style={styles.list}>
-        <View style={styles.customerHeader}>
-          <Icon name={'left'} size={30} color={'#222'} />
-          <Text style={styles.listTitle}>Appointments</Text>
-          <Icon name={'right'} size={30} color={'#fff'} />
+            ))}
+          </ScrollView>
         </View>
-        <ScrollView style={styles.listScroll}>
-          {customerList.map(customer => (
-            <View key={customer.id} style={[styles.RecCard]}>
-              <View style={styles.RecCardInfo}>
-                <Text style={styles.RecCardTitle}>{customer.name}</Text>
-                <Text style={styles.RecCardPara}>{customer.desc}</Text>
-              </View>
-              <View style={styles.customerImg}>
-                <Image style={styles.prodImgSmallRec} source={customer.img} />
-              </View>
-            </View>
-          ))}
-        </ScrollView>
-      </View>
       </ScrollView>
     </View>
   );
@@ -148,18 +214,18 @@ const styles = StyleSheet.create({
   textPress: {
     marginBottom: 10,
     fontFamily: 'Roboto',
-    textAlign:'center',
+    textAlign: 'center',
     fontSize: 20,
     color: '#222',
   },
   createSec: {
-    marginTop:20,
+    marginTop: 20,
     flexDirection: 'row',
     backgroundColor: 'f6f6f6',
   },
   createPress: {
     paddingTop: 40,
-    alignItems:'center',
+    alignItems: 'center',
     elevation: 10,
     marginHorizontal: 10,
     borderRadius: 26,
@@ -173,32 +239,32 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   list: {
-    marginTop:50
+    marginTop: 50,
   },
   listTitle: {
     fontFamily: 'Inter',
     fontSize: 25,
-    width:300,
+    width: 300,
     marginBottom: 10,
     textAlign: 'center',
-    color: '#222'
+    color: '#222',
   },
   listScroll: {
     height: 450,
     paddingBottom: 30,
-    marginHorizontal:10,
+    marginHorizontal: 10,
     flexDirection: 'column',
     //IOS SHADOWS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.5,
-    shadowRadius: 2
+    shadowRadius: 2,
   },
   RecCard: {
     flexDirection: 'row-reverse',
-    height: 120,
-    alignItems:'center',
-    marginBottom:30,
+    height: 110,
+    alignItems: 'center',
+    marginBottom: 30,
     elevation: 10,
     borderRadius: 12,
     backgroundColor: '#f3f3f3',
@@ -206,32 +272,45 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.5,
-    shadowRadius: 2
+    shadowRadius: 2,
   },
   RecCardInfo: {
     height: 90,
-    width:200,
-    marginLeft:60,
-    textAlign:'justify',
-    backgroundColor: '#f3f3f3'
+    width: 200,
+    marginLeft: 60,
+    textAlign: 'justify',
+    backgroundColor: '#f3f3f3',
+  },
+  RecCardInfoTime:{
+    top:10,
+    marginRight:10,
+    textAlign:'right',
+    color:'green'
   },
   RecCardTitle: {
     fontFamily: 'Inter-Bold',
     fontSize: 20,
-    color: '#777'
+    color: '#777',
+  },
+  RecCardTitle2: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 15,
+    textDecorationColor:'#222',
+    textDecorationLine:'underline',
+    textDecorationStyle:'solid',
+    color: '#333',
   },
   RecCardPara: {
     fontFamily: 'Roboto-Bold',
     fontSize: 15,
-    color: '#222'
+    color: '#222',
   },
   customerImg: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
   customerHeader: {
     flexDirection: 'row',
-    marginHorizontal:20
-
+    marginHorizontal: 20,
   },
   prodImgSmallRec: {
     height: 70,
@@ -241,13 +320,12 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    alignItems:'center',
-    justifyContent:'center',
-
+    alignItems: 'center',
+    top: 60,
   },
   modalView: {
-    height:400,
-    width:350,
+    height: 600,
+    width: 350,
     backgroundColor: '#f7f7f7',
     borderRadius: 20,
     alignItems: 'center',
@@ -261,8 +339,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    top:10,
-    left:140
+    top: 10,
+    left: 140,
   },
   textStyle: {
     color: 'white',
