@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Button, Text, Platform} from 'react-native';
+import {StyleSheet, View, Button, Text} from 'react-native';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -14,7 +14,7 @@ import TabsAds from './TabAds';
 import TabCustomer from './TabCustomer';
 import TabGuide from './TabGuide';
 import TabSupport from './TabSupport';
-function Feed({navigation}) {
+function Feed({navigation}: {navigation: any}) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Feed Screen</Text>
@@ -32,7 +32,7 @@ function Notifications() {
   );
 }
 const Drawer = createDrawerNavigator();
-function CustomDrawerContent(props) {
+function CustomDrawerContent({props}: {props: any}) {
   return (
     <DrawerContentScrollView {...props}>
       <DrawerItemList {...props} />
@@ -62,7 +62,6 @@ const Tab = createBottomTabNavigator();
 const screenOptions = ({route}: {route: {name: string}}) => ({
   tabBarIcon: ({color, size}: {color: string; size: number}) => {
     let iconName;
-    let iosName;
 
     switch (route.name) {
       case 'Home':
@@ -97,8 +96,8 @@ const screenOptions = ({route}: {route: {name: string}}) => ({
 
 const Product = () => {
   const route = useRoute();
-  const data = route.params as {username: string};
-  const {username} = data;
+  const data = route.params as {username: string; lastname: string};
+  const {username, lastname} = data;
 
   return (
     <View style={styles.container}>
@@ -111,7 +110,11 @@ const Product = () => {
           initialParams={{username: username}}
         />
         <Tab.Screen name="My Customer" component={TabCustomer} />
-        <Tab.Screen name="Tech Support" component={TabSupport} />
+        <Tab.Screen
+          name="Tech Support"
+          component={TabSupport}
+          initialParams={{username: username, lastname: lastname}}
+        />
       </Tab.Navigator>
     </View>
   );
