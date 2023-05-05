@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Alert,
   Pressable,
@@ -10,13 +11,16 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import axios from 'axios';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
-import React from 'react';
+import api from '../utils/api';
 
-const Login = ({navigation}) => {
+interface LoginProps {
+  navigation: NavigationProp<ParamListBase>;
+}
+const Login = ({navigation}: LoginProps) => {
   const [isLoading, setLoading] = React.useState(false);
   const [email, onChangeEmail] = React.useState('');
   const [password, passwordChange] = React.useState('');
@@ -28,21 +32,19 @@ const Login = ({navigation}) => {
         Alert.alert('Email or password must be provided');
       } else {
         setLoading(true);
-        const response = await axios.post(
-          'http://15.236.168.186:7000/api/v1/signin/',
-          {
-            email,
-            password,
-          },
-        );
+        const response = await api.post('signin/', {
+          email,
+          password,
+        });
 
         const json = response.data;
         const userName = json.data.firstname;
+        const lname = json.data.lastname;
         const userEmail = json.data.email;
 
         setLoading(false);
         if (json.data.role === 'clinic') {
-          navigation.navigate('Product', {username: userName});
+          navigation.navigate('Product', {username: userName, lastname: lname});
         } else if (json.data.role === 'patient') {
           navigation.navigate('patient_home', {
             username: userName,
