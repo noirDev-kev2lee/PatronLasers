@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 
 const Patient = ({navigation}) => {
   const route = useRoute();
-  const data = route.params as {username: string};
+  const data = route.params as {username: string; email: string};
   const {username, email} = data;
   return (
     <View style={styles.container}>
