@@ -11,10 +11,8 @@ import {
 import {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Modal} from 'react-native';
-import {AddCustomer} from './AddProduct';
 import AddAppointment from './AddAppointment';
-const TabCustomer = ({route}: {route: any}) => {
-  const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
+const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
@@ -110,26 +108,6 @@ const TabCustomer = ({route}: {route: any}) => {
   ];
   return (
     <View>
-      {/* Modal to add new customer or patient */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={CustomerModalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setCustomerModalVisible(!CustomerModalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Pressable
-              style={styles.button}
-              onPress={() => setCustomerModalVisible(!CustomerModalVisible)}>
-              <Icon name="close" size={30} color={'#222'} />
-            </Pressable>
-            <AddCustomer />
-          </View>
-        </View>
-      </Modal>
       {/* Modal to add new appointment */}
       <Modal
         animationType="slide"
@@ -152,7 +130,7 @@ const TabCustomer = ({route}: {route: any}) => {
       </Modal>
       <View style={styles.createSec}>
         <Pressable
-          onPress={() => setCustomerModalVisible(true)}
+          onPress={() => navigation.navigate('addCustomer')}
           style={styles.createPress}>
           <Text style={styles.textPress}>Add Customer</Text>
           <Icon name="user" size={50} color={'#222'} />
