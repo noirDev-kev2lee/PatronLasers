@@ -9,56 +9,26 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Image,
 } from 'react-native';
+import api from '../utils/api';
 
-export function AddCustomer() {
-  return (
-    <View>
-      <View style={styles.container}>
-        <ScrollView>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
-            style={styles.keyboard}>
-            <View>
-              <Text style={styles.title}>Add Customer</Text>
-            </View>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                placeholder="First Name"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                placeholder="Last Name"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                placeholder="Address"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                placeholder="Email"
-              />
-              <Pressable
-                style={styles.pressBtn}
-                onPress={() => Alert.alert('Submitted')}>
-                <Text style={styles.pressTxt}>Submit</Text>
-              </Pressable>
-            </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </View>
-    </View>
-  );
-}
-
-const AddProduct = () => {
+const AddProduct = ({clinicName}: {clinicName: any}) => {
+  const [serialNumber, onNumberChange] = React.useState('');
+  const [productName, onProductNameChange] = React.useState('');
+  const handleAddProduct = async () => {
+    await api
+      .post('purchases/', {
+        serial_number: serialNumber,
+        clinic_name: clinicName,
+        product_name: productName,
+      })
+      .then(() => {
+        Alert.alert('Product added successfuly!');
+      })
+      .catch(() => {
+        Alert.alert('Error occurs!');
+      });
+  };
   return (
     <View>
       <View style={styles.container}>
@@ -74,16 +44,16 @@ const AddProduct = () => {
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
+                onChangeText={onNumberChange}
                 placeholder="Serial Number"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
+                onChangeText={onProductNameChange}
                 placeholder="Product Name"
               />
-              <Pressable
-                style={styles.pressBtn}
-                onPress={() => Alert.alert('Submitted')}>
+              <Pressable style={styles.pressBtn} onPress={handleAddProduct}>
                 <Text style={styles.pressTxt}>Submit</Text>
               </Pressable>
             </View>
@@ -93,49 +63,7 @@ const AddProduct = () => {
     </View>
   );
 };
-
-export const AboutUs = () => {
-  return (
-    <ScrollView style={styles.aboutUsContainer}>
-      <View style={styles.aboutUs}>
-        <Image style={styles.logo} source={require('../assets/001.png')} />
-        <Text style={styles.aboutUsPara}>
-          חברת פטרון לייזר היא חברה מובילה בתחום הייצור, ייבוא ושיווק מכשור
-          טכנולוגי חדשני ומתקדם בעולם האסתטיקה בישראל. החברה הוקמה בשנת 2009, על
-          ידי ארז מלכה ואבי גבסו, והפכה במרוצת השנים למותג מוביל בתחום המכשור
-          הטכנולוגי בענף הרפואה, האסתטיקה והיופי. מאז ועד היום החברה התחילה את
-          דרכה בתחום המכשור הטכנולוגי, והוקמה על בסיס החזון: "לייצר ולפתח מכשור
-          טכנולוגי המבוסס על הטכנולוגיה החדשנית והמתקדמת ביותר בעולם". המכשור
-          הטכנולוגי של פטרון לייזר בעל תו תקן מחמיר הכולל בקרת איכות כחול לבן,
-          שמסייעת בהבנת הצורך של לקוח הקצה ומתן פתרונות טכנולוגיים בהתאמה אישית.
-          פטרון לייזר צברה ניסיון עשיר, מקצוענות ומוניטין גבוה בתחום המכשור
-          הטכנולוגי. עד שנת 2018, החברה שיווקה מכשור טכנולוגי לשוק המוסדי
-          ולחברות משווקות. בשנת 2018, החליטה החברה לשווק את המכשור הטכנולוגי
-          שברשותה, גם בפלטפורמת שיווק ישיר למכוני יופי, קוסמטיקה, רשתות טיפוח
-          ויופי, מכוני כושר וקליניקות פרטיות. כיום, ניתן למצוא את המכשור
-          הטכנולוגי של חברת פטרון לייזר ברוב מכוני היופי והאסתטיקה ברחבי הארץ.
-          המכשור החדשני והמתקדם משמש לצורך מגוון רחב של טיפולים אסתטיים ורפואיים
-          כגון: טיפולי פנים, טיפולי שיניים, הסרת שיער, הסרת קעקועים, חיטוב הגוף,
-          שיזוף ביתי, טיפולי אנטי אייג'ינג ועוד. פטרון לייזר: חדשנות, מקצוענות,
-          מצוינות ואיכות חסרת פשרות! חברת פטרון לייזר, חרטה על דגלה ערכים של
-          חדשנות, מקצוענות, אמינות, מצוינות, איכות גבוהה וחסרת פשרות, שירות
-          אדיב, יחס אישי, אוזן קשבת, שביעות רצון הלקוח, ליווי 360 ואהבה גדולה
-          לעולם היופי והאסתטיקה. ליווי 360 חוויות הלקוח חשובה לנו, לאין שיעור,
-          ואנו מעניקים ליווי 360 ללקוחותינו לאורך כל הדרך – החל משלב הייעוץ
-          הראשוני, דרך ההדרכה הטכנית ועד לתגובות של לקוחות הקצה, כל זאת במטרה
-          להעניק מעטפת שלמה ללקוחותינו
-        </Text>
-        <Text style={styles.aboutUsFooter1}>Patron Devs</Text>
-        <Text style={styles.aboutUsFooter}>&copy;2023</Text>
-      </View>
-    </ScrollView>
-  );
-};
-export const FinancialArea = () => {
-  return <View />;
-};
 export default AddProduct;
-
 const styles = StyleSheet.create({
   text: {
     color: '#000',
@@ -219,33 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#131035',
   },
-  logo: {
-    width: 200,
-    height: 100,
-    resizeMode: 'contain',
-    tintColor: '#fff',
-  },
-  aboutUsContainer: {
-    flex: 1,
-    backgroundColor: '#131035',
-    paddingVertical: 20,
-  },
-  aboutUs: {
-    height: 'auto',
-  },
-  aboutUsPara: {
-    fontSize: 14,
-    marginTop: 20,
-    left: 40,
-    width: 350,
-  },
-  aboutUsFooter: {
-    textAlign: 'center',
-  },
-  aboutUsFooter1: {
-    marginTop: 300,
-    textAlign: 'center',
-  },
+
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
