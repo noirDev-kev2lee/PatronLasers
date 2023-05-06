@@ -71,7 +71,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               onPress={() => setModalVisible(!modalVisible)}>
               <Icon2 name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddProduct />
+            <AddProduct clinicName={username} />
           </View>
         </View>
       </Modal>
