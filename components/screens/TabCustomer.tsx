@@ -11,10 +11,14 @@ import {
 import {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {Modal} from 'react-native';
-import {AddAppointment, AddCustomer} from './AddProduct';
-const TabCustomer = () => {
+import {AddCustomer} from './AddProduct';
+import AddAppointment from './AddAppointment';
+const TabCustomer = ({route}: {route: any}) => {
   const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
+  const data = route.params as {username: string};
+  const {username} = data;
+
   const customerList = [
     {
       id: 0,
@@ -142,7 +146,7 @@ const TabCustomer = () => {
               onPress={() => setAppointModalVisible(!AppointModalVisible)}>
               <Icon name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddAppointment />
+            <AddAppointment clinicName={username} />
           </View>
         </View>
       </Modal>
@@ -333,8 +337,8 @@ const styles = StyleSheet.create({
     top: 60,
   },
   modalView: {
-    height: 600,
-    width: 350,
+    height: 800,
+    width: '95%',
     backgroundColor: '#f7f7f7',
     borderRadius: 20,
     alignItems: 'center',
