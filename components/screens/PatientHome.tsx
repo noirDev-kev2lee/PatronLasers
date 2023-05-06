@@ -11,7 +11,7 @@ import {
 import {useState} from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {AddAppointment} from './AddProduct';
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 // import {useNavigation} from '@react-navigation/native';
 
 export default function PatientHome({
@@ -29,7 +29,7 @@ export default function PatientHome({
     <View style={styles.mainContainer}>
       <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
-          <Icon2 name="person-circle" size={52} color="#131035" />
+          <Icon2 name="user" size={52} color="#131035" />
           <Text style={styles.welcomeNote}>Hello, {username}</Text>
         </View>
       </Pressable>

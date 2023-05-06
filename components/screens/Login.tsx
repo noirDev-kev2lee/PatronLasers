@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 import React from 'react';
 
@@ -103,9 +103,9 @@ const Login = ({navigation}) => {
                 />
                 <Pressable onPress={() => setHide(!hide)}>
                   {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
+                    <Icon2 name="eye-slash" size={30} color="#000000" />
                   ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
+                    <Icon2 name="eye" size={30} color="#000000" />
                   )}
                 </Pressable>
               </View>

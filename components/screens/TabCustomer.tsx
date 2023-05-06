@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   listScroll: {
     height: 450,
     paddingBottom: 30,
-    marginHorizontal: 10,
+    marginHorizontal: 15,
     flexDirection: 'column',
     //IOS SHADOWS
     shadowColor: '#000',
