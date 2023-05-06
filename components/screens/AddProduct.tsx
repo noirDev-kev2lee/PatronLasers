@@ -143,44 +143,50 @@ export function AddAppointment() {
                 placeholder="Service Type"
               />
               <View style={styles.inputStyle}>
-                <TextInput style={styles.dateText}
+                <TextInput
+                  style={styles.dateText}
                   value={startDate.toDateString()}
                 />
-              <Pressable  style={styles.datePicker} onPress={() => setOpen(true)}>
-                <Icon name="calendar" size={25} color="#000000"/>
-              <DatePicker
-                modal
-                open={open}
-                date={startDate}
-                onConfirm={(startDate) => {
-                  setOpen(false)
-                  setStartDate(startDate)
-                }}
-                onCancel={() => {
-                  setOpen(false)
-                }}
-                />
-              </Pressable>
+                <Pressable
+                  style={styles.datePicker}
+                  onPress={() => setOpen(true)}>
+                  <Icon name="calendar" size={25} color="#000000" />
+                  <DatePicker
+                    modal
+                    open={open}
+                    date={startDate}
+                    onConfirm={startDate => {
+                      setOpen(false);
+                      setStartDate(startDate);
+                    }}
+                    onCancel={() => {
+                      setOpen(false);
+                    }}
+                  />
+                </Pressable>
               </View>
               <View style={styles.inputStyle}>
-                <TextInput style={styles.dateText}
+                <TextInput
+                  style={styles.dateText}
                   value={endDate.toDateString()}
                 />
-              <Pressable  style={styles.datePicker} onPress={() => setOpen2(true)}>
-                <Icon name="calendar" size={25} color="#000000"/>
-              <DatePicker
-                modal
-                open={open2}
-                date={endDate}
-                onConfirm={(endDate) => {
-                  setOpen2(false)
-                  setEndDate(endDate)
-                }}
-                onCancel={() => {
-                  setOpen2(false)
-                }}
-                />
-              </Pressable>
+                <Pressable
+                  style={styles.datePicker}
+                  onPress={() => setOpen2(true)}>
+                  <Icon name="calendar" size={25} color="#000000" />
+                  <DatePicker
+                    modal
+                    open={open2}
+                    date={endDate}
+                    onConfirm={endDate => {
+                      setOpen2(false);
+                      setEndDate(endDate);
+                    }}
+                    onCancel={() => {
+                      setOpen2(false);
+                    }}
+                  />
+                </Pressable>
               </View>
               <Pressable
                 style={styles.pressBtn}
@@ -294,24 +300,24 @@ const styles = StyleSheet.create({
     color: '#000',
     borderRadius: 12,
   },
-  dateText:{
-    marginLeft:10,
-    color:'#222',
-    fontFamily:'Inter-Bold',
-    fontSize:20
+  dateText: {
+    marginLeft: 10,
+    color: '#222',
+    fontFamily: 'Inter-Bold',
+    fontSize: 20,
   },
   inputStyle: {
-    margin:10,
+    margin: 10,
     flexDirection: 'row',
     borderRadius: 12,
     width: 300,
     height: 60,
-    color:'#222',
+    color: '#222',
     backgroundColor: '#D9D9D9',
   },
-  datePicker:{
-    left:100,
-    marginTop:15,
+  datePicker: {
+    left: 100,
+    marginTop: 15,
   },
   form: {
     flex: 1,

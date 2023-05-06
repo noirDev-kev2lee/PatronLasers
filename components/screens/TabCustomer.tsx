@@ -22,7 +22,7 @@ const TabCustomer = () => {
       img: require('../assets/customer1.jpg'),
       desc: 'This is customer one',
       time: '1:00 pm',
-      status: 'Not-Done'
+      status: 'Not-Done',
     },
     {
       id: 1,
@@ -30,7 +30,7 @@ const TabCustomer = () => {
       img: require('../assets/customer2.jpg'),
       desc: 'This is customer two',
       time: '2:00 pm',
-      status: 'Done'
+      status: 'Done',
     },
     {
       id: 2,
@@ -38,7 +38,7 @@ const TabCustomer = () => {
       img: require('../assets/customer3.jpg'),
       desc: 'This is customer three',
       time: '3:30 pm',
-      status: 'Done'
+      status: 'Done',
     },
     {
       id: 3,
@@ -46,7 +46,7 @@ const TabCustomer = () => {
       img: require('../assets/customer2.jpg'),
       desc: 'This is customer four',
       time: '3:00 pm',
-      status: 'Done'
+      status: 'Done',
     },
     {
       id: 4,
@@ -54,7 +54,7 @@ const TabCustomer = () => {
       img: require('../assets/customer1.jpg'),
       desc: 'This is customer four',
       time: '5:00 pm',
-      status: 'Done'
+      status: 'Done',
     },
   ];
   const AppointmentList = [
@@ -65,43 +65,43 @@ const TabCustomer = () => {
       img: require('../assets/customer1.jpg'),
       desc: 'This is customer one',
       time: '1:00 pm',
-      status: 'Not-Done'
+      status: 'Not-Done',
     },
     {
       id: 1,
       service: 'Tatoo Removal',
-      customer:'Anna Kituli',
+      customer: 'Anna Kituli',
       img: require('../assets/customer2.jpg'),
       desc: 'This is customer two',
       time: '2:00 pm',
-      status: 'Done'
+      status: 'Done',
     },
     {
       id: 2,
       service: 'Laser Waxing',
-      customer:'Doris Hatibu',
+      customer: 'Doris Hatibu',
       img: require('../assets/customer3.jpg'),
       desc: 'This is customer three',
       time: '3:30 pm',
-      status: 'Done'
+      status: 'Done',
     },
     {
       id: 3,
       service: 'Skin Bleaching',
-      customer:'Paula Kajala',
+      customer: 'Paula Kajala',
       img: require('../assets/customer2.jpg'),
       desc: 'This is customer four',
       time: '3:00 pm',
-      status: 'Done'
+      status: 'Done',
     },
     {
       id: 4,
       service: 'Tatoo Removal',
-      customer:'Airah Rose',
+      customer: 'Airah Rose',
       img: require('../assets/customer1.jpg'),
       desc: 'This is customer four',
       time: '5:00 pm',
-      status: 'Done'
+      status: 'Done',
     },
   ];
   return (
@@ -191,13 +191,22 @@ const TabCustomer = () => {
             {AppointmentList.map(AppointmentList => (
               <View key={AppointmentList.id} style={[styles.RecCard]}>
                 <View style={styles.RecCardInfo}>
-                <Text style={styles.RecCardTitle}>{AppointmentList.service}</Text>
-                  <Text style={styles.RecCardTitle2}>{AppointmentList.customer}</Text>
+                  <Text style={styles.RecCardTitle}>
+                    {AppointmentList.service}
+                  </Text>
+                  <Text style={styles.RecCardTitle2}>
+                    {AppointmentList.customer}
+                  </Text>
                   <Text style={styles.RecCardPara}>{AppointmentList.desc}</Text>
-                <Text style={styles.RecCardInfoTime}>{AppointmentList.time}</Text>
+                  <Text style={styles.RecCardInfoTime}>
+                    {AppointmentList.time}
+                  </Text>
                 </View>
                 <View style={styles.customerImg}>
-                  <Image style={styles.prodImgSmallRec} source={AppointmentList.img} />
+                  <Image
+                    style={styles.prodImgSmallRec}
+                    source={AppointmentList.img}
+                  />
                 </View>
               </View>
             ))}
@@ -281,11 +290,11 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     backgroundColor: '#f3f3f3',
   },
-  RecCardInfoTime:{
-    top:10,
-    marginRight:10,
-    textAlign:'right',
-    color:'green'
+  RecCardInfoTime: {
+    top: 10,
+    marginRight: 10,
+    textAlign: 'right',
+    color: 'green',
   },
   RecCardTitle: {
     fontFamily: 'Inter-Bold',
@@ -295,9 +304,9 @@ const styles = StyleSheet.create({
   RecCardTitle2: {
     fontFamily: 'Inter-Bold',
     fontSize: 15,
-    textDecorationColor:'#222',
-    textDecorationLine:'underline',
-    textDecorationStyle:'solid',
+    textDecorationColor: '#222',
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
     color: '#333',
   },
   RecCardPara: {

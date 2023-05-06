@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import React from 'react';
-// import Product from './Product';
+
 const productList = [
   {
     id: 0,
@@ -38,7 +38,7 @@ const productList = [
   },
 ];
 
-const ProductHome = ({navigation}) => {
+const ProductHome = ({navigation}: {navigation: any}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     textAlign: 'left',
     marginTop: 10,
-     marginBottom: 20,
+    marginBottom: 20,
     color: '#222',
   },
   container: {

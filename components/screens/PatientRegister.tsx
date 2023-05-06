@@ -10,14 +10,13 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
 import React, {useEffect} from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const PatientRegister = ({navigation}) => {
+const PatientRegister = ({navigation}: {navigation: any}) => {
   const [disableButton, setDisableButton] = React.useState(true);
   const [isLoading, setLoading] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
@@ -32,7 +31,6 @@ const PatientRegister = ({navigation}) => {
   const [mobile, onMobileChange] = React.useState('');
   const [password, onPasswordChange] = React.useState('');
   const [passwordConform, onPasswordConfirmChange] = React.useState('');
-  const sex = ['Male', 'Female'];
 
   // function to validate password
   useEffect(() => {
@@ -79,23 +77,20 @@ const PatientRegister = ({navigation}) => {
       } else {
         // add to user table
         try {
-          const response = await axios.post(
-            'http://15.236.168.186:7000/api/v1/signup/',
-            {
-              first_name: firstName,
-              last_name: lastName,
-              email: email,
-              password: password,
-              role: 'patient',
-            },
-          );
+          const response = await api.post('signup/', {
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            password: password,
+            role: 'patient',
+          });
           const json = response.data;
           if (json.data.data.code === '23505') {
             Alert.alert('Error occurs!, user exists already');
             setLoading(false);
           } else {
             //  add to patient table
-            await axios.post('http://15.236.168.186:7000/api/v1/patients/', {
+            await api.post('patients/', {
               clinic_name: clinicName,
               first_name: firstName,
               last_name: lastName,

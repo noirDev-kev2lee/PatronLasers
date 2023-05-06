@@ -11,12 +11,11 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import axios from 'axios';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-import Icon3 from 'react-native-vector-icons/AntDesign';
 
-const ChangePassword = ({navigation}) => {
+const ChangePassword = () => {
   const [isLoading, setLoading] = React.useState(false);
   const [password, passwordChange] = React.useState('');
   const [newPassword, onNewPasswordChange] = React.useState('');
