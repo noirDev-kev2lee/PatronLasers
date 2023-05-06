@@ -16,7 +16,7 @@ import api from '../utils/api';
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const PatientRegister = ({navigation}: {navigation: any}) => {
+const AddCustomer = ({navigation}: {navigation: any}) => {
   const [disableButton, setDisableButton] = React.useState(true);
   const [isLoading, setLoading] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
@@ -101,7 +101,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
             });
             setLoading(false);
             Alert.alert('Registration Successfully!');
-            navigation.navigate('Login');
+            navigation.navigate('Products');
           }
         } catch (error) {
           setLoading(true);
@@ -164,7 +164,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                   onChangeText={onAgeChange}
                   placeholder="Age"
                   keyboardType={'numeric'}
-                  maxLength={3} // optional: limit the number of characters to 10 for a typical
+                  maxLength={3}
                   placeholderTextColor={'grey'}
                 />
               </View>
@@ -192,7 +192,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                 onChangeText={onMobileChange}
                 placeholder="Phone Number"
                 keyboardType={'numeric'}
-                maxLength={10} // optional: limit the number of characters to 10 for a typical
+                maxLength={10}
                 placeholderTextColor={'grey'}
               />
             </View>
@@ -249,7 +249,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
   );
 };
 
-export default PatientRegister;
+export default AddCustomer;
 
 const styles = StyleSheet.create({
   form: {

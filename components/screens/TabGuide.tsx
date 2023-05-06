@@ -36,7 +36,7 @@ const productList = [
     desc: 'This is product four',
   },
 ];
-const TabGuide = ({navigation}) => {
+const TabGuide = ({navigation}: {navigation: any}) => {
   return (
     <View>
       <View>
@@ -47,7 +47,7 @@ const TabGuide = ({navigation}) => {
         horizontal
         style={styles.scroll}>
         <View style={styles.container}>
-        {productList.map(product => (
+          {productList.map(product => (
             <Pressable
               key={product.id}
               onPress={() =>
@@ -57,62 +57,52 @@ const TabGuide = ({navigation}) => {
                   category: product.category,
                 })
               }>
-            <View style={[styles.RecCard]}>
-              <View style={styles.RecCardInfo}>
-                <Text style={styles.RecCardTitle}>{product.name}</Text>
-                <Text style={styles.RecCardPara}>
-                {product.desc}
-                </Text>
+              <View style={[styles.RecCard]}>
+                <View style={styles.RecCardInfo}>
+                  <Text style={styles.RecCardTitle}>{product.name}</Text>
+                  <Text style={styles.RecCardPara}>{product.desc}</Text>
+                </View>
+                <Image style={styles.prodImgSmallRec} source={product.img} />
               </View>
-              <Image
-                style={styles.prodImgSmallRec}
-                source={product.img}
-              />
-            </View>
-          </Pressable>
+            </Pressable>
           ))}
-          </View>
+        </View>
       </ScrollView>
       <View>
         <Text style={styles.scrollHeader}>More Product Guides</Text>
       </View>
       <ScrollView
-        showsVerticalScrollIndicator={false} style={styles.containersec}>
+        showsVerticalScrollIndicator={false}
+        style={styles.containersec}>
         <View>
-        {productList.map (product => (
-          <Pressable key={product.id} onPress={() => navigation.navigate('Guide Info',{
-            desc:product.desc,
-            name:product.name,
-            image:product.img,
-            category:product.category
-            })
-          }>  
+          {productList.map(product => (
+            <Pressable
+              key={product.id}
+              onPress={() =>
+                navigation.navigate('Guide Info', {
+                  desc: product.desc,
+                  name: product.name,
+                  image: product.img,
+                  category: product.category,
+                })
+              }>
               <View style={styles.scrollsec}>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={product.img}
-                />
-              <Text style={styles.cardText}>{product.name}</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={product.img}
-                />
-              <Text style={styles.cardText}>{product.name}</Text>
-            </View>
-            <View style={[styles.RecCardSmall]}>
-              <Image
-                style={styles.prodImgSmall}
-                source={product.img}
-                />
-              <Text style={styles.cardText}>{product.name}</Text>
-            </View>
-            </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+                <View style={[styles.RecCardSmall]}>
+                  <Image style={styles.prodImgSmall} source={product.img} />
+                  <Text style={styles.cardText}>{product.name}</Text>
+                </View>
+              </View>
             </Pressable>
-            ))}
-          </View>
+          ))}
+        </View>
       </ScrollView>
     </View>
   );
@@ -132,16 +122,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    height:200,
+    height: 200,
     flexDirection: 'row',
   },
   scrollsec: {
-    flexDirection:'row',
-    marginVertical:5
+    flexDirection: 'row',
+    marginVertical: 5,
   },
   containersec: {
-    height:470,
-    flexDirection:'column',
+    height: 470,
+    flexDirection: 'column',
   },
   card: {
     textAlign: 'base-line',
@@ -177,7 +167,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 120,
     height: 170,
-    marginHorizontal:8,
+    marginHorizontal: 8,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
@@ -199,7 +189,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   prodImgSmallRec: {
-    right:10,
+    right: 10,
     height: 150,
     width: 200,
     resizeMode: 'contain',

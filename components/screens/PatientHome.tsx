@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {AddAppointment} from './AddProduct';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 
-
 export default function PatientHome({
   navigation,
   route,

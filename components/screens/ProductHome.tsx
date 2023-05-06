@@ -23,8 +23,8 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
-  const iconName =
-    Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
+
+  Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
   const productList = [
     {
@@ -71,7 +71,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               onPress={() => setModalVisible(!modalVisible)}>
               <Icon2 name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddProduct />
+            <AddProduct clinicName={username} />
           </View>
         </View>
       </Modal>
