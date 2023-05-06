@@ -89,6 +89,11 @@ export default function Register({navigation}: {navigation: any}) {
             Alert.alert('Error occurs!, clinic name already exists');
             setLoading(false);
           } else {
+            await api.post('purchases/', {
+              serial_number: serialNumber,
+              clinic_name: clinicName,
+              product_name: 'default',
+            });
             // add to user table
             await api
               .post('signup/', {
@@ -100,7 +105,6 @@ export default function Register({navigation}: {navigation: any}) {
               })
               .then(res => {
                 const signupData = res.data;
-                console.log();
                 if (signupData.data.data.code === '23505') {
                   setLoading(false);
                   Alert.alert('Error occurs!,user already exists.');
