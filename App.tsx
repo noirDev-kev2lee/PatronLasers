@@ -2,12 +2,9 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import theme from '@react-navigation/native';
 import ProductCard from './components/screens/ProductCard';
-import AddProduct, {
-  AboutUs,
-  FinancialArea,
-} from './components/screens/AddProduct';
+import FinancialArea from './components/screens/FinancialArea';
+import AboutUs from './components/screens/AboutUs';
 import Login from './components/screens/Login';
 import GuideCard from './components/screens/GuideCard';
 import Register from './components/screens/Register';
@@ -21,18 +18,9 @@ import ChangePassword from './components/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
 
-const appTheme = {
-  colors: {
-    primary: '#111113',
-    background: '#fff',
-    card: '#fff',
-    text: '#fff',
-  },
-};
-
 function App() {
   return (
-    <NavigationContainer theme={appTheme}>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
@@ -190,19 +178,7 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-        <Stack.Screen
-          name="Add Product"
-          component={AddProduct}
-          options={{
-            title: '',
-            headerShown: false,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: '#111113',
-            },
-            headerTintColor: '#fff',
-          }}
-        />
+
         <Stack.Screen
           name="Finacial Area"
           component={FinancialArea}
