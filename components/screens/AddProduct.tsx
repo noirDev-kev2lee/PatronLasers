@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Alert,
   StyleSheet,
@@ -10,12 +10,7 @@ import {
   Platform,
   ScrollView,
   Image,
-  ActivityIndicator,
 } from 'react-native';
-import axios from 'axios';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Icon2 from 'react-native-vector-icons/Ionicons';
-import DatePicker from 'react-native-date-picker';
 
 export function AddCustomer() {
   return (
@@ -62,151 +57,7 @@ export function AddCustomer() {
     </View>
   );
 }
-export function AddAppointment() {
-  const [isLoading, setLoading] = React.useState(false);
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [service, setService] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
-  // const [startTime, setStartTime] = useState('');
-  // const [endTime, setEndTime] = useState('');
 
-  const handleSaveAppointment = async () => {
-    try {
-      if (
-        fname === '' ||
-        lname === '' ||
-        service === '' ||
-        startDate === '' ||
-        endDate === ''
-      ) {
-        Alert.alert('Email or password must be provided');
-      } else {
-        setLoading(true);
-        await api
-          .post('appointments/', {
-            patient_id: '75757',
-            clinic_name: 'hghgg',
-            fname: fname,
-            lname: lname,
-            service_type: service,
-            start_date: startDate,
-            start_time: '55t6',
-            end_date: endDate,
-            end_time: '44884',
-            job_status: 'pending',
-          })
-          .then(() => {
-            setLoading(false);
-            Alert.alert('Data sent Successfully!');
-          })
-          .catch(() => {
-            Alert.alert('Data sent Successfully!');
-          });
-      }
-    } catch (error) {
-      Alert.alert('Server Error or user not found');
-      setLoading(false);
-    }
-  };
-  return (
-    <View>
-      <View style={styles.container}>
-        <ScrollView>
-          <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
-            style={styles.keyboard}>
-            <View>
-              <Text style={styles.title}>Add Appointment</Text>
-            </View>
-            <View style={styles.form}>
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                onChangeText={setFname}
-                placeholder="First Name"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                onChangeText={setLname}
-                placeholder="Last Name"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                onChangeText={setService}
-                placeholder="Service Type"
-              />
-              <View style={styles.inputStyle}>
-                <TextInput
-                  style={styles.dateText}
-                  value={startDate.toDateString()}
-                />
-                <Pressable
-                  style={styles.datePicker}
-                  onPress={() => setOpen(true)}>
-                  <Icon name="calendar" size={25} color="#000000" />
-                  <DatePicker
-                    modal
-                    open={open}
-                    date={startDate}
-                    onConfirm={startDate => {
-                      setOpen(false);
-                      setStartDate(startDate);
-                    }}
-                    onCancel={() => {
-                      setOpen(false);
-                    }}
-                  />
-                </Pressable>
-              </View>
-              <View style={styles.inputStyle}>
-                <TextInput
-                  style={styles.dateText}
-                  value={endDate.toDateString()}
-                />
-                <Pressable
-                  style={styles.datePicker}
-                  onPress={() => setOpen2(true)}>
-                  <Icon name="calendar" size={25} color="#000000" />
-                  <DatePicker
-                    modal
-                    open={open2}
-                    date={endDate}
-                    onConfirm={endDate => {
-                      setOpen2(false);
-                      setEndDate(endDate);
-                    }}
-                    onCancel={() => {
-                      setOpen2(false);
-                    }}
-                  />
-                </Pressable>
-              </View>
-              <Pressable
-                style={styles.pressBtn}
-                onPress={handleSaveAppointment}>
-                {isLoading ? (
-                  <ActivityIndicator
-                    color="white"
-                    style={styles.activityIndicator}
-                  />
-                ) : (
-                  <Text style={styles.pressTxt}>Add Appointment</Text>
-                )}
-              </Pressable>
-            </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
-      </View>
-    </View>
-  );
-}
 const AddProduct = () => {
   return (
     <View>
