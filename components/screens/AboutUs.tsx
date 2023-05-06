@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, ScrollView, Image} from 'react-native';
 
-export const AboutUs = () => {
+export default function AboutUs() {
   return (
     <ScrollView style={styles.aboutUsContainer}>
       <View style={styles.aboutUs}>
@@ -37,7 +37,8 @@ export const AboutUs = () => {
       </View>
     </ScrollView>
   );
-};
+}
+
 const styles = StyleSheet.create({
   text: {
     color: '#000',
