@@ -109,7 +109,11 @@ const Product = () => {
           component={ProductHome}
           initialParams={{username: username}}
         />
-        <Tab.Screen name="My Customer" component={TabCustomer} />
+        <Tab.Screen
+          name="My Customer"
+          component={TabCustomer}
+          initialParams={{username: username}}
+        />
         <Tab.Screen
           name="Tech Support"
           component={TabSupport}
