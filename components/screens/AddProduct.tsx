@@ -86,8 +86,8 @@ export function AddAppointment() {
         Alert.alert('Email or password must be provided');
       } else {
         setLoading(true);
-        await axios
-          .post('http://15.236.168.186:7000/api/v1/appointments/', {
+        await api
+          .post('appointments/', {
             patient_id: '75757',
             clinic_name: 'hghgg',
             fname: fname,
