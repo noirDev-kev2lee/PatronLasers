@@ -58,7 +58,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
 
         setLoading(true);
         await api
-          .post('appointment/', {
+          .post('appointments/', {
             patient_id: pid,
             clinic_name: clinicName,
             fname: fname,
