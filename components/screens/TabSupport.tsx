@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   keyboard: {flex: 1, padding: 30},
   activityIndicator: {
