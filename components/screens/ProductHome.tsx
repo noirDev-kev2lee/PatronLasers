@@ -388,7 +388,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 25,
     elevation: 100,
-
     backgroundColor: '#131035',
   },
   drawerList: {
@@ -410,8 +409,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   drawerName: {
+    fontFamily: 'poppins',
     color: '#DADADA',
-    fontSize: 25,
+    fontSize: 20,
   },
   lineContainer: {
     paddingVertical: 25,
