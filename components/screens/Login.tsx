@@ -49,6 +49,7 @@ const Login = ({navigation}: LoginProps) => {
           navigation.navigate('patient_home', {
             username: userName,
             email: userEmail,
+            lastname: lname,
           });
         }
       }
