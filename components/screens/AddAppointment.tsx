@@ -58,7 +58,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
 
         setLoading(true);
         await api
-          .post('appointment/', {
+          .post('appointments/', {
             patient_id: pid,
             clinic_name: clinicName,
             fname: fname,
@@ -70,9 +70,14 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             end_time: convertedEndTime,
             job_status: 'pending',
           })
-          .then(() => {
+          .then(res => {
+            const json = res.data;
             setLoading(false);
-            Alert.alert('Data sent Successfully!');
+            if (json.data.code === '23503') {
+              Alert.alert('Patient ID does not exist!');
+            } else {
+              Alert.alert('Appointment Registered Successfully!');
+            }
           })
           .catch(() => {
             setLoading(false);

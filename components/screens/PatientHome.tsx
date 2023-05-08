@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,11 +6,9 @@ import {
   ScrollView,
   Pressable,
   Modal,
-  Alert,
 } from 'react-native';
-import {useState} from 'react';
+import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {AddAppointment} from './AddProduct';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 
 export default function PatientHome({
@@ -20,37 +18,46 @@ export default function PatientHome({
   navigation: any;
   route: any;
 }) {
-  const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
-  const data = route.params as {username: string};
-  const {username} = data;
+  const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
+  const [patientData, setPatientData] = React.useState<any[]>([]);
+  const data = route.params as {
+    username: string;
+    email: string;
+    lastname: string;
+  };
+  const {username, email, lastname} = data;
+
+  React.useEffect(() => {
+    api
+      .get('http://15.236.168.186:7000/api/v1/patients/')
+      .then(res => setPatientData(res.data.rows));
+  }, []);
+  React.useEffect(() => {
+    api
+      .get('http://15.236.168.186:7000/api/v1/appointments/')
+      .then(res => setAppointmentData(res.data.rows));
+  }, []);
+
+  const patientList = patientData.filter(y => y.email === email);
+  const appointmentList = appointmentData.filter(
+    x => x.patient_id === patientList[0].patient_id,
+  );
+  const pendingList = appointmentList.filter(
+    pend => pend.job_status === 'pending',
+  );
+  const doneList = appointmentList.filter(done => done.job_status === 'done');
+  console.log(doneList);
+
   return (
     <View style={styles.mainContainer}>
       <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
-          <Icon2 name="user" size={42} color="#131035" />
+          <Icon2 name="user-circle-o" size={42} color="#131035" />
           <Text style={styles.welcomeNote}>Hello, {username}</Text>
         </View>
       </Pressable>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={AppointModalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setAppointModalVisible(!AppointModalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Pressable
-              style={styles.button}
-              onPress={() => setAppointModalVisible(!AppointModalVisible)}>
-              <Icon name="close" size={30} color={'#222'} />
-            </Pressable>
-            <AddAppointment />
-          </View>
-        </View>
-      </Modal>
+
       <Modal
         animationType="fade"
         transparent={true}
@@ -60,27 +67,49 @@ export default function PatientHome({
         }}>
         <View style={styles.drawerModal}>
           <View>
-            <Pressable
-              style={styles.drawerButton}
-              onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
-              <View style={styles.closeBntCont}>
-                <Icon name="close" size={30} color={'#222'} />
-              </View>
-            </Pressable>
-            {/* <Pressable>
-              <Text style={styles.drawerTxt}>Finacial Area</Text>
-            </Pressable> */}
-            <Pressable>
-              <Text style={styles.drawerTxt}>About</Text>
-            </Pressable>
-            <Pressable onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.drawerTxt2}>Sign Out</Text>
-            </Pressable>
+            <View>
+              <Pressable
+                style={styles.closeBntCont}
+                onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
+                <Icon name="close" size={30} color={'#DADADA'} />
+              </Pressable>
+            </View>
+            <View style={styles.drawerInfo}>
+              <Icon2 name="user-circle-o" size={58} color="#DADADA" />
+              <Text style={styles.drawerName}>
+                {username} {lastname}
+              </Text>
+            </View>
+            <View style={styles.lineContainer}>
+              <View style={styles.line} />
+            </View>
+            <View>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('About Us'),
+                ]}>
+                <View style={styles.drawerList}>
+                  <Icon name="profile" size={28} color={'#fff'} />
+                  <View style={styles.drawerTextCon}>
+                    <Text style={styles.drawerTxt}>About</Text>
+                  </View>
+                </View>
+              </Pressable>
+              <Pressable onPress={() => navigation.navigate('Login')}>
+                <View style={styles.drawerList}>
+                  <Icon name="logout" size={28} color={'#fff'} />
+                  <View style={styles.drawerTextCon}>
+                    <Text style={styles.drawerTxt}>Sign out </Text>
+                  </View>
+                </View>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
       {/* pending appointment */}
-      <View>
+      <View style={{paddingTop: 20}}>
         <Text style={styles.pendingText}>Pending Appointment</Text>
       </View>
       <ScrollView
@@ -89,22 +118,40 @@ export default function PatientHome({
         horizontal
         style={styles.scroll}>
         <View style={styles.scrollContainer}>
-          <View style={[styles.RecCard1]}>
-            <View style={styles.RecCardInfo1}>
-              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
-              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Status: Pending</Text>
+          {pendingList.length === 0 ? (
+            <View>
+              <Text style={styles.notAvailable}>No appointment available</Text>
             </View>
-          </View>
-          <View style={[styles.RecCard1]}>
-            <View style={styles.RecCardInfo1}>
-              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
-              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Status: Pending</Text>
+          ) : (
+            <View>
+              {pendingList.map(pending => (
+                <View key={pending.id}>
+                  <View style={[styles.RecCard1]}>
+                    <View style={styles.RecCardInfo1}>
+                      <Text style={styles.appointTitle1}>
+                        Service:{pending.service_type}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        Clinic:{pending.clinic_name}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        {pending.start_date}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        {pending.end_date}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        {pending.start_time} - {pending.end_time}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        Status:{pending.job_status}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              ))}
             </View>
-          </View>
+          )}
         </View>
       </ScrollView>
       {/* done appointment */}
@@ -117,29 +164,42 @@ export default function PatientHome({
         horizontal
         style={styles.scroll}>
         <View style={styles.scrollContainer}>
-          <View style={[styles.RecCard1]}>
-            <View style={styles.RecCardInfo1}>
-              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
-              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Status: Done</Text>
+          {doneList.length === 0 ? (
+            <View>
+              <Text style={styles.notAvailable}>No appointment available</Text>
             </View>
-          </View>
-          <View style={[styles.RecCard1]}>
-            <View style={styles.RecCardInfo1}>
-              <Text style={styles.appointTitle1}>Service: Tatoo Removal</Text>
-              <Text style={styles.appointTitle2}>Clinic: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Date: Israel Clinic</Text>
-              <Text style={styles.appointTitle2}>Status: Done</Text>
+          ) : (
+            <View>
+              {doneList.map(pending => (
+                <View key={pending.id}>
+                  <View style={[styles.RecCard1]}>
+                    <View style={styles.RecCardInfo1}>
+                      <Text style={styles.appointTitle1}>
+                        Service:{pending.service_type}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        Clinic:{pending.clinic_name}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        {pending.start_date}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        {pending.end_date}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        {pending.start_time} - {pending.end_time}
+                      </Text>
+                      <Text style={styles.appointTitle2}>
+                        Status:{pending.job_status}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              ))}
             </View>
-          </View>
+          )}
         </View>
       </ScrollView>
-      <Pressable
-        style={styles.floatingBtn}
-        onPress={() => setAppointModalVisible(true)}>
-        <Icon name="pluscircle" size={60} color="#777" />
-      </Pressable>
     </View>
   );
 }
@@ -153,6 +213,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexDirection: 'row',
+    paddingTop: 20,
   },
   heading: {
     marginLeft: 10,
@@ -169,47 +230,43 @@ const styles = StyleSheet.create({
   RecCardInfo1: {
     height: 300,
     width: 250,
-    textAlign: 'justify',
   },
   RecCard1: {
-    flex: 1,
     width: 330,
-    height: 200,
-    marginTop: 10,
+    height: 250,
     marginLeft: 20,
     borderRadius: 10,
     elevation: 10,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
-    paddingVertical: 25,
+    paddingVertical: 20,
   },
   appointTitle1: {
-    fontFamily: 'Roboto',
+    fontFamily: 'poppins',
     fontWeight: '600',
     fontSize: 19,
     color: '#222',
   },
   appointTitle2: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: 'poppins',
     fontSize: 19,
     color: '#555',
-    textAlign: 'justify',
   },
   appointInfo: {
     width: 300,
     padding: 10,
     textAlign: 'left',
-    fontFamily: 'Inter',
+    fontFamily: 'poppins',
     fontSize: 14,
     color: '#777',
   },
   pendingText: {
-    fontFamily: 'Roboto',
+    fontFamily: 'poppins',
     fontSize: 19,
     color: 'red',
   },
   doneText: {
-    fontFamily: 'Roboto',
+    fontFamily: 'poppins',
     fontSize: 19,
     color: 'green',
   },
@@ -242,32 +299,47 @@ const styles = StyleSheet.create({
     left: 140,
   },
   drawerModal: {
-    top: 100,
-    left: 60,
-    height: 170,
-    width: 230,
-    elevation: 100,
-    borderTopLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    backgroundColor: '#f1f1f1',
+    top: 41,
+    left: 0,
+    height: '100%',
+    width: 270,
     paddingHorizontal: 25,
-    paddingVertical: 12,
+    paddingVertical: 25,
+    elevation: 100,
+    backgroundColor: '#131035',
   },
   closeBntCont: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
+  drawerInfo: {
+    flexDirection: 'column',
+  },
+  drawerName: {
+    fontFamily: 'poppins',
+    marginTop: 10,
+    color: '#DADADA',
+    fontSize: 20,
+  },
+  drawerTextCon: {
+    paddingLeft: 20,
+  },
+  drawerList: {
+    flexDirection: 'row',
+    paddingBottom: 25,
+  },
+  lineContainer: {
+    paddingVertical: 25,
+  },
+  line: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#DADADA',
+  },
   drawerButton: {},
   drawerTxt: {
-    right: -10,
-    fontSize: 25,
-    paddingBottom: 30,
-    color: '#222',
-  },
-  drawerTxt2: {
-    fontSize: 18,
-    backgroundColor: '#f1f1f1',
-    color: '#222',
+    fontSize: 20,
+    color: '#DADADA',
   },
   welcome: {
     flexDirection: 'row',
@@ -277,5 +349,7 @@ const styles = StyleSheet.create({
   welcomeNote: {
     fontSize: 15,
     color: 'black',
+    marginLeft: 10,
   },
+  notAvailable: {color: 'black', fontFamily: 'poppins', fontSize: 18},
 });

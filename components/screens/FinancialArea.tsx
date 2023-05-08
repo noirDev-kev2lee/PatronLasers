@@ -3,8 +3,10 @@ import {View, Text} from 'react-native';
 
 const FinancialArea = () => {
   return (
-    <View>
-      <Text>Coming soon....</Text>
+    <View style={{paddingTop: 40}}>
+      <Text style={{color: 'black', textAlign: 'center', fontSize: 20}}>
+        Coming soon....
+      </Text>
     </View>
   );
 };

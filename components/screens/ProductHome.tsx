@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
-import Icon4 from 'react-native-vector-icons/Feather';
 import AddProduct from './AddProduct';
 import {
   widthPercentageToDP as wp,
@@ -93,7 +92,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               </Pressable>
             </View>
             <View style={styles.drawerInfo}>
-              <Icon2 name="user" size={72} color="#DADADA" />
+              <Icon2 name="user-circle-o" size={58} color="#DADADA" />
               <Text style={styles.drawerName}>{username}</Text>
             </View>
             <View style={styles.lineContainer}>
@@ -108,7 +107,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                 <View style={styles.drawerList}>
                   <Icon2 name="money" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
-                    <Text style={styles.drawerTxt}>Finacial</Text>
+                    <Text style={styles.drawerTxt}>financial</Text>
                   </View>
                 </View>
               </Pressable>
@@ -118,7 +117,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                   navigation.navigate('About Us'),
                 ]}>
                 <View style={styles.drawerList}>
-                  <Icon2 name="book" size={30} color={'#fff'} />
+                  <Icon name="profile" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
                     <Text style={styles.drawerTxt}>About</Text>
                   </View>
@@ -126,7 +125,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               </Pressable>
               <Pressable onPress={() => navigation.navigate('Login')}>
                 <View style={styles.drawerList}>
-                  <Icon4 name="log-out" size={30} color={'#fff'} />
+                  <Icon name="logout" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
                     <Text style={styles.drawerTxt}>Sign out </Text>
                   </View>
@@ -136,9 +135,10 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
           </View>
         </View>
       </Modal>
+      {/* welcome note and open drawer */}
       <Pressable onPress={() => setdrawerModalVisible(true)}>
         <View style={styles.welcome}>
-          <Icon2 name="user" size={42} color="#131035" />
+          <Icon2 name="user-circle-o" size={42} color="#131035" />
           <Text style={styles.welcomeNote}>Hello, {username}</Text>
         </View>
       </Pressable>
@@ -227,6 +227,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   welcomeNote: {
+    fontFamily: 'poppins',
+    marginLeft: 10,
     fontSize: 15,
     color: 'black',
   },
@@ -235,7 +237,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   scrollHeader: {
-    fontFamily: 'Inter',
+    fontFamily: 'poppins',
     fontWeight: '700',
     fontSize: 15,
     textTransform: 'uppercase',
@@ -388,7 +390,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingVertical: 25,
     elevation: 100,
-
     backgroundColor: '#131035',
   },
   drawerList: {
@@ -405,13 +406,16 @@ const styles = StyleSheet.create({
   drawerTxt: {
     fontSize: 20,
     color: '#DADADA',
+    textTransform: 'capitalize',
   },
   drawerInfo: {
     flexDirection: 'column',
   },
   drawerName: {
+    fontFamily: 'poppins',
+    marginTop: 10,
     color: '#DADADA',
-    fontSize: 25,
+    fontSize: 20,
   },
   lineContainer: {
     paddingVertical: 25,
