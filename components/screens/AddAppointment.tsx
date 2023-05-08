@@ -76,7 +76,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             if (json.data.code === '23503') {
               Alert.alert('Patient ID does not exist!');
             } else {
-              Alert.alert('Data sent Successfully!');
+              Alert.alert('Appointment Registered Successfully!');
             }
           })
           .catch(() => {
