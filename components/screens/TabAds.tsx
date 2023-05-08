@@ -12,7 +12,7 @@ import React from 'react';
 const productList = [
   {
     id: 0,
-    name: 'Box',
+    name: 'Boxa',
     category: 'Hair removal devices',
     img: require('../assets/product1.png'),
     desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     height: 180,
   },
   scrollHeader: {
-    fontFamily: 'Roboto',
+    fontFamily: 'poppins',
     fontSize: 18,
     textTransform: 'uppercase',
     textAlign: 'left',
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 20,
+    paddingHorizontal: 20,
   },
   scrollsec: {
     flexDirection: 'row',
@@ -152,7 +153,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   RecCard: {
-    flex: 1,
     flexDirection: 'row-reverse',
     width: 380,
     height: 'auto',
