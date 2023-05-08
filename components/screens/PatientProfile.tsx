@@ -1,9 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
+import api from '../utils/api';
 
-export default function PatientProfile({navigation, route}) {
+export default function PatientProfile({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) {
   const [patientData, setPatientData] = React.useState<any[]>([]);
 
   const data = route.params as {username: string; email: string};
@@ -11,7 +17,7 @@ export default function PatientProfile({navigation, route}) {
   const firstLetter = username.charAt(0);
 
   React.useEffect(() => {
-    axios
+    api
       .get('http://15.236.168.186:7000/api/v1/patients/')
       .then(res => setPatientData(res.data.rows));
   }, []);

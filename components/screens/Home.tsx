@@ -1,7 +1,7 @@
 import {View, StyleSheet, Pressable, Text, Image} from 'react-native';
 import React from 'react';
 
-export default function Home({navigation}) {
+export default function Home({navigation}: {navigation: any}) {
   return (
     <View style={styles.container}>
       <View>

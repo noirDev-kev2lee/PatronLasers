@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 
 import React from 'react';
-// import Product from './Product';
+
 const productList = [
   {
     id: 0,
-    name: 'Box',
+    name: 'Boxa',
     category: 'Hair removal devices',
     img: require('../assets/product1.png'),
     desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
@@ -38,7 +38,7 @@ const productList = [
   },
 ];
 
-const ProductHome = ({navigation}) => {
+const ProductHome = ({navigation}: {navigation: any}) => {
   return (
     <View style={styles.container}>
       <View>
@@ -116,25 +116,25 @@ const styles = StyleSheet.create({
     height: 180,
   },
   scrollHeader: {
-    fontFamily: 'Roboto',
+    fontFamily: 'poppins',
     fontSize: 18,
     textTransform: 'uppercase',
     textAlign: 'left',
     marginTop: 10,
-     marginBottom: 20,
+    marginBottom: 20,
     color: '#222',
   },
   container: {
     flex: 1,
-    marginHorizontal: 20,
     paddingVertical: 20,
+    paddingHorizontal: 20,
   },
   scrollsec: {
     flexDirection: 'row',
     marginVertical: 5,
   },
   containersec: {
-    height: 470,
+    height: 450,
     flexDirection: 'column',
   },
   card: {
@@ -153,7 +153,6 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   RecCard: {
-    flex: 1,
     flexDirection: 'row-reverse',
     width: 380,
     height: 'auto',

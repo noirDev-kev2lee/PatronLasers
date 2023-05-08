@@ -11,12 +11,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React, {useEffect} from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function Register({navigation}) {
+export default function Register({navigation}: {navigation: any}) {
   const [disableButton, setDisableButton] = React.useState(true);
   const [passwordError, setPasswordError] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
@@ -73,16 +73,13 @@ export default function Register({navigation}) {
         setLoading(true);
         // add to clinic table
         try {
-          const response = await axios.post(
-            'http://15.236.168.186:7000/api/v1/clinics/',
-            {
-              serial_number: serialNumber,
-              clinic_name: clinicName,
-              clinic_location: location,
-              email: email,
-              phone: mobile,
-            },
-          );
+          const response = await api.post('clinics/', {
+            serial_number: serialNumber,
+            clinic_name: clinicName,
+            clinic_location: location,
+            email: email,
+            phone: mobile,
+          });
           const json = response.data;
           if (json.data.code === '23503') {
             Alert.alert('Error occurs!, serial number not found');
@@ -92,9 +89,14 @@ export default function Register({navigation}) {
             Alert.alert('Error occurs!, clinic name already exists');
             setLoading(false);
           } else {
+            await api.post('purchases/', {
+              serial_number: serialNumber,
+              clinic_name: clinicName,
+              product_name: 'default',
+            });
             // add to user table
-            await axios
-              .post('http://15.236.168.186:7000/api/v1/signup/', {
+            await api
+              .post('signup/', {
                 first_name: clinicName,
                 last_name: serialNumber,
                 email: email,
@@ -103,7 +105,6 @@ export default function Register({navigation}) {
               })
               .then(res => {
                 const signupData = res.data;
-                console.log();
                 if (signupData.data.data.code === '23505') {
                   setLoading(false);
                   Alert.alert('Error occurs!,user already exists.');

@@ -1,11 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, Button, Text, Platform} from 'react-native';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import {StyleSheet, View} from 'react-native';
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useRoute} from '@react-navigation/native';
@@ -14,55 +9,12 @@ import TabsAds from './TabAds';
 import TabCustomer from './TabCustomer';
 import TabGuide from './TabGuide';
 import TabSupport from './TabSupport';
-function Feed({navigation}) {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Feed Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
-    </View>
-  );
-}
 
-function Notifications() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Notifications Screen</Text>
-    </View>
-  );
-}
-const Drawer = createDrawerNavigator();
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator
-      drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Feed" component={Feed} />
-      <Drawer.Screen name="Notifications" component={Notifications} />
-    </Drawer.Navigator>
-  );
-}
 const Tab = createBottomTabNavigator();
 
-const screenOptions = ({route}: {route: {name: string}}) => ({
+const screenOptions = ({route}: {route: any}) => ({
   tabBarIcon: ({color, size}: {color: string; size: number}) => {
     let iconName;
-    let iosName;
 
     switch (route.name) {
       case 'Home':
@@ -97,8 +49,8 @@ const screenOptions = ({route}: {route: {name: string}}) => ({
 
 const Product = () => {
   const route = useRoute();
-  const data = route.params as {username: string};
-  const {username} = data;
+  const data = route.params as {username: string; lastname: string};
+  const {username, lastname} = data;
 
   return (
     <View style={styles.container}>
@@ -110,8 +62,16 @@ const Product = () => {
           component={ProductHome}
           initialParams={{username: username}}
         />
-        <Tab.Screen name="My Customer" component={TabCustomer} />
-        <Tab.Screen name="Tech Support" component={TabSupport} />
+        <Tab.Screen
+          name="My Customer"
+          component={TabCustomer}
+          initialParams={{username: username}}
+        />
+        <Tab.Screen
+          name="Tech Support"
+          component={TabSupport}
+          initialParams={{username: username, lastname: lastname}}
+        />
       </Tab.Navigator>
     </View>
   );
