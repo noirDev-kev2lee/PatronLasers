@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   containersec: {
     margin: 5,
-    height: hp('35%'),
+    height: '50%',
     flexDirection: 'column',
   },
   card: {
