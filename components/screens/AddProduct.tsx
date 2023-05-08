@@ -22,8 +22,13 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
         clinic_name: clinicName,
         product_name: productName,
       })
-      .then(() => {
-        Alert.alert('Product added successfuly!');
+      .then(res => {
+        const json = res.data;
+        if (json.data.code === '23505') {
+          Alert.alert('Product Already taken!');
+        } else {
+          Alert.alert('Product added successfuly!');
+        }
       })
       .catch(() => {
         Alert.alert('Error occurs!');
