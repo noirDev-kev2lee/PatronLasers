@@ -16,7 +16,7 @@ import api from '../utils/api';
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const AddCustomer = ({navigation}: {navigation: any}) => {
+const AddCustomer = () => {
   const [disableButton, setDisableButton] = React.useState(true);
   const [isLoading, setLoading] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
@@ -101,7 +101,6 @@ const AddCustomer = ({navigation}: {navigation: any}) => {
             });
             setLoading(false);
             Alert.alert('Registration Successfully!');
-            navigation.navigate('Products');
           }
         } catch (error) {
           setLoading(true);
