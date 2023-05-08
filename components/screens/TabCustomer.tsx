@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Pressable,
@@ -7,157 +7,64 @@ import {
   Text,
   View,
 } from 'react-native';
-import {useState} from 'react';
+import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import {Modal} from 'react-native';
 import AddAppointment from './AddAppointment';
 const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [patientData, setPatientData] = React.useState<any[]>([]);
+  const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
   const data = route.params as {username: string};
   const {username} = data;
 
-  const customerList = [
-    {
-      id: 0,
-      first_name: 'Jane',
-      last_name: 'Kunambi',
-      age: 20,
-      gender: 'Female',
-      phone: '972541234567',
-      email: 'info@user.com',
-    },
-    {
-      id: 1,
-      first_name: 'Jane',
-      last_name: 'Kunambi',
-      age: 20,
-      gender: 'Female',
-      phone: '972541234567',
-      email: 'info@user.com',
-    },
-    {
-      id: 2,
-      first_name: 'Jane',
-      last_name: 'Kunambi',
-      age: 20,
-      gender: 'Female',
-      phone: '972541234567',
-      email: 'info@user.com',
-    },
-    {
-      id: 3,
-      first_name: 'Jane',
-      last_name: 'Kunambi',
-      age: 20,
-      gender: 'Female',
-      phone: '972541234567',
-      email: 'info@user.com',
-    },
-    {
-      id: 4,
-      first_name: 'Jane',
-      last_name: 'Kunambi',
-      age: 20,
-      gender: 'Female',
-      phone: '972541234567',
-      email: 'info@user.com',
-    },
-  ];
-  const AppointmentList = [
-    {
-      id: 0,
-      fname: 'jane',
-      lname: 'kunambi',
-      service: 'Hair Removal',
-      start_date: 'Sun May 07 2023',
-      end_date: 'Sun May 08 2023',
-      start_time: '11:54',
-      end_time: '12:54',
-      status: 'Pending',
-    },
-    {
-      id: 1,
-      fname: 'Anna',
-      lname: 'kituli',
-      service: 'Hair Removal',
-      start_date: 'Sun May 07 2023',
-      end_date: 'Sun May 08 2023',
-      start_time: '11:54',
-      end_time: '12:54',
-      status: 'Pending',
-    },
-    {
-      id: 2,
-      fname: 'Doris',
-      lname: 'Hatibu',
-      service: 'Hair Removal',
-      start_date: 'Sun May 07 2023',
-      end_date: 'Sun May 08 2023',
-      start_time: '11:54',
-      end_time: '12:54',
-      status: 'Done',
-    },
-    {
-      id: 3,
-      fname: 'Paula',
-      lname: 'Kajala',
-      service: 'Hair Removal',
-      start_date: 'Sun May 07 2023',
-      end_date: 'Sun May 08 2023',
-      start_time: '11:54',
-      end_time: '12:54',
-      status: 'Pending',
-    },
-    {
-      id: 4,
-      fname: 'Airah',
-      lname: 'Rose',
-      service: 'Hair Removal',
-      start_date: 'Sun May 07 2023',
-      end_date: 'Sun May 08 2023',
-      start_time: '11:54',
-      end_time: '12:54',
-      status: 'Done',
-    },
-  ];
-  const handleDonePress = () => {
-    setModalVisible(false);
+  React.useEffect(() => {
+    api
+      .get('http://15.236.168.186:7000/api/v1/patients/')
+      .then(res => setPatientData(res.data.rows));
+  }, [patientData]);
+  React.useEffect(() => {
+    api
+      .get('http://15.236.168.186:7000/api/v1/appointments/')
+      .then(res => setAppointmentData(res.data.rows));
+  }, [appointmentData]);
+
+  const patientList = patientData.filter(y => y.clinic_name === username);
+  const appointmentList = appointmentData.filter(
+    x => x.clinic_name === username,
+  );
+  const handleDonePress = async appointData => {
+    await api
+      .put(`appointments/${appointData.id}`, {
+        id: appointData.id,
+        appt_id: appointData.appt_id,
+        patient_id: appointData.patient_id,
+        clinic_name: appointData.clinic_name,
+        fname: appointData.fname,
+        lname: appointData.lname,
+        service_type: appointData.service_type,
+        start_date: appointData.start_date,
+        start_time: appointData.start_time,
+        end_date: appointData.end_date,
+        end_time: appointData.end_time,
+        job_status: 'done',
+      })
+      .then(res => {
+        const json = res.data;
+        if (json.data.code === '23503') {
+          Alert.alert('Patient ID does not exist!');
+        } else {
+          Alert.alert('Set done Successfully!');
+        }
+      })
+      .catch(() => {
+        Alert.alert('Error occurs!');
+      });
   };
 
-  const handleCancelPress = () => {
-    setModalVisible(false);
-  };
   return (
     <View style={styles.mainContainer}>
-      {/* Done and cancel modal */}
-      <Modal visible={modalVisible} animationType="fade" transparent={true}>
-        <Pressable style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalCloseIcon}>
-              <Pressable onPress={() => setModalVisible(false)}>
-                <Icon name="close" size={25} color={'#222'} />
-              </Pressable>
-            </View>
-            <View style={styles.buttonContainer}>
-              <Pressable
-                style={[
-                  styles.modalButton,
-                  {marginBottom: 10, backgroundColor: 'green'},
-                ]}
-                onPress={handleDonePress}>
-                <Text style={styles.modalBtnText}>Done</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.modalButton, {backgroundColor: '#B30000'}]}
-                onPress={handleCancelPress}>
-                <Text style={styles.modalBtnText}>Cancel</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Pressable>
-      </Modal>
       {/* Modal to add new appointment */}
       <Modal
         animationType="slide"
@@ -199,43 +106,67 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
             <Text style={styles.listTitle}>My Customers</Text>
           </View>
           <ScrollView style={styles.listScroll}>
-            {customerList.map(customer => (
-              <>
-                <View key={customer.id} style={[styles.customerCard]}>
-                  <View style={styles.customerImg}>
-                    <Text style={styles.profileLetter}>
-                      {customer.first_name.charAt(0)}
-                    </Text>
-                  </View>
-                  <View style={styles.RecCardInfo}>
-                    <View style={styles.infoGroup}>
-                      <Text style={styles.RecCardTitle}>
-                        {customer.first_name} {customer.last_name}
-                      </Text>
-                    </View>
-                    <View style={styles.infoGroup}>
-                      <Text style={styles.RecCardPara}>{customer.age}</Text>
-                      <Text style={[styles.RecCardPara, {marginLeft: 15}]}>
-                        {customer.gender}
-                      </Text>
-                    </View>
-                    <View style={styles.infoGroup}>
-                      <View>
-                        <Text style={styles.RecCardPara}>{customer.phone}</Text>
-                      </View>
-                      <View>
-                        <Text style={[styles.RecCardPara, {marginLeft: 15}]}>
-                          {customer.email}
+            {patientList.length === 0 ? (
+              <View>
+                <Text style={{color: 'red', paddingLeft: 20}}>
+                  No available customers
+                </Text>
+              </View>
+            ) : (
+              <View>
+                {patientList.map((customer: any) => (
+                  <View key={customer.id}>
+                    <View style={[styles.customerCard]}>
+                      <View style={styles.customerImg}>
+                        <Text style={styles.profileLetter}>
+                          {customer.first_name.charAt(0)}
                         </Text>
                       </View>
+                      <View style={styles.RecCardInfo}>
+                        <View style={styles.infoGroup}>
+                          <Text style={styles.idTitle}>
+                            {customer.patient_id}
+                          </Text>
+                        </View>
+                        <View style={styles.infoGroup}>
+                          <Text style={styles.RecCardTitle}>
+                            {customer.first_name} {customer.last_name}
+                          </Text>
+                        </View>
+                        <View style={styles.infoGroup}>
+                          <Text style={styles.RecCardPara}>
+                            Age:{customer.age}
+                          </Text>
+                          <Text
+                            style={[
+                              styles.RecCardPara,
+                              {marginLeft: 15, textTransform: 'capitalize'},
+                            ]}>
+                            Gender:{customer.gender}
+                          </Text>
+                        </View>
+                        <View style={styles.infoGroup}>
+                          <View>
+                            <Text style={styles.RecCardPara}>
+                              +{customer.phone}
+                            </Text>
+                          </View>
+                          <View>
+                            <Text
+                              style={[styles.RecCardPara, {marginLeft: 15}]}>
+                              {customer.email}
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                    <View style={styles.lineContainer}>
+                      <View style={styles.line} />
                     </View>
                   </View>
-                </View>
-                <View style={styles.lineContainer}>
-                  <View style={styles.line} />
-                </View>
-              </>
-            ))}
+                ))}
+              </View>
+            )}
           </ScrollView>
         </View>
         {/* appointments list */}
@@ -244,72 +175,91 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
             <Text style={styles.listTitle}>Appointments</Text>
           </View>
           <ScrollView style={styles.listScroll}>
-            {AppointmentList.map(y => (
-              <>
-                <View key={y.id} style={[styles.RecCard]}>
-                  <View style={styles.customerImg}>
-                    <Text style={styles.profileLetter}>
-                      {y.fname.charAt(0)}
-                    </Text>
+            {appointmentList.length === 0 ? (
+              <View>
+                <Text style={{color: 'red', paddingLeft: 20}}>
+                  No available appointments
+                </Text>
+              </View>
+            ) : (
+              <View>
+                {appointmentList.map(y => (
+                  <View key={y.id}>
+                    <View style={[styles.RecCard]}>
+                      <View style={styles.customerImg}>
+                        <Text style={styles.profileLetter}>
+                          {y.fname.charAt(0)}
+                        </Text>
+                      </View>
+                      <View style={styles.RecCardInfo}>
+                        <View style={styles.nameContainer}>
+                          <Text style={styles.RecCardTitle}>
+                            {y.fname} {y.lname}
+                          </Text>
+                          <Pressable
+                            style={styles.doneBtn}
+                            onPress={() => handleDonePress(y)}>
+                            <Text style={{color: 'white'}}>Set to Done</Text>
+                          </Pressable>
+                        </View>
+                        <Text style={styles.subTitle}>{y.service_type}</Text>
+                        <View style={styles.timeContainer}>
+                          <View
+                            style={[styles.dateTimeCont, {marginRight: 20}]}>
+                            <Icon2
+                              style={{marginRight: 5}}
+                              name="calendar"
+                              size={20}
+                              color={'green'}
+                            />
+                            <Text style={styles.startDateText}>
+                              {y.start_date}
+                            </Text>
+                          </View>
+                          <View style={styles.dateTimeCont}>
+                            <Icon2
+                              style={{marginRight: 5}}
+                              name="clock-o"
+                              size={25}
+                              color={'green'}
+                            />
+                            <Text style={styles.startDateText}>
+                              {y.start_time}
+                            </Text>
+                          </View>
+                        </View>
+                        <View style={styles.timeContainer}>
+                          <View
+                            style={[styles.dateTimeCont, {marginRight: 20}]}>
+                            <Icon2
+                              style={{marginRight: 5}}
+                              name="calendar"
+                              size={20}
+                              color={'#B30000'}
+                            />
+                            <Text style={styles.endDateText}>{y.end_date}</Text>
+                          </View>
+                          <View style={styles.dateTimeCont}>
+                            <Icon2
+                              style={{marginRight: 5}}
+                              name="clock-o"
+                              size={25}
+                              color={'#B30000'}
+                            />
+                            <Text style={styles.endDateText}>{y.end_time}</Text>
+                          </View>
+                        </View>
+                        <Text style={styles.RecCardPara}>{y.job_status}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.lineContainer}>
+                      <View style={styles.line} />
+                    </View>
+                    {/* Done and cancel modal */}
                   </View>
-                  <View style={styles.RecCardInfo}>
-                    <View style={styles.nameContainer}>
-                      <Text style={styles.RecCardTitle}>
-                        {y.fname} {y.lname}
-                      </Text>
-                      <Pressable onPress={() => setModalVisible(true)}>
-                        <Icon name="ellipsis1" size={30} color="black" />
-                      </Pressable>
-                    </View>
-                    <Text style={styles.subTitle}>{y.service}</Text>
-                    <View style={styles.timeContainer}>
-                      <View style={[styles.dateTimeCont, {marginRight: 20}]}>
-                        <Icon2
-                          style={{marginRight: 5}}
-                          name="calendar"
-                          size={20}
-                          color={'green'}
-                        />
-                        <Text style={styles.startDateText}>{y.start_date}</Text>
-                      </View>
-                      <View style={styles.dateTimeCont}>
-                        <Icon2
-                          style={{marginRight: 5}}
-                          name="clock-o"
-                          size={25}
-                          color={'green'}
-                        />
-                        <Text style={styles.startDateText}>{y.start_time}</Text>
-                      </View>
-                    </View>
-                    <View style={styles.timeContainer}>
-                      <View style={[styles.dateTimeCont, {marginRight: 20}]}>
-                        <Icon2
-                          style={{marginRight: 5}}
-                          name="calendar"
-                          size={20}
-                          color={'#B30000'}
-                        />
-                        <Text style={styles.endDateText}>{y.start_date}</Text>
-                      </View>
-                      <View style={styles.dateTimeCont}>
-                        <Icon2
-                          style={{marginRight: 5}}
-                          name="clock-o"
-                          size={25}
-                          color={'#B30000'}
-                        />
-                        <Text style={styles.endDateText}>{y.start_time}</Text>
-                      </View>
-                    </View>
-                    <Text style={styles.RecCardPara}>{y.status}</Text>
-                  </View>
-                </View>
-                <View style={styles.lineContainer}>
-                  <View style={styles.line} />
-                </View>
-              </>
-            ))}
+                ))}
+              </View>
+            )}
           </ScrollView>
         </View>
       </ScrollView>
@@ -399,6 +349,13 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     color: '#36454F',
   },
+  idTitle: {
+    fontFamily: 'poppins',
+    fontWeight: 'bold',
+    fontSize: 20,
+    textTransform: 'uppercase',
+    color: '#36454F',
+  },
   subTitle: {
     fontFamily: 'poppins',
     fontWeight: '500',
@@ -414,6 +371,7 @@ const styles = StyleSheet.create({
     fontFamily: 'poppins',
     fontSize: 16,
     color: '#222',
+    textTransform: 'capitalize',
   },
   startDateText: {
     fontFamily: 'poppins',
@@ -532,5 +490,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
     paddingVertical: 12,
     borderRadius: 4,
+  },
+  doneBtn: {
+    backgroundColor: 'green',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    borderRadius: 10,
   },
 });
