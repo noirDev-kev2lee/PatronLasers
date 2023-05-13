@@ -217,7 +217,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
 };
 
 export default ProductHome;
-
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
   mainContainer: {
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   },
   containersec: {
     margin: 5,
-    height: hp('35%'),
+    height:height * 0.35,
     flexDirection: 'column',
   },
   card: {
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
   },
   prodImgSmall: {
     margin: -5,
-    height: hp('18%'),
+    height:hp('18%'),
     width: 240,
     resizeMode: 'contain',
   },
