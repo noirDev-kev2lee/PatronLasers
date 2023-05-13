@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import { Dimensions } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import theme from '@react-navigation/native';
@@ -20,6 +21,7 @@ import ProductHome from './components/screens/ProductHome';
 import ChangePassword from './components/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
+const { width, height } = Dimensions.get('window');
 
 const appTheme = {
   colors: {
