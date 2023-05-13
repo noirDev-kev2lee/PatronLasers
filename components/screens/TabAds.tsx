@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 20,
-    paddingHorizontal: 20,
+    marginHorizontal:10
   },
   scrollsec: {
     flexDirection: 'row',
@@ -154,9 +154,9 @@ const styles = StyleSheet.create({
   },
   RecCard: {
     flexDirection: 'row-reverse',
-    width: 380,
+    width: 370,
     height: 'auto',
-    margin: 10,
+    margin: 8,
     borderRadius: 10,
     elevation: 10,
     backgroundColor: '#fff',
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 150,
     marginTop: 3,
-    marginHorizontal: 8,
+    marginHorizontal: 5,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
