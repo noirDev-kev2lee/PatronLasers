@@ -3,12 +3,10 @@ import React from 'react';
 import { Dimensions } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import theme from '@react-navigation/native';
 import ProductCard from './components/screens/ProductCard';
-import AddProduct, {
-  AboutUs,
-  FinancialArea,
-} from './components/screens/AddProduct';
+import FinancialArea from './components/screens/FinancialArea';
+import AddCustomer from './components/screens/AddCustomer';
+import AboutUs from './components/screens/AboutUs';
 import Login from './components/screens/Login';
 import GuideCard from './components/screens/GuideCard';
 import Register from './components/screens/Register';
@@ -23,18 +21,9 @@ import ChangePassword from './components/screens/ChangePassword';
 const Stack = createNativeStackNavigator();
 const { width, height } = Dimensions.get('window');
 
-const appTheme = {
-  colors: {
-    primary: '#111113',
-    background: '#fff',
-    card: '#fff',
-    text: '#fff',
-  },
-};
-
 function App() {
   return (
-    <NavigationContainer theme={appTheme}>
+    <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
@@ -192,22 +181,23 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-        <Stack.Screen
-          name="Add Product"
-          component={AddProduct}
-          options={{
-            title: '',
-            headerShown: false,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: '#111113',
-            },
-            headerTintColor: '#fff',
-          }}
-        />
+
         <Stack.Screen
           name="Finacial Area"
           component={FinancialArea}
+          options={{
+            title: 'Finacial Area',
+            headerShown: true,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTintColor: '#222',
+          }}
+        />
+        <Stack.Screen
+          name="addCustomer"
+          component={AddCustomer}
           options={{
             title: 'Finacial Area',
             headerShown: true,

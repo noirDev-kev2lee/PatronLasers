@@ -11,43 +11,44 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import axios from 'axios';
+import api from '../utils/api';
 
-const TabSupport = () => {
+const TabSupport = ({route}: {route: any}) => {
   const [isLoading, setLoading] = React.useState(false);
   const [cardType, onCardTpyeChange] = React.useState('');
-  const [serialNumber, onSerialNumberChange] = React.useState('');
   const [cardTitle, onCardTitleChange] = React.useState('');
   const [desc, onDescChange] = React.useState('');
 
+  const data = route.params as {username: string; lastname: string};
+  const {username, lastname} = data;
+
   const handleSupportRegister = async () => {
     try {
-      if (
-        cardType === '' ||
-        cardTitle === '' ||
-        serialNumber === '' ||
-        desc === ''
-      ) {
+      if (cardType === '' || cardTitle === '' || desc === '') {
         Alert.alert('All field must be provided');
       } else {
         setLoading(true);
-        // add to support table
         try {
-          await axios.post('http://15.236.168.186:7000/api/v1/supports/', {
-            clinic_id: 1235,
-            serial_number: serialNumber,
-            card_type: cardType,
-            card_title: cardTitle,
-            descriptions: 'hello',
-          });
+          await api
+            .post('supports/', {
+              clinic_name: username,
+              serial_number: lastname,
+              card_type: cardType,
+              card_title: cardTitle,
+              descriptions: desc,
+            })
+            .then(() => {
+              Alert.alert('Support sent');
+              setLoading(false);
+            });
         } catch (err) {
-           setLoading(false);
+          setLoading(false);
           Alert.alert('Error occurs!');
         }
       }
     } catch (error) {
-      Alert.alert('Wrong email or password');
-       setLoading(false);
+      Alert.alert('Internal Error occurs!');
+      setLoading(false);
     }
   };
   return (
@@ -62,13 +63,6 @@ const TabSupport = () => {
               <Text style={styles.title}>Create a card</Text>
             </View>
             <View style={styles.form}>
-              <TextInput
-                style={styles.textInput}
-                placeholderTextColor="#b4b9c1"
-                onChangeText={onSerialNumberChange}
-                placeholder="Serial Number"
-              />
-
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
@@ -182,6 +176,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   keyboard: {flex: 1, padding: 30},
   activityIndicator: {

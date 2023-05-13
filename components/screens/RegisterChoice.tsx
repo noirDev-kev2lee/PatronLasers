@@ -2,7 +2,7 @@ import {StyleSheet, Text, Pressable, View} from 'react-native';
 import React from 'react';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 
-export default function RegisterChoice({navigation}) {
+export default function RegisterChoice({navigation}: {navigation: any}) {
   return (
     <View style={styles.container}>
       <View>

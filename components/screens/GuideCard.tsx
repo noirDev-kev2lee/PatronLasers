@@ -1,12 +1,16 @@
 import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import React, {useRef} from 'react';
+import React from 'react';
 import {useRoute} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function GuideCard() {
   const route = useRoute();
-  const data = route.params as {desc: string; name: string; category: string; img;};
-  const {desc, name, category,img} = data;
+  const data = route.params as {
+    desc: string;
+    name: string;
+    category: string;
+    img: any;
+  };
+  const {desc, name, img} = data;
   return (
     <View style={styles.container}>
       <View style={styles.guideTopinfo}>
@@ -14,10 +18,7 @@ export default function GuideCard() {
           <Text style={styles.guideInfoTitle}>{name}</Text>
           <Text style={styles.guideInfoPara}>{desc}</Text>
         </View>
-        <Image
-          style={styles.prodImgSmallRec}
-          source={img}
-        />
+        <Image style={styles.prodImgSmallRec} source={img} />
       </View>
       <ScrollView pagingEnabled={true} horizontal style={styles.scroll}>
         <View style={styles.scrollContainer}>
