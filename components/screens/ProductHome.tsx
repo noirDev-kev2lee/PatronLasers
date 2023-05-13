@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
   },
   containersec: {
     margin: 5,
-    height:height * 0.35,
+    height:height * 0.45,
     flexDirection: 'column',
   },
   card: {
