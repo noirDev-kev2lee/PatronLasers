@@ -1,4 +1,4 @@
-package com.patrondev.patronlasers;
+package com.patronproject;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
