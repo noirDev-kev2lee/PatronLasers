@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
   Info: {
     paddingHorizontal: 20,
     paddingVertical: 20,
-    width: 400,
-    height: 100,
+    width: '100%',
+    height: 'auto',
     backgroundColor: 'white',
   },
   prodTitle: {

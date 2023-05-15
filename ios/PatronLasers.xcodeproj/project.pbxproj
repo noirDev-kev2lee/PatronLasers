@@ -49,23 +49,23 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = "PatronLasers";
+			remoteInfo = PatronLasers;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* PatronLasersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PatronLasersTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* PatronLasersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PatronLasersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* PatronLasersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "PatronLasersTests.m"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* PatronLasersTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatronLasersTests.m; sourceTree = "<group>"; };
 		01A65CBF0E6D42DB96D159B8 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../components/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		09071D1480204169B5046C69 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoCondensed-Light.ttf"; path = "../components/assets/fonts/RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
 		0FF1D3F72BD94E3EB914BB21 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../components/assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* PatronLasers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PatronLasers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "PatronLasers/AppDelegate.h"; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "PatronLasers/AppDelegate.mm"; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "PatronLasers/Images.xcassets"; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "PatronLasers/Info.plist"; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "PatronLasers/main.m"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* PatronLasers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PatronLasers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PatronLasers/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = PatronLasers/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = PatronLasers/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PatronLasers/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PatronLasers/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-PatronLasers-PatronLasersTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PatronLasers-PatronLasersTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BA0EC866EE047568D1EF974 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "RobotoCondensed-Regular.ttf"; path = "../components/assets/fonts/RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		256375F1B1994F67B2CC21E6 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../components/assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		6AFA2B7619BC47E68AA49A22 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../components/assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		7065E9D8E0CE4582A2BDBAA6 /* Inter-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Black.ttf"; path = "../components/assets/fonts/Inter-Black.ttf"; sourceTree = "<group>"; };
 		80FD15C39F8F4DFE883795CD /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../components/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "PatronLasers/LaunchScreen.storyboard"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = PatronLasers/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8370AC765D1F4B91A43DFA51 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../components/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		893E7C9374AE4F9DBCBA9791 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../components/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-PatronLasers-PatronLasersTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PatronLasers-PatronLasersTests.release.xcconfig"; path = "Target Support Files/Pods-PatronLasers-PatronLasersTests/Pods-PatronLasers-PatronLasersTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 				00E356F21AD99517003FC87E /* PatronLasersTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = "PatronLasersTests";
+			path = PatronLasersTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -182,7 +182,7 @@
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = "PatronLasers";
+			name = PatronLasers;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -354,8 +354,8 @@
 			);
 			dependencies = (
 			);
-			name = "PatronLasers";
-			productName = "PatronLasers";
+			name = PatronLasers;
+			productName = PatronLasers;
 			productReference = 13B07F961A680F5B00A75B9A /* PatronLasers.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -625,12 +625,12 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-PatronLasers-PatronLasersTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = QJGFGV4TYP;
+				DEVELOPMENT_TEAM = X23XDQJ6H4;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PatronLasersTests/Info.plist";
+				INFOPLIST_FILE = PatronLasersTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -642,7 +642,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.patronproject";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PatronLasers.app/PatronLasers";
 			};
@@ -654,8 +654,8 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = QJGFGV4TYP;
-				INFOPLIST_FILE = "PatronLasersTests/Info.plist";
+				DEVELOPMENT_TEAM = X23XDQJ6H4;
+				INFOPLIST_FILE = PatronLasersTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -667,7 +667,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.patronproject";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PatronLasers.app/PatronLasers";
 			};
@@ -679,10 +679,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QJGFGV4TYP;
+				DEVELOPMENT_TEAM = X23XDQJ6H4;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "PatronLasers/Info.plist";
+				INFOPLIST_FILE = PatronLasers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Patron Lasers";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -694,8 +696,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.patronproject";
-				PRODUCT_NAME = "PatronLasers";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
+				PRODUCT_NAME = PatronLasers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -708,9 +711,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QJGFGV4TYP;
-				INFOPLIST_FILE = "PatronLasers/Info.plist";
+				DEVELOPMENT_TEAM = X23XDQJ6H4;
+				INFOPLIST_FILE = PatronLasers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Patron Lasers";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -722,8 +727,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.patronproject";
-				PRODUCT_NAME = "PatronLasers";
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
+				PRODUCT_NAME = PatronLasers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

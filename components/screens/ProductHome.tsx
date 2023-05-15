@@ -143,6 +143,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
           <Text style={styles.welcomeNote}>Hello, {username}</Text>
         </View>
       </Pressable>
+      {/*My Products tiles */}
       <View>
         <Text style={styles.scrollHeader}>My Products</Text>
       </View>
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   welcomeNote: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     marginLeft: 10,
     fontSize: 15,
     color: 'black',
@@ -238,7 +239,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   scrollHeader: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: '700',
     fontSize: 15,
     textTransform: 'uppercase',
@@ -253,15 +254,15 @@ const styles = StyleSheet.create({
   },
   containersec: {
     margin: 5,
-    height:height * 0.45,
+    height:height * 0.38,
     flexDirection: 'column',
   },
   card: {
     textAlign: 'base-line',
     alignItems: 'center',
     margin: 10,
-    width: 150,
-    height: 180,
+    width: wp('42%'),
+    height: hp('25%'),
     borderRadius: 5,
     elevation: 10,
     backgroundColor: '#fff',
@@ -309,8 +310,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   prodImg: {
-    height: 150,
-    width: 250,
+    height: hp('22%'),
+    width: wp('40%'),
     resizeMode: 'contain',
   },
   prodImgSmall: {
@@ -413,7 +414,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   drawerName: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     marginTop: 10,
     color: '#DADADA',
     fontSize: 20,

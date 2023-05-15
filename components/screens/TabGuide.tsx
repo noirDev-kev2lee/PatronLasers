@@ -5,7 +5,12 @@ import {
   Text,
   View,
   Image,
+  Dimensions,
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 import React from 'react';
 const productList = [
@@ -109,7 +114,7 @@ const TabGuide = ({navigation}: {navigation: any}) => {
 };
 
 export default TabGuide;
-
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
   scrollHeader: {
@@ -130,7 +135,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   containersec: {
-    height: 470,
+    margin: 5,
+    height:height * 0.47,
     flexDirection: 'column',
   },
   card: {
@@ -165,8 +171,8 @@ const styles = StyleSheet.create({
   },
   RecCardSmall: {
     alignItems: 'center',
-    width: 120,
-    height: 170,
+    width: wp('28%'),
+    height: hp('20%'),
     marginHorizontal: 8,
     elevation: 10,
     borderRadius: 5,
@@ -184,7 +190,8 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   prodImgSmall: {
-    height: 140,
+    margin: -5,
+    height:hp('18%'),
     width: 230,
     resizeMode: 'contain',
   },

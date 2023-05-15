@@ -242,13 +242,13 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   appointTitle1: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: '600',
     fontSize: 19,
     color: '#222',
   },
   appointTitle2: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 19,
     color: '#555',
   },
@@ -256,17 +256,17 @@ const styles = StyleSheet.create({
     width: 300,
     padding: 10,
     textAlign: 'left',
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 14,
     color: '#777',
   },
   pendingText: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 19,
     color: 'red',
   },
   doneText: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 19,
     color: 'green',
   },
@@ -316,7 +316,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   drawerName: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     marginTop: 10,
     color: '#DADADA',
     fontSize: 20,
@@ -351,5 +351,5 @@ const styles = StyleSheet.create({
     color: 'black',
     marginLeft: 10,
   },
-  notAvailable: {color: 'black', fontFamily: 'poppins', fontSize: 18},
+  notAvailable: {color: 'black', fontFamily: 'Inter-Regular', fontSize: 18},
 });

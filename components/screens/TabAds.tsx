@@ -5,8 +5,12 @@ import {
   Text,
   View,
   Image,
+  Dimensions
 } from 'react-native';
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import React from 'react';
 
 const productList = [
@@ -40,7 +44,7 @@ const productList = [
 
 const ProductHome = ({navigation}: {navigation: any}) => {
   return (
-    <View style={styles.container}>
+    <View >
       <View>
         <Text style={styles.scrollHeader}>New Arrivals</Text>
       </View>
@@ -48,6 +52,7 @@ const ProductHome = ({navigation}: {navigation: any}) => {
         showsHorizontalScrollIndicator={false}
         horizontal
         style={styles.scroll}>
+        <View style={styles.container}>
         {productList.map(product => (
           <Pressable
             key={product.id}
@@ -68,6 +73,7 @@ const ProductHome = ({navigation}: {navigation: any}) => {
             </View>
           </Pressable>
         ))}
+        </View>
       </ScrollView>
       <View>
         <Text style={styles.scrollHeader}>Must See Products</Text>
@@ -110,31 +116,31 @@ const ProductHome = ({navigation}: {navigation: any}) => {
 };
 
 export default ProductHome;
-
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {
-    height: 180,
+    
   },
   scrollHeader: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter',
     fontSize: 18,
     textTransform: 'uppercase',
     textAlign: 'left',
-    marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     color: '#222',
   },
   container: {
     flex: 1,
-    paddingVertical: 20,
-    marginHorizontal:10
+    height: 200,
+    flexDirection: 'row',
   },
   scrollsec: {
     flexDirection: 'row',
     marginVertical: 5,
   },
   containersec: {
-    height: 450,
+    margin: 5,
+    height:height * 0.47,
     flexDirection: 'column',
   },
   card: {
@@ -153,10 +159,11 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   RecCard: {
+    flex: 1,
     flexDirection: 'row-reverse',
-    width: 370,
-    height: 'auto',
-    margin: 8,
+    width: 380,
+    height: 150,
+    margin: 10,
     borderRadius: 10,
     elevation: 10,
     backgroundColor: '#fff',
@@ -176,10 +183,9 @@ const styles = StyleSheet.create({
   },
   RecCardSmall: {
     alignItems: 'center',
-    width: 120,
-    height: 150,
-    marginTop: 3,
-    marginHorizontal: 5,
+    width: wp('28%'),
+    height: hp('20%'),
+    marginHorizontal: 8,
     elevation: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
@@ -196,8 +202,8 @@ const styles = StyleSheet.create({
   },
   prodImgSmall: {
     margin: -5,
-    height: 140,
-    width: 240,
+    height:hp('18%'),
+    width: 230,
     resizeMode: 'contain',
   },
   prodImgSmallRec: {
@@ -224,7 +230,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   RecCardPara: {
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto-Bold',
     fontSize: 15,
     textAlign: 'left',
     color: '#222',

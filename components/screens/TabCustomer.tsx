@@ -6,7 +6,12 @@ import {
   StyleSheet,
   Text,
   View,
+  Dimensions
 } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
@@ -85,6 +90,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
           </View>
         </View>
       </Modal>
+      {/* PRESSABLE CONTAINER */}
       <View style={styles.createSec}>
         <Pressable
           onPress={() => navigation.navigate('addCustomer')}
@@ -268,7 +274,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
 };
 
 export default TabCustomer;
-
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#F8FAFB',
@@ -292,7 +298,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     borderRadius: 26,
     height: 150,
-    width: 180,
+    width: wp('42%'),
     backgroundColor: '#131035',
     //IOS SHADOWS
     shadowColor: '#000',
@@ -302,10 +308,10 @@ const styles = StyleSheet.create({
   },
   list: {
     marginTop: 50,
-    width: 410,
+    width: width * 1,
   },
   listTitle: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 23,
     marginBottom: 5,
     fontWeight: 'bold',
@@ -313,7 +319,7 @@ const styles = StyleSheet.create({
     color: '#131035',
   },
   listScroll: {
-    height: 450,
+    height: height*0.5,
     paddingBottom: 30,
     flexDirection: 'column',
   },
@@ -343,43 +349,43 @@ const styles = StyleSheet.create({
     color: 'green',
   },
   RecCardTitle: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'capitalize',
     color: '#36454F',
   },
   idTitle: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'uppercase',
     color: '#36454F',
   },
   subTitle: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: '500',
     fontSize: 19,
     color: '#36454F',
   },
   RecCardTitle2: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 15,
     color: '#333',
   },
   RecCardPara: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 16,
     color: '#222',
     textTransform: 'capitalize',
   },
   startDateText: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 16,
     color: 'green',
   },
   endDateText: {
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontSize: 16,
     color: '#B30000',
   },
@@ -392,7 +398,7 @@ const styles = StyleSheet.create({
   },
   profileLetter: {
     color: '#fff',
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: '600',
     textTransform: 'uppercase',
     fontSize: 25,
@@ -478,7 +484,7 @@ const styles = StyleSheet.create({
   modalBtnText: {
     textAlign: 'center',
     fontSize: 18,
-    fontFamily: 'poppins',
+    fontFamily: 'Inter-Regular',
     fontWeight: '600',
   },
   modalCloseIcon: {
