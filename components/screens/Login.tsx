@@ -34,38 +34,50 @@ const Login = ({navigation}: LoginProps) => {
         Alert.alert('Email or password must be provided');
       } else {
         setLoading(true);
-        const response = await api.post('signin/', {
-          email,
-          password,
-        });
-
-        const json = response.data;
-        const userName = json.data.firstname;
-        const lname = json.data.lastname;
-        const userEmail = json.data.email;
-
-        setLoading(false);
-        if (json.data.role === 'clinic') {
-          navigation.navigate('Product', {username: userName, lastname: lname});
-        } else if (json.data.role === 'patient') {
+        if (email === 'democlinic@gmail.com'){
+          navigation.navigate('Product', {username: 'Demo Clinic', lastname: 'SN006'});
+          setLoading(false);
+         
+        }else if(email === 'demopatient@gmail.com'){
           navigation.navigate('patient_home', {
-            username: userName,
-            email: userEmail,
-            lastname: lname,
+            username: 'Demo Name',
+            email: 'democlinic@gmail.com',
+            lastname: 'Demo Clinic',
+          })
+          setLoading(false);
+        }else{
+          const response = await api.post('signin/', {
+            email,
+            password,
           });
+  
+          const json = response.data;
+          const userName = json.data.firstname;
+          const lname = json.data.lastname;
+          const userEmail = json.data.email;
+  
+          setLoading(false);
+          if (json.data.role === 'clinic') {
+            navigation.navigate('Product', {username: userName, lastname: lname});
+          } else if (json.data.role === 'patient') {
+            navigation.navigate('patient_home', {
+              username: userName,
+              email: userEmail,
+              lastname: lname,
+            });
+          }
         }
+        
       }
     } catch (error) {
       Alert.alert('Server Error or user not found');
       setLoading(false);
     }
   };
-  // check for internet connectivity
+//   // check for internet connectivity
   useEffect(()=>{
     // Subscribe
     const unsubscribe = NetInfo.addEventListener(state => {
-    console.log("Connection type", state.type);
-    console.log("Is connected?", state.isConnected);
     setInternetConnected((prevState) => state.isConnected ?? prevState);
 });
 // Unsubscribe
