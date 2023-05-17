@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,6 +11,7 @@ import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 
+
 export default function PatientHome({
   navigation,
   route,
@@ -19,8 +20,8 @@ export default function PatientHome({
   route: any;
 }) {
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
-  const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
-  const [patientData, setPatientData] = React.useState<any[]>([]);
+  const [appointmentData, setAppointmentData] = useState<any[]>([]);
+  const [patientData, setPatientData] = useState<any[]>([]);
   const data = route.params as {
     username: string;
     email: string;
@@ -28,26 +29,41 @@ export default function PatientHome({
   };
   const {username, email, lastname} = data;
 
-  React.useEffect(() => {
-    api
-      .get('http://15.236.168.186:7000/api/v1/patients/')
-      .then(res => setPatientData(res.data.rows));
-  }, []);
-  React.useEffect(() => {
-    api
-      .get('http://15.236.168.186:7000/api/v1/appointments/')
+try{
+  useEffect(() => {
+    const fetchPatient = async () =>{
+     await api
+     .get('patients/')
+     .then(res => setPatientData(res.data.rows));
+    }
+    fetchPatient();
+   }, []);
+}catch(error){
+console.log(error)
+}
+ try{
+
+  useEffect(() => {
+    const fetchAppointment = async () =>{
+      await api
+      .get('appointments/')
       .then(res => setAppointmentData(res.data.rows));
+    }
+    fetchAppointment()
   }, []);
+ }catch(error){
+  console.log(error)
+ }
 
   const patientList = patientData.filter(y => y.email === email);
   const appointmentList = appointmentData.filter(
-    x => x.patient_id === patientList[0].patient_id,
+    x => x.patient_id === patientList[0]?.patient_id,
   );
   const pendingList = appointmentList.filter(
     pend => pend.job_status === 'pending',
   );
   const doneList = appointmentList.filter(done => done.job_status === 'done');
-  console.log(doneList);
+  
 
   return (
     <View style={styles.mainContainer}>

@@ -20,7 +20,7 @@ export default function PatientAds() {
                 enim inventore error ducimus laborum consequuntur. Pariatur
                 recusandae aliquid vel reiciendis sed!
               </Text>
-              <Text style={styles.RecCardTime}>8:00am-4:00pm</Text>
+             
             </View>
           </View>
           <View style={[styles.RecCard]}>
@@ -33,7 +33,7 @@ export default function PatientAds() {
                 enim inventore error ducimus laborum consequuntur. Pariatur
                 recusandae aliquid vel reiciendis sed!
               </Text>
-              <Text style={styles.RecCardTime}>10:00am-6:00pm</Text>
+              
             </View>
           </View>
           <View style={[styles.RecCard]}>
@@ -46,7 +46,7 @@ export default function PatientAds() {
                 enim inventore error ducimus laborum consequuntur. Pariatur
                 recusandae aliquid vel reiciendis sed!
               </Text>
-              <Text style={styles.RecCardTime}>11:00am-3:00pm</Text>
+              
             </View>
           </View>
           <View style={[styles.RecCard]}>
@@ -75,10 +75,7 @@ export default function PatientAds() {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
                 voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
                 mollitia. Cumque reiciendis repellendus exercitationem nam harum
-                velit id nemo quos, non qui, officia itaque asperiores eos.
-                Consequuntur asperiores, numquam deserunt doloribus similique
-                consectetur at dignissimos laudantium ipsa facilis unde odit,
-                iure nemo.
+                velit id nemo quos, 
               </Text>
             </View>
           </View>
@@ -109,7 +106,7 @@ const styles = StyleSheet.create({
   },
   RecCard: {
     width: 380,
-    height: 150,
+    height: 190,
     margin: 15,
     borderRadius: 10,
     elevation: 30,
@@ -195,7 +192,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 300,
     fontFamily: 'Roboto-bold',
-    fontSize: 50,
+    fontSize: 30,
     color: '#888',
   },
   appointTitle2: {
