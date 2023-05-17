@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import {
   Alert,
   Pressable,
@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
@@ -21,10 +22,11 @@ interface LoginProps {
   navigation: NavigationProp<ParamListBase>;
 }
 const Login = ({navigation}: LoginProps) => {
-  const [isLoading, setLoading] = React.useState(false);
-  const [email, onChangeEmail] = React.useState('');
-  const [password, passwordChange] = React.useState('');
-  const [hide, setHide] = React.useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const [email, onChangeEmail] = useState('');
+  const [password, passwordChange] = useState('');
+  const [hide, setHide] = useState(true);
+  const [isConnected, setInternetConnected ] = useState(false);
 
   const handleLogin = async () => {
     try {
@@ -58,6 +60,20 @@ const Login = ({navigation}: LoginProps) => {
       setLoading(false);
     }
   };
+  // check for internet connectivity
+  useEffect(()=>{
+    // Subscribe
+    const unsubscribe = NetInfo.addEventListener(state => {
+    console.log("Connection type", state.type);
+    console.log("Is connected?", state.isConnected);
+    setInternetConnected((prevState) => state.isConnected ?? prevState);
+});
+// Unsubscribe
+return ()=>{
+  unsubscribe();
+}
+
+  },[])
   return (
     <View style={styles.container}>
       <View>
@@ -71,6 +87,11 @@ const Login = ({navigation}: LoginProps) => {
             color="#000000"
           />
         </Pressable>
+      </View>
+      <View style={styles.internetContainer}>
+      <View style={isConnected? styles.internetConnected: styles.internetNotConnected}>
+        <Text style={{color: 'white', textAlign: 'center'}}>{isConnected? 'Internet is available' : 'No internet connection'}</Text>
+      </View>
       </View>
       <ScrollView>
         <KeyboardAvoidingView
@@ -223,5 +244,18 @@ const styles = StyleSheet.create({
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
+  },
+  internetContainer: {
+    paddingHorizontal: 20,
+    marginTop: 8,
+  },
+  internetConnected: {
+    backgroundColor: 'green',
+    paddingVertical: 8,
+
+  },
+  internetNotConnected: {
+    backgroundColor: 'red',
+    paddingVertical: 8,
   },
 });
