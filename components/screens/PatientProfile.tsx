@@ -18,7 +18,7 @@ export default function PatientProfile({
 
   React.useEffect(() => {
     api
-      .get('http://15.236.168.186:7000/api/v1/patients/')
+      .get('patients/')
       .then(res => setPatientData(res.data.rows));
   }, []);
 
@@ -127,7 +127,7 @@ export default function PatientProfile({
 }
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: '#F8FAFB', paddingHorizontal: 25},
+  container: {flex:1,backgroundColor: '#F8FAFB', paddingHorizontal: 25},
   profileLetter: {
     color: '#fff',
     fontFamily: 'Roboto',
@@ -152,12 +152,14 @@ const styles = StyleSheet.create({
   profileHeadName: {
     fontFamily: 'Roboto',
     fontSize: 20,
+    textAlign: 'center',
     fontWeight: 'bold',
     color: '#222',
   },
   profileHeadEmail: {
     fontFamily: 'Roboto-Regular',
     fontSize: 15,
+    textAlign: 'center',
     color: '#888',
   },
   bioHead: {
