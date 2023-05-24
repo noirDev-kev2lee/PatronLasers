@@ -268,6 +268,6 @@ const styles = StyleSheet.create({
   },
   internetNotConnected: {
     backgroundColor: 'red',
-    paddingVertical: 8,
+   
   },
 });
