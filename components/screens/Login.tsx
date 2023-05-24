@@ -102,7 +102,7 @@ return ()=>{
       </View>
       <View style={styles.internetContainer}>
       <View style={isConnected? styles.internetConnected: styles.internetNotConnected}>
-        <Text style={{color: 'white', textAlign: 'center'}}>{isConnected? 'Internet is available' : 'No internet connection'}</Text>
+        <Text style={{color: 'white', textAlign: 'center'}}>{isConnected? '' : 'No internet connection'}</Text>
       </View>
       </View>
       <ScrollView>
@@ -262,12 +262,12 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   internetConnected: {
-    backgroundColor: 'green',
+    backgroundColor: 'transparent',
     paddingVertical: 8,
 
   },
   internetNotConnected: {
     backgroundColor: 'red',
-    paddingVertical: 8,
+   
   },
 });
