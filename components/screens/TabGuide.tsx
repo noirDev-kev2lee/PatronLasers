@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -12,7 +13,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-import React from 'react';
+
 const productList = [
   {
     id: 0,
@@ -26,13 +27,13 @@ const productList = [
     name: 'Lisa',
     category: 'Hair removal devices',
     img: require('../assets/product2.png'),
-    desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
+    desc: 'The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more.  ',
   },
   {
     id: 2,
     name: 'product three',
     img: require('../assets/product3.png'),
-    desc: 'This is product three',
+    desc: 'The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. ',
   },
   {
     id: 3,
