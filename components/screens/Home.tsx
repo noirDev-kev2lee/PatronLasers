@@ -4,8 +4,10 @@ import React from 'react';
 export default function Home({navigation}: {navigation: any}) {
   return (
     <View style={styles.container}>
-      <View>
+      <View style={styles.logoContainer}>
+        <View>
         <Image style={styles.logo} source={require('../assets/001.png')} />
+        </View>
       </View>
       <Pressable
         style={styles.pressBtnReg}
@@ -28,11 +30,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#131035',
   },
+  logoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   logo: {
     width: 250,
     height: 100,
     marginBottom: 30,
-    marginRight: 50,
     resizeMode: 'contain',
     tintColor: 'white',
   },
