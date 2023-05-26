@@ -1,9 +1,11 @@
-import {Text, StyleSheet, View, ScrollView, Pressable} from 'react-native';
+import {Text, StyleSheet, View, ScrollView, Pressable, useWindowDimensions } from 'react-native';
+import HTML from 'react-native-render-html';
 import React, {useRef} from 'react';
 import {useRoute} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function ProductCard() {
+  const windowWidth = useWindowDimensions().width;
   const route = useRoute();
   const data = route.params as {desc: string; name: string; category: string};
   const {desc, name, category} = data;
@@ -19,15 +21,15 @@ export default function ProductCard() {
   };
 
   const handleScroll = () => {
-    if (scrollDirection === 'down') {
-      handleScrollTo(500);
-      setScrollDirection('up');
-    } else {
-      handleScrollTo(0);
-      setScrollDirection('down');
-    }
+    const scrollToValue = scrollDirection === 'down' ? 500 : 0;
+    handleScrollTo(scrollToValue);
+    setScrollDirection(scrollDirection === 'down' ? 'up' : 'down');
   };
-
+  const htmlRenderStyles = StyleSheet.create({
+    baseText: {
+      color: 'black', 
+    },
+  });
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -35,8 +37,9 @@ export default function ProductCard() {
         <Text style={styles.subText}>{category}</Text>
       </View>
       <ScrollView ref={scrollViewRef} style={styles.Info}>
-        <Text style={styles.prodTitle}>Introduction</Text>
-        <Text style={styles.prodInfo}>{desc}</Text>
+        <View style={styles.htmlView} >
+      <HTML source={{ html: desc }} contentWidth={windowWidth} baseStyle={htmlRenderStyles.baseText} />
+    </View>
       </ScrollView>
       <Pressable style={styles.scrollBtn} onPress={handleScroll}>
         <Icon
@@ -72,7 +75,10 @@ const styles = StyleSheet.create({
     color: '#888',
     fontFamily: 'Inter',
     fontWeight: '500',
-    fontSize: 20,
+    fontSize: 17,
+  },
+  htmlView: {
+    paddingBottom: 100,
   },
   Info: {
     paddingHorizontal: 20,
