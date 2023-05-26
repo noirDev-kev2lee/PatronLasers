@@ -15,10 +15,7 @@ export default function PatientAds() {
               <Text style={styles.RecCardTitle}>Tandale Clinic</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
+              The device produces electric pulses that pass to the skin, the currents in the different programs differ from each other in the frequency of the electric signal, its duration, the type of wave, the pause time from pulse to pulse and the duration of the time when the electric wave is at its peak.
               </Text>
              
             </View>
@@ -28,10 +25,7 @@ export default function PatientAds() {
               <Text style={styles.RecCardTitle}>Oyseterbay Clinic</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
+              Passes in a targeted manner through the skin, penetrates the upper layer of the SMAS tissue in the neuromuscular system, and damages the elastin and collagen fibers, thereby producing a natural facelift, and encourages the regeneration of the elastin and collagen. 
               </Text>
               
             </View>
@@ -41,10 +35,7 @@ export default function PatientAds() {
               <Text style={styles.RecCardTitle}>Masaki Clinic</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
+              The RAY tanning machine system is multiplied in such a way that all the light rays are focused on the patient's body area only, therefore the effectiveness of the technology proves the result
               </Text>
               
             </View>
@@ -54,10 +45,7 @@ export default function PatientAds() {
               <Text style={styles.RecCardTitle}>Sinza</Text>
               <Text style={styles.RecCardTitleSmall}>Kinondoni</Text>
               <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
+              The RAY tanning machine comes with a cluster of 200w *turbo* light bulbs that redefine the tanning method, in addition, all machines are equipped with a light emitting casing that returns and multiplies the UV rays meeting the body and ensures the most effective tanning from the very first moment.
               </Text>
               <Text style={styles.RecCardTime}>9:00am-5:00pm</Text>
             </View>
@@ -72,10 +60,7 @@ export default function PatientAds() {
               <Text style={styles.appointTitle1}>Tatoo Removal</Text>
               <Text style={styles.appointTitle2}>Masaki Clinic</Text>
               <Text style={styles.appointInfo}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
-                mollitia. Cumque reiciendis repellendus exercitationem nam harum
-                velit id nemo quos, 
+              The device produces electric pulses that pass to the skin, the currents in the different programs differ from each other in the frequency of the electric signal, its duration, the type of wave, the pause time from pulse to pulse and the duration of the time when the electric wave is at its peak.
               </Text>
             </View>
           </View>
@@ -84,13 +69,7 @@ export default function PatientAds() {
               <Text style={styles.appointTitle1}>Hair Removal</Text>
               <Text style={styles.appointTitle2}>Oysterbay Clinic</Text>
               <Text style={styles.appointInfo}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-                voluptas nesciunt vitae amet, minus ex quibusdam. Dolorum,
-                mollitia. Cumque reiciendis repellendus exercitationem nam harum
-                velit id nemo quos, non qui, officia itaque asperiores eos.
-                Consequuntur asperiores, numquam deserunt doloribus similique
-                consectetur at dignissimos laudantium ipsa facilis unde odit,
-                iure nemo.
+              The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. 
               </Text>
             </View>
           </View>
