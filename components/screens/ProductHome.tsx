@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -17,15 +17,31 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import api from '../utils/api'
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
+  const [products, setProducts] = useState([])
   const [modalVisible, setModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
-
   Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
+  
+  // fetch products
+  useEffect(()=>{
+    const fetchProducts = async () =>{
+      try{
+       await api.get('products/'). then((res)=> setProducts(res.data.rows))
+      }catch(error){
+        return error
+      }
+
+    }
+    fetchProducts();
+  },[])
+
+  const myImg = 'http://35.180.24.145:7000/';
   const productList = [
     {
       id: 0,
@@ -181,29 +197,22 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.containersec}>
-        <View>
-          {productList.map(product => (
+        <View style={styles.productsContainer}>
+          {products.map(product => (
             <Pressable
               key={product.id}
+              style={styles.productsView}
               onPress={() =>
                 navigation.navigate('Product Info', {
-                  desc: product.desc,
-                  name: product.name,
-                  category: product.category,
+                  desc: product?.descriptions,
+                  name: product?.product_name,
+                  category: product?.category,
                 })
               }>
               <View style={styles.scrollsec}>
                 <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
-                </View>
-                <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
-                </View>
-                <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
+                  <Image style={styles.prodImgSmall} source={{uri: myImg + product?.img_url}} />
+                  <Text style={styles.cardText}>{product?.product_name}</Text>
                 </View>
               </View>
             </Pressable>
@@ -256,6 +265,14 @@ const styles = StyleSheet.create({
     margin: 5,
     height:height * 0.38,
     flexDirection: 'column',
+  },
+  productsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  productsView: {
+    flexBasis: '33.33%', 
+    marginBottom: 10, 
   },
   card: {
     textAlign: 'base-line',
