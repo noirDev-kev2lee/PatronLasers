@@ -39,7 +39,7 @@ try{
     fetchPatient();
    }, []);
 }catch(error){
-console.log(error)
+return error
 }
  try{
 
@@ -52,7 +52,7 @@ console.log(error)
     fetchAppointment()
   }, []);
  }catch(error){
-  console.log(error)
+ return error
  }
 
   const patientList = patientData.filter(y => y.email === email);

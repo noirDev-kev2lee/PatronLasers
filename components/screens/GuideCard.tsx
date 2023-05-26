@@ -10,7 +10,7 @@ export default function GuideCard() {
     category: string;
     img: any;
   };
-  const {desc, name, img} = data;
+  const {desc, name} = data;
   return (
     <View style={styles.container}>
       <View style={styles.guideTopinfo}>
@@ -18,7 +18,7 @@ export default function GuideCard() {
           <Text style={styles.guideInfoTitle}>{name}</Text>
           <Text style={styles.guideInfoPara}>{desc}</Text>
         </View>
-        <Image style={styles.prodImgSmallRec} source={img} />
+        
       </View>
       <ScrollView pagingEnabled={true} horizontal style={styles.scroll}>
         <View style={styles.scrollContainer}>
@@ -26,14 +26,11 @@ export default function GuideCard() {
             <View style={styles.RecCardInfo}>
               <Text style={styles.RecCardTitle}>Manuals</Text>
               <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
+              The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. 
               </Text>
             </View>
           </View>
-          <View style={[styles.RecCard]}>
+          {/* <View style={[styles.RecCard]}>
             <View style={styles.RecCardInfoVideo}>
               <Text style={styles.RecCardTitle}>Video Guides</Text>
               <ScrollView showsVerticalScrollIndicator={false}>
@@ -74,15 +71,12 @@ export default function GuideCard() {
                 </View>
               </ScrollView>
             </View>
-          </View>
+          </View> */}
           <View style={[styles.RecCard]}>
             <View style={styles.RecCardInfo}>
               <Text style={styles.RecCardTitle}>Articles</Text>
               <Text style={styles.RecCardPara}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga
-                hic quod vel cumque dolore recusandae quam maiores, doloremque
-                enim inventore error ducimus laborum consequuntur. Pariatur
-                recusandae aliquid vel reiciendis sed!
+              The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. 
               </Text>
             </View>
           </View>
