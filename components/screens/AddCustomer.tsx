@@ -316,6 +316,7 @@ const styles = StyleSheet.create({
   keyboard: {paddingBottom: 0},
   activityIndicator: {
     alignSelf: 'center',
-    padding: 20,
+    padding: 50,
+    
   },
 });

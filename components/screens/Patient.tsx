@@ -47,7 +47,7 @@ const Patient = () => {
           headerTitleAlign: 'center',
           tabBarShowLabel: false,
         })}>
-        <Tab.Screen name="Advertisement" component={PatientAds} />
+        {/* <Tab.Screen name="Advertisement" component={PatientAds} /> */}
         <Tab.Screen
           name="Home"
           component={PatientHome}
