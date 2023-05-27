@@ -20,6 +20,7 @@ import AddAppointment from './AddAppointment';
 import AddCustomer from './AddCustomer';
 const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
+  const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
   const [patientData, setPatientData] = React.useState<any[]>([]);
   const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
   const data = route.params as {username: string};
@@ -91,6 +92,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
           </View>
         </View>
       </Modal>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -106,7 +108,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
               onPress={() => setCustomerModalVisible(!CustomerModalVisible)}>
               <Icon name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddAppointment/>
+            <AddCustomer/>
           </View>
         </View>
       </Modal>
@@ -114,7 +116,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
       {/* PRESSABLE CONTAINER */}
       <View style={styles.createSec}>
         <Pressable
-          onPress={() => setAppointModalVisible(true)}
+          onPress={() => setCustomerModalVisible(true)}
           style={styles.createPress}>
           <Text style={styles.textPress}>Add Customer</Text>
           <Icon name="user" size={50} color={'white'} />
@@ -450,7 +452,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   modalView: {
-    height: 600,
+    height: 650,
     width: '95%',
     backgroundColor: '#f7f7f7',
     borderRadius: 20,
