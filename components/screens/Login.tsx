@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react';
 import {
-  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -16,6 +15,7 @@ import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 interface LoginProps {
@@ -27,11 +27,22 @@ const Login = ({navigation}: LoginProps) => {
   const [password, passwordChange] = useState('');
   const [hide, setHide] = useState(true);
   const [isConnected, setInternetConnected ] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
 
   const handleLogin = async () => {
     try {
       if (email === '' || password === '') {
-        Alert.alert('Email or password must be provided');
+        showAlert('Email or password must be provided!')
       } else {
         setLoading(true);
         if (email === 'democlinic@gmail.com'){
@@ -70,7 +81,7 @@ const Login = ({navigation}: LoginProps) => {
         
       }
     } catch (error) {
-      Alert.alert('Server Error or user not found');
+      showAlert('Server Error or user not found!')
       setLoading(false);
     }
   };
@@ -149,7 +160,7 @@ return ()=>{
             <View style={styles.buttons}>
               <Pressable
                 style={styles.pressBtn2}
-                onPress={() => Alert.alert('Not Working yet')}>
+                onPress={() => showAlert('Not Working yet')}>
                 <Text style={styles.forgotPass}>Forgot Password?</Text>
               </Pressable>
               <Pressable style={styles.pressBtn} onPress={handleLogin}>
@@ -166,6 +177,8 @@ return ()=>{
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
+      {/* custom alert */}
+      <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </View>
   );
 };
