@@ -5,6 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Modal,
   View,
   Dimensions
 } from 'react-native';
@@ -15,10 +16,11 @@ import {
 import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
-import {Modal} from 'react-native';
 import AddAppointment from './AddAppointment';
+import AddCustomer from './AddCustomer';
 const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
+  const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
   const [patientData, setPatientData] = React.useState<any[]>([]);
   const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
   const data = route.params as {username: string};
@@ -90,10 +92,31 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
           </View>
         </View>
       </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={CustomerModalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setCustomerModalVisible(!CustomerModalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable
+              style={styles.button}
+              onPress={() => setCustomerModalVisible(!CustomerModalVisible)}>
+              <Icon name="close" size={30} color={'#222'} />
+            </Pressable>
+            <AddCustomer/>
+          </View>
+        </View>
+      </Modal>
+      
       {/* PRESSABLE CONTAINER */}
       <View style={styles.createSec}>
         <Pressable
-          onPress={() => navigation.navigate('addCustomer')}
+          onPress={() => setCustomerModalVisible(true)}
           style={styles.createPress}>
           <Text style={styles.textPress}>Add Customer</Text>
           <Icon name="user" size={50} color={'white'} />
@@ -429,8 +452,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   modalView: {
-    height: 800,
-    width: '95%',
+    height: 650,
+    width: '100%',
     backgroundColor: '#f7f7f7',
     borderRadius: 20,
     alignItems: 'center',
