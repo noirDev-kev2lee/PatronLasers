@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import AddAppointment from './AddAppointment';
 import AddCustomer from './AddCustomer';
+
 const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
@@ -28,12 +29,12 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
 
   React.useEffect(() => {
     api
-      .get('http://15.236.168.186:7000/api/v1/patients/')
+      .get('patients/')
       .then(res => setPatientData(res.data.rows));
   }, [patientData]);
   React.useEffect(() => {
     api
-      .get('http://15.236.168.186:7000/api/v1/appointments/')
+      .get('appointments/')
       .then(res => setAppointmentData(res.data.rows));
   }, [appointmentData]);
 
