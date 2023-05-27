@@ -20,7 +20,7 @@ import {
 import api from '../utils/api'
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<any[]>([])
   const [modalVisible, setModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
