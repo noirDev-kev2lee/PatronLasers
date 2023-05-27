@@ -1,6 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
-  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -11,20 +10,31 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/Ionicons';
+import CustomAlert from './partials/CustomAlert';
 
 const ChangePassword = () => {
-  const [isLoading, setLoading] = React.useState(false);
-  const [password, passwordChange] = React.useState('');
-  const [newPassword, onNewPasswordChange] = React.useState('');
-  const [passwordConform, onPasswordConfirmChange] = React.useState('');
-  const [hide, setHide] = React.useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const [password, passwordChange] = useState('');
+  const [newPassword, onNewPasswordChange] = useState('');
+  const [passwordConform, onPasswordConfirmChange] = useState('');
+  const [hide, setHide] = useState(true);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
 
   const handleChangePassword = async () => {
     if (password === '' || newPassword === '' || passwordConform === '') {
-      Alert.alert('All field must be provided');
+      showAlert('All field must be provided');
     }
   };
   return (
@@ -110,6 +120,8 @@ const ChangePassword = () => {
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
+        {/* custom alert */}
+        <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </View>
   );
 };
