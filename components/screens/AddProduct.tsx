@@ -1,6 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
-  Alert,
   StyleSheet,
   Text,
   View,
@@ -10,11 +9,26 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 const AddProduct = ({clinicName}: {clinicName: any}) => {
-  const [serialNumber, onNumberChange] = React.useState('');
-  const [productName, onProductNameChange] = React.useState('');
+  const [serialNumber, onNumberChange] = useState('');
+  const [productName, onProductNameChange] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
+
+
+
   const handleAddProduct = async () => {
     await api
       .post('purchases/', {
@@ -25,13 +39,13 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
       .then(res => {
         const json = res.data;
         if (json.data.code === '23505') {
-          Alert.alert('Product Already taken!');
+          showAlert('Product Already taken!');
         } else {
-          Alert.alert('Product added successfuly!');
+          showAlert('Product added successfuly!');
         }
       })
       .catch(() => {
-        Alert.alert('Error occurs!');
+        showAlert('Error occurs!');
       });
   };
   return (
@@ -65,6 +79,8 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
+        {/* custom alert */}
+        <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </View>
   );
 };
