@@ -199,7 +199,7 @@ function App() {
           name="addCustomer"
           component={AddCustomer}
           options={{
-            title: 'Finacial Area',
+            title: '',
             headerShown: true,
             headerTitleAlign: 'center',
             headerStyle: {
