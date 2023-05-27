@@ -31,16 +31,16 @@ const productList = [
   },
   {
     id: 2,
-    name: 'product three',
+    name: 'Titi',
     img: require('../assets/product3.png'),
     desc: 'The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. ',
   },
-  {
-    id: 3,
-    name: 'product four',
-    img: require('../assets/product4.png'),
-    desc: 'This is product four',
-  },
+  // {
+  //   id: 3,
+  //   name: 'product four',
+  //   img: require('../assets/product4.png'),
+  //   desc: 'This is product four',
+  // },
 ];
 const TabGuide = ({navigation}: {navigation: any}) => {
   return (

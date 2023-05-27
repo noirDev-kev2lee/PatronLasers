@@ -625,7 +625,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-PatronLasers-PatronLasersTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = X23XDQJ6H4;
+				DEVELOPMENT_TEAM = AP44SU36N5;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -642,7 +642,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronproject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PatronLasers.app/PatronLasers";
 			};
@@ -654,7 +654,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = X23XDQJ6H4;
+				DEVELOPMENT_TEAM = AP44SU36N5;
 				INFOPLIST_FILE = PatronLasersTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -667,7 +667,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronproject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PatronLasers.app/PatronLasers";
 			};
@@ -682,7 +682,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X23XDQJ6H4;
+				DEVELOPMENT_TEAM = AP44SU36N5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PatronLasers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Patron Lasers";
@@ -690,13 +690,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronproject;
 				PRODUCT_NAME = PatronLasers;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -714,20 +714,20 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X23XDQJ6H4;
+				DEVELOPMENT_TEAM = AP44SU36N5;
 				INFOPLIST_FILE = PatronLasers/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Patron Lasers";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.patronlasers;
+				PRODUCT_BUNDLE_IDENTIFIER = com.patronproject;
 				PRODUCT_NAME = PatronLasers;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

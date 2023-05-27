@@ -23,9 +23,9 @@ const screenOptions = ({route}: {route: any}) => ({
       case 'Advertisement':
         iconName = 'globe';
         break;
-      case 'Clinical Guides':
-        iconName = 'medkit';
-        break;
+      // case 'Clinical Guides':
+      //   iconName = 'medkit';
+      //   break;
       case 'My Customer':
         iconName = 'users';
         break;
@@ -55,13 +55,14 @@ const Product = () => {
   return (
     <View style={styles.container}>
       <Tab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
-        <Tab.Screen name="Advertisement" component={TabsAds} />
-        <Tab.Screen name="Clinical Guides" component={TabGuide} />
-        <Tab.Screen
+      <Tab.Screen
           name="Home"
           component={ProductHome}
           initialParams={{username: username}}
         />
+        <Tab.Screen name="Advertisement" component={TabsAds} />
+        {/* <Tab.Screen name="Clinical Guides" component={TabGuide} /> */}
+        
         <Tab.Screen
           name="My Customer"
           component={TabCustomer}
