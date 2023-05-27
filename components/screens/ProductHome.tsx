@@ -116,7 +116,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               <View style={styles.line} />
             </View>
             <View>
-              <Pressable
+              {/* <Pressable
                 onPress={() => [
                   setdrawerModalVisible(!drawerModalVisible),
                   navigation.navigate('Finacial Area'),
@@ -127,7 +127,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                     <Text style={styles.drawerTxt}>financial</Text>
                   </View>
                 </View>
-              </Pressable>
+              </Pressable> */}
               <Pressable
                 onPress={() => [
                   setdrawerModalVisible(!drawerModalVisible),

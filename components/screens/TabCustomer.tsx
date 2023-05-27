@@ -429,7 +429,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   modalView: {
-    height: 800,
+    height: '80%',
     width: '95%',
     backgroundColor: '#f7f7f7',
     borderRadius: 20,

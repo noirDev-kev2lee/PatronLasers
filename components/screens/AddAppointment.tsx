@@ -92,8 +92,8 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
+        // behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        // keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20} // adjust this value as needed
         style={styles.keyboard}>
         <View style={styles.form}>
           <TextInput
