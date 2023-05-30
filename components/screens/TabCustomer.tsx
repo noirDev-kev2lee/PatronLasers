@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Alert,
   Pressable,
@@ -22,17 +22,17 @@ import AddCustomer from './AddCustomer';
 const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
-  const [patientData, setPatientData] = React.useState<any[]>([]);
-  const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
+  const [patientData, setPatientData] = useState<any[]>([]);
+  const [appointmentData, setAppointmentData] = useState<any[]>([]);
   const data = route.params as {username: string};
   const {username} = data;
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .get('patients/')
       .then(res => setPatientData(res.data.rows));
   }, [patientData]);
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .get('appointments/')
       .then(res => setAppointmentData(res.data.rows));
@@ -42,7 +42,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const appointmentList = appointmentData.filter(
     x => x.clinic_name === username,
   );
-  const handleDonePress = async appointData => {
+  const handleDonePress = async (appointData: any) => {
     await api
       .put(`appointments/${appointData.id}`, {
         id: appointData.id,
@@ -226,11 +226,15 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                           <Text style={styles.RecCardTitle}>
                             {y.fname} {y.lname}
                           </Text>
-                          <Pressable
+                         {y.job_status !== 'done' ? (
+                          <View>
+                             <Pressable
                             style={styles.doneBtn}
                             onPress={() => handleDonePress(y)}>
                             <Text style={{color: 'white'}}>Set to Done</Text>
                           </Pressable>
+                          </View>
+                         ): ''}
                         </View>
                         <Text style={styles.subTitle}>{y.service_type}</Text>
                         <View style={styles.timeContainer}>
@@ -302,6 +306,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#F8FAFB',
+    flex: 1,
   },
   textPress: {
     marginBottom: 10,

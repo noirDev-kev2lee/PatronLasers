@@ -145,7 +145,7 @@ export default function Register({navigation}: {navigation: any}) {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
         style={styles.keyboard}>
         <View style={styles.form}>
-          <Text style={styles.title}>Register</Text>
+          <Text style={styles.title}>Clinic</Text>
           <Text style={styles.title2}>
             Welcome to Patron, register as a Clinic
           </Text>

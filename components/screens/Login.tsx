@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 50,
     fontFamily: 'Inter-Bold',
-    fontSize: 40,
+    fontSize: 35,
     color: '#131035',
   },
   title2: {
