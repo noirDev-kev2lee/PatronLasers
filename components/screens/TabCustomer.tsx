@@ -226,11 +226,15 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                           <Text style={styles.RecCardTitle}>
                             {y.fname} {y.lname}
                           </Text>
-                          <Pressable
+                         {y.job_status !== 'done' ? (
+                          <View>
+                             <Pressable
                             style={styles.doneBtn}
                             onPress={() => handleDonePress(y)}>
                             <Text style={{color: 'white'}}>Set to Done</Text>
                           </Pressable>
+                          </View>
+                         ): ''}
                         </View>
                         <Text style={styles.subTitle}>{y.service_type}</Text>
                         <View style={styles.timeContainer}>
