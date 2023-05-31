@@ -9,6 +9,8 @@ import {
   Platform,
   ScrollView,
   ActivityIndicator,
+  Modal,
+  TouchableWithoutFeedback ,
 } from 'react-native';
 import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
@@ -33,6 +35,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
   const [passwordConform, onPasswordConfirmChange] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const showAlert = (message: React.SetStateAction<string>) => {
     setAlertMessage(message);
@@ -122,6 +125,10 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
       showAlert('Wrong email or password');
     }
   };
+  const handleOptionSelect = (option:any) => {
+    onGenderChange(option);
+    setModalVisible(false);
+  };
   return (
     <ScrollView>
       <KeyboardAvoidingView
@@ -164,12 +171,30 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                 <TextInput
                   style={styles.textInput}
                   onChangeText={onGenderChange}
+                  onFocus={() => setModalVisible(true)}
+                  value={gender}
                   placeholder="Gender"
                   placeholderTextColor={'grey'}
                 />
+                  <Modal
+                visible={modalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setModalVisible(false)}
+              >
+                <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+                  <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Male')}>Male</Text>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Female')}>Female</Text> 
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
+              </Modal>
               </View>
               <View style={styles.inputcustom}>
-                <TextInput
+               
+               <TextInput
                   style={styles.textInput}
                   onChangeText={onAgeChange}
                   placeholder="Age"
@@ -177,6 +202,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                   maxLength={3} // optional: limit the number of characters to 10 for a typical
                   placeholderTextColor={'grey'}
                 />
+              
               </View>
             </View>
 
@@ -274,7 +300,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'left',
     fontFamily: 'Inter-Regular',
-    fontSize: 40,
+    fontSize: 35,
     color: '#131035',
   },
   title2: {
@@ -304,7 +330,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: 'Inter',
-    paddingLeft: 30,
+    paddingLeft: 20,
     fontSize: 18,
     color: '#000',
     width: 250,
@@ -330,4 +356,38 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 20,
   },
+     // for select input
+     container2: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    optionInput: {
+      paddingLeft: 20,
+      margin: 10,
+      fontFamily: 'Roboto',
+      fontSize: 20,
+      color: '#000',
+      backgroundColor: '#e6e6e9',
+      width: 350,
+      height: 60,
+      borderRadius: 12,
+    },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'flex-end',
+     
+    },
+    modalContent: {
+      backgroundColor: '#fff',
+      padding: 20,
+      borderRadius: 10,
+      elevation: 5,
+    },
+    option: {
+      paddingVertical: 10,
+      fontSize: 18,
+      color: '#000',
+    },
 });
