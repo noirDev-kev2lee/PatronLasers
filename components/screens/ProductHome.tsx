@@ -20,14 +20,25 @@ import {
 import api from '../utils/api'
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
-  const [products, setProducts] = useState<any[]>([])
+  const [products, setProducts] = useState<any[]>([]);
+  const [purchased, setPurchased] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {username: string};
   const {username} = data;
   Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
-  
+  // fetch purchased
+  useEffect(()=>{
+    const fetchPurchased = async () =>{
+      try{
+        api.get('purchases/').then((res)=> setPurchased(res.data.rows))
+      }catch(error){
+        return error
+      }
+    }
+    fetchPurchased();
+  },[])
   // fetch products
   useEffect(()=>{
     const fetchProducts = async () =>{
@@ -41,35 +52,12 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
     fetchProducts();
   },[])
 
+  // filter serial number
+  const filteredSN= purchased.filter(y => y.clinic_name === username) .map(purchase => purchase.serial_number);
+  const myProducts = products.filter((obj) => filteredSN.includes(obj.serial_number));
+  // endpoint for image
   const myImg = 'http://35.180.24.145:7000/';
-  const productList = [
-    {
-      id: 0,
-      name: 'Boxa',
-      category: 'Hair removal devices',
-      img: require('../assets/product1.png'),
-      desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
-    },
-    {
-      id: 1,
-      name: 'Lisa',
-      category: 'Hair removal devices',
-      img: require('../assets/product2.png'),
-      desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
-    },
-    {
-      id: 2,
-      name: 'Biotox',
-      img: require('../assets/product3.png'),
-      desc: 'This is product three',
-    },
-    {
-      id: 3,
-      name: 'Zina',
-      img: require('../assets/product4.png'),
-      desc: 'This is product four',
-    },
-  ];
+ 
   return (
     <View style={styles.mainContainer}>
       {/* Modal for adding new product */}
@@ -82,11 +70,13 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View style={{width:'100%',flexDirection: 'row',justifyContent: 'flex-end',paddingTop: 20, paddingRight: 20}}>
             <Pressable
-              style={styles.button}
+              style={styles.closeButton}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Icon2 name="close" size={30} color={'#222'} />
+              <Icon name="close" size={30} color={'#222'} />
             </Pressable>
+            </View>
             <AddProduct clinicName={username} />
           </View>
         </View>
@@ -168,28 +158,30 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         horizontal
         style={styles.scroll}>
         <View style={styles.container}>
-          {productList.map(product => (
+          {myProducts.map(product => (
             <Pressable
               key={product.id}
               onPress={() =>
                 navigation.navigate('Product Info', {
-                  desc: product.desc,
-                  name: product.name,
-                  category: product.category,
+                  desc: product?.descriptions,
+                  name: product?.product_name,
+                  category: product?.category,
                 })
               }>
               <View style={[styles.card]}>
-                <Image style={styles.prodImg} source={product.img} />
-                <Text style={styles.cardText}>{product.name}</Text>
+                <Image style={styles.prodImg} source={{uri: myImg + product?.img_url}} />
+                <Text style={styles.cardText}>{product?.product_name}</Text>
               </View>
             </Pressable>
           ))}
         </View>
+        <View style={{flexDirection: 'column',justifyContent: 'center',}}>
         <Pressable
           onPress={() => setModalVisible(true)}
           style={styles.pressBtn}>
-          <Icon name="pluscircle" size={60} color="#888" />
+          <Icon name="pluscircle" size={60} color="#4BB543" />
         </Pressable>
+        </View>
       </ScrollView>
       <View>
         <Text style={styles.scrollHeader}>More From Patron</Text>
@@ -347,8 +339,6 @@ const styles = StyleSheet.create({
   },
   pressBtn: {
     fontFamily: 'Inter-Regular',
-    alignContent: 'center',
-    marginTop: 60,
     marginLeft: 8,
     borderRadius: 50,
     width: 80,
@@ -387,7 +377,6 @@ const styles = StyleSheet.create({
     width: 350,
     backgroundColor: 'white',
     borderRadius: 20,
-    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -397,9 +386,9 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  button: {
-    top: 10,
-    left: 150,
+  closeButton: {
+   
+   
     elevation: 2,
   },
   drawerModal: {
