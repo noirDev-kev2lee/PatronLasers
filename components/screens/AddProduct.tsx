@@ -13,8 +13,8 @@ import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 const AddProduct = ({clinicName}: {clinicName: any}) => {
-  const [serialNumber, onNumberChange] = useState('');
-  const [productName, onProductNameChange] = useState('');
+  const [serialNumber, setSerialNumber] = useState('');
+  const [productName, setProductName] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
@@ -42,6 +42,8 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
           showAlert('Product Already taken!');
         } else {
           showAlert('Product added successfuly!');
+          setSerialNumber('');
+          setProductName('');
         }
       })
       .catch(() => {
@@ -50,7 +52,6 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
   };
   return (
     <View>
-      <View style={styles.container}>
         <ScrollView>
           <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -63,13 +64,15 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
-                onChangeText={onNumberChange}
+                value={serialNumber}
+                onChangeText={setSerialNumber}
                 placeholder="Serial Number"
               />
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="grey"
-                onChangeText={onProductNameChange}
+                value={productName}
+                onChangeText={setProductName}
                 placeholder="Product Name"
               />
               <Pressable style={styles.pressBtn} onPress={handleAddProduct}>
@@ -78,7 +81,6 @@ const AddProduct = ({clinicName}: {clinicName: any}) => {
             </View>
           </KeyboardAvoidingView>
         </ScrollView>
-      </View>
         {/* custom alert */}
         <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </View>
@@ -148,7 +150,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#eee0cb',
   },
-  container: {},
 
   title: {
     textAlign: 'center',
