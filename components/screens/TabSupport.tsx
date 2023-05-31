@@ -88,32 +88,32 @@ const TabSupport = ({route}: {route: any}) => {
             </View>
             <View style={styles.form}>
             <View style={styles.container2}>
-      <TextInput
-        style={styles.optionInput}
-        placeholderTextColor="#b4b9c1"
-        value={cardType}
-        onChangeText={setCardType}
-        placeholder="Card type"
-        onFocus={() => setModalVisible(true)}
-      />
+              <TextInput
+                style={styles.optionInput}
+                placeholderTextColor="#b4b9c1"
+                value={cardType}
+                onChangeText={setCardType}
+                placeholder="Card type"
+                onFocus={() => setModalVisible(true)}
+              />
 
-      <Modal
-        visible={modalVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <View style={styles.modalContent}>
-              <Text style={styles.option} onPress={() => handleOptionSelect('Fault')}>Fault</Text>
-              <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Technical Support</Text>
-              <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Product Training</Text>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    </View>
+              <Modal
+                visible={modalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setModalVisible(false)}
+              >
+                <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+                  <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Fault')}>Fault</Text>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Technical Support</Text>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Product Training</Text>
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
+              </Modal>
+             </View>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
