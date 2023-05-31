@@ -1,37 +1,47 @@
+import React, {useEffect, useState} from 'react';
 import {
   Pressable,
   StyleSheet,
   TextInput,
   Text,
   View,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PatientRegister = ({navigation}: {navigation: any}) => {
-  const [disableButton, setDisableButton] = React.useState(true);
-  const [isLoading, setLoading] = React.useState(false);
-  const [emailError, setEmailError] = React.useState(false);
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [borderColor, setBorderColor] = React.useState('#D9D9D9');
-  const [clinicName, onClinicChange] = React.useState('');
-  const [firstName, onFnameChange] = React.useState('');
-  const [lastName, onLnameChange] = React.useState('');
-  const [gender, onGenderChange] = React.useState('');
-  const [age, onAgeChange] = React.useState('');
-  const [email, onEmailChange] = React.useState('');
-  const [mobile, onMobileChange] = React.useState('');
-  const [password, onPasswordChange] = React.useState('');
-  const [passwordConform, onPasswordConfirmChange] = React.useState('');
+  const [disableButton, setDisableButton] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [borderColor, setBorderColor] = useState('#D9D9D9');
+  const [clinicName, onClinicChange] = useState('');
+  const [firstName, onFnameChange] = useState('');
+  const [lastName, onLnameChange] = useState('');
+  const [gender, onGenderChange] = useState('');
+  const [age, onAgeChange] = useState('');
+  const [email, onEmailChange] = useState('');
+  const [mobile, onMobileChange] = useState('');
+  const [password, onPasswordChange] = useState('');
+  const [passwordConform, onPasswordConfirmChange] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
 
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
   // function to validate password
   useEffect(() => {
     if (!EMAIL_PATTERN.test(email) && email !== '') {
@@ -73,7 +83,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
         gender === '' ||
         clinicName === ''
       ) {
-        Alert.alert('All field must be provided');
+        showAlert('All field must be provided');
       } else {
         // add to user table
         try {
@@ -86,7 +96,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
           });
           const json = response.data;
           if (json.data.data.code === '23505') {
-            Alert.alert('Error occurs!, user exists already');
+            showAlert('Error occurs!, user exists already');
             setLoading(false);
           } else {
             //  add to patient table
@@ -100,16 +110,16 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
               email: email,
             });
             setLoading(false);
-            Alert.alert('Registration Successfully!');
+            showAlert('Registration Successfully!');
             navigation.navigate('Login');
           }
         } catch (error) {
           setLoading(true);
-          Alert.alert('Error occurs!');
+          showAlert('Error occurs!');
         }
       }
     } catch (error) {
-      Alert.alert('Wrong email or password');
+      showAlert('Wrong email or password');
     }
   };
   return (
@@ -245,6 +255,8 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+      {/* custom alert */}
+      <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </ScrollView>
   );
 };
