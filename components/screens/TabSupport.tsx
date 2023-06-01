@@ -170,6 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   textInput3: {
+    fontFamily: 'Roboto',
     textAlignVertical: 'top',
     padding: 10,
     margin: 10,
@@ -194,18 +195,11 @@ const styles = StyleSheet.create({
     top: 20,
   },
   pressTxt: {
+    fontFamily: 'Roboto',
     textAlign: 'center',
     padding: 10,
     fontSize: 20,
     color: 'white',
-  },
-  pressTxt1: {
-    marginTop: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 50,
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#eee0cb',
   },
   container: {
     flex: 1,
