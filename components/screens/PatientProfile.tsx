@@ -11,10 +11,10 @@ export default function PatientProfile({
   route: any;
 }) {
   const [patientData, setPatientData] = React.useState<any[]>([]);
-
-  const data = route.params as {username: string; email: string};
-  const {username, email} = data;
+  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
+  const {username, email, lastname,role,id} = data;
   const firstLetter = username.charAt(0);
+ 
 
   React.useEffect(() => {
     api
@@ -103,7 +103,7 @@ export default function PatientProfile({
         </View>
       </View>
       <View style={styles.profileBio}>
-        <Pressable onPress={() => navigation.navigate('change_password')}>
+        <Pressable onPress={() => navigation.navigate('change_password',{username:username,email:email, lastname:lastname, role:role, id:id})}>
           <View style={[styles.iconText, {marginBottom: 18}]}>
             <Icon name="lock-closed" size={25} color="#2D4059" />
             <View style={styles.infoCon}>
