@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../utils/api';
 
 export default function PatientProfile({
@@ -10,17 +10,19 @@ export default function PatientProfile({
   navigation: any;
   route: any;
 }) {
-  const [patientData, setPatientData] = React.useState<any[]>([]);
+  const [patientData, setPatientData] = useState<any[]>([]);
   const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
   const {username, email, lastname,role,id} = data;
   const firstLetter = username.charAt(0);
  
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .get('patients/')
       .then(res => setPatientData(res.data.rows));
   }, []);
+
+
 
   const singlePatient = patientData.filter(y => y.email === email);
 
@@ -84,7 +86,7 @@ export default function PatientProfile({
                 </View>
                 <View style={styles.infoCon}>
                   <Text style={styles.bioInfo1}>Phone</Text>
-                  <Text style={styles.bioInfo2}>{x.phone}</Text>
+                  <Text style={styles.bioInfo2}>+{x.phone}</Text>
                 </View>
               </View>
             </View>
@@ -92,20 +94,23 @@ export default function PatientProfile({
         </View>
       )}
 
-      <View style={styles.profileBio}>
+      <View style={styles. appointmentsBio}>
         <View style={styles.iconText}>
-          <Icon name="ios-medkit-outline" size={25} color="#F54D42" />
+          <Icon name="calendar-today" size={25} color="#F54D42" />
           <View style={styles.infoCon}>
             <View style={{paddingLeft: 10}}>
               <Text style={styles.bioInfo1}>Appointment(s)</Text>
             </View>
           </View>
         </View>
+        <View>
+          <Text style={styles.bioInfo1}>10</Text>
+        </View>
       </View>
       <View style={styles.profileBio}>
         <Pressable onPress={() => navigation.navigate('change_password',{username:username,email:email, lastname:lastname, role:role, id:id})}>
           <View style={[styles.iconText, {marginBottom: 18}]}>
-            <Icon name="lock-closed" size={25} color="#2D4059" />
+            <Icon name="lock-outline" size={25} color="#2D4059" />
             <View style={styles.infoCon}>
               <View style={{paddingLeft: 10}}>
                 <Text style={styles.bioInfo1}>Change password</Text>
@@ -114,7 +119,7 @@ export default function PatientProfile({
           </View>
         </Pressable>
         <View style={styles.iconText}>
-          <Icon name="ios-help-sharp" size={25} color="#FFB400" />
+          <Icon name="help-outline" size={25} color="#FFB400" />
           <View style={styles.infoCon}>
             <View style={{paddingLeft: 10}}>
               <Text style={styles.bioInfo1}>Help</Text>
@@ -157,24 +162,36 @@ const styles = StyleSheet.create({
     color: '#222',
   },
   profileHeadEmail: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: 'Roboto',
     fontSize: 15,
     textAlign: 'center',
     color: '#888',
   },
   bioHead: {
     marginBottom: 10,
-    fontFamily: 'Roboto-Bold',
+    fontFamily: 'Roboto',
     fontSize: 25,
     color: '#666',
   },
   bioHead2: {
     marginBottom: 10,
-    fontFamily: 'Roboto-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#222',
   },
   profileBio: {
+    height: 'auto',
+    paddingHorizontal: 25,
+    paddingVertical: 25,
+    borderRadius: 12,
+    backgroundColor: '#fff',
+    elevation: 3,
+    marginBottom: 12,
+  },
+  appointmentsBio: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     height: 'auto',
     paddingHorizontal: 25,
     paddingVertical: 25,
