@@ -92,16 +92,18 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         }}>
         <View style={styles.drawerModal}>
           <View>
-            <View>
+            <View style={{width: '100%', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 15}}>
               <Pressable
-                style={styles.drawerButton}
                 onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
-                <Icon name="close" size={30} color={'#DADADA'} />
+                <Icon name="close" size={30} color={'#DFDFDF'} />
               </Pressable>
             </View>
             <View style={styles.drawerInfo}>
-              <Icon2 name="user-circle-o" size={58} color="#DADADA" />
-              <Text style={styles.drawerName}>{username}</Text>
+              <Icon2 name="user-circle-o" size={58} color="#DFDFDF" />
+             <View>
+             <Text style={styles.drawerName}>{username}</Text>
+             <Text style={styles.drawerEmail}>{email}</Text>
+             </View>
             </View>
             <View style={styles.lineContainer}>
               <View style={styles.line} />
@@ -241,7 +243,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   welcomeNote: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Inter',
     marginLeft: 10,
     fontSize: 15,
     color: 'black',
@@ -405,7 +407,7 @@ const styles = StyleSheet.create({
     top: 41,
     left: 0,
     height: '100%',
-    width: 270,
+    width: '85%',
     paddingHorizontal: 25,
     paddingVertical: 25,
     elevation: 100,
@@ -418,11 +420,9 @@ const styles = StyleSheet.create({
   drawerTextCon: {
     paddingLeft: 20,
   },
-  drawerButton: {
-    top: 5,
-    left: 180,
-  },
+  
   drawerTxt: {
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#DADADA',
     textTransform: 'capitalize',
@@ -431,10 +431,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   drawerName: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     marginTop: 10,
-    color: '#DADADA',
+    color: '#DFDFDF',
     fontSize: 20,
+  },
+  drawerEmail: {
+    fontFamily: 'Roboto',
+    marginTop: 10,
+    color: '#808083',
+    fontSize: 18,
   },
   lineContainer: {
     paddingVertical: 25,
