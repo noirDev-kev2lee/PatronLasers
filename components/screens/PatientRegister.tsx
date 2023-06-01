@@ -1,37 +1,50 @@
+import React, {useEffect, useState} from 'react';
 import {
   Pressable,
   StyleSheet,
   TextInput,
   Text,
   View,
-  Alert,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   ActivityIndicator,
+  Modal,
+  TouchableWithoutFeedback ,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PatientRegister = ({navigation}: {navigation: any}) => {
-  const [disableButton, setDisableButton] = React.useState(true);
-  const [isLoading, setLoading] = React.useState(false);
-  const [emailError, setEmailError] = React.useState(false);
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [borderColor, setBorderColor] = React.useState('#D9D9D9');
-  const [clinicName, onClinicChange] = React.useState('');
-  const [firstName, onFnameChange] = React.useState('');
-  const [lastName, onLnameChange] = React.useState('');
-  const [gender, onGenderChange] = React.useState('');
-  const [age, onAgeChange] = React.useState('');
-  const [email, onEmailChange] = React.useState('');
-  const [mobile, onMobileChange] = React.useState('');
-  const [password, onPasswordChange] = React.useState('');
-  const [passwordConform, onPasswordConfirmChange] = React.useState('');
+  const [disableButton, setDisableButton] = useState(true);
+  const [isLoading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [borderColor, setBorderColor] = useState('#D9D9D9');
+  const [clinicName, onClinicChange] = useState('');
+  const [firstName, onFnameChange] = useState('');
+  const [lastName, onLnameChange] = useState('');
+  const [gender, onGenderChange] = useState('');
+  const [age, onAgeChange] = useState('');
+  const [email, onEmailChange] = useState('');
+  const [mobile, onMobileChange] = useState('');
+  const [password, onPasswordChange] = useState('');
+  const [passwordConform, onPasswordConfirmChange] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
   // function to validate password
   useEffect(() => {
     if (!EMAIL_PATTERN.test(email) && email !== '') {
@@ -73,7 +86,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
         gender === '' ||
         clinicName === ''
       ) {
-        Alert.alert('All field must be provided');
+        showAlert('All field must be provided');
       } else {
         // add to user table
         try {
@@ -86,7 +99,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
           });
           const json = response.data;
           if (json.data.data.code === '23505') {
-            Alert.alert('Error occurs!, user exists already');
+            showAlert('Error occurs!, user exists already');
             setLoading(false);
           } else {
             //  add to patient table
@@ -100,17 +113,21 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
               email: email,
             });
             setLoading(false);
-            Alert.alert('Registration Successfully!');
+            showAlert('Registration Successfully!');
             navigation.navigate('Login');
           }
         } catch (error) {
           setLoading(true);
-          Alert.alert('Error occurs!');
+          showAlert('Error occurs!');
         }
       }
     } catch (error) {
-      Alert.alert('Wrong email or password');
+      showAlert('Wrong email or password');
     }
+  };
+  const handleOptionSelect = (option:any) => {
+    onGenderChange(option);
+    setModalVisible(false);
   };
   return (
     <ScrollView>
@@ -154,12 +171,30 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                 <TextInput
                   style={styles.textInput}
                   onChangeText={onGenderChange}
+                  onFocus={() => setModalVisible(true)}
+                  value={gender}
                   placeholder="Gender"
                   placeholderTextColor={'grey'}
                 />
+                  <Modal
+                visible={modalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setModalVisible(false)}
+              >
+                <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+                  <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Male')}>Male</Text>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Female')}>Female</Text> 
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
+              </Modal>
               </View>
               <View style={styles.inputcustom}>
-                <TextInput
+               
+               <TextInput
                   style={styles.textInput}
                   onChangeText={onAgeChange}
                   placeholder="Age"
@@ -167,6 +202,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                   maxLength={3} // optional: limit the number of characters to 10 for a typical
                   placeholderTextColor={'grey'}
                 />
+              
               </View>
             </View>
 
@@ -245,6 +281,8 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+      {/* custom alert */}
+      <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </ScrollView>
   );
 };
@@ -261,12 +299,12 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontFamily: 'Inter-Regular',
-    fontSize: 40,
+    fontFamily: 'Roboto',
+    fontSize: 35,
     color: '#131035',
   },
   title2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#9F9F9F',
   },
@@ -292,7 +330,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: 'Inter',
-    paddingLeft: 30,
+    paddingLeft: 20,
     fontSize: 18,
     color: '#000',
     width: 250,
@@ -301,7 +339,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     left: 10,
     top: 20,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     borderRadius: 12,
     backgroundColor: '#131035',
     width: 350,
@@ -309,7 +347,7 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     top: 10,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#fff',
   },
@@ -318,4 +356,38 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 20,
   },
+     // for select input
+     container2: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    optionInput: {
+      paddingLeft: 20,
+      margin: 10,
+      fontFamily: 'Roboto',
+      fontSize: 20,
+      color: '#000',
+      backgroundColor: '#e6e6e9',
+      width: 350,
+      height: 60,
+      borderRadius: 12,
+    },
+    modalOverlay: {
+      flex: 1,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      justifyContent: 'flex-end',
+     
+    },
+    modalContent: {
+      backgroundColor: '#fff',
+      padding: 20,
+      borderRadius: 10,
+      elevation: 5,
+    },
+    option: {
+      paddingVertical: 10,
+      fontSize: 18,
+      color: '#000',
+    },
 });

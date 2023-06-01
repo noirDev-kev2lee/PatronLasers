@@ -63,18 +63,30 @@ const Login = ({navigation}: LoginProps) => {
           });
   
           const json = response.data;
+         
+          
+          const userID = json.data.id;
           const userName = json.data.firstname;
           const lname = json.data.lastname;
           const userEmail = json.data.email;
+          const userRole = json.data.role;
+        
+          
   
           setLoading(false);
           if (json.data.role === 'clinic') {
-            navigation.navigate('Product', {username: userName, lastname: lname});
+            navigation.navigate('Product', { username: userName,
+              email: userEmail,
+              lastname: lname,
+              id:userID,
+              role: userRole});
           } else if (json.data.role === 'patient') {
             navigation.navigate('patient_home', {
               username: userName,
               email: userEmail,
               lastname: lname,
+              id:userID,
+              role: userRole
             });
           }
         }
@@ -202,13 +214,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 50,
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'Roboto',
+    fontWeight: '700',
     fontSize: 35,
     color: '#131035',
   },
   title2: {
     width: 300,
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 25,
     color: '#131035',
   },
@@ -224,7 +237,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
   },
   textInput: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     padding: 10,
     fontSize: 18,
     color: '#000',
@@ -238,7 +251,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
   },
   pressTxt: {
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
@@ -248,7 +261,7 @@ const styles = StyleSheet.create({
   },
   forgotPass: {
     top: -10,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 15,
     color: '#737373',
   },

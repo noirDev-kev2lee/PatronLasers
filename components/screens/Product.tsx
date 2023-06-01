@@ -49,8 +49,14 @@ const screenOptions = ({route}: {route: any}) => ({
 
 const Product = () => {
   const route = useRoute();
-  const data = route.params as {username: string; lastname: string};
-  const {username, lastname} = data;
+  const data = route.params as {
+    username: string;
+    email: string;
+    lastname: string;
+    role: string;
+    id: string;
+  };
+  const {username, email, lastname, id, role} = data;
 
   return (
     <View style={styles.container}>
@@ -58,7 +64,7 @@ const Product = () => {
       <Tab.Screen
           name="Home"
           component={ProductHome}
-          initialParams={{username: username}}
+          initialParams={{username: username, email: email, lastname: lastname, role: role, id: id}}
         />
         <Tab.Screen name="Advertisement" component={TabsAds} />
         {/* <Tab.Screen name="Clinical Guides" component={TabGuide} /> */}

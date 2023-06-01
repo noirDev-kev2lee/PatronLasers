@@ -1,6 +1,5 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
-  Alert,
   StyleSheet,
   Text,
   TextInput,
@@ -10,14 +9,36 @@ import {
   ScrollView,
   View,
   ActivityIndicator,
+  Modal,
+  TouchableWithoutFeedback
+  
 } from 'react-native';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 const TabSupport = ({route}: {route: any}) => {
-  const [isLoading, setLoading] = React.useState(false);
-  const [cardType, onCardTpyeChange] = React.useState('');
-  const [cardTitle, onCardTitleChange] = React.useState('');
-  const [desc, onDescChange] = React.useState('');
+  const [isLoading, setLoading] = useState(false);
+  const [cardType, setCardType] = useState('');
+  const [cardTitle, setCardTitle] = useState('');
+  const [desc, setDesc] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
+
+  const handleOptionSelect = (option:any) => {
+    setCardType(option);
+    setModalVisible(false);
+  };
+  
 
   const data = route.params as {username: string; lastname: string};
   const {username, lastname} = data;
@@ -25,7 +46,7 @@ const TabSupport = ({route}: {route: any}) => {
   const handleSupportRegister = async () => {
     try {
       if (cardType === '' || cardTitle === '' || desc === '') {
-        Alert.alert('All field must be provided');
+        showAlert('All field must be provided');
       } else {
         setLoading(true);
         try {
@@ -38,16 +59,19 @@ const TabSupport = ({route}: {route: any}) => {
               descriptions: desc,
             })
             .then(() => {
-              Alert.alert('Support sent');
+             showAlert('Support Sent Successfuly! ');
+             setCardType('');
+             setCardTitle('');
+             setDesc('');
               setLoading(false);
             });
         } catch (err) {
           setLoading(false);
-          Alert.alert('Error occurs!');
+         showAlert('Error occurs!');
         }
       }
     } catch (error) {
-      Alert.alert('Internal Error occurs!');
+     showAlert('Internal Error occurs!');
       setLoading(false);
     }
   };
@@ -63,16 +87,38 @@ const TabSupport = ({route}: {route: any}) => {
               <Text style={styles.title}>Create a card</Text>
             </View>
             <View style={styles.form}>
+            <View style={styles.container2}>
               <TextInput
-                style={styles.textInput}
+                style={styles.optionInput}
                 placeholderTextColor="#b4b9c1"
-                onChangeText={onCardTpyeChange}
+                value={cardType}
+                onChangeText={setCardType}
                 placeholder="Card type"
+                onFocus={() => setModalVisible(true)}
               />
+
+              <Modal
+                visible={modalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setModalVisible(false)}
+              >
+                <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+                  <View style={styles.modalOverlay}>
+                    <View style={styles.modalContent}>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Fault')}>Fault</Text>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Technical Support</Text>
+                      <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Product Training</Text>
+                    </View>
+                  </View>
+                </TouchableWithoutFeedback>
+              </Modal>
+             </View>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
-                onChangeText={onCardTitleChange}
+                onChangeText={setCardTitle}
+                value={cardTitle}
                 placeholder="Card title"
               />
               <TextInput
@@ -80,7 +126,8 @@ const TabSupport = ({route}: {route: any}) => {
                 numberOfLines={10}
                 style={styles.textInput3}
                 placeholderTextColor="#b4b9c1"
-                onChangeText={onDescChange}
+                value={desc}
+                onChangeText={setDesc}
                 placeholder="Type your message..."
               />
               <Pressable
@@ -99,6 +146,8 @@ const TabSupport = ({route}: {route: any}) => {
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
+        {/* custom alert */}
+        <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </View>
   );
 };
@@ -121,6 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   textInput3: {
+    fontFamily: 'Roboto',
     textAlignVertical: 'top',
     padding: 10,
     margin: 10,
@@ -145,18 +195,11 @@ const styles = StyleSheet.create({
     top: 20,
   },
   pressTxt: {
+    fontFamily: 'Roboto',
     textAlign: 'center',
     padding: 10,
     fontSize: 20,
     color: 'white',
-  },
-  pressTxt1: {
-    marginTop: 20,
-    paddingVertical: 12,
-    paddingHorizontal: 50,
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#eee0cb',
   },
   container: {
     flex: 1,
@@ -182,5 +225,39 @@ const styles = StyleSheet.create({
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
+  },
+  // for select input
+  container2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  optionInput: {
+    paddingLeft: 20,
+    margin: 10,
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    color: '#000',
+    backgroundColor: '#e6e6e9',
+    width: 350,
+    height: 60,
+    borderRadius: 12,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+   
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    elevation: 5,
+  },
+  option: {
+    paddingVertical: 10,
+    fontSize: 18,
+    color: '#000',
   },
 });

@@ -10,24 +10,33 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Ionicons';
 import CustomAlert from './partials/CustomAlert';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../utils/api';
 
-const ChangePassword = () => {
+const ChangePassword = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
+  const {username, email, lastname,role,id} = data;
+ 
+  const [disableButton, setDisableButton] = useState(true);
   const [isLoading, setLoading] = useState(false);
-  const [password, passwordChange] = useState('');
-  const [newPassword, onNewPasswordChange] = useState('');
-  const [passwordConform, onPasswordConfirmChange] = useState('');
-  const [hide, setHide] = useState(true);
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [passwordConform, setPasswordConfirm] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+ 
 
   const showAlert = (message: React.SetStateAction<string>) => {
     setAlertMessage(message);
     setAlertVisible(true);
   };
-
   const closeAlert = () => {
     setAlertVisible(false);
   };
@@ -35,6 +44,30 @@ const ChangePassword = () => {
   const handleChangePassword = async () => {
     if (password === '' || newPassword === '' || passwordConform === '') {
       showAlert('All field must be provided');
+    }else{
+     if(passwordConform === newPassword){
+      try{
+        api.put(`users/${id}`,{
+          id: id,
+          first_name: username,
+          last_name: lastname ,
+          email: email,
+          password: newPassword,
+          role: role
+        }).then(()=>{
+          showAlert('Password Changed Successfuly!');
+          navigation.navigate('Login');
+        }).catch((err)=>{
+          return err
+          
+        })
+      }catch(error){
+        showAlert('Error occured')
+        return error
+      }
+     }else{
+      showAlert('Passwords are not equal')
+     }
     }
   };
   return (
@@ -44,69 +77,54 @@ const ChangePassword = () => {
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
           style={styles.keyboard}>
-          <View style={styles.formContainer}>
+       
+            <View style={styles.lockIcon}>
+           <View style={styles.lockIconStyle}>
+           <Icon name="lock-outline" size={60} color="#131035" />
+           </View>
+            </View>
+          <View>
             <View style={styles.textContainer}>
-              <Text style={styles.title}>Change Password </Text>
+              <View>
+              <Text style={styles.title}>Create a new Password</Text>
+              <Text style={styles.title2}>always keep your password safe</Text>
+              </View>
             </View>
 
             <View style={styles.form}>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
-
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={passwordChange}
-                  secureTextEntry={hide}
+                  onChangeText={setPassword}
+                  secureTextEntry={true}
                   placeholder="Enter old password"
                   placeholderTextColor={'gray'}
                 />
-                <Pressable onPress={() => setHide(!hide)}>
-                  {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
-                  ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
-                  )}
-                </Pressable>
               </View>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
-
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={onNewPasswordChange}
-                  secureTextEntry={hide}
+                  onChangeText={setNewPassword}
+                  secureTextEntry={true}
                   placeholder="Enter New password"
                   placeholderTextColor={'gray'}
                 />
-                <Pressable onPress={() => setHide(!hide)}>
-                  {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
-                  ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
-                  )}
-                </Pressable>
+               
               </View>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
-
-                <TextInput
+                  <TextInput
                   style={styles.textInput}
-                  onChangeText={onPasswordConfirmChange}
-                  secureTextEntry={hide}
+                  onChangeText={setPasswordConfirm}
+                  secureTextEntry={true}
                   placeholder="Confirm New password"
                   placeholderTextColor={'gray'}
                 />
-                <Pressable onPress={() => setHide(!hide)}>
-                  {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
-                  ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
-                  )}
-                </Pressable>
               </View>
             </View>
+          
             <View style={styles.buttons}>
-              <Pressable style={styles.pressBtn} onPress={handleChangePassword}>
+              <Pressable style={styles.pressBtn}  disabled={disableButton} onPress={handleChangePassword}>
+             
                 {isLoading ? (
                   <ActivityIndicator
                     color="white"
@@ -133,6 +151,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     backgroundColor: 'white',
+    paddingHorizontal: 25,
+    paddingTop: 50,
   },
   form: {
     justifyContent: 'center',
@@ -143,12 +163,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  textContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   title: {
-    marginTop: 50,
-    fontFamily: 'Inter-Bold',
-    fontSize: 30,
+    fontFamily: 'Roboto',
+    fontWeight: '700',
+    fontSize: 25,
     color: '#131035',
   },
+  title2: {
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    color: '#131035',
+  },
+
   inputStyle: {
     margin: 10,
     paddingLeft: 24,
@@ -161,8 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
   },
   textInput: {
-    fontFamily: 'Inter-Regular',
-    padding: 10,
+    fontFamily: 'Roboto',
     fontSize: 18,
     color: '#000',
     width: 250,
@@ -175,7 +205,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
   },
   pressTxt: {
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
@@ -183,26 +213,28 @@ const styles = StyleSheet.create({
   pressBtn2: {
     right: -110,
   },
-  forgotPass: {
-    top: -10,
-    fontFamily: 'Inter-Regular',
-    fontSize: 15,
-    color: '#737373',
+  lockIcon: {
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
-  textContainer: {
-    paddingLeft: 25,
+  lockIconStyle: {
+    width: 89,
+    height: 89,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 48,
+    borderWidth: 3,
+    borderColor: '#131035'
+   
   },
-  backArrow: {
-    paddingTop: 35,
-    paddingLeft: 25,
-  },
+
+
   Arrow: {
     fontSize: 30,
   },
   keyboard: {paddingBottom: 30},
-  formContainer: {
-    flexDirection: 'column',
-  },
+ 
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
