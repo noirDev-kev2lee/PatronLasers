@@ -24,8 +24,9 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [purchased, setPurchased] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
-  const data = route.params as {username: string};
-  const {username} = data;
+  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
+  const {username, email, lastname,role,id} = data;
+ 
   Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
   // fetch purchased
@@ -127,6 +128,15 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                   <Icon name="profile" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
                     <Text style={styles.drawerTxt}>About</Text>
+                  </View>
+                </View>
+              </Pressable>
+              {/* change password */}
+              <Pressable onPress={() => navigation.navigate('change_password',{username:username,email:email, lastname:lastname, role:role, id:id})}>
+                <View style={styles.drawerList}>
+                  <Icon name="lock1" size={30} color={'#fff'} />
+                  <View style={styles.drawerTextCon}>
+                    <Text style={styles.drawerTxt}>Change Password</Text>
                   </View>
                 </View>
               </Pressable>
