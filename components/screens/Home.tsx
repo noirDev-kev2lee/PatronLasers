@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   pressTxt: {
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     textTransform: 'uppercase',
     letterSpacing: 2,
     fontSize: 17,
