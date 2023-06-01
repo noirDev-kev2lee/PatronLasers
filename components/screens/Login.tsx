@@ -63,9 +63,15 @@ const Login = ({navigation}: LoginProps) => {
           });
   
           const json = response.data;
+         
+          
+          const userID = json.data.id;
           const userName = json.data.firstname;
           const lname = json.data.lastname;
           const userEmail = json.data.email;
+          const userRole = json.data.role;
+        
+          
   
           setLoading(false);
           if (json.data.role === 'clinic') {
@@ -75,6 +81,8 @@ const Login = ({navigation}: LoginProps) => {
               username: userName,
               email: userEmail,
               lastname: lname,
+              id:userID,
+              role: userRole
             });
           }
         }
