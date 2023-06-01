@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import CustomAlert from './partials/CustomAlert';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../utils/api';
 
 const ChangePassword = ({
@@ -23,7 +24,7 @@ const ChangePassword = ({
   const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
   const {username, email, lastname,role,id} = data;
  
-  
+  const [disableButton, setDisableButton] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -58,7 +59,7 @@ const ChangePassword = ({
           navigation.navigate('Login');
         }).catch((err)=>{
           return err
-          showAlert('Error occured')
+          
         })
       }catch(error){
         showAlert('Error occured')
@@ -76,9 +77,18 @@ const ChangePassword = ({
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
           style={styles.keyboard}>
-          <View style={styles.formContainer}>
+       
+            <View style={styles.lockIcon}>
+           <View style={styles.lockIconStyle}>
+           <Icon name="lock-outline" size={60} color="#131035" />
+           </View>
+            </View>
+          <View>
             <View style={styles.textContainer}>
-              <Text style={styles.title}>Change Password </Text>
+              <View>
+              <Text style={styles.title}>Create a new Password</Text>
+              <Text style={styles.title2}>always keep your password safe</Text>
+              </View>
             </View>
 
             <View style={styles.form}>
@@ -111,8 +121,10 @@ const ChangePassword = ({
                 />
               </View>
             </View>
+          
             <View style={styles.buttons}>
-              <Pressable style={styles.pressBtn} onPress={handleChangePassword}>
+              <Pressable style={styles.pressBtn}  disabled={disableButton} onPress={handleChangePassword}>
+             
                 {isLoading ? (
                   <ActivityIndicator
                     color="white"
@@ -139,6 +151,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: 'center',
     backgroundColor: 'white',
+    paddingHorizontal: 25,
+    paddingTop: 50,
   },
   form: {
     justifyContent: 'center',
@@ -149,12 +163,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  textContainer: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   title: {
-    marginTop: 50,
-    fontFamily: 'Inter-Bold',
-    fontSize: 30,
+    fontFamily: 'Roboto',
+    fontWeight: '700',
+    fontSize: 25,
     color: '#131035',
   },
+  title2: {
+    fontFamily: 'Roboto',
+    fontSize: 20,
+    color: '#131035',
+  },
+
   inputStyle: {
     margin: 10,
     paddingLeft: 24,
@@ -167,7 +192,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
   },
   textInput: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 18,
     color: '#000',
     width: 250,
@@ -180,7 +205,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
   },
   pressTxt: {
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
@@ -188,26 +213,28 @@ const styles = StyleSheet.create({
   pressBtn2: {
     right: -110,
   },
-  forgotPass: {
-    top: -10,
-    fontFamily: 'Inter-Regular',
-    fontSize: 15,
-    color: '#737373',
+  lockIcon: {
+    flexDirection: 'row',
+    justifyContent: 'center'
   },
-  textContainer: {
-    paddingLeft: 25,
+  lockIconStyle: {
+    width: 89,
+    height: 89,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 48,
+    borderWidth: 3,
+    borderColor: '#131035'
+   
   },
-  backArrow: {
-    paddingTop: 35,
-    paddingLeft: 25,
-  },
+
+
   Arrow: {
     fontSize: 30,
   },
   keyboard: {paddingBottom: 30},
-  formContainer: {
-    flexDirection: 'column',
-  },
+ 
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
