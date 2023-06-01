@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
     width: width * 1,
   },
   listTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 23,
     marginBottom: 5,
     fontWeight: 'bold',
@@ -378,43 +378,43 @@ const styles = StyleSheet.create({
     color: 'green',
   },
   RecCardTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'capitalize',
     color: '#36454F',
   },
   idTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'uppercase',
     color: '#36454F',
   },
   subTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '500',
     fontSize: 19,
     color: '#36454F',
   },
   RecCardTitle2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 15,
     color: '#333',
   },
   RecCardPara: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: '#222',
     textTransform: 'capitalize',
   },
   startDateText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: 'green',
   },
   endDateText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: '#B30000',
   },
@@ -427,7 +427,7 @@ const styles = StyleSheet.create({
   },
   profileLetter: {
     color: '#fff',
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '600',
     textTransform: 'uppercase',
     fontSize: 25,
@@ -513,7 +513,7 @@ const styles = StyleSheet.create({
   modalBtnText: {
     textAlign: 'center',
     fontSize: 18,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '600',
   },
   modalCloseIcon: {
