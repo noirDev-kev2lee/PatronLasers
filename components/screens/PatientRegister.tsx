@@ -299,12 +299,12 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 35,
     color: '#131035',
   },
   title2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#9F9F9F',
   },
@@ -339,7 +339,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     left: 10,
     top: 20,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     borderRadius: 12,
     backgroundColor: '#131035',
     width: 350,
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     top: 10,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#fff',
   },
