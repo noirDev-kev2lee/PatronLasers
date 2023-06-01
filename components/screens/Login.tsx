@@ -75,7 +75,11 @@ const Login = ({navigation}: LoginProps) => {
   
           setLoading(false);
           if (json.data.role === 'clinic') {
-            navigation.navigate('Product', {username: userName, lastname: lname});
+            navigation.navigate('Product', { username: userName,
+              email: userEmail,
+              lastname: lname,
+              id:userID,
+              role: userRole});
           } else if (json.data.role === 'patient') {
             navigation.navigate('patient_home', {
               username: userName,
