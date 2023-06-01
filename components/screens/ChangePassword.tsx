@@ -10,24 +10,32 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import Icon2 from 'react-native-vector-icons/Ionicons';
 import CustomAlert from './partials/CustomAlert';
+import api from '../utils/api';
 
-const ChangePassword = () => {
+const ChangePassword = ({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) => {
+  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
+  const {username, email, lastname,role,id} = data;
+ 
+  
   const [isLoading, setLoading] = useState(false);
-  const [password, passwordChange] = useState('');
-  const [newPassword, onNewPasswordChange] = useState('');
-  const [passwordConform, onPasswordConfirmChange] = useState('');
-  const [hide, setHide] = useState(true);
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [passwordConform, setPasswordConfirm] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+ 
 
   const showAlert = (message: React.SetStateAction<string>) => {
     setAlertMessage(message);
     setAlertVisible(true);
   };
-
   const closeAlert = () => {
     setAlertVisible(false);
   };
@@ -35,6 +43,30 @@ const ChangePassword = () => {
   const handleChangePassword = async () => {
     if (password === '' || newPassword === '' || passwordConform === '') {
       showAlert('All field must be provided');
+    }else{
+     if(passwordConform === newPassword){
+      try{
+        api.put(`users/${id}`,{
+          id: id,
+          first_name: username,
+          last_name: lastname ,
+          email: email,
+          password: newPassword,
+          role: role
+        }).then(()=>{
+          showAlert('Password Changed Successfuly!');
+          navigation.navigate('Login');
+        }).catch((err)=>{
+          return err
+          showAlert('Error occured')
+        })
+      }catch(error){
+        showAlert('Error occured')
+        return error
+      }
+     }else{
+      showAlert('Passwords are not equal')
+     }
     }
   };
   return (
@@ -51,58 +83,32 @@ const ChangePassword = () => {
 
             <View style={styles.form}>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
-
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={passwordChange}
-                  secureTextEntry={hide}
+                  onChangeText={setPassword}
+                  secureTextEntry={true}
                   placeholder="Enter old password"
                   placeholderTextColor={'gray'}
                 />
-                <Pressable onPress={() => setHide(!hide)}>
-                  {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
-                  ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
-                  )}
-                </Pressable>
               </View>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
-
                 <TextInput
                   style={styles.textInput}
-                  onChangeText={onNewPasswordChange}
-                  secureTextEntry={hide}
+                  onChangeText={setNewPassword}
+                  secureTextEntry={true}
                   placeholder="Enter New password"
                   placeholderTextColor={'gray'}
                 />
-                <Pressable onPress={() => setHide(!hide)}>
-                  {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
-                  ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
-                  )}
-                </Pressable>
+               
               </View>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
-
-                <TextInput
+                  <TextInput
                   style={styles.textInput}
-                  onChangeText={onPasswordConfirmChange}
-                  secureTextEntry={hide}
+                  onChangeText={setPasswordConfirm}
+                  secureTextEntry={true}
                   placeholder="Confirm New password"
                   placeholderTextColor={'gray'}
                 />
-                <Pressable onPress={() => setHide(!hide)}>
-                  {hide ? (
-                    <Icon2 name="eye-off" size={30} color="#000000" />
-                  ) : (
-                    <Icon2 name="eye-sharp" size={30} color="#000000" />
-                  )}
-                </Pressable>
               </View>
             </View>
             <View style={styles.buttons}>
@@ -162,7 +168,6 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: 'Inter-Regular',
-    padding: 10,
     fontSize: 18,
     color: '#000',
     width: 250,
