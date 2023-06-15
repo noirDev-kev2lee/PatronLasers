@@ -119,9 +119,6 @@ const AddCustomer = () => {
         style={styles.keyboard}>
         <View style={styles.form}>
           <Text style={styles.title}>Patient</Text>
-          <Text style={styles.title2}>
-            Welcome to Patron, register as a Patient
-          </Text>
           <View>
             <View style={styles.inputLog}>
               <TextInput
@@ -313,9 +310,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#fff',
   },
-  keyboard: {paddingBottom: 0},
+  keyboard: {paddingBottom: 10},
   activityIndicator: {
     alignSelf: 'center',
-    padding: 20,
   },
 });
