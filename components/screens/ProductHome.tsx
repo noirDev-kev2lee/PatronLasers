@@ -57,7 +57,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const filteredSN= purchased.filter(y => y.clinic_name === username) .map(purchase => purchase.serial_number);
   const myProducts = products.filter((obj) => filteredSN.includes(obj.serial_number));
   // endpoint for image
-  const myImg = 'http://35.180.24.145:7000/';
+  const myImg = 'http://15.237.138.133:7000/';
  
   return (
     <View style={styles.mainContainer}>
