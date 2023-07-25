@@ -123,14 +123,6 @@ const AddCustomer = () => {
             <View style={styles.inputLog}>
               <TextInput
                 style={styles.textInput}
-                onChangeText={onClinicChange}
-                placeholder="Clinic Name"
-                placeholderTextColor={'grey'}
-              />
-            </View>
-            <View style={styles.inputLog}>
-              <TextInput
-                style={styles.textInput}
                 onChangeText={onFnameChange}
                 placeholder="First Name"
                 placeholderTextColor={'grey'}
@@ -251,10 +243,10 @@ const styles = StyleSheet.create({
   form: {
     flex: 1,
     padding: 20,
-    height:900,
+    height:800,//if this breakes on Iphone Please change Back.
     paddingBottom: 180,
     alignContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#f7f7f7',
   },
   title: {
     textAlign: 'left',

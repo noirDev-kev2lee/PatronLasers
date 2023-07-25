@@ -477,7 +477,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    top: 10,
+    top: 0,
     left: 140,
   },
   textStyle: {

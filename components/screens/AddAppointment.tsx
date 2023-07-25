@@ -25,6 +25,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   const [endDate, setEndDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
+  const [sessionCount, SetSessionCount] = React.useState('');
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [timeOpen, setTimeOpen] = useState(false);
@@ -119,6 +120,12 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             placeholderTextColor="#b4b9c1"
             onChangeText={setService}
             placeholder="Service Type"
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholderTextColor="#b4b9c1"
+            onChangeText={SetSessionCount}
+            placeholder="How Many Sessions"
           />
           {/* start date */}
           <View style={styles.datePickerStyle}>
@@ -283,15 +290,15 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   form: {
-    flex: 1,
+    flex: 1,        
     flexDirection: 'column',
     alignItems: 'center',
-    paddingBottom: 100,
+    paddingBottom: 50,
   },
-  pressBtn: {
+  pressBtn: {                                                                                       
     alignItems: 'center',
     fontFamily: 'Inter-Regular',
-    borderRadius: 12,
+    borderRadius: 12,  
     backgroundColor: '#131035',
     width: 300,
     height: 60,

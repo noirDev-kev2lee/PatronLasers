@@ -61,18 +61,15 @@ const Product = () => {
   return (
     <View style={styles.container}>
       <Tab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
-      <Tab.Screen
-          name="Home"
-          component={ProductHome}
-          initialParams={{username: username, email: email, lastname: lastname, role: role, id: id}}
-        />
-        <Tab.Screen name="Advertisement" component={TabsAds} />
-        {/* <Tab.Screen name="Clinical Guides" component={TabGuide} /> */}
-        
         <Tab.Screen
           name="My Customer"
           component={TabCustomer}
           initialParams={{username: username}}
+        />
+      <Tab.Screen
+          name="Home"
+          component={ProductHome}
+          initialParams={{username: username, email: email, lastname: lastname, role: role, id: id}}
         />
         <Tab.Screen
           name="Tech Support"
