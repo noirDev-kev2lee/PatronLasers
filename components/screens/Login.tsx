@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react';
 import {
-  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -16,6 +15,7 @@ import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 interface LoginProps {
@@ -27,11 +27,22 @@ const Login = ({navigation}: LoginProps) => {
   const [password, passwordChange] = useState('');
   const [hide, setHide] = useState(true);
   const [isConnected, setInternetConnected ] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
 
   const handleLogin = async () => {
     try {
       if (email === '' || password === '') {
-        Alert.alert('Email or password must be provided');
+        showAlert('Email or password must be provided!')
       } else {
         setLoading(true);
         if (email === 'democlinic@gmail.com'){
@@ -52,25 +63,37 @@ const Login = ({navigation}: LoginProps) => {
           });
   
           const json = response.data;
+         
+          
+          const userID = json.data.id;
           const userName = json.data.firstname;
           const lname = json.data.lastname;
           const userEmail = json.data.email;
+          const userRole = json.data.role;
+        
+          
   
           setLoading(false);
           if (json.data.role === 'clinic') {
-            navigation.navigate('Product', {username: userName, lastname: lname});
+            navigation.navigate('Product', { username: userName,
+              email: userEmail,
+              lastname: lname,
+              id:userID,
+              role: userRole});
           } else if (json.data.role === 'patient') {
             navigation.navigate('patient_home', {
               username: userName,
               email: userEmail,
               lastname: lname,
+              id:userID,
+              role: userRole
             });
           }
         }
         
       }
     } catch (error) {
-      Alert.alert('Server Error or user not found');
+      showAlert('Server Error or user not found!')
       setLoading(false);
     }
   };
@@ -149,7 +172,7 @@ return ()=>{
             <View style={styles.buttons}>
               <Pressable
                 style={styles.pressBtn2}
-                onPress={() => Alert.alert('Not Working yet')}>
+                onPress={() => showAlert('Not Working yet')}>
                 <Text style={styles.forgotPass}>Forgot Password?</Text>
               </Pressable>
               <Pressable style={styles.pressBtn} onPress={handleLogin}>
@@ -166,6 +189,8 @@ return ()=>{
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
+      {/* custom alert */}
+      <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </View>
   );
 };
@@ -189,13 +214,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 50,
-    fontFamily: 'Inter-Bold',
-    fontSize: 40,
+    fontFamily: 'Roboto',
+    fontWeight: '700',
+    fontSize: 35,
     color: '#131035',
   },
   title2: {
     width: 300,
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 25,
     color: '#131035',
   },
@@ -211,7 +237,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#D9D9D9',
   },
   textInput: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     padding: 10,
     fontSize: 18,
     color: '#000',
@@ -225,7 +251,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
   },
   pressTxt: {
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
@@ -235,7 +261,7 @@ const styles = StyleSheet.create({
   },
   forgotPass: {
     top: -10,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 15,
     color: '#737373',
   },

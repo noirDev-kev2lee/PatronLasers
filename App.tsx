@@ -91,17 +91,7 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-        <Stack.Screen
-          name="Patient Home"
-          component={PatientHome}
-          options={{
-            title: '',
-            headerShown: false,
-            headerTitleAlign: 'center',
-            headerStyle: {},
-            headerTintColor: '#fff',
-          }}
-        />
+      
         <Stack.Screen
           name="change_password"
           component={ChangePassword}

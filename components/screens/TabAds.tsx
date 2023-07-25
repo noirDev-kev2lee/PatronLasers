@@ -1,3 +1,4 @@
+import React,{useState, useEffect} from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -5,47 +6,47 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  useWindowDimensions 
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import React from 'react';
+import HTML from 'react-native-render-html';
+import api from '../utils/api'
 
-const productList = [
-  {
-    id: 0,
-    name: 'Boxa',
-    category: 'Hair removal devices',
-    img: require('../assets/product1.png'),
-    desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
-  },
-  {
-    id: 1,
-    name: 'Lisa',
-    category: 'Hair removal devices',
-    img: require('../assets/product2.png'),
-    desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
-  },
-  {
-    id: 2,
-    name: 'product three',
-    img: require('../assets/product3.png'),
-    desc: 'This is product three',
-  },
-  {
-    id: 3,
-    name: 'product four',
-    img: require('../assets/product4.png'),
-    desc: 'This is product four',
-  },
-];
 
 const ProductHome = ({navigation}: {navigation: any}) => {
+  const windowWidth = useWindowDimensions().width;
+  const [products, setProducts] = useState<any[]>([])
+  const myImg = 'http://35.180.24.145:7000/';
+  // fetch products
+  useEffect(()=>{
+    const fetchProducts = async () =>{
+      try{
+       await api.get('products/'). then((res)=> setProducts(res.data.rows))
+      }catch(error){
+        return error
+      }
+
+    }
+    fetchProducts();
+  },[])
+  const htmlRenderStyles = StyleSheet.create({
+    baseText: {
+      color: 'black', 
+    },
+  });
+  function limitWords(str: string, limit: number) {
+    const words = str.split(' ');
+    const limitedWords = words.slice(0, limit);
+    const limitedString = limitedWords.join(' ');
+    return limitedString;
+  }
   return (
     <View >
-      <View>
+      <View style={{paddingLeft: 16, paddingTop: 16}}>
         <Text style={styles.scrollHeader}>New Arrivals</Text>
       </View>
       <ScrollView
@@ -53,58 +54,52 @@ const ProductHome = ({navigation}: {navigation: any}) => {
         horizontal
         style={styles.scroll}>
         <View style={styles.container}>
-        {productList.map(product => (
+        {products.slice(0,5).map(product => (
           <Pressable
             key={product.id}
             onPress={() =>
               navigation.navigate('Product Info', {
-                desc: product.desc,
-                name: product.name,
-                image: product.img,
-                category: product.category,
+                desc: product?.descriptions,
+                  name: product?.product_name,
+                  category: product?.category,
               })
             }>
             <View style={[styles.RecCard]}>
               <View style={styles.RecCardInfo}>
-                <Text style={styles.RecCardTitle}>{product.name}</Text>
-                <Text style={styles.RecCardPara}>{product.desc}</Text>
+                <Text style={styles.RecCardTitle}>{product.product_name}</Text>
+                <View>
+                <HTML source={{ html: limitWords(product?.descriptions,35) }} contentWidth={windowWidth} baseStyle={htmlRenderStyles.baseText} />
               </View>
-              <Image style={styles.prodImgSmallRec} source={product.img} />
+              </View>
+              <Image style={styles.prodImgSmallRec} source={{uri: myImg + product?.img_url}} />
             </View>
           </Pressable>
         ))}
         </View>
       </ScrollView>
-      <View>
+      <View style={{paddingLeft: 16, paddingVertical:16}}>
         <Text style={styles.scrollHeader}>Must See Products</Text>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.containersec}>
-        <View>
-          {productList.map(product => (
+        <View style={styles.productsContainer}>
+        {products.map(product => (
             <Pressable
               key={product.id}
+              style={styles.productsView}
               onPress={() =>
                 navigation.navigate('Product Info', {
-                  desc: product.desc,
-                  name: product.name,
-                  image: product.img,
-                  category: product.category,
+                  desc: product?.descriptions,
+                  name: product?.product_name,
+                  category: product?.category,
                 })
-              }>
-              <View style={styles.scrollsec}>
+              }
+              >
+              <View>
                 <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
-                </View>
-                <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
-                </View>
-                <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
+                  <Image style={styles.prodImgSmall} source={{uri: myImg + product?.img_url}} />
+                  <Text style={styles.cardText}>{product?.product_name}</Text>
                 </View>
               </View>
             </Pressable>
@@ -134,10 +129,7 @@ const styles = StyleSheet.create({
     height: 200,
     flexDirection: 'row',
   },
-  scrollsec: {
-    flexDirection: 'row',
-    marginVertical: 5,
-  },
+  
   containersec: {
     margin: 5,
     height:height * 0.47,
@@ -207,7 +199,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   prodImgSmallRec: {
-    top: -15,
+   
     left: -20,
     height: 150,
     width: 230,
@@ -225,7 +217,7 @@ const styles = StyleSheet.create({
   RecCardTitle: {
     fontFamily: 'Inter',
     color: '#222',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'left',
   },
@@ -244,5 +236,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 30,
     textAlign: 'center',
+  },
+   productsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  productsView: {
+    flexBasis: '33.33%', 
+    marginBottom: 10, 
   },
 });

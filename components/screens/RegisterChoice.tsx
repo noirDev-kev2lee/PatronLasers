@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     marginTop: 50,
     margin: 10,
     textAlign: 'left',
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
     fontSize: 30,
     color: '#e6e6e9',
   },
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f3f3',
   },
   textInput: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     padding: 10,
     fontSize: 20,
     color: '#000',
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     textAlign: 'center',
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     textTransform: 'uppercase',
     fontSize: 18,
   },
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
     right: -110,
   },
   pressTxt2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 15,
     color: '#e6e6e9',
   },

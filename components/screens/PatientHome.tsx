@@ -234,13 +234,13 @@ const styles = StyleSheet.create({
   heading: {
     marginLeft: 10,
     color: '#222',
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 40,
   },
   heading2: {
     marginLeft: 10,
     color: '#888',
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 20,
   },
   RecCardInfo1: {
@@ -258,13 +258,13 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   appointTitle1: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '600',
     fontSize: 19,
     color: '#222',
   },
   appointTitle2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 19,
     color: '#555',
   },
@@ -272,17 +272,17 @@ const styles = StyleSheet.create({
     width: 300,
     padding: 10,
     textAlign: 'left',
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 14,
     color: '#777',
   },
   pendingText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 19,
     color: 'red',
   },
   doneText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 19,
     color: 'green',
   },
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   drawerName: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     marginTop: 10,
     color: '#DADADA',
     fontSize: 20,
@@ -367,5 +367,5 @@ const styles = StyleSheet.create({
     color: 'black',
     marginLeft: 10,
   },
-  notAvailable: {color: 'black', fontFamily: 'Inter-Regular', fontSize: 18},
+  notAvailable: {color: 'black', fontFamily: 'Roboto', fontSize: 18},
 });

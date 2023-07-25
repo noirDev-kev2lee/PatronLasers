@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Alert,
   Pressable,
@@ -18,22 +18,23 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import AddAppointment from './AddAppointment';
 import AddCustomer from './AddCustomer';
+
 const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
-  const [patientData, setPatientData] = React.useState<any[]>([]);
-  const [appointmentData, setAppointmentData] = React.useState<any[]>([]);
+  const [patientData, setPatientData] = useState<any[]>([]);
+  const [appointmentData, setAppointmentData] = useState<any[]>([]);
   const data = route.params as {username: string};
   const {username} = data;
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
-      .get('http://15.236.168.186:7000/api/v1/patients/')
+      .get('patients/')
       .then(res => setPatientData(res.data.rows));
   }, [patientData]);
-  React.useEffect(() => {
+  useEffect(() => {
     api
-      .get('http://15.236.168.186:7000/api/v1/appointments/')
+      .get('appointments/')
       .then(res => setAppointmentData(res.data.rows));
   }, [appointmentData]);
 
@@ -41,7 +42,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const appointmentList = appointmentData.filter(
     x => x.clinic_name === username,
   );
-  const handleDonePress = async appointData => {
+  const handleDonePress = async (appointData: any) => {
     await api
       .put(`appointments/${appointData.id}`, {
         id: appointData.id,
@@ -225,11 +226,15 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                           <Text style={styles.RecCardTitle}>
                             {y.fname} {y.lname}
                           </Text>
-                          <Pressable
+                         {y.job_status !== 'done' ? (
+                          <View>
+                             <Pressable
                             style={styles.doneBtn}
                             onPress={() => handleDonePress(y)}>
                             <Text style={{color: 'white'}}>Set to Done</Text>
                           </Pressable>
+                          </View>
+                         ): ''}
                         </View>
                         <Text style={styles.subTitle}>{y.service_type}</Text>
                         <View style={styles.timeContainer}>
@@ -301,6 +306,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#F8FAFB',
+    flex: 1,
   },
   textPress: {
     marginBottom: 10,
@@ -334,7 +340,7 @@ const styles = StyleSheet.create({
     width: width * 1,
   },
   listTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 23,
     marginBottom: 5,
     fontWeight: 'bold',
@@ -372,43 +378,43 @@ const styles = StyleSheet.create({
     color: 'green',
   },
   RecCardTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'capitalize',
     color: '#36454F',
   },
   idTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: 20,
     textTransform: 'uppercase',
     color: '#36454F',
   },
   subTitle: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '500',
     fontSize: 19,
     color: '#36454F',
   },
   RecCardTitle2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 15,
     color: '#333',
   },
   RecCardPara: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: '#222',
     textTransform: 'capitalize',
   },
   startDateText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: 'green',
   },
   endDateText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: '#B30000',
   },
@@ -421,7 +427,7 @@ const styles = StyleSheet.create({
   },
   profileLetter: {
     color: '#fff',
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '600',
     textTransform: 'uppercase',
     fontSize: 25,
@@ -453,7 +459,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     height: 650,
-    width: '95%',
+    width: '100%',
     backgroundColor: '#f7f7f7',
     borderRadius: 20,
     alignItems: 'center',
@@ -507,7 +513,7 @@ const styles = StyleSheet.create({
   modalBtnText: {
     textAlign: 'center',
     fontSize: 18,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontWeight: '600',
   },
   modalCloseIcon: {

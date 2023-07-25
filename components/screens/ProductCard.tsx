@@ -68,12 +68,12 @@ const styles = StyleSheet.create({
   headerText: {
     color: '#000000',
     fontSize: 25,
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
   },
   subText: {
     color: '#888',
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontWeight: '500',
     fontSize: 17,
   },
@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   prodTitle: {
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'Roboto',
+    fontWeight: '700',
     marginBottom: 10,
     color: '#888',
     fontSize: 30,

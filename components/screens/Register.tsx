@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -10,25 +11,36 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import CustomAlert from './partials/CustomAlert';
 import api from '../utils/api';
 
 const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Register({navigation}: {navigation: any}) {
-  const [disableButton, setDisableButton] = React.useState(true);
-  const [passwordError, setPasswordError] = React.useState(false);
-  const [emailError, setEmailError] = React.useState(false);
-  const [isLoading, setLoading] = React.useState(false);
-  const [borderColor, setBorderColor] = React.useState('#D9D9D9');
-  const [clinicName, onClinicNameChange] = React.useState('');
-  const [serialNumber, onNumberChange] = React.useState('');
-  const [email, onEmailChange] = React.useState('');
-  const [location, onLocationChange] = React.useState('');
-  const [mobile, onMobileChange] = React.useState('');
-  const [password, onPasswordChange] = React.useState('');
-  const [passwordConform, onPasswordConfirmChange] = React.useState('');
+  const [disableButton, setDisableButton] = useState(true);
+  const [passwordError, setPasswordError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [borderColor, setBorderColor] = useState('#D9D9D9');
+  const [clinicName, onClinicNameChange] = useState('');
+  const [serialNumber, onNumberChange] = useState('');
+  const [email, onEmailChange] = useState('');
+  const [location, onLocationChange] = useState('');
+  const [mobile, onMobileChange] = useState('');
+  const [password, onPasswordChange] = useState('');
+  const [passwordConform, onPasswordConfirmChange] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+
+  const showAlert = (message: React.SetStateAction<string>) => {
+    setAlertMessage(message);
+    setAlertVisible(true);
+  };
+
+  const closeAlert = () => {
+    setAlertVisible(false);
+  };
   // function to validate password
   useEffect(() => {
     if (!EMAIL_PATTERN.test(email) && email !== '') {
@@ -68,7 +80,7 @@ export default function Register({navigation}: {navigation: any}) {
         location === '' ||
         mobile === ''
       ) {
-        Alert.alert('All field must be provided');
+        showAlert('All field must be provided');
       } else {
         setLoading(true);
         // add to clinic table
@@ -82,11 +94,11 @@ export default function Register({navigation}: {navigation: any}) {
           });
           const json = response.data;
           if (json.data.code === '23503') {
-            Alert.alert('Error occurs!, serial number not found');
+            showAlert('Error occurs!, serial number not found');
             setLoading(false);
           }
           if (json.data.code === '23505') {
-            Alert.alert('Error occurs!, clinic name already exists');
+            showAlert('Error occurs!, clinic name already exists');
             setLoading(false);
           } else {
             await api.post('purchases/', {
@@ -107,21 +119,21 @@ export default function Register({navigation}: {navigation: any}) {
                 const signupData = res.data;
                 if (signupData.data.data.code === '23505') {
                   setLoading(false);
-                  Alert.alert('Error occurs!,user already exists.');
+                  showAlert('Error occurs!,user already exists.');
                 } else {
-                  Alert.alert('Registration Successfully!');
+                  showAlert('Registration Successfully!');
                   navigation.navigate('Login');
                   setLoading(false);
                 }
               });
           }
         } catch (err) {
-          Alert.alert('Error occurs!');
+          showAlert('Error occurs!');
           setLoading(false);
         }
       }
     } catch (error) {
-      Alert.alert('Internal Error occurs!');
+      showAlert('Internal Error occurs!');
       setLoading(false);
     }
   };
@@ -133,7 +145,7 @@ export default function Register({navigation}: {navigation: any}) {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
         style={styles.keyboard}>
         <View style={styles.form}>
-          <Text style={styles.title}>Register</Text>
+          <Text style={styles.title}>Clinic</Text>
           <Text style={styles.title2}>
             Welcome to Patron, register as a Clinic
           </Text>
@@ -237,6 +249,8 @@ export default function Register({navigation}: {navigation: any}) {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
+       {/* custom alert */}
+       <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
     </ScrollView>
   );
 }
@@ -251,12 +265,12 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontFamily: 'Inter-Regular',
-    fontSize: 40,
+    fontFamily: 'Roboto',
+    fontSize: 32,
     color: '#131035',
   },
   title2: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#9F9F9F',
   },
@@ -281,7 +295,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     left: 10,
     top: 20,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     borderRadius: 12,
     backgroundColor: '#131035',
     width: 350,
@@ -289,7 +303,7 @@ const styles = StyleSheet.create({
   },
   pressTxt: {
     padding: 10,
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'Roboto',
     fontSize: 20,
     color: '#fff',
   },

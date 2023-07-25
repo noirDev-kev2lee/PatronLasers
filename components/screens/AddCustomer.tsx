@@ -313,5 +313,7 @@ const styles = StyleSheet.create({
   keyboard: {paddingBottom: 10},
   activityIndicator: {
     alignSelf: 'center',
+    padding: 50,
+    
   },
 });
