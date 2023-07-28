@@ -106,18 +106,6 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
           <TextInput
             style={styles.textInput}
             placeholderTextColor="#b4b9c1"
-            onChangeText={setFname}
-            placeholder="First Name"
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholderTextColor="#b4b9c1"
-            onChangeText={setLname}
-            placeholder="Last Name"
-          />
-          <TextInput
-            style={styles.textInput}
-            placeholderTextColor="#b4b9c1"
             onChangeText={setService}
             placeholder="Service Type"
           />
@@ -125,7 +113,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             style={styles.textInput}
             placeholderTextColor="#b4b9c1"
             onChangeText={SetSessionCount}
-            placeholder="How Many Sessions"
+            placeholder="Session Number"
           />
           {/* start date */}
           <View style={styles.datePickerStyle}>

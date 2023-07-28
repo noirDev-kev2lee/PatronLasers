@@ -18,7 +18,6 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import api from '../utils/api'
-import TabCustomer from './TabCustomer';
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [products, setProducts] = useState<any[]>([]);
@@ -296,6 +295,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                           </View>
                         </View>
                         <Text style={styles.RecCardPara}>{y.job_status}</Text>
+                        <Text style={styles.endDateText2}>Session:</Text>
                       </View>
                     </View>
                     <View style={styles.lineContainer}>
@@ -656,6 +656,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 16,
     color: '#B30000',
+  },
+  endDateText2: {
+    textAlign: 'right',
+    bottom:15,
+    fontWeight:'bold',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    color:'blue'
   },
   idTitle: {
     fontFamily: 'Roboto',
