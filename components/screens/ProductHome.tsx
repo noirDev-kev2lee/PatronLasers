@@ -8,7 +8,7 @@ import {
   View,
   Image,
   Platform,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
@@ -17,67 +17,72 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import api from '../utils/api'
+import api from '../utils/api';
 
 const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [products, setProducts] = useState<any[]>([]);
   const [purchased, setPurchased] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
-  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
-  const {username, email, lastname,role,id} = data;
- 
+  const data = route.params as {
+    username: string;
+    email: string;
+    lastname: string;
+    role: string;
+    id: string;
+  };
+  const {username, email, lastname, role, id} = data;
+
   Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
   // fetch purchased
-  useEffect(()=>{
-    const fetchPurchased = async () =>{
-      try{
-        api.get('purchases/').then((res)=> setPurchased(res.data.rows))
-      }catch(error){
-        return error
+  useEffect(() => {
+    const fetchPurchased = async () => {
+      try {
+        api.get('purchases/').then(res => setPurchased(res.data.rows));
+      } catch (error) {
+        return error;
       }
-    }
+    };
     fetchPurchased();
-  },[])
+  }, []);
   // fetch products
-  useEffect(()=>{
-    const fetchProducts = async () =>{
-      try{
-       await api.get('products/'). then((res)=> setProducts(res.data.rows))
-      }catch(error){
-        return error
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        await api.get('products/').then(res => setProducts(res.data.rows));
+      } catch (error) {
+        return error;
       }
-
-    }
+    };
     fetchProducts();
-  },[])
+  }, []);
   //Customer Tab Data
   const [patientData, setPatientData] = useState<any[]>([]);
   const [appointmentData, setAppointmentData] = useState<any[]>([]);
   //Patient
   useEffect(() => {
-    api
-      .get('patients/')
-      .then(res => setPatientData(res.data.rows));
+    api.get('patients/').then(res => setPatientData(res.data.rows));
   }, [patientData]);
   //Appointments
   useEffect(() => {
-    api
-      .get('appointments/')
-      .then(res => setAppointmentData(res.data.rows));
+    api.get('appointments/').then(res => setAppointmentData(res.data.rows));
   }, [appointmentData]);
   const patientList = patientData.filter(y => y.clinic_name === username);
   const appointmentList = appointmentData.filter(
     x => x.clinic_name === username,
   );
-  
+
   // filter serial number
-  const filteredSN= purchased.filter(y => y.clinic_name === username) .map(purchase => purchase.serial_number);
-  const myProducts = products.filter((obj) => filteredSN.includes(obj.serial_number));
+  const filteredSN = purchased
+    .filter(y => y.clinic_name === username)
+    .map(purchase => purchase.serial_number);
+  const myProducts = products.filter(obj =>
+    filteredSN.includes(obj.serial_number),
+  );
   // endpoint for image
   const myImg = 'http://15.237.138.133:7000/';
- 
+
   return (
     <View style={styles.mainContainer}>
       {/* Modal for adding new product */}
@@ -90,12 +95,19 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <View style={{width:'100%',flexDirection: 'row',justifyContent: 'flex-end',paddingTop: 20, paddingRight: 20}}>
-            <Pressable
-              style={styles.closeButton}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Icon name="close" size={30} color={'#222'} />
-            </Pressable>
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                paddingTop: 20,
+                paddingRight: 20,
+              }}>
+              <Pressable
+                style={styles.closeButton}
+                onPress={() => setModalVisible(!modalVisible)}>
+                <Icon name="close" size={30} color={'#222'} />
+              </Pressable>
             </View>
             <AddProduct clinicName={username} />
           </View>
@@ -111,7 +123,13 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
         }}>
         <View style={styles.drawerModal}>
           <View>
-            <View style={{width: '100%', flexDirection:'row', justifyContent: 'flex-end', paddingBottom: 15}}>
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                paddingBottom: 15,
+              }}>
               <Pressable
                 onPress={() => setdrawerModalVisible(!drawerModalVisible)}>
                 <Icon name="close" size={30} color={'#DFDFDF'} />
@@ -119,27 +137,29 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             </View>
             <View style={styles.drawerInfo}>
               <Icon2 name="user-circle-o" size={58} color="#DFDFDF" />
-             <View>
-             <Text style={styles.drawerName}>{username}</Text>
-             <Text style={styles.drawerEmail}>{email}</Text>
-             </View>
+              <View>
+                <Text style={styles.drawerName}>{username}</Text>
+                <Text style={styles.drawerEmail}>{email}</Text>
+              </View>
             </View>
             <View style={styles.lineContainer}>
               <View style={styles.line} />
             </View>
             <View>
-              {<Pressable
-                onPress={() => [
-                  setdrawerModalVisible(!drawerModalVisible),
-                  navigation.navigate('Finacial Area'),
-                ]}>
-                <View style={styles.drawerList}>
-                  <Icon2 name="money" size={30} color={'#fff'} />
-                  <View style={styles.drawerTextCon}>
-                    <Text style={styles.drawerTxt}>financial</Text>
+              {
+                <Pressable
+                  onPress={() => [
+                    setdrawerModalVisible(!drawerModalVisible),
+                    navigation.navigate('Finacial Area', {username: username}),
+                  ]}>
+                  <View style={styles.drawerList}>
+                    <Icon2 name="money" size={30} color={'#fff'} />
+                    <View style={styles.drawerTextCon}>
+                      <Text style={styles.drawerTxt}>financial</Text>
+                    </View>
                   </View>
-                </View>
-              </Pressable>}
+                </Pressable>
+              }
               <Pressable
                 onPress={() => [
                   setdrawerModalVisible(!drawerModalVisible),
@@ -153,7 +173,16 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                 </View>
               </Pressable>
               {/* change password */}
-              <Pressable onPress={() => navigation.navigate('change_password',{username:username,email:email, lastname:lastname, role:role, id:id})}>
+              <Pressable
+                onPress={() =>
+                  navigation.navigate('change_password', {
+                    username: username,
+                    email: email,
+                    lastname: lastname,
+                    role: role,
+                    id: id,
+                  })
+                }>
                 <View style={styles.drawerList}>
                   <Icon name="lock1" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
@@ -200,23 +229,26 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                 })
               }>
               <View style={[styles.card]}>
-                <Image style={styles.prodImg} source={{uri: myImg + product?.img_url}} />
+                <Image
+                  style={styles.prodImg}
+                  source={{uri: myImg + product?.img_url}}
+                />
                 <Text style={styles.cardText}>{product?.product_name}</Text>
               </View>
             </Pressable>
           ))}
         </View>
-        <View style={{flexDirection: 'column',justifyContent: 'center',}}>
-        <Pressable
-          onPress={() => setModalVisible(true)}
-          style={styles.pressBtn}>
-          <Icon name="pluscircle" size={60} color="#4BB543" />
-        </Pressable>
+        <View style={{flexDirection: 'column', justifyContent: 'center'}}>
+          <Pressable
+            onPress={() => setModalVisible(true)}
+            style={styles.pressBtn}>
+            <Icon name="pluscircle" size={60} color="#4BB543" />
+          </Pressable>
         </View>
       </ScrollView>
       <ScrollView horizontal pagingEnabled={true}>
-      {/* appointments list */}
-      <View style={styles.list}>
+        {/* appointments list */}
+        <View style={styles.list}>
           <View style={styles.customerHeader}>
             <Text style={styles.listTitle}>Appointments</Text>
           </View>
@@ -242,10 +274,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                           <Text style={styles.RecCardTitle}>
                             {y.fname} {y.lname}
                           </Text>
-                         {y.job_status !== 'done' ? (
-                          <View>
-                          </View>
-                         ): ''}
+                          {y.job_status !== 'done' ? <View /> : ''}
                         </View>
                         <Text style={styles.subTitle}>{y.service_type}</Text>
                         <View style={styles.timeContainer}>
@@ -377,13 +406,12 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             )}
           </ScrollView>
         </View>
-
       </ScrollView>
     </View>
   );
 };
 export default ProductHome;
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
   mainContainer: {
@@ -422,7 +450,7 @@ const styles = StyleSheet.create({
   },
   containersec: {
     margin: 5,
-    height:height * 0.38,
+    height: height * 0.38,
     flexDirection: 'column',
   },
   productsContainer: {
@@ -430,8 +458,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   productsView: {
-    flexBasis: '33.33%', 
-    marginBottom: 10, 
+    flexBasis: '33.33%',
+    marginBottom: 10,
   },
   card: {
     textAlign: 'base-line',
@@ -492,7 +520,7 @@ const styles = StyleSheet.create({
   },
   prodImgSmall: {
     margin: -5,
-    height:hp('18%'),
+    height: hp('18%'),
     width: 240,
     resizeMode: 'contain',
   },
@@ -553,7 +581,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   closeButton: {
-   elevation: 2,
+    elevation: 2,
   },
   drawerModal: {
     top: 41,
@@ -572,7 +600,7 @@ const styles = StyleSheet.create({
   drawerTextCon: {
     paddingLeft: 20,
   },
-  
+
   drawerTxt: {
     fontFamily: 'Roboto',
     fontSize: 20,
@@ -615,7 +643,7 @@ const styles = StyleSheet.create({
     color: '#131035',
   },
   listScroll: {
-    height: height*0.5,
+    height: height * 0.5,
     paddingBottom: 30,
     flexDirection: 'column',
   },
@@ -659,11 +687,11 @@ const styles = StyleSheet.create({
   },
   endDateText2: {
     textAlign: 'right',
-    bottom:15,
-    fontWeight:'bold',
+    bottom: 15,
+    fontWeight: 'bold',
     fontFamily: 'Roboto',
     fontSize: 16,
-    color:'blue'
+    color: 'blue',
   },
   idTitle: {
     fontFamily: 'Roboto',
@@ -695,4 +723,4 @@ const styles = StyleSheet.create({
     fontSize: 19,
     color: '#36454F',
   },
-})
+});
