@@ -1,203 +1,193 @@
-import React, { useEffect, useState } from 'react';
-import {View, Text, StyleSheet, Dimensions,} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/AntDesign';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
+// import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,} from 'react-native-responsive-screen'
-  import api from '../utils/api'
-  
-  const FinancialArea = ({route, navigation}: {route: any; navigation: any}) => {
-    const [patientData, setPatientData] = useState<any[]>([]);
-    const [appointmentData, setAppointmentData] = useState<any[]>([]);
-    const data = route.params as {username: string};
-    const {username} = data;
-    useEffect(() => {
-      api
-        .get('patients/')
-        .then(res => setPatientData(res.data.rows));
-    }, [patientData]);
-    useEffect(() => {
-      api
-        .get('appointments/')
-        .then(res => setAppointmentData(res.data.rows));
-    }, [appointmentData]);
-  
-    const patientList = patientData.filter(y => y.clinic_name === username);
-    const appointmentList = appointmentData.filter(
-      x => x.clinic_name === username,
-    );
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import api from '../utils/api';
+
+const FinancialArea = ({route}: {route: any}) => {
+  const [patientData, setPatientData] = useState<any[]>([]);
+  const [appointmentData, setAppointmentData] = useState<any[]>([]);
+  const data = route.params as {username: string};
+  const {username} = data;
+  useEffect(() => {
+    api.get('patients/').then(res => setPatientData(res.data.rows));
+  }, [patientData]);
+  useEffect(() => {
+    api.get('appointments/').then(res => setAppointmentData(res.data.rows));
+  }, [appointmentData]);
+
+  const patientList = patientData.filter(y => y.clinic_name === username);
+  const appointmentList = appointmentData.filter(
+    x => x.clinic_name === username,
+  );
   return (
     <ScrollView horizontal pagingEnabled={true}>
-        {/* customers list */}
-        <View style={styles.list}>
-          <View style={styles.customerHeader}>
-            <Text style={styles.listTitle}>My Customers</Text>
-          </View>
-          <ScrollView style={styles.listScroll}>
-            {patientList.length === 0 ? (
-              <View>
-                <Text style={{color: 'red', paddingLeft: 20}}>
-                  No available customers
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {patientList.map((customer: any) => (
-                  <View key={customer.id}>
-                    <View style={[styles.customerCard]}>
-                      <View style={styles.customerImg}>
-                        <Text style={styles.profileLetter}>
-                          {customer.first_name.charAt(0)}
+      {/* customers list */}
+      <View style={styles.list}>
+        <View style={styles.customerHeader}>
+          <Text style={styles.listTitle}>My Customers</Text>
+        </View>
+        <ScrollView style={styles.listScroll}>
+          {patientList.length === 0 ? (
+            <View>
+              <Text style={{color: 'red', paddingLeft: 20}}>
+                No available customers
+              </Text>
+            </View>
+          ) : (
+            <View>
+              {patientList.map((customer: any) => (
+                <View key={customer.id}>
+                  <View style={[styles.customerCard]}>
+                    <View style={styles.customerImg}>
+                      <Text style={styles.profileLetter}>
+                        {customer.first_name.charAt(0)}
+                      </Text>
+                    </View>
+                    <View style={styles.RecCardInfo}>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.idTitle}>
+                          {customer.patient_id}
                         </Text>
                       </View>
-                      <View style={styles.RecCardInfo}>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.idTitle}>
-                            {customer.patient_id}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.RecCardTitle}>
-                            {customer.first_name} {customer.last_name}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.RecCardTitle}>
+                          {customer.first_name} {customer.last_name}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.RecCardPara}>
+                          Age:{customer.age}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.RecCardPara,
+                            {marginLeft: 15, textTransform: 'capitalize'},
+                          ]}>
+                          Gender:{customer.gender}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <View>
                           <Text style={styles.RecCardPara}>
-                            Age:{customer.age}
-                          </Text>
-                          <Text
-                            style={[
-                              styles.RecCardPara,
-                              {marginLeft: 15, textTransform: 'capitalize'},
-                            ]}>
-                            Gender:{customer.gender}
+                            +{customer.phone}
                           </Text>
                         </View>
-                        <View style={styles.infoGroup}>
-                          <View>
-                            <Text style={styles.RecCardPara}>
-                              +{customer.phone}
-                            </Text>
-                          </View>
-                          <View>
-                            <Text
-                              style={[styles.RecCardPara, {marginLeft: 15}]}>
-                              {customer.email}
-                            </Text>
-                          </View>
+                        <View>
+                          <Text style={[styles.RecCardPara, {marginLeft: 15}]}>
+                            {customer.email}
+                          </Text>
                         </View>
                       </View>
                     </View>
-                    <View style={styles.lineContainer}>
-                      <View style={styles.line} />
-                    </View>
                   </View>
-                ))}
-              </View>
-            )}
-          </ScrollView>
+                  <View style={styles.lineContainer}>
+                    <View style={styles.line} />
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+      </View>
+      {/* appointments list */}
+      <View style={styles.list}>
+        <View style={styles.customerHeader}>
+          <Text style={styles.listTitle}>Appointments</Text>
         </View>
-        {/* appointments list */}
-        <View style={styles.list}>
-          <View style={styles.customerHeader}>
-            <Text style={styles.listTitle}>Appointments</Text>
-          </View>
-          <ScrollView style={styles.listScroll}>
-            {appointmentList.length === 0 ? (
-              <View>
-                <Text style={{color: 'red', paddingLeft: 20}}>
-                  No available appointments
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {appointmentList.map(y => (
-                  <View key={y.id}>
-                    <View style={[styles.RecCard]}>
-                      <View style={styles.customerImg}>
-                        <Text style={styles.profileLetter}>
-                          {y.fname.charAt(0)}
+        <ScrollView style={styles.listScroll}>
+          {appointmentList.length === 0 ? (
+            <View>
+              <Text style={{color: 'red', paddingLeft: 20}}>
+                No available appointments
+              </Text>
+            </View>
+          ) : (
+            <View>
+              {appointmentList.map(y => (
+                <View key={y.id}>
+                  <View style={[styles.RecCard]}>
+                    <View style={styles.customerImg}>
+                      <Text style={styles.profileLetter}>
+                        {y.fname.charAt(0)}
+                      </Text>
+                    </View>
+                    <View style={styles.RecCardInfo}>
+                      <View style={styles.nameContainer}>
+                        <Text style={styles.RecCardTitle}>
+                          {y.fname} {y.lname}
                         </Text>
+                        {y.job_status !== 'done' ? <View /> : ''}
                       </View>
-                      <View style={styles.RecCardInfo}>
-                        <View style={styles.nameContainer}>
-                          <Text style={styles.RecCardTitle}>
-                            {y.fname} {y.lname}
+                      <Text style={styles.subTitle}>{y.service_type}</Text>
+                      <View style={styles.timeContainer}>
+                        <View style={[styles.dateTimeCont, {marginRight: 20}]}>
+                          <Icon2
+                            style={{marginRight: 5}}
+                            name="calendar"
+                            size={20}
+                            color={'green'}
+                          />
+                          <Text style={styles.startDateText}>
+                            {y.start_date}
                           </Text>
-                         {y.job_status !== 'done' ? (
-                          <View>
-
-                          </View>
-                         ): ''}
                         </View>
-                        <Text style={styles.subTitle}>{y.service_type}</Text>
-                        <View style={styles.timeContainer}>
-                          <View
-                            style={[styles.dateTimeCont, {marginRight: 20}]}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="calendar"
-                              size={20}
-                              color={'green'}
-                            />
-                            <Text style={styles.startDateText}>
-                              {y.start_date}
-                            </Text>
-                          </View>
-                          <View style={styles.dateTimeCont}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="clock-o"
-                              size={25}
-                              color={'green'}
-                            />
-                            <Text style={styles.startDateText}>
-                              {y.start_time}
-                            </Text>
-                          </View>
+                        <View style={styles.dateTimeCont}>
+                          <Icon2
+                            style={{marginRight: 5}}
+                            name="clock-o"
+                            size={25}
+                            color={'green'}
+                          />
+                          <Text style={styles.startDateText}>
+                            {y.start_time}
+                          </Text>
                         </View>
-                        <View style={styles.timeContainer}>
-                          <View
-                            style={[styles.dateTimeCont, {marginRight: 20}]}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="calendar"
-                              size={20}
-                              color={'#B30000'}
-                            />
-                            <Text style={styles.endDateText}>{y.end_date}</Text>
-                          </View>
-                          <View style={styles.dateTimeCont}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="clock-o"
-                              size={25}
-                              color={'#B30000'}
-                            />
-                            <Text style={styles.endDateText}>{y.end_time}</Text>
-                          </View>
-                        </View>
-                        <Text style={styles.RecCardPara}>{y.job_status}</Text>
                       </View>
+                      <View style={styles.timeContainer}>
+                        <View style={[styles.dateTimeCont, {marginRight: 20}]}>
+                          <Icon2
+                            style={{marginRight: 5}}
+                            name="calendar"
+                            size={20}
+                            color={'#B30000'}
+                          />
+                          <Text style={styles.endDateText}>{y.end_date}</Text>
+                        </View>
+                        <View style={styles.dateTimeCont}>
+                          <Icon2
+                            style={{marginRight: 5}}
+                            name="clock-o"
+                            size={25}
+                            color={'#B30000'}
+                          />
+                          <Text style={styles.endDateText}>{y.end_time}</Text>
+                        </View>
+                      </View>
+                      <Text style={styles.RecCardPara}>{y.job_status}</Text>
                     </View>
-                    <View style={styles.lineContainer}>
-                      <View style={styles.line} />
-                    </View>
-                    {/* Done and cancel modal */}
                   </View>
-                ))}
-              </View>
-            )}
-          </ScrollView>
-        </View>
-  </ScrollView>
+                  <View style={styles.lineContainer}>
+                    <View style={styles.line} />
+                  </View>
+                  {/* Done and cancel modal */}
+                </View>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+      </View>
+    </ScrollView>
   );
 };
 
 export default FinancialArea;
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#F8FAFB',
@@ -243,7 +233,7 @@ const styles = StyleSheet.create({
     color: '#131035',
   },
   listScroll: {
-    height: height*0.5,
+    height: height * 0.5,
     paddingBottom: 30,
     flexDirection: 'column',
   },
