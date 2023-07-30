@@ -478,10 +478,11 @@ const styles = StyleSheet.create({
   },
   RecCard: {
     flex: 1,
-    flexDirection: 'row-reverse',
+    flexDirection: 'row',
     width: 380,
-    height: 150,
-    margin: 10,
+    padding: 10,
+    marginLeft: 15,
+    height: 190,
     borderRadius: 10,
     elevation: 10,
     backgroundColor: '#fff',
@@ -492,12 +493,7 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
   },
   RecCardInfo: {
-    top: 10,
-    left: 10,
-    height: 100,
-    width: 230,
-    textAlign: 'left',
-    color: 'black',
+    marginLeft: 10,
   },
   RecCardSmall: {
     alignItems: 'center',
@@ -664,6 +660,7 @@ const styles = StyleSheet.create({
   customerHeader: {
     flexDirection: 'row',
     marginHorizontal: 20,
+    paddingVertical: 10,
   },
   profileLetter: {
     color: '#fff',
