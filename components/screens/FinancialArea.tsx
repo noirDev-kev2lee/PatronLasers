@@ -27,76 +27,8 @@ const FinancialArea = ({route}: {route: any}) => {
   );
   return (
     <ScrollView horizontal pagingEnabled={true}>
-      {/* customers list */}
-      <View style={styles.list}>
-        <View style={styles.customerHeader}>
-          <Text style={styles.listTitle}>My Customers</Text>
-        </View>
-        <ScrollView style={styles.listScroll}>
-          {patientList.length === 0 ? (
-            <View>
-              <Text style={{color: 'red', paddingLeft: 20}}>
-                No available customers
-              </Text>
-            </View>
-          ) : (
-            <View>
-              {patientList.map((customer: any) => (
-                <View key={customer.id}>
-                  <View style={[styles.customerCard]}>
-                    <View style={styles.customerImg}>
-                      <Text style={styles.profileLetter}>
-                        {customer.first_name.charAt(0)}
-                      </Text>
-                    </View>
-                    <View style={styles.RecCardInfo}>
-                      <View style={styles.infoGroup}>
-                        <Text style={styles.idTitle}>
-                          {customer.patient_id}
-                        </Text>
-                      </View>
-                      <View style={styles.infoGroup}>
-                        <Text style={styles.RecCardTitle}>
-                          {customer.first_name} {customer.last_name}
-                        </Text>
-                      </View>
-                      <View style={styles.infoGroup}>
-                        <Text style={styles.RecCardPara}>
-                          Age:{customer.age}
-                        </Text>
-                        <Text
-                          style={[
-                            styles.RecCardPara,
-                            {marginLeft: 15, textTransform: 'capitalize'},
-                          ]}>
-                          Gender:{customer.gender}
-                        </Text>
-                      </View>
-                      <View style={styles.infoGroup}>
-                        <View>
-                          <Text style={styles.RecCardPara}>
-                            +{customer.phone}
-                          </Text>
-                        </View>
-                        <View>
-                          <Text style={[styles.RecCardPara, {marginLeft: 15}]}>
-                            {customer.email}
-                          </Text>
-                        </View>
-                      </View>
-                    </View>
-                  </View>
-                  <View style={styles.lineContainer}>
-                    <View style={styles.line} />
-                  </View>
-                </View>
-              ))}
-            </View>
-          )}
-        </ScrollView>
-      </View>
-      {/* appointments list */}
-      <View style={styles.list}>
+    {/* appointments list */}
+            <View style={styles.list}>
         <View style={styles.customerHeader}>
           <Text style={styles.listTitle}>Appointments</Text>
         </View>
@@ -170,12 +102,82 @@ const FinancialArea = ({route}: {route: any}) => {
                         </View>
                       </View>
                       <Text style={styles.RecCardPara}>{y.job_status}</Text>
+                      <Text style={styles.endDateText2}>Session:</Text>
+                    <Text style={styles.endDateText3}>Price:</Text>
                     </View>
                   </View>
                   <View style={styles.lineContainer}>
                     <View style={styles.line} />
                   </View>
                   {/* Done and cancel modal */}
+                </View>
+              ))}
+            </View>
+          )}
+        </ScrollView>
+      </View>
+      {/* customers list */}
+      <View style={styles.list}>
+        <View style={styles.customerHeader}>
+          <Text style={styles.listTitle}>My Customers</Text>
+        </View>
+        <ScrollView style={styles.listScroll}>
+          {patientList.length === 0 ? (
+            <View>
+              <Text style={{color: 'red', paddingLeft: 20}}>
+                No available customers
+              </Text>
+            </View>
+          ) : (
+            <View>
+              {patientList.map((customer: any) => (
+                <View key={customer.id}>
+                  <View style={[styles.customerCard]}>
+                    <View style={styles.customerImg}>
+                      <Text style={styles.profileLetter}>
+                        {customer.first_name.charAt(0)}
+                      </Text>
+                    </View>
+                    <View style={styles.RecCardInfo}>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.idTitle}>
+                          {customer.patient_id}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.RecCardTitle}>
+                          {customer.first_name} {customer.last_name}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.RecCardPara}>
+                          Age:{customer.age}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.RecCardPara,
+                            {marginLeft: 15, textTransform: 'capitalize'},
+                          ]}>
+                          Gender:{customer.gender}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <View>
+                          <Text style={styles.RecCardPara}>
+                            +{customer.phone}
+                          </Text>
+                        </View>
+                        <View>
+                          <Text style={[styles.RecCardPara, {marginLeft: 15}]}>
+                            {customer.email}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                  <View style={styles.lineContainer}>
+                    <View style={styles.line} />
+                  </View>
                 </View>
               ))}
             </View>
@@ -288,10 +290,12 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   RecCardPara: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto-Bold',
+    textTransform:'uppercase',
+    textDecorationStyle:'solid',
+    textDecorationLine:'underline',
     fontSize: 16,
     color: '#222',
-    textTransform: 'capitalize',
   },
   startDateText: {
     fontFamily: 'Roboto',
@@ -302,6 +306,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 16,
     color: '#B30000',
+  },
+  endDateText2: {
+    textAlign: 'right',
+    bottom: 15,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    color: 'blue',
+  },
+  endDateText3: {
+    textAlign: 'right',
+    bottom: 0,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    color: '#888',
   },
   customerImg: {
     backgroundColor: '#131035',

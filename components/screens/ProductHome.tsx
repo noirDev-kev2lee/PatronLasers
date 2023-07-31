@@ -542,7 +542,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   RecCardPara: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto-Bold',
+    textTransform:'uppercase',
+    textDecorationStyle:'solid',
+    textDecorationLine:'underline',
     fontSize: 15,
     textAlign: 'left',
     color: '#222',

@@ -284,6 +284,8 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                           </View>
                         </View>
                         <Text style={styles.RecCardPara}>{y.job_status}</Text>
+                      <Text style={styles.endDateText2}>Session:</Text>
+                    <Text style={styles.endDateText3}>Price:</Text>
                       </View>
                     </View>
                     <View style={styles.lineContainer}>
@@ -403,10 +405,12 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   RecCardPara: {
-    fontFamily: 'Roboto',
+    fontFamily: 'Roboto-Bold',
+    textTransform:'uppercase',
+    textDecorationStyle:'solid',
+    textDecorationLine:'underline',
     fontSize: 16,
     color: '#222',
-    textTransform: 'capitalize',
   },
   startDateText: {
     fontFamily: 'Roboto',
@@ -417,6 +421,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 16,
     color: '#B30000',
+  },
+  endDateText2: {
+    textAlign: 'right',
+    bottom: 15,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    color: 'blue',
+  },
+  endDateText3: {
+    textAlign: 'right',
+    bottom: 0,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    fontSize: 16,
+    color: '#888',
   },
   customerImg: {
     backgroundColor: '#131035',

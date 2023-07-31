@@ -26,6 +26,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [sessionCount, SetSessionCount] = React.useState('');
+  const [sessionPrice, SetSessionPrice] = React.useState('');
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [timeOpen, setTimeOpen] = useState(false);
@@ -114,6 +115,12 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             placeholderTextColor="#b4b9c1"
             onChangeText={SetSessionCount}
             placeholder="Session Number"
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholderTextColor="#b4b9c1"
+            onChangeText={SetSessionPrice}
+            placeholder="Session Price"
           />
           {/* start date */}
           <View style={styles.datePickerStyle}>
