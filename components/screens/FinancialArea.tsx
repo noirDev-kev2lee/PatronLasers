@@ -27,8 +27,8 @@ const FinancialArea = ({route}: {route: any}) => {
   );
   return (
     <ScrollView horizontal pagingEnabled={true}>
-    {/* appointments list */}
-            <View style={styles.list}>
+      {/* appointments list */}
+      <View style={styles.list}>
         <View style={styles.customerHeader}>
           <Text style={styles.listTitle}>Appointments</Text>
         </View>
@@ -44,11 +44,11 @@ const FinancialArea = ({route}: {route: any}) => {
               {appointmentList.map(y => (
                 <View key={y.id}>
                   <View style={[styles.RecCard]}>
-                    <View style={styles.customerImg}>
+                    {/* <View style={styles.customerImg}>
                       <Text style={styles.profileLetter}>
                         {y.fname.charAt(0)}
                       </Text>
-                    </View>
+                    </View> */}
                     <View style={styles.RecCardInfo}>
                       <View style={styles.nameContainer}>
                         <Text style={styles.RecCardTitle}>
@@ -103,7 +103,7 @@ const FinancialArea = ({route}: {route: any}) => {
                       </View>
                       <Text style={styles.RecCardPara}>{y.job_status}</Text>
                       <Text style={styles.endDateText2}>Session:</Text>
-                    <Text style={styles.endDateText3}>Price:</Text>
+                      <Text style={styles.endDateText3}>Price:</Text>
                     </View>
                   </View>
                   <View style={styles.lineContainer}>
@@ -291,9 +291,9 @@ const styles = StyleSheet.create({
   },
   RecCardPara: {
     fontFamily: 'Roboto-Bold',
-    textTransform:'uppercase',
-    textDecorationStyle:'solid',
-    textDecorationLine:'underline',
+    textTransform: 'uppercase',
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
     fontSize: 16,
     color: '#222',
   },
