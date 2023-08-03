@@ -220,7 +220,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                       <View style={styles.RecCardInfo}>
                         <View style={styles.nameContainer}>
                           <Text style={styles.RecCardTitle}>
-                            {y.fname} {y.lname}
+                            {y.patient_id}
                           </Text>
                           {y.job_status !== 'done' ? (
                             <View>
@@ -284,8 +284,12 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                           </View>
                         </View>
                         <Text style={styles.RecCardPara}>{y.job_status}</Text>
-                        <Text style={styles.endDateText2}>Session:</Text>
-                        <Text style={styles.endDateText3}>Price:</Text>
+                        <Text style={styles.endDateText2}>
+                          Session: {y.session_number}
+                        </Text>
+                        <Text style={styles.endDateText3}>
+                          Price: {y.session_price}
+                        </Text>
                       </View>
                     </View>
                     <View style={styles.lineContainer}>
@@ -383,7 +387,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: 'bold',
     fontSize: 20,
-    textTransform: 'capitalize',
+    textTransform: 'uppercase',
     color: '#36454F',
   },
   idTitle: {

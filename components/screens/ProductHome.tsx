@@ -267,7 +267,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                       <View style={styles.RecCardInfo}>
                         <View style={styles.nameContainer}>
                           <Text style={styles.RecCardTitle}>
-                            {y.fname} {y.lname}
+                            {y.patient_id}
                           </Text>
                           {y.job_status !== 'done' ? <View /> : ''}
                         </View>
@@ -319,7 +319,9 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                           </View>
                         </View>
                         <Text style={styles.RecCardPara}>{y.job_status}</Text>
-                        <Text style={styles.endDateText2}>Session:</Text>
+                        <Text style={styles.endDateText2}>
+                          Session: {y.session_number}
+                        </Text>
                       </View>
                     </View>
                     <View style={styles.lineContainer}>
