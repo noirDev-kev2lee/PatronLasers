@@ -7,7 +7,7 @@ import {
   Text,
   Modal,
   View,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -28,14 +28,10 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
   const {username} = data;
 
   useEffect(() => {
-    api
-      .get('patients/')
-      .then(res => setPatientData(res.data.rows));
+    api.get('patients/').then(res => setPatientData(res.data.rows));
   }, [patientData]);
   useEffect(() => {
-    api
-      .get('appointments/')
-      .then(res => setAppointmentData(res.data.rows));
+    api.get('appointments/').then(res => setAppointmentData(res.data.rows));
   }, [appointmentData]);
 
   const patientList = patientData.filter(y => y.clinic_name === username);
@@ -109,11 +105,11 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
               onPress={() => setCustomerModalVisible(!CustomerModalVisible)}>
               <Icon name="close" size={30} color={'#222'} />
             </Pressable>
-            <AddCustomer/>
+            <AddCustomer />
           </View>
         </View>
       </Modal>
-      
+
       {/* PRESSABLE CONTAINER */}
       <View style={styles.createSec}>
         <Pressable
@@ -216,25 +212,29 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                 {appointmentList.map(y => (
                   <View key={y.id}>
                     <View style={[styles.RecCard]}>
-                      <View style={styles.customerImg}>
+                      {/* <View style={styles.customerImg}>
                         <Text style={styles.profileLetter}>
                           {y.fname.charAt(0)}
                         </Text>
-                      </View>
+                      </View> */}
                       <View style={styles.RecCardInfo}>
                         <View style={styles.nameContainer}>
                           <Text style={styles.RecCardTitle}>
                             {y.fname} {y.lname}
                           </Text>
-                         {y.job_status !== 'done' ? (
-                          <View>
-                             <Pressable
-                            style={styles.doneBtn}
-                            onPress={() => handleDonePress(y)}>
-                            <Text style={{color: 'white'}}>Set to Done</Text>
-                          </Pressable>
-                          </View>
-                         ): ''}
+                          {y.job_status !== 'done' ? (
+                            <View>
+                              <Pressable
+                                style={styles.doneBtn}
+                                onPress={() => handleDonePress(y)}>
+                                <Text style={{color: 'white'}}>
+                                  Set to Done
+                                </Text>
+                              </Pressable>
+                            </View>
+                          ) : (
+                            ''
+                          )}
                         </View>
                         <Text style={styles.subTitle}>{y.service_type}</Text>
                         <View style={styles.timeContainer}>
@@ -284,8 +284,8 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
                           </View>
                         </View>
                         <Text style={styles.RecCardPara}>{y.job_status}</Text>
-                      <Text style={styles.endDateText2}>Session:</Text>
-                    <Text style={styles.endDateText3}>Price:</Text>
+                        <Text style={styles.endDateText2}>Session:</Text>
+                        <Text style={styles.endDateText3}>Price:</Text>
                       </View>
                     </View>
                     <View style={styles.lineContainer}>
@@ -304,7 +304,7 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
 };
 
 export default TabCustomer;
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: '#F8FAFB',
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     color: '#131035',
   },
   listScroll: {
-    height: height*0.5,
+    height: height * 0.5,
     paddingBottom: 30,
     flexDirection: 'column',
   },
@@ -406,9 +406,9 @@ const styles = StyleSheet.create({
   },
   RecCardPara: {
     fontFamily: 'Roboto-Bold',
-    textTransform:'uppercase',
-    textDecorationStyle:'solid',
-    textDecorationLine:'underline',
+    textTransform: 'uppercase',
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
     fontSize: 16,
     color: '#222',
   },
