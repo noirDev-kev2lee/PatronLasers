@@ -18,8 +18,6 @@ import api from '../utils/api';
 export default function AddAppointment({clinicName}: {clinicName: string}) {
   const [isLoading, setLoading] = React.useState(false);
   const [pid, setPid] = useState('');
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
   const [service, setService] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -42,8 +40,6 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   const handleSaveAppointment = async () => {
     try {
       if (
-        fname === '' ||
-        lname === '' ||
         service === '' ||
         startDate.toLocaleString() === '' ||
         endDate.toLocaleString() === '' ||
@@ -63,14 +59,14 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
           .post('appointments/', {
             patient_id: pid,
             clinic_name: clinicName,
-            fname: fname,
-            lname: lname,
             service_type: service,
             start_date: convertedStartDate,
             start_time: convertedStartTime,
             end_date: convertedEndDate,
             end_time: convertedEndTime,
             job_status: 'pending',
+            session_number: sessionCount,
+            session_price: sessionPrice,
           })
           .then(res => {
             const json = res.data;
@@ -285,15 +281,15 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   form: {
-    flex: 1,        
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     paddingBottom: 50,
   },
-  pressBtn: {                                                                                       
+  pressBtn: {
     alignItems: 'center',
     fontFamily: 'Inter-Regular',
-    borderRadius: 12,  
+    borderRadius: 12,
     backgroundColor: '#131035',
     width: 300,
     height: 60,

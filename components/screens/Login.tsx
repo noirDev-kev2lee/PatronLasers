@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -26,7 +26,7 @@ const Login = ({navigation}: LoginProps) => {
   const [email, onChangeEmail] = useState('');
   const [password, passwordChange] = useState('');
   const [hide, setHide] = useState(true);
-  const [isConnected, setInternetConnected ] = useState(false);
+  const [isConnected, setInternetConnected] = useState(false);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
@@ -42,73 +42,72 @@ const Login = ({navigation}: LoginProps) => {
   const handleLogin = async () => {
     try {
       if (email === '' || password === '') {
-        showAlert('Email or password must be provided!')
+        showAlert('Email or password must be provided!');
       } else {
         setLoading(true);
-        if (email === 'democlinic@gmail.com'){
-          navigation.navigate('Product', {username: 'Demo Clinic', lastname: 'SN006'});
+        if (email === 'democlinic@gmail.com') {
+          navigation.navigate('Product', {
+            username: 'Demo Clinic',
+            lastname: 'SN006',
+          });
           setLoading(false);
-         
-        }else if(email === 'demopatient@gmail.com'){
+        } else if (email === 'demopatient@gmail.com') {
           navigation.navigate('patient_home', {
             username: 'Demo Name',
             email: 'democlinic@gmail.com',
             lastname: 'Demo Clinic',
-          })
+          });
           setLoading(false);
-        }else{
+        } else {
           const response = await api.post('signin/', {
             email,
             password,
           });
-  
+
           const json = response.data;
-         
-          
+
           const userID = json.data.id;
           const userName = json.data.firstname;
           const lname = json.data.lastname;
           const userEmail = json.data.email;
           const userRole = json.data.role;
-        
-          
-  
+
           setLoading(false);
           if (json.data.role === 'clinic') {
-            navigation.navigate('Product', { username: userName,
+            navigation.navigate('Product', {
+              username: userName,
               email: userEmail,
               lastname: lname,
-              id:userID,
-              role: userRole});
+              id: userID,
+              role: userRole,
+            });
           } else if (json.data.role === 'patient') {
             navigation.navigate('patient_home', {
               username: userName,
               email: userEmail,
               lastname: lname,
-              id:userID,
-              role: userRole
+              id: userID,
+              role: userRole,
             });
           }
         }
-        
       }
     } catch (error) {
-      showAlert('Server Error or user not found!')
+      showAlert('Server Error or user not found!');
       setLoading(false);
     }
   };
-//   // check for internet connectivity
-  useEffect(()=>{
+  //   // check for internet connectivity
+  useEffect(() => {
     // Subscribe
     const unsubscribe = NetInfo.addEventListener(state => {
-    setInternetConnected((prevState) => state.isConnected ?? prevState);
-});
-// Unsubscribe
-return ()=>{
-  unsubscribe();
-}
-
-  },[])
+      setInternetConnected(prevState => state.isConnected ?? prevState);
+    });
+    // Unsubscribe
+    return () => {
+      unsubscribe();
+    };
+  }, []);
   return (
     <View style={styles.container}>
       <View>
@@ -124,9 +123,14 @@ return ()=>{
         </Pressable>
       </View>
       <View style={styles.internetContainer}>
-      <View style={isConnected? styles.internetConnected: styles.internetNotConnected}>
-        <Text style={{color: 'white', textAlign: 'center'}}>{isConnected? '' : 'No internet connection'}</Text>
-      </View>
+        <View
+          style={
+            isConnected ? styles.internetConnected : styles.internetNotConnected
+          }>
+          <Text style={{color: 'white', textAlign: 'center'}}>
+            {isConnected ? '' : 'No internet connection'}
+          </Text>
+        </View>
       </View>
       <ScrollView>
         <KeyboardAvoidingView
@@ -146,7 +150,7 @@ return ()=>{
                 <TextInput
                   style={styles.textInput}
                   onChangeText={onChangeEmail}
-                  placeholder="Username Or Email"
+                  placeholder="Phone number"
                   placeholderTextColor={'gray'}
                 />
               </View>
@@ -190,7 +194,11 @@ return ()=>{
         </KeyboardAvoidingView>
       </ScrollView>
       {/* custom alert */}
-      <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
+      <CustomAlert
+        visible={alertVisible}
+        message={alertMessage}
+        onClose={closeAlert}
+      />
     </View>
   );
 };
@@ -290,10 +298,8 @@ const styles = StyleSheet.create({
   internetConnected: {
     backgroundColor: 'transparent',
     paddingVertical: 8,
-
   },
   internetNotConnected: {
     backgroundColor: 'red',
-   
   },
 });

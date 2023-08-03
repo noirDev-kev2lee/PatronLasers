@@ -264,11 +264,6 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                 {appointmentList.map(y => (
                   <View key={y.id}>
                     <View style={[styles.RecCard]}>
-                      <View style={styles.customerImg}>
-                        <Text style={styles.profileLetter}>
-                          {y.fname.charAt(0)}
-                        </Text>
-                      </View>
                       <View style={styles.RecCardInfo}>
                         <View style={styles.nameContainer}>
                           <Text style={styles.RecCardTitle}>
@@ -356,7 +351,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                     <View style={[styles.customerCard]}>
                       <View style={styles.customerImg}>
                         <Text style={styles.profileLetter}>
-                          {customer.first_name.charAt(0)}
+                          {customer.first_name?.charAt(0)}
                         </Text>
                       </View>
                       <View style={styles.RecCardInfo}>
@@ -543,9 +538,9 @@ const styles = StyleSheet.create({
   },
   RecCardPara: {
     fontFamily: 'Roboto-Bold',
-    textTransform:'uppercase',
-    textDecorationStyle:'solid',
-    textDecorationLine:'underline',
+    textTransform: 'uppercase',
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
     fontSize: 15,
     textAlign: 'left',
     color: '#222',
