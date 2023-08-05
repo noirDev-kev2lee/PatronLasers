@@ -30,7 +30,8 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   const [open2, setOpen2] = useState(false);
   const [timeOpen, setTimeOpen] = useState(false);
   const [timeOpen2, setTimeOpen2] = useState(false);
-  const services = ["Tatoo Removal","Laser Treatment","Skin Bleaching"];
+  const services = ["Tatoo Removal","Laser Treatment","Skin Bleaching"];//From DB Hatibu
+  const patient_id = ["Patient 1","Patient 2","Patient 3"];//Route from Registerd Customers Table
   const formatTime = (time: any) => {
     const hours = time.getHours();
     const minutes = time.getMinutes();
@@ -98,12 +99,26 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20} // adjust this value as needed
         style={styles.keyboard}>
         <View style={styles.form}>
-          <TextInput
-            style={styles.textInput}
-            placeholderTextColor="#b4b9c1"
-            onChangeText={setPid}
-            placeholder="Patient ID"
-          />
+        <SelectDropdown
+              buttonStyle={styles.textInput}
+              buttonTextStyle={styles.pressTxtDropdown}
+              defaultButtonText='Patient ID'
+	            data={patient_id}
+              searchPlaceHolder='Patient ID'
+	            onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index)
+              }}
+	buttonTextAfterSelection={(selectedItem, index) => {
+    // text represented after item is selected
+		// if data array is an array of objects then return selectedItem.property to render after item is selected
+		return selectedItem
+	}}
+	rowTextForSelection={(item, index) => {
+		// text represented for each item in dropdown
+		// if data array is an array of objects then return item.property to represent item in dropdown
+		return item
+	}}
+/>
             <SelectDropdown
               buttonStyle={styles.textInput}
               buttonTextStyle={styles.pressTxtDropdown}
@@ -111,10 +126,10 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
 	            data={services}
               searchPlaceHolder='Service'
 	            onSelect={(selectedItem, index) => {
-		          console.log(selectedItem, index)
-	          }}
+                console.log(selectedItem, index)
+              }}
 	buttonTextAfterSelection={(selectedItem, index) => {
-		// text represented after item is selected
+    // text represented after item is selected
 		// if data array is an array of objects then return selectedItem.property to render after item is selected
 		return selectedItem
 	}}
@@ -325,7 +340,7 @@ const styles = StyleSheet.create({
     textAlign:'left',
     padding: 10,
     fontSize: 15,
-    color: '#222',
+    color: '#b4b9c1',
   },
   pressTxt1: {
     paddingVertical: 12,
@@ -343,6 +358,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   keyboard: {flex: 1, padding: 30},
+  
   arrow: {
     color: 'white',
   },
