@@ -8,7 +8,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
 import CustomAlert from './partials/CustomAlert';
@@ -114,6 +113,7 @@ export default function Register({navigation}: {navigation: any}) {
                 email: email,
                 password: password,
                 role: 'clinic',
+                phone: mobile,
               })
               .then(res => {
                 const signupData = res.data;
@@ -197,7 +197,7 @@ export default function Register({navigation}: {navigation: any}) {
                 placeholder="Phone Number"
                 placeholderTextColor={'grey'}
                 keyboardType={'numeric'}
-                maxLength={10} // optional: limit the number of characters to 10 for a typical
+                maxLength={12}
               />
             </View>
             <View style={{flexDirection: 'column'}}>
@@ -249,8 +249,12 @@ export default function Register({navigation}: {navigation: any}) {
           </Pressable>
         </View>
       </KeyboardAvoidingView>
-       {/* custom alert */}
-       <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
+      {/* custom alert */}
+      <CustomAlert
+        visible={alertVisible}
+        message={alertMessage}
+        onClose={closeAlert}
+      />
     </ScrollView>
   );
 }
