@@ -42,7 +42,7 @@ const Login = ({navigation}: LoginProps) => {
   const handleLogin = async () => {
     try {
       if (email === '' || password === '') {
-        showAlert('Email or password must be provided!');
+        showAlert('Phone or password must be provided!');
       } else {
         setLoading(true);
         if (email === 'democlinic@gmail.com') {
@@ -146,7 +146,7 @@ const Login = ({navigation}: LoginProps) => {
 
             <View style={styles.form}>
               <View style={styles.inputStyle}>
-                <Icon name="email" size={30} color="#000000" />
+                <Icon name="phone" size={30} color="#000000" />
                 <TextInput
                   style={styles.textInput}
                   onChangeText={onChangeEmail}
