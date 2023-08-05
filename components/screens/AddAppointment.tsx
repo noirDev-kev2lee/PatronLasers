@@ -12,6 +12,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import SelectDropdown from 'react-native-select-dropdown';
 import DatePicker from 'react-native-date-picker';
 import api from '../utils/api';
 
@@ -29,6 +30,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   const [open2, setOpen2] = useState(false);
   const [timeOpen, setTimeOpen] = useState(false);
   const [timeOpen2, setTimeOpen2] = useState(false);
+  const services = ["Tatoo Removal","Laser Treatment","Skin Bleaching"];
   const formatTime = (time: any) => {
     const hours = time.getHours();
     const minutes = time.getMinutes();
@@ -86,6 +88,8 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
       Alert.alert('Server Error or user not found');
       setLoading(false);
     }
+    //Drop-Down Variables
+
   };
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -100,12 +104,26 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             onChangeText={setPid}
             placeholder="Patient ID"
           />
-          <TextInput
-            style={styles.textInput}
-            placeholderTextColor="#b4b9c1"
-            onChangeText={setService}
-            placeholder="Service Type"
-          />
+            <SelectDropdown
+              buttonStyle={styles.textInput}
+              buttonTextStyle={styles.pressTxtDropdown}
+              defaultButtonText='Service'
+	            data={services}
+              searchPlaceHolder='Service'
+	            onSelect={(selectedItem, index) => {
+		          console.log(selectedItem, index)
+	          }}
+	buttonTextAfterSelection={(selectedItem, index) => {
+		// text represented after item is selected
+		// if data array is an array of objects then return selectedItem.property to render after item is selected
+		return selectedItem
+	}}
+	rowTextForSelection={(item, index) => {
+		// text represented for each item in dropdown
+		// if data array is an array of objects then return item.property to represent item in dropdown
+		return item
+	}}
+/>
           <TextInput
             style={styles.textInput}
             placeholderTextColor="#b4b9c1"
@@ -301,6 +319,13 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 20,
     color: 'white',
+  },
+  pressTxtDropdown: {
+    fontFamily: 'Inter-Regular',
+    textAlign:'left',
+    padding: 10,
+    fontSize: 15,
+    color: '#222',
   },
   pressTxt1: {
     paddingVertical: 12,

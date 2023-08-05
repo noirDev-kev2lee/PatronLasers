@@ -633,7 +633,7 @@ const styles = StyleSheet.create({
   listTitle: {
     fontFamily: 'Roboto',
     fontSize: 23,
-    marginBottom: 5,
+    marginBottom: 5,                                                                                                                              
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#131035',
@@ -654,7 +654,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 50,
+    width: 50,   
     height: 50,
   },
   customerHeader: {
