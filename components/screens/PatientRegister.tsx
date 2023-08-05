@@ -175,6 +175,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                   onFocus={() => setModalVisible(true)}
                   value={gender}
                   placeholder="Gender"
+                  cursorColor="black"
                   placeholderTextColor={'grey'}
                 />
                 <Modal
@@ -207,7 +208,8 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                   onChangeText={onAgeChange}
                   placeholder="Age"
                   keyboardType={'numeric'}
-                  maxLength={3} // optional: limit the number of characters to 10 for a typical
+                  maxLength={3}
+                  cursorColor="black"
                   placeholderTextColor={'grey'}
                 />
               </View>
@@ -236,6 +238,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                 placeholder="Phone Number"
                 keyboardType={'numeric'}
                 maxLength={12}
+                cursorColor="black"
                 placeholderTextColor={'grey'}
               />
             </View>
@@ -250,6 +253,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                   onChangeText={onPasswordChange}
                   placeholder="Password"
                   secureTextEntry={true}
+                  cursorColor="black"
                   placeholderTextColor={'grey'}
                 />
               </View>
@@ -269,6 +273,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                 onChangeText={onPasswordConfirmChange}
                 secureTextEntry={true}
                 placeholder="Password Confirm"
+                cursorColor="black"
                 placeholderTextColor={'grey'}
               />
             </View>
