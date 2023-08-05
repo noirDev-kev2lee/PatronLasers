@@ -155,6 +155,7 @@ export default function Register({navigation}: {navigation: any}) {
                 style={styles.textInput}
                 onChangeText={onClinicNameChange}
                 placeholder="Clinic Name"
+                cursorColor="black"
                 placeholderTextColor={'grey'}
               />
             </View>
@@ -163,6 +164,8 @@ export default function Register({navigation}: {navigation: any}) {
                 style={styles.textInput}
                 onChangeText={onNumberChange}
                 placeholder="Serial Number"
+                maxLength={15}
+                cursorColor="black"
                 placeholderTextColor={'grey'}
               />
             </View>
@@ -171,6 +174,7 @@ export default function Register({navigation}: {navigation: any}) {
                 style={styles.textInput}
                 onChangeText={onLocationChange}
                 placeholder="Location"
+                cursorColor="black"
                 placeholderTextColor={'grey'}
               />
             </View>
@@ -180,6 +184,7 @@ export default function Register({navigation}: {navigation: any}) {
                   style={styles.textInput}
                   onChangeText={onEmailChange}
                   placeholder="Email"
+                  cursorColor="black"
                   placeholderTextColor={'grey'}
                 />
               </View>
@@ -197,6 +202,7 @@ export default function Register({navigation}: {navigation: any}) {
                 placeholder="Phone Number"
                 placeholderTextColor={'grey'}
                 keyboardType={'numeric'}
+                cursorColor="black"
                 maxLength={12}
               />
             </View>
@@ -211,6 +217,7 @@ export default function Register({navigation}: {navigation: any}) {
                   onChangeText={onPasswordChange}
                   placeholder="Password"
                   secureTextEntry={true}
+                  cursorColor="black"
                   placeholderTextColor={'grey'}
                 />
               </View>
@@ -230,6 +237,7 @@ export default function Register({navigation}: {navigation: any}) {
                 onChangeText={onPasswordConfirmChange}
                 secureTextEntry={true}
                 placeholder="Confirm Password"
+                cursorColor="black"
                 placeholderTextColor={'grey'}
               />
             </View>
