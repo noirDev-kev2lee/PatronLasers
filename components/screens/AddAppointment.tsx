@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Alert,
   StyleSheet,
@@ -30,8 +30,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
   const [open2, setOpen2] = useState(false);
   const [timeOpen, setTimeOpen] = useState(false);
   const [timeOpen2, setTimeOpen2] = useState(false);
-  const services = ["Tatoo Removal","Laser Treatment","Skin Bleaching"];//From DB Hatibu
-  const patient_id = ["Patient 1","Patient 2","Patient 3"];//Route from Registerd Customers Table
+  const services = ['Tatoo Removal', 'Laser Treatment', 'Skin Bleaching']; //From DB Hatibu
   const formatTime = (time: any) => {
     const hours = time.getHours();
     const minutes = time.getMinutes();
@@ -90,8 +89,15 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
       setLoading(false);
     }
     //Drop-Down Variables
-
   };
+
+  //Patient
+  const [patientData, setPatientData] = useState<any[]>([]);
+  useEffect(() => {
+    api.get('patients/').then(res => setPatientData(res.data.rows));
+  }, []);
+  const patient_id = patientData.map(item => item.patient_id);
+
   return (
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <KeyboardAvoidingView
@@ -99,57 +105,59 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20} // adjust this value as needed
         style={styles.keyboard}>
         <View style={styles.form}>
-        <SelectDropdown
-              buttonStyle={styles.textInput}
-              buttonTextStyle={styles.pressTxtDropdown}
-              defaultButtonText='Patient ID'
-	            data={patient_id}
-              searchPlaceHolder='Patient ID'
-	            onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
-              }}
-	buttonTextAfterSelection={(selectedItem, index) => {
-    // text represented after item is selected
-		// if data array is an array of objects then return selectedItem.property to render after item is selected
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-/>
-            <SelectDropdown
-              buttonStyle={styles.textInput}
-              buttonTextStyle={styles.pressTxtDropdown}
-              defaultButtonText='Service'
-	            data={services}
-              searchPlaceHolder='Service'
-	            onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
-              }}
-	buttonTextAfterSelection={(selectedItem, index) => {
-    // text represented after item is selected
-		// if data array is an array of objects then return selectedItem.property to render after item is selected
-		return selectedItem
-	}}
-	rowTextForSelection={(item, index) => {
-		// text represented for each item in dropdown
-		// if data array is an array of objects then return item.property to represent item in dropdown
-		return item
-	}}
-/>
+          <SelectDropdown
+            buttonStyle={styles.textInput}
+            buttonTextStyle={styles.pressTxtDropdown}
+            defaultButtonText="Patient ID"
+            data={patient_id}
+            searchPlaceHolder="Patient ID"
+            onSelect={selectedItem => {
+              setPid(selectedItem);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
+            }}
+          />
+          <SelectDropdown
+            buttonStyle={styles.textInput}
+            buttonTextStyle={styles.pressTxtDropdown}
+            defaultButtonText="Service"
+            data={services}
+            searchPlaceHolder="Service"
+            onSelect={selectedItem => {
+              setService(selectedItem);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
+            }}
+          />
           <TextInput
             style={styles.textInput}
             placeholderTextColor="#b4b9c1"
             onChangeText={SetSessionCount}
             placeholder="Session Number"
+            keyboardType="number-pad"
           />
           <TextInput
             style={styles.textInput}
             placeholderTextColor="#b4b9c1"
             onChangeText={SetSessionPrice}
             placeholder="Session Price"
+            keyboardType="number-pad"
           />
           {/* start date */}
           <View style={styles.datePickerStyle}>
@@ -276,8 +284,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     width: 300,
     height: 60,
-    color: '#000',
     borderRadius: 12,
+    color: 'black',
   },
   dateText: {
     marginLeft: 10,
@@ -337,7 +345,7 @@ const styles = StyleSheet.create({
   },
   pressTxtDropdown: {
     fontFamily: 'Inter-Regular',
-    textAlign:'left',
+    textAlign: 'left',
     padding: 10,
     fontSize: 15,
     color: '#b4b9c1',
@@ -358,7 +366,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   keyboard: {flex: 1, padding: 30},
-  
+
   arrow: {
     color: 'white',
   },
