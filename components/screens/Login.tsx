@@ -152,6 +152,7 @@ const Login = ({navigation}: LoginProps) => {
                   onChangeText={onChangeEmail}
                   placeholder="Phone number"
                   placeholderTextColor={'gray'}
+                  keyboardType="number-pad"
                 />
               </View>
               <View style={styles.inputStyle}>
