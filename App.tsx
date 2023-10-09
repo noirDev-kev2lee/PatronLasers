@@ -1,10 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Dimensions } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ProductCard from './components/screens/ProductCard';
-import FinancialArea from './components/screens/FinancialArea';
 import AddCustomer from './components/screens/AddCustomer';
 import AboutUs from './components/screens/AboutUs';
 import Login from './components/screens/Login';
@@ -19,7 +17,6 @@ import ProductHome from './components/screens/ProductHome';
 import ChangePassword from './components/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
-const { width, height } = Dimensions.get('window');
 
 function App() {
   return (
@@ -91,7 +88,7 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-      
+
         <Stack.Screen
           name="change_password"
           component={ChangePassword}
@@ -172,19 +169,6 @@ function App() {
           }}
         />
 
-        <Stack.Screen
-          name="Finacial Area"
-          component={FinancialArea}
-          options={{
-            title: 'Finacial Area',
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTintColor: '#222',
-          }}
-        />
         <Stack.Screen
           name="addCustomer"
           component={AddCustomer}

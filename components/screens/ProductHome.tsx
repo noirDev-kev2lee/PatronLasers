@@ -146,20 +146,6 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               <View style={styles.line} />
             </View>
             <View>
-              {
-                <Pressable
-                  onPress={() => [
-                    setdrawerModalVisible(!drawerModalVisible),
-                    navigation.navigate('Finacial Area', {username: username}),
-                  ]}>
-                  <View style={styles.drawerList}>
-                    <Icon2 name="money" size={30} color={'#fff'} />
-                    <View style={styles.drawerTextCon}>
-                      <Text style={styles.drawerTxt}>financial</Text>
-                    </View>
-                  </View>
-                </Pressable>
-              }
               <Pressable
                 onPress={() => [
                   setdrawerModalVisible(!drawerModalVisible),
@@ -633,7 +619,7 @@ const styles = StyleSheet.create({
   listTitle: {
     fontFamily: 'Roboto',
     fontSize: 23,
-    marginBottom: 5,                                                                                                                              
+    marginBottom: 5,
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#131035',
@@ -654,7 +640,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#131035',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 50,   
+    width: 50,
     height: 50,
   },
   customerHeader: {
