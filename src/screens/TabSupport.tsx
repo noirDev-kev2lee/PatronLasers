@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,10 +10,9 @@ import {
   View,
   ActivityIndicator,
   Modal,
-  TouchableWithoutFeedback
-  
+  TouchableWithoutFeedback,
 } from 'react-native';
-import CustomAlert from './partials/CustomAlert';
+import CustomAlert from '../components/CustomAlert';
 import api from '../utils/api';
 
 const TabSupport = ({route}: {route: any}) => {
@@ -34,11 +33,10 @@ const TabSupport = ({route}: {route: any}) => {
     setAlertVisible(false);
   };
 
-  const handleOptionSelect = (option:any) => {
+  const handleOptionSelect = (option: any) => {
     setCardType(option);
     setModalVisible(false);
   };
-  
 
   const data = route.params as {username: string; lastname: string};
   const {username, lastname} = data;
@@ -59,19 +57,19 @@ const TabSupport = ({route}: {route: any}) => {
               descriptions: desc,
             })
             .then(() => {
-             showAlert('Support Sent Successfuly! ');
-             setCardType('');
-             setCardTitle('');
-             setDesc('');
+              showAlert('Support Sent Successfuly! ');
+              setCardType('');
+              setCardTitle('');
+              setDesc('');
               setLoading(false);
             });
         } catch (err) {
           setLoading(false);
-         showAlert('Error occurs!');
+          showAlert('Error occurs!');
         }
       }
     } catch (error) {
-     showAlert('Internal Error occurs!');
+      showAlert('Internal Error occurs!');
       setLoading(false);
     }
   };
@@ -87,33 +85,49 @@ const TabSupport = ({route}: {route: any}) => {
               <Text style={styles.title}>Create a card</Text>
             </View>
             <View style={styles.form}>
-            <View style={styles.container2}>
-              <TextInput
-                style={styles.optionInput}
-                placeholderTextColor="#b4b9c1"
-                value={cardType}
-                onChangeText={setCardType}
-                placeholder="Card type"
-                onFocus={() => setModalVisible(true)}
-              />
+              <View style={styles.container2}>
+                <TextInput
+                  style={styles.optionInput}
+                  placeholderTextColor="#b4b9c1"
+                  value={cardType}
+                  onChangeText={setCardType}
+                  placeholder="Card type"
+                  onFocus={() => setModalVisible(true)}
+                />
 
-              <Modal
-                visible={modalVisible}
-                transparent
-                animationType="fade"
-                onRequestClose={() => setModalVisible(false)}
-              >
-                <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
-                  <View style={styles.modalOverlay}>
-                    <View style={styles.modalContent}>
-                      <Text style={styles.option} onPress={() => handleOptionSelect('Fault')}>Fault</Text>
-                      <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Technical Support</Text>
-                      <Text style={styles.option} onPress={() => handleOptionSelect('Technical Support')}>Product Training</Text>
+                <Modal
+                  visible={modalVisible}
+                  transparent
+                  animationType="fade"
+                  onRequestClose={() => setModalVisible(false)}>
+                  <TouchableWithoutFeedback
+                    onPress={() => setModalVisible(false)}>
+                    <View style={styles.modalOverlay}>
+                      <View style={styles.modalContent}>
+                        <Text
+                          style={styles.option}
+                          onPress={() => handleOptionSelect('Fault')}>
+                          Fault
+                        </Text>
+                        <Text
+                          style={styles.option}
+                          onPress={() =>
+                            handleOptionSelect('Technical Support')
+                          }>
+                          Technical Support
+                        </Text>
+                        <Text
+                          style={styles.option}
+                          onPress={() =>
+                            handleOptionSelect('Technical Support')
+                          }>
+                          Product Training
+                        </Text>
+                      </View>
                     </View>
-                  </View>
-                </TouchableWithoutFeedback>
-              </Modal>
-             </View>
+                  </TouchableWithoutFeedback>
+                </Modal>
+              </View>
               <TextInput
                 style={styles.textInput}
                 placeholderTextColor="#b4b9c1"
@@ -146,8 +160,12 @@ const TabSupport = ({route}: {route: any}) => {
           </KeyboardAvoidingView>
         </ScrollView>
       </View>
-        {/* custom alert */}
-        <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
+      {/* custom alert */}
+      <CustomAlert
+        visible={alertVisible}
+        message={alertMessage}
+        onClose={closeAlert}
+      />
     </View>
   );
 };
@@ -247,7 +265,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'flex-end',
-   
   },
   modalContent: {
     backgroundColor: '#fff',

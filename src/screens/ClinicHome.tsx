@@ -9,6 +9,7 @@ import {
   Image,
   Platform,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
@@ -19,7 +20,7 @@ import {
 } from 'react-native-responsive-screen';
 import api from '../utils/api';
 
-const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
+const ClinicHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [products, setProducts] = useState<any[]>([]);
   const [purchased, setPurchased] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -304,10 +305,16 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                             <Text style={styles.endDateText}>{y.end_time}</Text>
                           </View>
                         </View>
-                        <Text style={styles.RecCardPara}>{y.job_status}</Text>
-                        <Text style={styles.endDateText2}>
-                          Session: {y.session_number}
-                        </Text>
+                        <View
+                          style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                          }}>
+                          <Text style={styles.statusText}>{y.job_status}</Text>
+                          <Text style={styles.sessionText}>
+                            Session(s): {y.session_number}
+                          </Text>
+                        </View>
                       </View>
                     </View>
                     <View style={styles.lineContainer}>
@@ -335,7 +342,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
             ) : (
               <View>
                 {patientList.map((customer: any) => (
-                  <View key={customer.id}>
+                  <TouchableOpacity key={customer.id}>
                     <View style={[styles.customerCard]}>
                       <View style={styles.customerImg}>
                         <Text style={styles.profileLetter}>
@@ -383,7 +390,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
                     <View style={styles.lineContainer}>
                       <View style={styles.line} />
                     </View>
-                  </View>
+                  </TouchableOpacity>
                 ))}
               </View>
             )}
@@ -393,7 +400,7 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
     </View>
   );
 };
-export default ProductHome;
+export default ClinicHome;
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
@@ -520,15 +527,20 @@ const styles = StyleSheet.create({
   RecCardTitle: {
     fontFamily: 'Roboto',
     color: '#222',
-    fontSize: 20,
+    fontSize: 17,
     fontWeight: 'bold',
     textAlign: 'left',
   },
   RecCardPara: {
-    fontFamily: 'Roboto-Bold',
-    textTransform: 'uppercase',
-    textDecorationStyle: 'solid',
-    textDecorationLine: 'underline',
+    fontFamily: 'Roboto',
+    textTransform: 'capitalize',
+    fontSize: 15,
+    textAlign: 'left',
+    color: '#222',
+  },
+  statusText: {
+    fontFamily: 'Roboto',
+    textTransform: 'capitalize',
     fontSize: 15,
     textAlign: 'left',
     color: '#222',
@@ -618,11 +630,12 @@ const styles = StyleSheet.create({
   },
   listTitle: {
     fontFamily: 'Roboto',
-    fontSize: 23,
+    fontSize: 17,
     marginBottom: 5,
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#131035',
+    textTransform: 'uppercase',
   },
   listScroll: {
     height: height * 0.5,
@@ -668,9 +681,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#B30000',
   },
-  endDateText2: {
-    textAlign: 'right',
-    bottom: 15,
+  sessionText: {
     fontWeight: 'bold',
     fontFamily: 'Roboto',
     fontSize: 16,

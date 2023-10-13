@@ -4,10 +4,10 @@ import {StyleSheet, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useRoute} from '@react-navigation/native';
-import ProductHome from './ProductHome';
-import TabsAds from './TabAds';
+import ClinicHome from './ClinicHome';
+// import TabsAds from './TabAds';
 import TabCustomer from './TabCustomer';
-import TabGuide from './TabGuide';
+// import TabGuide from './TabGuide';
 import TabSupport from './TabSupport';
 
 const Tab = createBottomTabNavigator();
@@ -66,10 +66,16 @@ const Product = () => {
           component={TabCustomer}
           initialParams={{username: username}}
         />
-      <Tab.Screen
+        <Tab.Screen
           name="Home"
-          component={ProductHome}
-          initialParams={{username: username, email: email, lastname: lastname, role: role, id: id}}
+          component={ClinicHome}
+          initialParams={{
+            username: username,
+            email: email,
+            lastname: lastname,
+            role: role,
+            id: id,
+          }}
         />
         <Tab.Screen
           name="Tech Support"

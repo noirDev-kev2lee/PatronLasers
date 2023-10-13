@@ -9,13 +9,15 @@ import {
   Platform,
   ScrollView,
   ActivityIndicator,
+  SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
 import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
-import CustomAlert from './partials/CustomAlert';
+import CustomAlert from '../components/CustomAlert';
 import api from '../utils/api';
 
 interface LoginProps {
@@ -109,7 +111,8 @@ const Login = ({navigation}: LoginProps) => {
     };
   }, []);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <View>
         <Pressable
           style={styles.backArrow}
@@ -153,6 +156,7 @@ const Login = ({navigation}: LoginProps) => {
                   placeholder="Phone number"
                   placeholderTextColor={'gray'}
                   keyboardType="number-pad"
+                  cursorColor="gray"
                 />
               </View>
               <View style={styles.inputStyle}>
@@ -164,6 +168,7 @@ const Login = ({navigation}: LoginProps) => {
                   secureTextEntry={hide}
                   placeholder="Enter password"
                   placeholderTextColor={'gray'}
+                  cursorColor="gray"
                 />
                 <Pressable onPress={() => setHide(!hide)}>
                   {hide ? (
@@ -200,7 +205,7 @@ const Login = ({navigation}: LoginProps) => {
         message={alertMessage}
         onClose={closeAlert}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
