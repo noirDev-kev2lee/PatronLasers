@@ -11,7 +11,6 @@ import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 
-
 export default function PatientHome({
   navigation,
   route,
@@ -22,39 +21,36 @@ export default function PatientHome({
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const [appointmentData, setAppointmentData] = useState<any[]>([]);
   const [patientData, setPatientData] = useState<any[]>([]);
+
   const data = route.params as {
     username: string;
     email: string;
     lastname: string;
   };
   const {username, email, lastname} = data;
+  const [activeTab, setActiveTab] = useState('Appointments');
+  const [service, setSercices] = useState<any[]>([]);
 
-try{
-  useEffect(() => {
-    const fetchPatient = async () =>{
-     await api
-     .get('patients/')
-     .then(res => setPatientData(res.data.rows));
-    }
-    fetchPatient();
-   }, []);
-}catch(error){
-return error
-}
- try{
-
-  useEffect(() => {
-    const fetchAppointment = async () =>{
-      await api
+  try {
+    useEffect(() => {
+      fetchPatient();
+      fetchAppointment();
+      fetchServices();
+    }, []);
+  } catch (error) {
+    return error;
+  }
+  const fetchServices = async () => {
+    await api.get('clinic-services/').then(res => setSercices(res.data.rows));
+  };
+  const fetchPatient = async () => {
+    await api.get('patients/').then(res => setPatientData(res.data.rows));
+  };
+  const fetchAppointment = async () => {
+    await api
       .get('appointments/')
       .then(res => setAppointmentData(res.data.rows));
-    }
-    fetchAppointment()
-  }, []);
- }catch(error){
- return error
- }
-
+  };
   const patientList = patientData.filter(y => y.email === email);
   const appointmentList = appointmentData.filter(
     x => x.patient_id === patientList[0]?.patient_id,
@@ -63,16 +59,24 @@ return error
     pend => pend.job_status === 'pending',
   );
   const doneList = appointmentList.filter(done => done.job_status === 'done');
-  
-
+  const serviceList = service.filter(
+    y => y.clinic_name === patientList[0]?.clinic_name,
+  );
   return (
     <View style={styles.mainContainer}>
-      <Pressable onPress={() => setdrawerModalVisible(true)}>
-        <View style={styles.welcome}>
-          <Icon2 name="user-circle-o" size={42} color="#131035" />
-          <Text style={styles.welcomeNote}>Hello, {username}</Text>
-        </View>
-      </Pressable>
+      <View
+        style={{
+          backgroundColor: 'white',
+          paddingHorizontal: 18,
+          paddingVertical: 10,
+        }}>
+        <Pressable onPress={() => setdrawerModalVisible(true)}>
+          <View style={styles.welcome}>
+            <Icon2 name="user-circle-o" size={42} color="#131035" />
+            <Text style={styles.welcomeNote}>Hello, {username}</Text>
+          </View>
+        </Pressable>
+      </View>
 
       <Modal
         animationType="fade"
@@ -103,6 +107,20 @@ return error
               <Pressable
                 onPress={() => [
                   setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('treatment_records', {
+                    patient_id: patientList[0].patient_id,
+                  }),
+                ]}>
+                <View style={styles.drawerList}>
+                  <Icon name="profile" size={28} color={'#fff'} />
+                  <View style={styles.drawerTextCon}>
+                    <Text style={styles.drawerTxt}>My records</Text>
+                  </View>
+                </View>
+              </Pressable>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
                   navigation.navigate('About Us'),
                 ]}>
                 <View style={styles.drawerList}>
@@ -124,98 +142,157 @@ return error
           </View>
         </View>
       </Modal>
-      {/* pending appointment */}
-      <View style={{paddingTop: 20}}>
-        <Text style={styles.pendingText}>Pending Appointment</Text>
+      <View style={styles.tabContainer}>
+        <Pressable onPress={() => setActiveTab('Appointments')}>
+          <View
+            style={[
+              styles.tabItem,
+              activeTab === 'Appointments' && styles.activeTabItem,
+            ]}>
+            <Text style={styles.tabText}>Appointments</Text>
+          </View>
+        </Pressable>
+        <Pressable onPress={() => setActiveTab('Services')}>
+          <View
+            style={[
+              styles.tabItem,
+              activeTab === 'Services' && styles.activeTabItem,
+            ]}>
+            <Text style={styles.tabText}>Services</Text>
+          </View>
+        </Pressable>
       </View>
-      <ScrollView
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        style={styles.scroll}>
-        <View style={styles.scrollContainer}>
-          {pendingList.length === 0 ? (
-            <View>
-              <Text style={styles.notAvailable}>No appointment available</Text>
-            </View>
-          ) : (
-            <View>
-              {pendingList.map(pending => (
-                <View key={pending.id}>
-                  <View style={[styles.RecCard1]}>
-                    <View style={styles.RecCardInfo1}>
-                      <Text style={styles.appointTitle1}>
-                        Service:{pending.service_type}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        Clinic:{pending.clinic_name}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        {pending.start_date}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        {pending.end_date}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        {pending.start_time} - {pending.end_time}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        Status:{pending.job_status}
-                      </Text>
-                    </View>
-                  </View>
+      {activeTab === 'Services' && (
+        <View style={{paddingHorizontal: 20, paddingTop: 30}}>
+          <ScrollView
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            style={styles.scroll}>
+            {serviceList.map((value, index) => (
+              <View key={index} style={styles.serviceContainer}>
+                <View style={{marginBottom: 10}}>
+                  <Text style={styles.serviceText}>Service</Text>
+                  <Text style={{color: 'black', fontSize: 16}}>
+                    {value.service_name}
+                  </Text>
                 </View>
-              ))}
-            </View>
-          )}
-        </View>
-      </ScrollView>
-      {/* done appointment */}
-      <View>
-        <Text style={styles.doneText}>Done Appointment</Text>
-      </View>
-      <ScrollView
-        pagingEnabled={true}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        style={styles.scroll}>
-        <View style={styles.scrollContainer}>
-          {doneList.length === 0 ? (
-            <View>
-              <Text style={styles.notAvailable}>No appointment available</Text>
-            </View>
-          ) : (
-            <View>
-              {doneList.map(pending => (
-                <View key={pending.id}>
-                  <View style={[styles.RecCard1]}>
-                    <View style={styles.RecCardInfo1}>
-                      <Text style={styles.appointTitle1}>
-                        Service:{pending.service_type}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        Clinic:{pending.clinic_name}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        {pending.start_date}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        {pending.end_date}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        {pending.start_time} - {pending.end_time}
-                      </Text>
-                      <Text style={styles.appointTitle2}>
-                        Status:{pending.job_status}
-                      </Text>
-                    </View>
-                  </View>
+                <View style={{marginBottom: 10}}>
+                  <Text style={styles.serviceText}>Description</Text>
+                  <Text style={{color: 'black', fontSize: 16}}>
+                    {value.service_desc}
+                  </Text>
                 </View>
-              ))}
-            </View>
-          )}
+                <View style={{marginBottom: 10}}>
+                  <Text style={styles.serviceText}>Cost</Text>
+                  <Text style={{color: 'black', fontSize: 16}}>
+                    {value.service_cost}
+                  </Text>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
         </View>
-      </ScrollView>
+      )}
+      {activeTab === 'Appointments' && (
+        <View>
+          {/* pending appointment */}
+          <View style={styles.heading}>
+            <Text style={styles.pendingText}>Pending Appointment</Text>
+          </View>
+          <ScrollView
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            style={styles.scroll}>
+            <View style={styles.scrollContainer}>
+              {pendingList.length === 0 ? (
+                <View style={{paddingHorizontal: 20}}>
+                  <Text style={styles.notAvailable}>
+                    No appointment available
+                  </Text>
+                </View>
+              ) : (
+                <View>
+                  {pendingList.map(pending => (
+                    <View key={pending.id}>
+                      <View style={[styles.RecCard1]}>
+                        <View style={styles.RecCardInfo1}>
+                          <Text style={styles.appointTitle1}>
+                            Service:{pending.service_type}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            Clinic:{pending.clinic_name}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.start_date}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.end_date}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.start_time} - {pending.end_time}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            Status:{pending.job_status}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+          </ScrollView>
+          {/* done appointment */}
+          <View>
+            <Text style={styles.doneText}>Done Appointment</Text>
+          </View>
+          <ScrollView
+            pagingEnabled={true}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            style={styles.scroll}>
+            <View style={styles.scrollContainer}>
+              {doneList.length === 0 ? (
+                <View>
+                  <Text style={styles.notAvailable}>
+                    No appointment available
+                  </Text>
+                </View>
+              ) : (
+                <View>
+                  {doneList.map(pending => (
+                    <View key={pending.id}>
+                      <View style={[styles.RecCard1]}>
+                        <View style={styles.RecCardInfo1}>
+                          <Text style={styles.appointTitle1}>
+                            Service:{pending.service_type}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            Clinic:{pending.clinic_name}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.start_date}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.end_date}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.start_time} - {pending.end_time}
+                          </Text>
+                          <Text style={styles.appointTitle2}>
+                            Status:{pending.job_status}
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
+            </View>
+          </ScrollView>
+        </View>
+      )}
     </View>
   );
 }
@@ -224,19 +301,13 @@ const styles = StyleSheet.create({
   scroll: {},
   mainContainer: {
     flex: 1,
-    paddingHorizontal: 18,
-    backgroundColor: '#F8FAFB',
+    backgroundColor: '#D9D9D9',
   },
   scrollContainer: {
     flexDirection: 'row',
     paddingTop: 20,
   },
-  heading: {
-    marginLeft: 10,
-    color: '#222',
-    fontFamily: 'Roboto',
-    fontSize: 40,
-  },
+
   heading2: {
     marginLeft: 10,
     color: '#888',
@@ -368,4 +439,48 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   notAvailable: {color: 'black', fontFamily: 'Roboto', fontSize: 18},
+  tabText: {
+    color: 'black',
+    fontSize: 17,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    paddingHorizontal: 70,
+  },
+  tabItem: {
+    alignItems: 'center',
+    padding: 16,
+  },
+  activeTabItem: {
+    borderBottomWidth: 3,
+    borderBottomColor: 'gray',
+  },
+
+  activeTabText: {
+    color: 'red',
+  },
+  heading: {paddingTop: 20, paddingHorizontal: 20},
+  serviceContainer: {
+    backgroundColor: 'white',
+    width: '100%',
+    padding: 20,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 10,
+  },
+  serviceText: {
+    fontSize: 16,
+    color: 'gray',
+  },
+  serviceDesc: {
+    fontSize: 14,
+    color: 'gray',
+  },
+  serviceCost: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
 });
