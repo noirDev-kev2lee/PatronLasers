@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../utils/api';
@@ -11,18 +11,19 @@ export default function PatientProfile({
   route: any;
 }) {
   const [patientData, setPatientData] = useState<any[]>([]);
-  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
-  const {username, email, lastname,role,id} = data;
+  const data = route.params as {
+    username: string;
+    email: string;
+    lastname: string;
+    role: string;
+    id: string;
+  };
+  const {username, email, lastname, role, id} = data;
   const firstLetter = username.charAt(0);
- 
 
   useEffect(() => {
-    api
-      .get('patients/')
-      .then(res => setPatientData(res.data.rows));
+    api.get('patients/').then(res => setPatientData(res.data.rows));
   }, []);
-
-
 
   const singlePatient = patientData.filter(y => y.email === email);
 
@@ -94,7 +95,7 @@ export default function PatientProfile({
         </View>
       )}
 
-      <View style={styles. appointmentsBio}>
+      <View style={styles.appointmentsBio}>
         <View style={styles.iconText}>
           <Icon name="calendar-today" size={25} color="#F54D42" />
           <View style={styles.infoCon}>
@@ -108,7 +109,16 @@ export default function PatientProfile({
         </View>
       </View>
       <View style={styles.profileBio}>
-        <Pressable onPress={() => navigation.navigate('change_password',{username:username,email:email, lastname:lastname, role:role, id:id})}>
+        <Pressable
+          onPress={() =>
+            navigation.navigate('change_password', {
+              username: username,
+              email: email,
+              lastname: lastname,
+              role: role,
+              id: id,
+            })
+          }>
           <View style={[styles.iconText, {marginBottom: 18}]}>
             <Icon name="lock-outline" size={25} color="#2D4059" />
             <View style={styles.infoCon}>
@@ -132,7 +142,7 @@ export default function PatientProfile({
 }
 
 const styles = StyleSheet.create({
-  container: {flex:1,backgroundColor: '#F8FAFB', paddingHorizontal: 25},
+  container: {flex: 1, backgroundColor: '#F8FAFB', paddingHorizontal: 25},
   profileLetter: {
     color: '#fff',
     fontFamily: 'Roboto',
