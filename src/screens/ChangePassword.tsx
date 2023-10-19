@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -10,20 +10,20 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import CustomAlert from './partials/CustomAlert';
+import CustomAlert from '../components/CustomAlert';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../utils/api';
 
-const ChangePassword = ({
-  navigation,
-  route,
-}: {
-  navigation: any;
-  route: any;
-}) => {
-  const data = route.params as {username: string; email: string; lastname: string; role: string; id:string;};
-  const {username, email, lastname,role,id} = data;
- 
+const ChangePassword = ({navigation, route}: {navigation: any; route: any}) => {
+  const data = route.params as {
+    username: string;
+    email: string;
+    lastname: string;
+    role: string;
+    id: string;
+  };
+  const {username, email, lastname, role, id} = data;
+
   const [disableButton, setDisableButton] = useState(true);
   const [isLoading, setLoading] = useState(false);
   const [password, setPassword] = useState('');
@@ -31,7 +31,6 @@ const ChangePassword = ({
   const [passwordConform, setPasswordConfirm] = useState('');
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
- 
 
   const showAlert = (message: React.SetStateAction<string>) => {
     setAlertMessage(message);
@@ -44,30 +43,32 @@ const ChangePassword = ({
   const handleChangePassword = async () => {
     if (password === '' || newPassword === '' || passwordConform === '') {
       showAlert('All field must be provided');
-    }else{
-     if(passwordConform === newPassword){
-      try{
-        api.put(`users/${id}`,{
-          id: id,
-          first_name: username,
-          last_name: lastname ,
-          email: email,
-          password: newPassword,
-          role: role
-        }).then(()=>{
-          showAlert('Password Changed Successfuly!');
-          navigation.navigate('Login');
-        }).catch((err)=>{
-          return err
-          
-        })
-      }catch(error){
-        showAlert('Error occured')
-        return error
+    } else {
+      if (passwordConform === newPassword) {
+        try {
+          api
+            .put(`users/${id}`, {
+              id: id,
+              first_name: username,
+              last_name: lastname,
+              email: email,
+              password: newPassword,
+              role: role,
+            })
+            .then(() => {
+              showAlert('Password Changed Successfuly!');
+              navigation.navigate('Login');
+            })
+            .catch(err => {
+              return err;
+            });
+        } catch (error) {
+          showAlert('Error occured');
+          return error;
+        }
+      } else {
+        showAlert('Passwords are not equal');
       }
-     }else{
-      showAlert('Passwords are not equal')
-     }
     }
   };
   return (
@@ -77,17 +78,18 @@ const ChangePassword = ({
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
           style={styles.keyboard}>
-       
-            <View style={styles.lockIcon}>
-           <View style={styles.lockIconStyle}>
-           <Icon name="lock-outline" size={60} color="#131035" />
-           </View>
+          <View style={styles.lockIcon}>
+            <View style={styles.lockIconStyle}>
+              <Icon name="lock-outline" size={60} color="#131035" />
             </View>
+          </View>
           <View>
             <View style={styles.textContainer}>
               <View>
-              <Text style={styles.title}>Create a new Password</Text>
-              <Text style={styles.title2}>always keep your password safe</Text>
+                <Text style={styles.title}>Create a new Password</Text>
+                <Text style={styles.title2}>
+                  always keep your password safe
+                </Text>
               </View>
             </View>
 
@@ -109,10 +111,9 @@ const ChangePassword = ({
                   placeholder="Enter New password"
                   placeholderTextColor={'gray'}
                 />
-               
               </View>
               <View style={styles.inputStyle}>
-                  <TextInput
+                <TextInput
                   style={styles.textInput}
                   onChangeText={setPasswordConfirm}
                   secureTextEntry={true}
@@ -121,10 +122,12 @@ const ChangePassword = ({
                 />
               </View>
             </View>
-          
+
             <View style={styles.buttons}>
-              <Pressable style={styles.pressBtn}  disabled={disableButton} onPress={handleChangePassword}>
-             
+              <Pressable
+                style={styles.pressBtn}
+                disabled={disableButton}
+                onPress={handleChangePassword}>
                 {isLoading ? (
                   <ActivityIndicator
                     color="white"
@@ -138,8 +141,12 @@ const ChangePassword = ({
           </View>
         </KeyboardAvoidingView>
       </ScrollView>
-        {/* custom alert */}
-        <CustomAlert visible={alertVisible} message={alertMessage} onClose={closeAlert} />
+      {/* custom alert */}
+      <CustomAlert
+        visible={alertVisible}
+        message={alertMessage}
+        onClose={closeAlert}
+      />
     </View>
   );
 };
@@ -215,7 +222,7 @@ const styles = StyleSheet.create({
   },
   lockIcon: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   lockIconStyle: {
     width: 89,
@@ -225,16 +232,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 48,
     borderWidth: 3,
-    borderColor: '#131035'
-   
+    borderColor: '#131035',
   },
-
 
   Arrow: {
     fontSize: 30,
   },
   keyboard: {paddingBottom: 30},
- 
+
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,

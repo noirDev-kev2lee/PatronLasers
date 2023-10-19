@@ -18,8 +18,10 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import api from '../utils/api';
+import AppointmentsList from '../components/AppointmentsList';
+import CustomersList from '../components/CustomersList';
 
-const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
+const ClinicHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [products, setProducts] = useState<any[]>([]);
   const [purchased, setPurchased] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
@@ -57,21 +59,6 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
     };
     fetchProducts();
   }, []);
-  //Customer Tab Data
-  const [patientData, setPatientData] = useState<any[]>([]);
-  const [appointmentData, setAppointmentData] = useState<any[]>([]);
-  //Patient
-  useEffect(() => {
-    api.get('patients/').then(res => setPatientData(res.data.rows));
-  }, [patientData]);
-  //Appointments
-  useEffect(() => {
-    api.get('appointments/').then(res => setAppointmentData(res.data.rows));
-  }, [appointmentData]);
-  const patientList = patientData.filter(y => y.clinic_name === username);
-  const appointmentList = appointmentData.filter(
-    x => x.clinic_name === username,
-  );
 
   // filter serial number
   const filteredSN = purchased
@@ -146,20 +133,6 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
               <View style={styles.line} />
             </View>
             <View>
-              {
-                <Pressable
-                  onPress={() => [
-                    setdrawerModalVisible(!drawerModalVisible),
-                    navigation.navigate('Finacial Area', {username: username}),
-                  ]}>
-                  <View style={styles.drawerList}>
-                    <Icon2 name="money" size={30} color={'#fff'} />
-                    <View style={styles.drawerTextCon}>
-                      <Text style={styles.drawerTxt}>financial</Text>
-                    </View>
-                  </View>
-                </Pressable>
-              }
               <Pressable
                 onPress={() => [
                   setdrawerModalVisible(!drawerModalVisible),
@@ -248,167 +221,15 @@ const ProductHome = ({navigation, route}: {navigation: any; route: any}) => {
       </ScrollView>
       <ScrollView horizontal pagingEnabled={true}>
         {/* appointments list */}
-        <View style={styles.list}>
-          <View style={styles.customerHeader}>
-            <Text style={styles.listTitle}>Appointments</Text>
-          </View>
-          <ScrollView style={styles.listScroll}>
-            {appointmentList.length === 0 ? (
-              <View>
-                <Text style={{color: 'red', paddingLeft: 10}}>
-                  No available appointments
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {appointmentList.map(y => (
-                  <View key={y.id}>
-                    <View style={[styles.RecCard]}>
-                      <View style={styles.RecCardInfo}>
-                        <View style={styles.nameContainer}>
-                          <Text style={styles.RecCardTitle}>
-                            {y.patient_id}
-                          </Text>
-                          {y.job_status !== 'done' ? <View /> : ''}
-                        </View>
-                        <Text style={styles.subTitle}>{y.service_type}</Text>
-                        <View style={styles.timeContainer}>
-                          <View
-                            style={[styles.dateTimeCont, {marginRight: 20}]}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="calendar"
-                              size={20}
-                              color={'green'}
-                            />
-                            <Text style={styles.startDateText}>
-                              {y.start_date}
-                            </Text>
-                          </View>
-                          <View style={styles.dateTimeCont}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="clock-o"
-                              size={25}
-                              color={'green'}
-                            />
-                            <Text style={styles.startDateText}>
-                              {y.start_time}
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.timeContainer}>
-                          <View
-                            style={[styles.dateTimeCont, {marginRight: 20}]}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="calendar"
-                              size={20}
-                              color={'#B30000'}
-                            />
-                            <Text style={styles.endDateText}>{y.end_date}</Text>
-                          </View>
-                          <View style={styles.dateTimeCont}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="clock-o"
-                              size={25}
-                              color={'#B30000'}
-                            />
-                            <Text style={styles.endDateText}>{y.end_time}</Text>
-                          </View>
-                        </View>
-                        <Text style={styles.RecCardPara}>{y.job_status}</Text>
-                        <Text style={styles.endDateText2}>
-                          Session: {y.session_number}
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.lineContainer}>
-                      <View style={styles.line} />
-                    </View>
-                    {/* Done and cancel modal */}
-                  </View>
-                ))}
-              </View>
-            )}
-          </ScrollView>
-        </View>
+        <AppointmentsList username={username} />
         {/* customers list */}
-        <View style={styles.list}>
-          <View style={styles.customerHeader}>
-            <Text style={styles.listTitle}>My Customers</Text>
-          </View>
-          <ScrollView style={styles.listScroll}>
-            {patientList.length === 0 ? (
-              <View>
-                <Text style={{color: 'red', paddingLeft: 20}}>
-                  No available customers
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {patientList.map((customer: any) => (
-                  <View key={customer.id}>
-                    <View style={[styles.customerCard]}>
-                      <View style={styles.customerImg}>
-                        <Text style={styles.profileLetter}>
-                          {customer.first_name?.charAt(0)}
-                        </Text>
-                      </View>
-                      <View style={styles.RecCardInfo}>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.idTitle}>
-                            {customer.patient_id}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.RecCardTitle}>
-                            {customer.first_name} {customer.last_name}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.RecCardPara}>
-                            Age:{customer.age}
-                          </Text>
-                          <Text
-                            style={[
-                              styles.RecCardPara,
-                              {marginLeft: 15, textTransform: 'capitalize'},
-                            ]}>
-                            Gender:{customer.gender}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <View>
-                            <Text style={styles.RecCardPara}>
-                              +{customer.phone}
-                            </Text>
-                          </View>
-                          <View>
-                            <Text
-                              style={[styles.RecCardPara, {marginLeft: 15}]}>
-                              {customer.email}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                    <View style={styles.lineContainer}>
-                      <View style={styles.line} />
-                    </View>
-                  </View>
-                ))}
-              </View>
-            )}
-          </ScrollView>
-        </View>
+        <CustomersList username={username} />
       </ScrollView>
     </View>
   );
 };
-export default ProductHome;
-const {width, height} = Dimensions.get('window');
+export default ClinicHome;
+const {height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
   mainContainer: {
@@ -489,9 +310,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 2,
   },
-  RecCardInfo: {
-    marginLeft: 10,
-  },
+
   RecCardSmall: {
     alignItems: 'center',
     width: wp('28%'),
@@ -531,18 +350,10 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
   },
-  RecCardTitle: {
+
+  statusText: {
     fontFamily: 'Roboto',
-    color: '#222',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'left',
-  },
-  RecCardPara: {
-    fontFamily: 'Roboto-Bold',
-    textTransform: 'uppercase',
-    textDecorationStyle: 'solid',
-    textDecorationLine: 'underline',
+    textTransform: 'capitalize',
     fontSize: 15,
     textAlign: 'left',
     color: '#222',
@@ -625,99 +436,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 1,
     backgroundColor: '#DADADA',
-  },
-  //These styles are for the customer section
-  list: {
-    width: width * 1,
-  },
-  listTitle: {
-    fontFamily: 'Roboto',
-    fontSize: 23,
-    marginBottom: 5,                                                                                                                              
-    fontWeight: 'bold',
-    textAlign: 'left',
-    color: '#131035',
-  },
-  listScroll: {
-    height: height * 0.5,
-    paddingBottom: 30,
-    flexDirection: 'column',
-  },
-  customerCard: {
-    flexDirection: 'row',
-    height: 140,
-    backgroundColor: '#F8FAFB',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-  },
-  customerImg: {
-    backgroundColor: '#131035',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 50,   
-    height: 50,
-  },
-  customerHeader: {
-    flexDirection: 'row',
-    marginHorizontal: 20,
-    paddingVertical: 10,
-  },
-  profileLetter: {
-    color: '#fff',
-    fontFamily: 'Roboto',
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    fontSize: 25,
-  },
-  timeContainer: {
-    flexDirection: 'row',
-  },
-  startDateText: {
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    color: 'green',
-  },
-  endDateText: {
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    color: '#B30000',
-  },
-  endDateText2: {
-    textAlign: 'right',
-    bottom: 15,
-    fontWeight: 'bold',
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    color: 'blue',
-  },
-  idTitle: {
-    fontFamily: 'Roboto',
-    fontWeight: 'bold',
-    fontSize: 20,
-    textTransform: 'uppercase',
-    color: '#36454F',
-  },
-  infoGroup: {
-    flexDirection: 'row',
-  },
-  dateTimeCont: {
-    flexDirection: 'row',
-    paddingVertical: 3,
-  },
-  nameContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  doneBtn: {
-    backgroundColor: 'green',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 10,
-  },
-  subTitle: {
-    fontFamily: 'Roboto',
-    fontWeight: '500',
-    fontSize: 19,
-    color: '#36454F',
   },
 });

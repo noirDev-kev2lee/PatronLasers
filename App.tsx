@@ -1,25 +1,22 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { Dimensions } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProductCard from './components/screens/ProductCard';
-import FinancialArea from './components/screens/FinancialArea';
-import AddCustomer from './components/screens/AddCustomer';
-import AboutUs from './components/screens/AboutUs';
-import Login from './components/screens/Login';
-import GuideCard from './components/screens/GuideCard';
-import Register from './components/screens/Register';
-import Home from './components/screens/Home';
-import Product from './components/screens/Product';
-import RegisterChoice from './components/screens/RegisterChoice';
-import PatientRegister from './components/screens/PatientRegister';
-import PatientHome from './components/screens/Patient';
-import ProductHome from './components/screens/ProductHome';
-import ChangePassword from './components/screens/ChangePassword';
+import ProductCard from './src/screens/ProductCard';
+import AddCustomer from './src/screens/AddCustomer';
+import AboutUs from './src/screens/AboutUs';
+import Login from './src/screens/Login';
+import GuideCard from './src/screens/GuideCard';
+import Register from './src/screens/Register';
+import Home from './src/screens/Home';
+import Product from './src/screens/Product';
+import RegisterChoice from './src/screens/RegisterChoice';
+import PatientRegister from './src/screens/PatientRegister';
+import PatientHome from './src/screens/Patient';
+import ProductHome from './src/screens/ClinicHome';
+import ChangePassword from './src/screens/ChangePassword';
 
 const Stack = createNativeStackNavigator();
-const { width, height } = Dimensions.get('window');
 
 function App() {
   return (
@@ -91,7 +88,7 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
-      
+
         <Stack.Screen
           name="change_password"
           component={ChangePassword}
@@ -172,19 +169,6 @@ function App() {
           }}
         />
 
-        <Stack.Screen
-          name="Finacial Area"
-          component={FinancialArea}
-          options={{
-            title: 'Finacial Area',
-            headerShown: true,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTintColor: '#222',
-          }}
-        />
         <Stack.Screen
           name="addCustomer"
           component={AddCustomer}

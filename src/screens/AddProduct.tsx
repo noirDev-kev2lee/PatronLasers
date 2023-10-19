@@ -9,7 +9,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import CustomAlert from './partials/CustomAlert';
+import CustomAlert from '../components/CustomAlert';
 import api from '../utils/api';
 
 const AddProduct = ({clinicName}: {clinicName: any}) => {

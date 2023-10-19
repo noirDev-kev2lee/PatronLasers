@@ -1,10 +1,18 @@
-import {StyleSheet, Text, Pressable, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  Pressable,
+  View,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import React from 'react';
 import Icon3 from 'react-native-vector-icons/AntDesign';
 
 export default function RegisterChoice({navigation}: {navigation: any}) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#131035" barStyle="light-content" />
       <View>
         <Pressable
           style={styles.backArrow}
@@ -35,7 +43,7 @@ export default function RegisterChoice({navigation}: {navigation: any}) {
           <Text style={[styles.pressTxt, {color: '#131035'}]}>Patient</Text>
         </Pressable>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
