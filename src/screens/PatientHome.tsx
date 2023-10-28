@@ -55,6 +55,7 @@ export default function PatientHome({
   const appointmentList = appointmentData.filter(
     x => x.patient_id === patientList[0]?.patient_id,
   );
+  console.log(patientList);
   const pendingList = appointmentList.filter(
     pend => pend.job_status === 'pending',
   );
@@ -115,6 +116,18 @@ export default function PatientHome({
                   <Icon name="profile" size={28} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
                     <Text style={styles.drawerTxt}>My records</Text>
+                  </View>
+                </View>
+              </Pressable>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('notification', {status: 'patient'}),
+                ]}>
+                <View style={styles.drawerList}>
+                  <Icon name="bells" size={28} color={'#fff'} />
+                  <View style={styles.drawerTextCon}>
+                    <Text style={styles.drawerTxt}>Notifications</Text>
                   </View>
                 </View>
               </Pressable>
@@ -216,26 +229,28 @@ export default function PatientHome({
                   {pendingList.map(pending => (
                     <View key={pending.id}>
                       <View style={[styles.RecCard1]}>
-                        <View style={styles.RecCardInfo1}>
-                          <Text style={styles.appointTitle1}>
-                            Service:{pending.service_type}
-                          </Text>
+                        <View>
+                          <Text style={styles.appointTitle1}>Service</Text>
                           <Text style={styles.appointTitle2}>
-                            Clinic:{pending.clinic_name}
-                          </Text>
-                          <Text style={styles.appointTitle2}>
-                            {pending.start_date}
-                          </Text>
-                          <Text style={styles.appointTitle2}>
-                            {pending.end_date}
-                          </Text>
-                          <Text style={styles.appointTitle2}>
-                            {pending.start_time} - {pending.end_time}
-                          </Text>
-                          <Text style={styles.appointTitle2}>
-                            Status:{pending.job_status}
+                            {pending.service_type}
                           </Text>
                         </View>
+                        <View>
+                          <Text style={styles.appointTitle1}>Clinic</Text>
+                          <Text style={styles.appointTitle2}>
+                            {pending.clinic_name}
+                          </Text>
+                        </View>
+
+                        <Text style={styles.appointTitle2}>
+                          {pending.start_date} - {pending.end_date}
+                        </Text>
+                        <Text style={styles.appointTitle2}>
+                          {pending.start_time} - {pending.end_time}
+                        </Text>
+                        <Text style={styles.appointTitle2}>
+                          Status:{pending.job_status}
+                        </Text>
                       </View>
                     </View>
                   ))}
@@ -264,7 +279,7 @@ export default function PatientHome({
                   {doneList.map(pending => (
                     <View key={pending.id}>
                       <View style={[styles.RecCard1]}>
-                        <View style={styles.RecCardInfo1}>
+                        <View>
                           <Text style={styles.appointTitle1}>
                             Service:{pending.service_type}
                           </Text>
@@ -306,6 +321,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexDirection: 'row',
     paddingTop: 20,
+    paddingLeft: 20,
   },
 
   heading2: {
@@ -314,30 +330,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 20,
   },
-  RecCardInfo1: {
-    height: 300,
-    width: 250,
-  },
+
   RecCard1: {
-    width: 330,
-    height: 250,
-    marginLeft: 20,
-    borderRadius: 10,
-    elevation: 10,
+    width: '100%',
+    marginBottom: 20,
     backgroundColor: '#fff',
     paddingHorizontal: 20,
     paddingVertical: 20,
+    borderWidth: 1,
+    borderColor: 'gray',
   },
   appointTitle1: {
-    fontFamily: 'Roboto',
     fontWeight: '600',
     fontSize: 19,
-    color: '#222',
+    color: 'gray',
   },
   appointTitle2: {
-    fontFamily: 'Roboto',
     fontSize: 19,
-    color: '#555',
+    color: '#222',
   },
   appointInfo: {
     width: 300,

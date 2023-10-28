@@ -7,7 +7,7 @@ import {useRoute} from '@react-navigation/native';
 import ClinicHome from './ClinicHome';
 // import TabsAds from './TabAds';
 import TabCustomer from './TabCustomer';
-// import TabGuide from './TabGuide';
+import TabGuide from './TabGuide';
 import TabSupport from './TabSupport';
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +47,7 @@ const screenOptions = ({route}: {route: any}) => ({
   tabBarShowLabel: false,
 });
 
-const Product = () => {
+const Clinic = () => {
   const route = useRoute();
   const data = route.params as {
     username: string;
@@ -82,6 +82,11 @@ const Product = () => {
           component={TabSupport}
           initialParams={{username: username, lastname: lastname}}
         />
+        <Tab.Screen
+          name="guide"
+          component={TabGuide}
+          initialParams={{username: username, lastname: lastname}}
+        />
       </Tab.Navigator>
     </View>
   );
@@ -94,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Product;
+export default Clinic;

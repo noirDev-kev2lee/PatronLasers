@@ -9,12 +9,14 @@ import Login from './src/screens/Login';
 import GuideCard from './src/screens/GuideCard';
 import Register from './src/screens/Register';
 import Home from './src/screens/Home';
-import Product from './src/screens/Product';
+import Product from './src/screens/Clinic';
 import RegisterChoice from './src/screens/RegisterChoice';
 import PatientRegister from './src/screens/PatientRegister';
 import PatientHome from './src/screens/Patient';
 import ProductHome from './src/screens/ClinicHome';
 import ChangePassword from './src/screens/ChangePassword';
+import TreatmentRecords from './src/screens/TreatmentRecords';
+import Notification from './src/screens/Notification';
 
 const Stack = createNativeStackNavigator();
 
@@ -100,6 +102,29 @@ function App() {
             headerTintColor: '#fff',
           }}
         />
+
+        <Stack.Screen
+          name="treatment_records"
+          component={TreatmentRecords}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="notification"
+          component={Notification}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
         <Stack.Screen
           name="Product"
           component={Product}
@@ -147,7 +172,7 @@ function App() {
           component={GuideCard}
           options={{
             title: '',
-            headerShown: true,
+            headerShown: false,
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#fff',

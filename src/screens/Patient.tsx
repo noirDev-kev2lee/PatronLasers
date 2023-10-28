@@ -19,7 +19,7 @@ const Patient = () => {
     id: string;
   };
   const {username, email, lastname, id, role} = data;
-  
+
   return (
     <View style={styles.container}>
       <Tab.Navigator
@@ -59,7 +59,13 @@ const Patient = () => {
         <Tab.Screen
           name="Profile"
           component={PatientProfile}
-          initialParams={{username: username, email: email, lastname: lastname, role: role, id: id}}
+          initialParams={{
+            username: username,
+            email: email,
+            lastname: lastname,
+            role: role,
+            id: id,
+          }}
         />
       </Tab.Navigator>
     </View>

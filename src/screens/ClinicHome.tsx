@@ -37,28 +37,24 @@ const ClinicHome = ({navigation, route}: {navigation: any; route: any}) => {
 
   Platform.OS === 'ios' ? 'ios-md-close-outline' : 'md-close-outline';
 
-  // fetch purchased
   useEffect(() => {
-    const fetchPurchased = async () => {
-      try {
-        api.get('purchases/').then(res => setPurchased(res.data.rows));
-      } catch (error) {
-        return error;
-      }
-    };
     fetchPurchased();
-  }, []);
-  // fetch products
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        await api.get('products/').then(res => setProducts(res.data.rows));
-      } catch (error) {
-        return error;
-      }
-    };
     fetchProducts();
   }, []);
+  const fetchPurchased = async () => {
+    try {
+      api.get('purchases/').then(res => setPurchased(res.data.rows));
+    } catch (error) {
+      return error;
+    }
+  };
+  const fetchProducts = async () => {
+    try {
+      await api.get('products/').then(res => setProducts(res.data.rows));
+    } catch (error) {
+      return error;
+    }
+  };
 
   // filter serial number
   const filteredSN = purchased
@@ -142,6 +138,21 @@ const ClinicHome = ({navigation, route}: {navigation: any; route: any}) => {
                   <Icon name="profile" size={30} color={'#fff'} />
                   <View style={styles.drawerTextCon}>
                     <Text style={styles.drawerTxt}>About</Text>
+                  </View>
+                </View>
+              </Pressable>
+              <Pressable
+                onPress={() => [
+                  setdrawerModalVisible(!drawerModalVisible),
+                  navigation.navigate('notification', {
+                    status: 'clinic',
+                    user_id: username,
+                  }),
+                ]}>
+                <View style={styles.drawerList}>
+                  <Icon name="bells" size={28} color={'#fff'} />
+                  <View style={styles.drawerTextCon}>
+                    <Text style={styles.drawerTxt}>Notifications</Text>
                   </View>
                 </View>
               </Pressable>

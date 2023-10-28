@@ -1,12 +1,21 @@
-import {View, StyleSheet, Pressable, Text, Image} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Pressable,
+  Text,
+  Image,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import React from 'react';
 
 export default function Home({navigation}: {navigation: any}) {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#131035" barStyle="light-content" />
       <View style={styles.logoContainer}>
         <View>
-        <Image style={styles.logo} source={require('../assets/001.png')} />
+          <Image style={styles.logo} source={require('../assets/001.png')} />
         </View>
       </View>
       <Pressable
@@ -19,7 +28,7 @@ export default function Home({navigation}: {navigation: any}) {
         onPress={() => navigation.navigate('Login')}>
         <Text style={[styles.pressTxt, {color: '#131035'}]}>Login</Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 }
 

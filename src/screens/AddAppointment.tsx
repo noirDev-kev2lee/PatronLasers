@@ -67,17 +67,21 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             end_date: convertedEndDate,
             end_time: convertedEndTime,
             job_status: 'pending',
-            session_number: sessionCount,
+            no_sessions: sessionCount,
             session_price: sessionPrice,
           })
           .then(res => {
-            const json = res.data;
+            const data = res.data.rows[0];
             setLoading(false);
-            if (json.data.code === '23503') {
-              Alert.alert('Patient ID does not exist!');
-            } else {
-              Alert.alert('Appointment Registered Successfully!');
-            }
+            api.post('treatment-records/', {
+              patient_id: pid,
+              appt_id: data.appt_id,
+              clinic_name: clinicName,
+              service_type: service,
+              service_cost: sessionPrice,
+              session_number: 1,
+            });
+            Alert.alert('Appointment Registered Successfully!');
           })
           .catch(() => {
             setLoading(false);
@@ -102,7 +106,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20} // adjust this value as needed
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         style={styles.keyboard}>
         <View style={styles.form}>
           <SelectDropdown
@@ -115,13 +119,9 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
               setPid(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
-              // text represented after item is selected
-              // if data array is an array of objects then return selectedItem.property to render after item is selected
               return selectedItem;
             }}
             rowTextForSelection={(item, index) => {
-              // text represented for each item in dropdown
-              // if data array is an array of objects then return item.property to represent item in dropdown
               return item;
             }}
           />
@@ -135,31 +135,31 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
               setService(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
-              // text represented after item is selected
-              // if data array is an array of objects then return selectedItem.property to render after item is selected
               return selectedItem;
             }}
             rowTextForSelection={(item, index) => {
-              // text represented for each item in dropdown
-              // if data array is an array of objects then return item.property to represent item in dropdown
               return item;
             }}
           />
           <TextInput
             style={styles.textInput}
-            placeholderTextColor="#b4b9c1"
+            placeholderTextColor="gray"
             onChangeText={SetSessionCount}
-            placeholder="Session Number"
+            placeholder="Number of sessions"
             keyboardType="number-pad"
+            maxLength={2}
+            cursorColor="gray"
           />
           <TextInput
             style={styles.textInput}
-            placeholderTextColor="#b4b9c1"
+            placeholderTextColor="gray"
             onChangeText={SetSessionPrice}
             placeholder="Session Price"
             keyboardType="number-pad"
+            cursorColor="gray"
           />
           {/* start date */}
+          <Text style={styles.label}>Start date</Text>
           <View style={styles.datePickerStyle}>
             <TextInput
               style={styles.dateText}
@@ -277,12 +277,11 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   textInput: {
-    fontFamily: 'Roboto',
-    fontSize: 20,
+    fontSize: 17,
     margin: 10,
-    backgroundColor: '#e6e6e9',
+    backgroundColor: '#D9D9D9',
     paddingLeft: 20,
-    width: 300,
+    width: '100%',
     height: 60,
     borderRadius: 12,
     color: 'black',
@@ -305,7 +304,7 @@ const styles = StyleSheet.create({
     margin: 10,
     flexDirection: 'row',
     borderRadius: 12,
-    width: 300,
+    width: '100%',
     height: 60,
     color: '#222',
     backgroundColor: '#D9D9D9',
@@ -347,17 +346,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     textAlign: 'left',
     padding: 10,
-    fontSize: 15,
-    color: '#b4b9c1',
+    fontSize: 18,
+    color: 'black',
   },
-  pressTxt1: {
-    paddingVertical: 12,
-    paddingHorizontal: 50,
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#eee0cb',
-  },
-  container: {},
 
   title: {
     textAlign: 'center',
@@ -374,5 +365,9 @@ const styles = StyleSheet.create({
   activityIndicator: {
     alignSelf: 'center',
     padding: 20,
+  },
+  label: {
+    color: 'black',
+    fontSize: 16,
   },
 });

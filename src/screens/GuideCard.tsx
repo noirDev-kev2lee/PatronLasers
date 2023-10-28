@@ -1,87 +1,75 @@
-import React from 'react';
-import {StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Pressable,
+  TouchableOpacity,
+} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export default function GuideCard() {
-  const route = useRoute();
-  const data = route.params as {
-    desc: string;
-    name: string;
-    category: string;
-    img: any;
-  };
-  const {desc, name} = data;
+export default function GuideCard({navigation}: {navigation: any}) {
+  const [activeTab, setActiveTab] = useState('manuals');
   return (
     <View style={styles.container}>
-      <View style={styles.guideTopinfo}>
-        <View style={styles.guideInfo}>
-          <Text style={styles.guideInfoTitle}>{name}</Text>
-          <Text style={styles.guideInfoPara}>{desc}</Text>
-        </View>
-        
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backArrow}>
+          <AntDesign name="arrowleft" size={24} color="black" />
+        </TouchableOpacity>
       </View>
-      <ScrollView pagingEnabled={true} horizontal style={styles.scroll}>
-        <View style={styles.scrollContainer}>
-          <View style={styles.RecCard}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Manuals</Text>
-              <Text style={styles.RecCardPara}>
-              The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. 
-              </Text>
-            </View>
+      <View style={styles.tabContainer}>
+        <Pressable onPress={() => setActiveTab('manuals')}>
+          <View
+            style={[
+              styles.tabItem,
+              activeTab === 'manuals' && styles.activeTabItem,
+            ]}>
+            <Text style={styles.tabText}>Manuals</Text>
           </View>
-          {/* <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfoVideo}>
-              <Text style={styles.RecCardTitle}>Video Guides</Text>
-              <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
-                  <View style={styles.scrollsec}>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product One</Text>
-                    </View>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Two</Text>
-                    </View>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                  </View>
-                  <View style={styles.scrollsec}>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                  </View>
-                  <View style={styles.scrollsec}>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                    <View style={[styles.RecCardSmall]}>
-                      <Text style={styles.cardText}>Product Three</Text>
-                    </View>
-                  </View>
-                </View>
-              </ScrollView>
-            </View>
-          </View> */}
-          <View style={[styles.RecCard]}>
-            <View style={styles.RecCardInfo}>
-              <Text style={styles.RecCardTitle}>Articles</Text>
-              <Text style={styles.RecCardPara}>
-              The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. 
-              </Text>
-            </View>
+        </Pressable>
+        <Pressable onPress={() => setActiveTab('videos')}>
+          <View
+            style={[
+              styles.tabItem,
+              activeTab === 'videos' && styles.activeTabItem,
+            ]}>
+            <Text style={styles.tabText}>Videos</Text>
           </View>
+        </Pressable>
+      </View>
+      {activeTab === 'manuals' && (
+        <View>
+          <ScrollView pagingEnabled={true} style={styles.scroll}>
+            <View>
+              <View style={styles.RecCard}>
+                <Text style={styles.RecCardPara}>
+                  The TITI device works with ultra-short technology in order to
+                  damage and exert great pressure on the melanin pigment, which
+                  shatters into small pieces. The small particles are absorbed
+                  by the skin and disperse the various pigments that make up the
+                  tattoo. This is an effective, fast, non-invasive treatment
+                  that avoids the need for a complex surgical procedure.
+                  Treatment for removing tattoos using the TITI device is
+                  intended for treating most areas of the body such as: face,
+                  hands, chest, legs and more.
+                </Text>
+              </View>
+            </View>
+          </ScrollView>
         </View>
-      </ScrollView>
+      )}
+      {activeTab === 'videos' && (
+        <View>
+          <ScrollView pagingEnabled={true} style={styles.scroll}>
+            <View>
+              <View style={[styles.videoCard]}></View>
+            </View>
+          </ScrollView>
+        </View>
+      )}
     </View>
   );
 }
@@ -93,9 +81,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexDirection: 'row',
-    paddingTop: 60,
-    borderTopLeftRadius: 80,
-    borderTopRightRadius: 80,
+    paddingTop: 20,
     backgroundColor: '#888',
   },
   scrollsec: {
@@ -130,14 +116,11 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   guideInfoTitle: {
-    fontFamily: 'Inter',
     color: '#222',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'left',
   },
   guideInfoPara: {
-    fontFamily: 'Roboto-Bold',
     fontSize: 15,
     textAlign: 'justify',
     color: '#222',
@@ -165,12 +148,8 @@ const styles = StyleSheet.create({
   },
   RecCard: {
     flex: 1,
-    flexDirection: 'row-reverse',
-    width: 400,
-    height: 500,
-    marginRight: 10,
-    borderRadius: 10,
-    backgroundColor: '#888',
+    paddingTop: 20,
+    paddingHorizontal: 20,
   },
   RecCardSmall: {
     alignItems: 'center',
@@ -180,7 +159,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     elevation: 30,
     borderRadius: 5,
-    backgroundColor: '#555',
   },
   RecCardInfo: {
     height: 300,
@@ -193,19 +171,52 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
   },
   RecCardTitle: {
-    fontFamily: 'Inter',
-    fontWeight: 'bold',
     textAlign: 'center',
-    top: -40,
-    fontSize: 30,
-    color: '#fff',
+    fontSize: 23,
+    color: 'black',
   },
   RecCardPara: {
-    top: -20,
     marginTop: 5,
-    fontFamily: 'Roboto-Bold',
+    fontSize: 18,
+    textAlign: 'justify',
+    color: 'black',
+  },
+  tabText: {
+    color: 'black',
+    fontSize: 17,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    paddingHorizontal: 70,
+  },
+  tabItem: {
+    alignItems: 'center',
+    padding: 16,
+  },
+  activeTabItem: {
+    borderBottomWidth: 3,
+    borderBottomColor: 'gray',
+  },
+
+  activeTabText: {
+    color: 'red',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 20,
+    paddingTop: 20,
+  },
+  backArrow: {
+    marginRight: 16,
+  },
+  title: {
     fontSize: 20,
-    color: '#fff',
+    color: 'black',
+    fontWeight: 'bold',
   },
   cardText: {},
   scroll: {},

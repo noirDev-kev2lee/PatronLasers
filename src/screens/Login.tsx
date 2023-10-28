@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Pressable,
   StyleSheet,
@@ -11,9 +11,9 @@ import {
   ActivityIndicator,
   SafeAreaView,
   StatusBar,
+  Image,
 } from 'react-native';
 import {NavigationProp, ParamListBase} from '@react-navigation/native';
-import NetInfo from '@react-native-community/netinfo';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon3 from 'react-native-vector-icons/AntDesign';
@@ -28,7 +28,7 @@ const Login = ({navigation}: LoginProps) => {
   const [email, onChangeEmail] = useState('');
   const [password, passwordChange] = useState('');
   const [hide, setHide] = useState(true);
-  const [isConnected, setInternetConnected] = useState(false);
+
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
@@ -47,51 +47,35 @@ const Login = ({navigation}: LoginProps) => {
         showAlert('Phone or password must be provided!');
       } else {
         setLoading(true);
-        if (email === 'democlinic@gmail.com') {
+        const response = await api.post('signin/', {
+          email,
+          password,
+        });
+
+        const json = response.data;
+        const userID = json.data.id;
+        const userName = json.data.firstname;
+        const lname = json.data.lastname;
+        const userEmail = json.data.email;
+        const userRole = json.data.role;
+
+        setLoading(false);
+        if (json.data.role === 'clinic') {
           navigation.navigate('Product', {
-            username: 'Demo Clinic',
-            lastname: 'SN006',
+            username: userName,
+            email: userEmail,
+            lastname: lname,
+            id: userID,
+            role: userRole,
           });
-          setLoading(false);
-        } else if (email === 'demopatient@gmail.com') {
+        } else if (json.data.role === 'patient') {
           navigation.navigate('patient_home', {
-            username: 'Demo Name',
-            email: 'democlinic@gmail.com',
-            lastname: 'Demo Clinic',
+            username: userName,
+            email: userEmail,
+            lastname: lname,
+            id: userID,
+            role: userRole,
           });
-          setLoading(false);
-        } else {
-          const response = await api.post('signin/', {
-            email,
-            password,
-          });
-
-          const json = response.data;
-
-          const userID = json.data.id;
-          const userName = json.data.firstname;
-          const lname = json.data.lastname;
-          const userEmail = json.data.email;
-          const userRole = json.data.role;
-
-          setLoading(false);
-          if (json.data.role === 'clinic') {
-            navigation.navigate('Product', {
-              username: userName,
-              email: userEmail,
-              lastname: lname,
-              id: userID,
-              role: userRole,
-            });
-          } else if (json.data.role === 'patient') {
-            navigation.navigate('patient_home', {
-              username: userName,
-              email: userEmail,
-              lastname: lname,
-              id: userID,
-              role: userRole,
-            });
-          }
         }
       }
     } catch (error) {
@@ -99,17 +83,7 @@ const Login = ({navigation}: LoginProps) => {
       setLoading(false);
     }
   };
-  //   // check for internet connectivity
-  useEffect(() => {
-    // Subscribe
-    const unsubscribe = NetInfo.addEventListener(state => {
-      setInternetConnected(prevState => state.isConnected ?? prevState);
-    });
-    // Unsubscribe
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
@@ -125,31 +99,27 @@ const Login = ({navigation}: LoginProps) => {
           />
         </Pressable>
       </View>
-      <View style={styles.internetContainer}>
-        <View
-          style={
-            isConnected ? styles.internetConnected : styles.internetNotConnected
-          }>
-          <Text style={{color: 'white', textAlign: 'center'}}>
-            {isConnected ? '' : 'No internet connection'}
-          </Text>
+
+      <View style={styles.logoContainer}>
+        <View>
+          <Image style={styles.logo} source={require('../assets/001.png')} />
         </View>
       </View>
       <ScrollView>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200}
           style={styles.keyboard}>
           <View style={styles.formContainer}>
             <View style={styles.textContainer}>
-              <Text style={styles.title}>Let’s sign you in </Text>
+              <Text style={styles.title}>Let&apos;s sign you in </Text>
               <Text style={styles.title2}>Welcome back.</Text>
               <Text style={styles.title2}>You have been missed.</Text>
             </View>
 
             <View style={styles.form}>
               <View style={styles.inputStyle}>
-                <Icon name="phone" size={30} color="#000000" />
+                <Icon name="phone" size={25} color="#000000" />
                 <TextInput
                   style={styles.textInput}
                   onChangeText={onChangeEmail}
@@ -160,7 +130,7 @@ const Login = ({navigation}: LoginProps) => {
                 />
               </View>
               <View style={styles.inputStyle}>
-                <Icon name="lock" size={30} color="#000000" />
+                <Icon name="lock" size={25} color="#000000" />
 
                 <TextInput
                   style={styles.textInput}
@@ -174,7 +144,7 @@ const Login = ({navigation}: LoginProps) => {
                   {hide ? (
                     <Icon2 name="eye-slash" size={30} color="#000000" />
                   ) : (
-                    <Icon2 name="eye" size={30} color="#000000" />
+                    <Icon2 name="eye" size={25} color="#000000" />
                   )}
                 </Pressable>
               </View>
@@ -214,7 +184,6 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: 'center',
     backgroundColor: 'white',
   },
   form: {
@@ -227,16 +196,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    marginTop: 50,
+    marginTop: 20,
     fontFamily: 'Roboto',
     fontWeight: '700',
-    fontSize: 35,
+    fontSize: 30,
     color: '#131035',
   },
   title2: {
     width: 300,
     fontFamily: 'Roboto',
-    fontSize: 25,
+    fontSize: 22,
     color: '#131035',
   },
   inputStyle: {
@@ -307,5 +276,15 @@ const styles = StyleSheet.create({
   },
   internetNotConnected: {
     backgroundColor: 'red',
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  logo: {
+    width: 220,
+    height: 70,
+    resizeMode: 'contain',
+    tintColor: '#131035',
   },
 });
