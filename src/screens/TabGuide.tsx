@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -12,7 +12,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
+import api from '../utils/api';
 
 const productList = [
   {
@@ -35,14 +35,21 @@ const productList = [
     img: require('../assets/product3.png'),
     desc: 'The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. ',
   },
-  // {
-  //   id: 3,
-  //   name: 'product four',
-  //   img: require('../assets/product4.png'),
-  //   desc: 'This is product four',
-  // },
+ 
 ];
 const TabGuide = ({navigation}: {navigation: any}) => {
+  const [products, setProducts] = useState<any[]>([]);
+  
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+  const fetchProducts = async () => {
+    try {
+      await api.get('products/').then(res => setProducts(res.data.rows));
+    } catch (error) {
+      return error;
+    }
+  };
   return (
     <View>
       <View>
@@ -115,7 +122,7 @@ const TabGuide = ({navigation}: {navigation: any}) => {
 };
 
 export default TabGuide;
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
   scrollHeader: {
@@ -137,7 +144,7 @@ const styles = StyleSheet.create({
   },
   containersec: {
     margin: 5,
-    height:height * 0.47,
+    height: height * 0.47,
     flexDirection: 'column',
   },
   card: {
@@ -192,7 +199,7 @@ const styles = StyleSheet.create({
   },
   prodImgSmall: {
     margin: -5,
-    height:hp('18%'),
+    height: hp('18%'),
     width: 230,
     resizeMode: 'contain',
   },

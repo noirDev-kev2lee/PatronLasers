@@ -11,11 +11,13 @@ import {
   ActivityIndicator,
   Modal,
   TouchableWithoutFeedback,
+  StatusBar,
+  
 } from 'react-native';
 import CustomAlert from '../components/CustomAlert';
 import api from '../utils/api';
 
-const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/; //requires at least one letter and one number, and a minimum length of 8 characters
+const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const PatientRegister = ({navigation}: {navigation: any}) => {
@@ -132,9 +134,10 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
   };
   return (
     <ScrollView>
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200} // adjust this value as needed
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -200}
         style={styles.keyboard}>
         <View style={styles.form}>
           <Text style={styles.title}>Patient</Text>
@@ -209,7 +212,7 @@ const PatientRegister = ({navigation}: {navigation: any}) => {
                 <TextInput
                   style={styles.textInput}
                   onChangeText={onAgeChange}
-                  placeholder="Age"
+                  placeholder="DoB"
                   keyboardType={'numeric'}
                   maxLength={3}
                   cursorColor="black"

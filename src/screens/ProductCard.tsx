@@ -1,4 +1,11 @@
-import {Text, StyleSheet, View, ScrollView, Pressable, useWindowDimensions } from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  Pressable,
+  useWindowDimensions,
+} from 'react-native';
 import HTML from 'react-native-render-html';
 import React, {useRef} from 'react';
 import {useRoute} from '@react-navigation/native';
@@ -27,7 +34,7 @@ export default function ProductCard() {
   };
   const htmlRenderStyles = StyleSheet.create({
     baseText: {
-      color: 'black', 
+      color: 'black',
     },
   });
   return (
@@ -37,9 +44,13 @@ export default function ProductCard() {
         <Text style={styles.subText}>{category}</Text>
       </View>
       <ScrollView ref={scrollViewRef} style={styles.Info}>
-        <View style={styles.htmlView} >
-      <HTML source={{ html: desc }} contentWidth={windowWidth} baseStyle={htmlRenderStyles.baseText} />
-    </View>
+        <View style={styles.htmlView}>
+          <HTML
+            source={{html: desc}}
+            contentWidth={windowWidth}
+            baseStyle={htmlRenderStyles.baseText}
+          />
+        </View>
       </ScrollView>
       <Pressable style={styles.scrollBtn} onPress={handleScroll}>
         <Icon

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Alert,
   Pressable,
@@ -11,61 +11,55 @@ import {
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
+  // heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import api from '../utils/api';
+// import api from '../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/FontAwesome';
+
 import AddAppointment from './AddAppointment';
 import AddCustomer from './AddCustomer';
+import CustomersList from '../components/CustomersList';
+import AppointmentsList from '../components/AppointmentsList';
 
-const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
+interface tabCustomerProps {
+  route: any;
+}
+
+const TabCustomer = ({route}: tabCustomerProps) => {
   const [AppointModalVisible, setAppointModalVisible] = useState(false);
   const [CustomerModalVisible, setCustomerModalVisible] = useState(false);
-  const [patientData, setPatientData] = useState<any[]>([]);
-  const [appointmentData, setAppointmentData] = useState<any[]>([]);
+
   const data = route.params as {username: string};
   const {username} = data;
 
-  useEffect(() => {
-    api.get('patients/').then(res => setPatientData(res.data.rows));
-  }, [patientData]);
-  useEffect(() => {
-    api.get('appointments/').then(res => setAppointmentData(res.data.rows));
-  }, [appointmentData]);
-
-  const patientList = patientData.filter(y => y.clinic_name === username);
-  const appointmentList = appointmentData.filter(
-    x => x.clinic_name === username,
-  );
-  const handleDonePress = async (appointData: any) => {
-    await api
-      .put(`appointments/${appointData.id}`, {
-        id: appointData.id,
-        appt_id: appointData.appt_id,
-        patient_id: appointData.patient_id,
-        clinic_name: appointData.clinic_name,
-        fname: appointData.fname,
-        lname: appointData.lname,
-        service_type: appointData.service_type,
-        start_date: appointData.start_date,
-        start_time: appointData.start_time,
-        end_date: appointData.end_date,
-        end_time: appointData.end_time,
-        job_status: 'done',
-      })
-      .then(res => {
-        const json = res.data;
-        if (json.data.code === '23503') {
-          Alert.alert('Patient ID does not exist!');
-        } else {
-          Alert.alert('Set done Successfully!');
-        }
-      })
-      .catch(() => {
-        Alert.alert('Error occurs!');
-      });
-  };
+  // const handleDonePress = async (appointData: any) => {
+  //   await api
+  //     .put(`appointments/${appointData.id}`, {
+  //       id: appointData.id,
+  //       appt_id: appointData.appt_id,
+  //       patient_id: appointData.patient_id,
+  //       clinic_name: appointData.clinic_name,
+  //       fname: appointData.fname,
+  //       lname: appointData.lname,
+  //       service_type: appointData.service_type,
+  //       start_date: appointData.start_date,
+  //       start_time: appointData.start_time,
+  //       end_date: appointData.end_date,
+  //       end_time: appointData.end_time,
+  //       job_status: 'done',
+  //     })
+  //     .then(res => {
+  //       const json = res.data;
+  //       if (json.data.code === '23503') {
+  //         Alert.alert('Patient ID does not exist!');
+  //       } else {
+  //         Alert.alert('Set done Successfully!');
+  //       }
+  //     })
+  //     .catch(() => {
+  //       Alert.alert('Error occurs!');
+  //     });
+  // };
 
   return (
     <View style={styles.mainContainer}>
@@ -127,181 +121,9 @@ const TabCustomer = ({route, navigation}: {route: any; navigation: any}) => {
       </View>
       <ScrollView horizontal pagingEnabled={true}>
         {/* customers list */}
-        <View style={styles.list}>
-          <View style={styles.customerHeader}>
-            <Text style={styles.listTitle}>My Customers</Text>
-          </View>
-          <ScrollView style={styles.listScroll}>
-            {patientList.length === 0 ? (
-              <View>
-                <Text style={{color: 'red', paddingLeft: 20}}>
-                  No available customers
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {patientList.map((customer: any) => (
-                  <View key={customer.id}>
-                    <View style={[styles.customerCard]}>
-                      <View style={styles.customerImg}>
-                        <Text style={styles.profileLetter}>
-                          {customer.first_name.charAt(0)}
-                        </Text>
-                      </View>
-                      <View style={styles.RecCardInfo}>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.idTitle}>
-                            {customer.patient_id}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.RecCardTitle}>
-                            {customer.first_name} {customer.last_name}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <Text style={styles.RecCardPara}>
-                            Age:{customer.age}
-                          </Text>
-                          <Text
-                            style={[
-                              styles.RecCardPara,
-                              {marginLeft: 15, textTransform: 'capitalize'},
-                            ]}>
-                            Gender:{customer.gender}
-                          </Text>
-                        </View>
-                        <View style={styles.infoGroup}>
-                          <View>
-                            <Text style={styles.RecCardPara}>
-                              +{customer.phone}
-                            </Text>
-                          </View>
-                          <View>
-                            <Text
-                              style={[styles.RecCardPara, {marginLeft: 15}]}>
-                              {customer.email}
-                            </Text>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                    <View style={styles.lineContainer}>
-                      <View style={styles.line} />
-                    </View>
-                  </View>
-                ))}
-              </View>
-            )}
-          </ScrollView>
-        </View>
+        <CustomersList username={username} />
         {/* appointments list */}
-        <View style={styles.list}>
-          <View style={styles.customerHeader}>
-            <Text style={styles.listTitle}>Appointments</Text>
-          </View>
-          <ScrollView style={styles.listScroll}>
-            {appointmentList.length === 0 ? (
-              <View>
-                <Text style={{color: 'red', paddingLeft: 20}}>
-                  No available appointments
-                </Text>
-              </View>
-            ) : (
-              <View>
-                {appointmentList.map(y => (
-                  <View key={y.id}>
-                    <View style={[styles.RecCard]}>
-                      {/* <View style={styles.customerImg}>
-                        <Text style={styles.profileLetter}>
-                          {y.fname.charAt(0)}
-                        </Text>
-                      </View> */}
-                      <View style={styles.RecCardInfo}>
-                        <View style={styles.nameContainer}>
-                          <Text style={styles.RecCardTitle}>
-                            {y.patient_id}
-                          </Text>
-                          {y.job_status !== 'done' ? (
-                            <View>
-                              <Pressable
-                                style={styles.doneBtn}
-                                onPress={() => handleDonePress(y)}>
-                                <Text style={{color: 'white'}}>
-                                  Set to Done
-                                </Text>
-                              </Pressable>
-                            </View>
-                          ) : (
-                            ''
-                          )}
-                        </View>
-                        <Text style={styles.subTitle}>{y.service_type}</Text>
-                        <View style={styles.timeContainer}>
-                          <View
-                            style={[styles.dateTimeCont, {marginRight: 20}]}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="calendar"
-                              size={20}
-                              color={'green'}
-                            />
-                            <Text style={styles.startDateText}>
-                              {y.start_date}
-                            </Text>
-                          </View>
-                          <View style={styles.dateTimeCont}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="clock-o"
-                              size={25}
-                              color={'green'}
-                            />
-                            <Text style={styles.startDateText}>
-                              {y.start_time}
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.timeContainer}>
-                          <View
-                            style={[styles.dateTimeCont, {marginRight: 20}]}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="calendar"
-                              size={20}
-                              color={'#B30000'}
-                            />
-                            <Text style={styles.endDateText}>{y.end_date}</Text>
-                          </View>
-                          <View style={styles.dateTimeCont}>
-                            <Icon2
-                              style={{marginRight: 5}}
-                              name="clock-o"
-                              size={25}
-                              color={'#B30000'}
-                            />
-                            <Text style={styles.endDateText}>{y.end_time}</Text>
-                          </View>
-                        </View>
-                        <Text style={styles.RecCardPara}>{y.job_status}</Text>
-                        <Text style={styles.endDateText2}>
-                          Session: {y.session_number}
-                        </Text>
-                        <Text style={styles.endDateText3}>
-                          Price: {y.session_price}
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.lineContainer}>
-                      <View style={styles.line} />
-                    </View>
-                    {/* Done and cancel modal */}
-                  </View>
-                ))}
-              </View>
-            )}
-          </ScrollView>
-        </View>
+        <AppointmentsList username={username} />
       </ScrollView>
     </View>
   );
@@ -475,16 +297,16 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    alignItems: 'center',
-    top: 60,
+    top: 0,
   },
   infoGroup: {
     flexDirection: 'row',
   },
   modalView: {
-    height: 650,
+    height: 'auto',
     width: '100%',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: 'white',
+    paddingTop: 10,
     borderRadius: 20,
     alignItems: 'center',
     shadowColor: '#111',

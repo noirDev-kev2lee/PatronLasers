@@ -21,6 +21,8 @@ const TreatmentRecords = ({
 }) => {
   const [records, setRecords] = useState<any[]>([]);
   const {patient_id} = route?.params;
+ 
+ 
 
   useEffect(() => {
     getTreatmentRecords();
