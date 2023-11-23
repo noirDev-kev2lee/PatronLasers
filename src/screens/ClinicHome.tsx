@@ -25,6 +25,7 @@ const ClinicHome = ({navigation, route}: {navigation: any; route: any}) => {
   const [products, setProducts] = useState<any[]>([]);
   const [purchased, setPurchased] = useState<any[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [activeTab, setActiveTab] = useState('Appointments');
   const [drawerModalVisible, setdrawerModalVisible] = useState(false);
   const data = route.params as {
     username: string;
@@ -230,12 +231,28 @@ const ClinicHome = ({navigation, route}: {navigation: any; route: any}) => {
           </Pressable>
         </View>
       </ScrollView>
-      <ScrollView horizontal pagingEnabled={true}>
-        {/* appointments list */}
-        <AppointmentsList username={username} />
-        {/* customers list */}
-        <CustomersList username={username} />
-      </ScrollView>
+      <View style={styles.tabContainer}>
+        <Pressable onPress={() => setActiveTab('Appointments')}>
+          <View
+            style={[
+              styles.tabItem,
+              activeTab === 'Appointments' && styles.activeTabItem,
+            ]}>
+            <Text style={styles.tabText}>Appointments</Text>
+          </View>
+        </Pressable>
+        <Pressable onPress={() => setActiveTab('customers')}>
+          <View
+            style={[
+              styles.tabItem,
+              activeTab === 'customers' && styles.activeTabItem,
+            ]}>
+            <Text style={styles.tabText}>Customers</Text>
+          </View>
+        </Pressable>
+      </View>
+      {activeTab === 'Appointments' && <AppointmentsList username={username} />}
+      {activeTab === 'customers' && <CustomersList username={username} />}
     </View>
   );
 };
@@ -264,7 +281,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   scrollHeader: {
-    fontFamily: 'Inter-Regular',
     fontWeight: '700',
     fontSize: 15,
     textTransform: 'uppercase',
@@ -447,5 +463,28 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 1,
     backgroundColor: '#DADADA',
+  },
+  tabText: {
+    color: 'black',
+    fontSize: 17,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: 'white',
+    paddingHorizontal: 30,
+    marginBottom: 20,
+  },
+  tabItem: {
+    alignItems: 'center',
+    padding: 16,
+  },
+  activeTabItem: {
+    borderBottomWidth: 3,
+    borderBottomColor: 'gray',
+  },
+
+  activeTabText: {
+    color: 'red',
   },
 });
