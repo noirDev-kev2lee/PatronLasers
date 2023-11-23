@@ -47,7 +47,7 @@ const AppointmentsList = ({username}: appointmentListProps) => {
         service_cost: list[0].service_cost,
         session_number: maxSession.session_number + 1,
       });
-      console.log('sent successfully');
+      
     } else {
       setIsLimit(true);
       console.log('you exceed limit');
@@ -56,9 +56,6 @@ const AppointmentsList = ({username}: appointmentListProps) => {
 
   return (
     <View style={styles.list}>
-      <View style={styles.customerHeader}>
-        <Text style={styles.listTitle}>Appointments</Text>
-      </View>
       <ScrollView style={styles.listScroll}>
         {appointmentList.length === 0 ? (
           <View>
