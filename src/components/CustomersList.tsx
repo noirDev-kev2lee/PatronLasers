@@ -22,9 +22,6 @@ const CustomersList = ({username}: customersListProps) => {
   const patientList = patientData.filter(y => y.clinic_name === username);
   return (
     <View style={styles.list}>
-      <View style={styles.customerHeader}>
-        <Text style={styles.listTitle}>My Customers</Text>
-      </View>
       <ScrollView style={styles.listScroll}>
         {patientList.length === 0 ? (
           <View>
@@ -93,8 +90,7 @@ const styles = StyleSheet.create({
     width: width * 1,
   },
   listTitle: {
-    fontFamily: 'Roboto',
-    fontSize: 17,
+    fontSize: 16,
     marginBottom: 5,
     fontWeight: 'bold',
     textAlign: 'left',
