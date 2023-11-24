@@ -16,7 +16,9 @@ import PatientHome from './src/screens/Patient';
 import ProductHome from './src/screens/ClinicHome';
 import ChangePassword from './src/screens/ChangePassword';
 import TreatmentRecords from './src/screens/TreatmentRecords';
+import PatientDetails from './src/screens/PatientDetails';
 import Notification from './src/screens/Notification';
+import CustomerList from './src/components/CustomersList';
 
 const Stack = createNativeStackNavigator();
 
@@ -106,6 +108,28 @@ function App() {
         <Stack.Screen
           name="treatment_records"
           component={TreatmentRecords}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="customer_list"
+          component={CustomerList}
+          options={{
+            title: '',
+            headerShown: false,
+            headerTitleAlign: 'center',
+            headerStyle: {},
+            headerTintColor: '#fff',
+          }}
+        />
+        <Stack.Screen
+          name="patient_details"
+          component={PatientDetails}
           options={{
             title: '',
             headerShown: false,
