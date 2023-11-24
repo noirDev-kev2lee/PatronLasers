@@ -47,7 +47,6 @@ const AppointmentsList = ({username}: appointmentListProps) => {
         service_cost: list[0].service_cost,
         session_number: maxSession.session_number + 1,
       });
-      
     } else {
       setIsLimit(true);
       console.log('you exceed limit');
