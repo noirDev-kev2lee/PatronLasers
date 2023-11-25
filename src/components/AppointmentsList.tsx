@@ -39,26 +39,39 @@ const AppointmentsList = ({username}: appointmentListProps) => {
       return maxNotification;
     }, null);
     if (list_2[0].no_sessions !== maxSession.session_number) {
-      api.post('treatment-records/', {
-        patient_id: patient_id,
-        appt_id: appointment_data.appt_id,
-        clinic_name: list[0].clinic_name,
-        service_type: list[0].service_type,
-        service_cost: list[0].service_cost,
-        session_number: maxSession.session_number + 1,
-      });
-      console.log('sent successfully');
+      api
+        .post('treatment-records/', {
+          patient_id: patient_id,
+          appt_id: appointment_data.appt_id,
+          clinic_name: list[0].clinic_name,
+          service_type: list[0].service_type,
+          service_cost: list[0].service_cost,
+          session_number: maxSession.session_number + 1,
+        })
+        .then(response => {
+          api.put(`appointments/${appointment_data.id}`, {
+            appt_id: appointment_data.appt_id,
+            patient_id: appointment_data.patient_id,
+            clinic_name: appointment_data.clinic_name,
+            service_type: appointment_data.service_type,
+            start_date: appointment_data.start_date,
+            start_time: appointment_data.start_time,
+            end_date: appointment_data.end_date,
+            end_time: appointment_data.end_time,
+            job_status: 'active',
+            no_sessions: appointment_data.no_sessions,
+            session_price: appointment_data.session_price,
+            active_session: maxSession.session_number + 1,
+          });
+        });
     } else {
       setIsLimit(true);
-      console.log('you exceed limit');
+      // console.log('you exceed limit');
     }
   };
 
   return (
     <View style={styles.list}>
-      <View style={styles.customerHeader}>
-        <Text style={styles.listTitle}>Appointments</Text>
-      </View>
       <ScrollView style={styles.listScroll}>
         {appointmentList.length === 0 ? (
           <View>
@@ -126,7 +139,9 @@ const AppointmentsList = ({username}: appointmentListProps) => {
                       </View>
                     </View>
                     <View style={styles.sessionContainer}>
-                      <Text style={styles.statusText}>Active session 3</Text>
+                      <Text style={styles.statusText}>
+                        Active session: {y.active_session}
+                      </Text>
                       <Text style={styles.sessionText}>
                         Total Session(s): {y.no_sessions}
                       </Text>

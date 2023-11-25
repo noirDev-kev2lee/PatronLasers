@@ -69,6 +69,7 @@ export default function AddAppointment({clinicName}: {clinicName: string}) {
             job_status: 'pending',
             no_sessions: sessionCount,
             session_price: sessionPrice,
+            active_session: 1,
           })
           .then(res => {
             const data = res.data.rows[0];

@@ -7,12 +7,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 import api from '../utils/api';
 
-interface customersListProps {
-  username: string;
-}
-const CustomersList = ({username}: customersListProps) => {
+const CustomersList = ({username}) => {
+  const navigation = useNavigation();
   const [patientData, setPatientData] = useState<any[]>([]);
 
   useEffect(() => {
@@ -22,9 +21,6 @@ const CustomersList = ({username}: customersListProps) => {
   const patientList = patientData.filter(y => y.clinic_name === username);
   return (
     <View style={styles.list}>
-      <View style={styles.customerHeader}>
-        <Text style={styles.listTitle}>My Customers</Text>
-      </View>
       <ScrollView style={styles.listScroll}>
         {patientList.length === 0 ? (
           <View>
@@ -35,48 +31,57 @@ const CustomersList = ({username}: customersListProps) => {
         ) : (
           <View>
             {patientList.map((customer: any) => (
-              <TouchableOpacity key={customer.id}>
-                <View style={[styles.customerCard]}>
-                  <View style={styles.customerImg}>
-                    <Text style={styles.profileLetter}>
-                      {customer.first_name?.charAt(0)}
-                    </Text>
-                  </View>
-                  <View style={styles.RecCardInfo}>
-                    <View style={styles.infoGroup}>
-                      <Text style={styles.idTitle}>{customer.patient_id}</Text>
-                    </View>
-                    <View style={styles.infoGroup}>
-                      <Text style={styles.customerNames}>
-                        {customer.first_name} {customer.last_name}
+              <View key={customer.id}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('patient_details', {
+                      patientData: customer,
+                    })
+                  }>
+                  <View style={[styles.customerCard]}>
+                    <View style={styles.customerImg}>
+                      <Text style={styles.profileLetter}>
+                        {customer.first_name?.charAt(0)}
                       </Text>
                     </View>
-                    <View style={styles.infoGroup}>
-                      <Text style={styles.details}>Age:{customer.age}</Text>
-                      <Text
-                        style={[
-                          styles.details,
-                          {marginLeft: 15, textTransform: 'capitalize'},
-                        ]}>
-                        Gender:{customer.gender}
-                      </Text>
-                    </View>
-                    <View style={styles.infoGroup}>
-                      <View>
-                        <Text style={styles.details}>{customer.phone}</Text>
-                      </View>
-                      <View>
-                        <Text style={[styles.details, {marginLeft: 15}]}>
-                          {customer.email}
+                    <View style={styles.RecCardInfo}>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.idTitle}>
+                          {customer.patient_id}
                         </Text>
                       </View>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.customerNames}>
+                          {customer.first_name} {customer.last_name}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <Text style={styles.details}>Age:{customer.age}</Text>
+                        <Text
+                          style={[
+                            styles.details,
+                            {marginLeft: 15, textTransform: 'capitalize'},
+                          ]}>
+                          Gender:{customer.gender}
+                        </Text>
+                      </View>
+                      <View style={styles.infoGroup}>
+                        <View>
+                          <Text style={styles.details}>{customer.phone}</Text>
+                        </View>
+                        <View>
+                          <Text style={[styles.details, {marginLeft: 15}]}>
+                            {customer.email}
+                          </Text>
+                        </View>
+                      </View>
                     </View>
                   </View>
-                </View>
-                <View style={styles.lineContainer}>
-                  <View style={styles.line} />
-                </View>
-              </TouchableOpacity>
+                  <View style={styles.lineContainer}>
+                    <View style={styles.line} />
+                  </View>
+                </TouchableOpacity>
+              </View>
             ))}
           </View>
         )}
@@ -93,8 +98,7 @@ const styles = StyleSheet.create({
     width: width * 1,
   },
   listTitle: {
-    fontFamily: 'Roboto',
-    fontSize: 17,
+    fontSize: 16,
     marginBottom: 5,
     fontWeight: 'bold',
     textAlign: 'left',
