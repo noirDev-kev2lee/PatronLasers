@@ -1,110 +1,115 @@
-import React, {useEffect, useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  StatusBar,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
-import api from '../utils/api';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, SafeAreaView, Pressable} from 'react-native';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import Icon3 from 'react-native-vector-icons/AntDesign';
 import Line from '../components/Line';
+import api from '../utils/api';
 
-const TreatmentRecords = ({
-  navigation,
-  route,
-}: {
-  navigation: any;
-  route: any;
-}) => {
-  const [records, setRecords] = useState<any[]>([]);
-  const {patient_id} = route?.params;
- 
- 
-
+interface detailsProps {
+  navigation: NavigationProp<ParamListBase>;
+}
+const PatientDetails = ({navigation, route}: detailsProps) => {
+  const {patientData} = route.params;
+  const [appointmentData, setAppointmentData] = useState<any[]>([]);
   useEffect(() => {
-    getTreatmentRecords();
+    api.get('appointments/').then(res => setAppointmentData(res.data.rows));
   }, []);
-  const getTreatmentRecords = async () => {
-    const res = await api.get('treatment-records');
-    setRecords(res.data.rows);
-  };
-  const patient_records = records.filter(y => y.patient_id === patient_id);
-  console.log(patient_records);
+  const appointmentList = appointmentData.filter(
+    x => x.patient_id === patientData.patient_id,
+  );
+  const sumOfSessionPrices = appointmentList.reduce(
+    (accumulator, appointment) => {
+      const sessionPrice = parseFloat(appointment.session_price);
+      return accumulator + sessionPrice;
+    },
+    0,
+  );
+  console.log(sumOfSessionPrices);
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#E0DEDE" barStyle="dark-content" />
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backArrow}>
-          <AntDesign name="arrowleft" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Treatment Records</Text>
+      <View style={styles.headingContainer}>
+        <Pressable onPress={() => navigation.goBack()}>
+          <Icon3
+            style={styles.Arrow}
+            name="arrowleft"
+            size={25}
+            color="#000000"
+          />
+        </Pressable>
+        <Text style={styles.heading}>Patient details</Text>
       </View>
-      <View style={styles.cardContainer}>
-        <FlatList
-          data={patient_records}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => (
-            <View style={styles.profileBio}>
-              <View style={styles.infoCon}>
-                <Text style={styles.bioInfo1}>Clinic name</Text>
-                <Text style={styles.bioInfo2}>{item.clinic_name}</Text>
-              </View>
-              <Line />
-              <View style={styles.infoCon}>
-                <Text style={styles.bioInfo1}>Service type</Text>
-                <Text style={styles.bioInfo2}>{item.service_type}</Text>
-              </View>
-              <Line />
-              <View style={styles.infoCon}>
-                <Text style={styles.bioInfo1}>Service cost</Text>
-                <Text style={[styles.bioInfo2, {textTransform: 'capitalize'}]}>
-                  {item.service_cost}
-                </Text>
-              </View>
-              <Line />
-              <View style={styles.infoCon}>
-                <Text style={styles.bioInfo1}>Number of session</Text>
-                <Text style={styles.bioInfo2}>{item.session_number}</Text>
-              </View>
-            </View>
-          )}
-        />
+      <View style={styles.profileBio}>
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Name</Text>
+          <Text style={styles.bioInfo2}>
+            {patientData.first_name}
+            {patientData.last_name}
+          </Text>
+        </View>
+        <Line />
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Gender</Text>
+          <Text style={[styles.bioInfo2, {textTransform: 'capitalize'}]}>
+            {patientData.gender}
+          </Text>
+        </View>
+        <Line />
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Date of birth</Text>
+          <Text style={[styles.bioInfo2, {textTransform: 'capitalize'}]}>
+            {patientData.dob}
+          </Text>
+        </View>
+        <Line />
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Phone</Text>
+          <Text style={[styles.bioInfo2, {textTransform: 'capitalize'}]}>
+            {patientData.phone}
+          </Text>
+        </View>
+        <Line />
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Email</Text>
+          <Text style={styles.bioInfo2}>{patientData.email}</Text>
+        </View>
+        <Line />
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Total cost</Text>
+          <Text style={styles.bioInfo2}>{sumOfSessionPrices}</Text>
+        </View>
+        <Line />
+        <View style={styles.infoCon}>
+          <Text style={styles.bioInfo1}>Number of appointment(s)</Text>
+          <Text style={styles.bioInfo2}>{appointmentList.length}</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export default TreatmentRecords;
+export default PatientDetails;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
     flex: 1,
-    backgroundColor: '#E0DEDE',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    padding: 20,
   },
-  header: {
+  headingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: 16,
-    marginBottom: 17,
+    justifyContent: 'space-between',
+    width: '70%',
+    marginBottom: 30,
   },
-  backArrow: {
-    marginRight: 16,
-  },
-  title: {
-    fontSize: 20,
+  heading: {
     color: 'black',
-    fontWeight: 'bold',
+    fontSize: 17,
+    fontWeight: '600',
   },
-  cardContainer: {
-    marginBottom: 10,
+
+  Arrow: {
+    fontSize: 30,
   },
   profileBio: {
     height: 'auto',

@@ -23,9 +23,9 @@ const screenOptions = ({route}: {route: any}) => ({
       case 'Advertisement':
         iconName = 'globe';
         break;
-      // case 'Clinical Guides':
-      //   iconName = 'medkit';
-      //   break;
+      case 'guide':
+        iconName = 'medkit';
+        break;
       case 'My Customer':
         iconName = 'users';
         break;

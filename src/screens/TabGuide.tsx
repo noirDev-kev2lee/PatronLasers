@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   ScrollView,
@@ -7,42 +7,33 @@ import {
   View,
   Image,
   Dimensions,
+  useWindowDimensions,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import HTML from 'react-native-render-html';
 import api from '../utils/api';
 
-const productList = [
-  {
-    id: 0,
-    name: 'Box',
-    category: 'Hair removal devices',
-    img: require('../assets/product1.png'),
-    desc: 'The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. The laser beam is actually the result of the emission of photons in one direction, in a narrow beam.All the emitted photons transmit on the same wave and have only one wavelength. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates.There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. There are different and diverse types of laser, where each type of laser differs in the wavelength at which it operates. ',
-  },
-  {
-    id: 1,
-    name: 'Lisa',
-    category: 'Hair removal devices',
-    img: require('../assets/product2.png'),
-    desc: 'The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more.  ',
-  },
-  {
-    id: 2,
-    name: 'Titi',
-    img: require('../assets/product3.png'),
-    desc: 'The TITI device works with ultra-short technology in order to damage and exert great pressure on the melanin pigment, which shatters into small pieces. The small particles are absorbed by the skin and disperse the various pigments that make up the tattoo. This is an effective, fast, non-invasive treatment that avoids the need for a complex surgical procedure. Treatment for removing tattoos using the TITI device is intended for treating most areas of the body such as: face, hands, chest, legs and more. ',
-  },
- 
-];
-const TabGuide = ({navigation}: {navigation: any}) => {
+const TabGuide = ({navigation, route}: {navigation: any; route: any}) => {
+  const data = route.params as {
+    username: string;
+  };
+  const {username} = data;
   const [products, setProducts] = useState<any[]>([]);
-  
+  const [purchased, setPurchased] = useState<any[]>([]);
   useEffect(() => {
     fetchProducts();
+    fetchPurchased();
   }, []);
+  const fetchPurchased = async () => {
+    try {
+      api.get('purchases/').then(res => setPurchased(res.data.rows));
+    } catch (error) {
+      return error;
+    }
+  };
   const fetchProducts = async () => {
     try {
       await api.get('products/').then(res => setProducts(res.data.rows));
@@ -50,9 +41,24 @@ const TabGuide = ({navigation}: {navigation: any}) => {
       return error;
     }
   };
+
+  const filteredSN = purchased
+    .filter(y => y.clinic_name === username)
+    .map(purchase => purchase.serial_number);
+  const myProducts = products.filter(obj =>
+    filteredSN.includes(obj.serial_number),
+  );
+  // endpoint for image
+  const myImg = 'http://15.237.138.133:7000/';
+  const windowWidth = useWindowDimensions().width;
+  const htmlRenderStyles = StyleSheet.create({
+    baseText: {
+      color: 'black',
+    },
+  });
   return (
     <View>
-      <View>
+      <View style={{paddingHorizontal: 12, paddingTop: 10}}>
         <Text style={styles.scrollHeader}>My Products Guides</Text>
       </View>
       <ScrollView
@@ -60,57 +66,62 @@ const TabGuide = ({navigation}: {navigation: any}) => {
         horizontal
         style={styles.scroll}>
         <View style={styles.container}>
-          {productList.map(product => (
+          {myProducts.map(product => (
             <Pressable
               key={product.id}
               onPress={() =>
                 navigation.navigate('Guide Info', {
-                  desc: product.desc,
-                  name: product.name,
+                  desc: product.descriptions,
+                  name: product.product_name,
                   category: product.category,
                 })
               }>
               <View style={[styles.RecCard]}>
                 <View style={styles.RecCardInfo}>
-                  <Text style={styles.RecCardTitle}>{product.name}</Text>
-                  <Text style={styles.RecCardPara}>{product.desc}</Text>
+                  <Text style={styles.RecCardTitle}>
+                    {product?.product_name}
+                  </Text>
+                  <HTML
+                    source={{html: product?.descriptions}}
+                    contentWidth={windowWidth}
+                    baseStyle={htmlRenderStyles.baseText}
+                  />
+                  <Text style={styles.RecCardPara}>
+                    {product?.descriptions}
+                  </Text>
                 </View>
-                <Image style={styles.prodImgSmallRec} source={product.img} />
+                <Image
+                  style={styles.prodImgSmallRec}
+                  source={{uri: myImg + product?.img_url}}
+                />
               </View>
             </Pressable>
           ))}
         </View>
       </ScrollView>
-      <View>
+      <View style={{paddingHorizontal: 12, paddingTop: 10}}>
         <Text style={styles.scrollHeader}>More Product Guides</Text>
       </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.containersec}>
-        <View>
-          {productList.map(product => (
+        <View style={{flexWrap: 'wrap', flexDirection: 'row'}}>
+          {products.map(product => (
             <Pressable
               key={product.id}
               onPress={() =>
                 navigation.navigate('Guide Info', {
-                  desc: product.desc,
-                  name: product.name,
-                  image: product.img,
-                  category: product.category,
+                  desc: product.descriptions,
+                  name: product.product_name,
                 })
               }>
               <View style={styles.scrollsec}>
                 <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
-                </View>
-                <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
-                </View>
-                <View style={[styles.RecCardSmall]}>
-                  <Image style={styles.prodImgSmall} source={product.img} />
-                  <Text style={styles.cardText}>{product.name}</Text>
+                  <Image
+                    style={styles.prodImgSmall}
+                    source={{uri: myImg + product?.img_url}}
+                  />
+                  <Text style={styles.cardText}>{product?.product_name}</Text>
                 </View>
               </View>
             </Pressable>
@@ -126,8 +137,7 @@ const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
   scroll: {},
   scrollHeader: {
-    fontFamily: 'Inter',
-    fontSize: 20,
+    fontSize: 18,
     textTransform: 'uppercase',
     textAlign: 'left',
     marginBottom: 10,
@@ -218,10 +228,9 @@ const styles = StyleSheet.create({
     height: 80,
   },
   RecCardTitle: {
-    fontFamily: 'Inter',
     color: '#777',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 18,
+    fontWeight: '500',
     textAlign: 'left',
   },
   RecCardPara: {

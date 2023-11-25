@@ -6,11 +6,27 @@ import {
   ScrollView,
   Pressable,
   TouchableOpacity,
+  useWindowDimensions,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import HTML from 'react-native-render-html';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
-export default function GuideCard({navigation}: {navigation: any}) {
+export default function GuideCard({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) {
+  const windowWidth = useWindowDimensions().width;
   const [activeTab, setActiveTab] = useState('manuals');
+  const {name, desc} = route?.params;
+  const htmlRenderStyles = StyleSheet.create({
+    baseText: {
+      color: 'black',
+    },
+  });
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -42,20 +58,22 @@ export default function GuideCard({navigation}: {navigation: any}) {
       </View>
       {activeTab === 'manuals' && (
         <View>
-          <ScrollView pagingEnabled={true} style={styles.scroll}>
+          <ScrollView pagingEnabled={true}>
             <View>
               <View style={styles.RecCard}>
-                <Text style={styles.RecCardPara}>
-                  The TITI device works with ultra-short technology in order to
-                  damage and exert great pressure on the melanin pigment, which
-                  shatters into small pieces. The small particles are absorbed
-                  by the skin and disperse the various pigments that make up the
-                  tattoo. This is an effective, fast, non-invasive treatment
-                  that avoids the need for a complex surgical procedure.
-                  Treatment for removing tattoos using the TITI device is
-                  intended for treating most areas of the body such as: face,
-                  hands, chest, legs and more.
+                <Text
+                  style={{color: 'black', fontSize: 17, fontWeight: 'bold'}}>
+                  {name}
                 </Text>
+                <ScrollView style={styles.Info}>
+                  <View style={styles.htmlView}>
+                    <HTML
+                      source={{html: desc}}
+                      contentWidth={windowWidth}
+                      baseStyle={htmlRenderStyles.baseText}
+                    />
+                  </View>
+                </ScrollView>
               </View>
             </View>
           </ScrollView>
@@ -63,9 +81,22 @@ export default function GuideCard({navigation}: {navigation: any}) {
       )}
       {activeTab === 'videos' && (
         <View>
-          <ScrollView pagingEnabled={true} style={styles.scroll}>
-            <View>
-              <View style={[styles.videoCard]}></View>
+          <ScrollView pagingEnabled={true}>
+            <View style={styles.videoContainer}>
+              <View>
+                <YoutubePlayer
+                  height={300}
+                  play={false}
+                  videoId={'WN2Sd-D-Ds8'}
+                />
+              </View>
+              {/* <View>
+                <YoutubePlayer
+                  height={300}
+                  play={false}
+                  videoId={'CUvbL6fU9Uc'}
+                />
+              </View> */}
             </View>
           </ScrollView>
         </View>
@@ -218,6 +249,18 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
   },
-  cardText: {},
-  scroll: {},
+  Info: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+    width: '100%',
+    height: 'auto',
+    backgroundColor: 'white',
+  },
+  htmlView: {
+    paddingBottom: 100,
+  },
+  videoContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
 });
