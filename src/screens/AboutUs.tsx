@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     left: 40,
     width: 350,
+    color: '#fff'
   },
   aboutUsFooter: {
     textAlign: 'center',
